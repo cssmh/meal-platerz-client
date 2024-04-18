@@ -1,20 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useContextHook from "../../useCustomHook/useContextHook";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { login } = useContextHook();
+  const navigateTo = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    login(email, password)
+      .then(() => {
+        toast.success("logged in success");
+        navigateTo("/");
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   return (
-    <div className="my-8 space-y-3 rounded-xl lg:w-1/2 mx-auto">
+    <div className="my-8 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
       <h1 className="text-2xl font-bold text-center">Login</h1>
-      <form
-        onSubmit={handleLogin}
-        className="space-y-5"
-      >
+      <form onSubmit={handleLogin} className="space-y-5">
         <div className="space-y-1 text-sm">
           <label htmlFor="Your Email" className="block dark:text-gray-600">
             Your Email

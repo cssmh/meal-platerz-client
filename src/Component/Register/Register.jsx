@@ -1,27 +1,30 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import useContextHook from "../../useCustomHook/useContextHook";
 
 const Register = () => {
-  const { createNewUser, updateProfile } = useContextHook();
+  const { createNewUser, updateProfileInfo, emailVerification } =
+    useContextHook();
   const handleRegister = (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const image = e.target.image.value;
-    const password = e.target.password.value;
-    console.log(name, email, image, password);
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const password = form.password.value;
     createNewUser(email, password)
-      .then((res) => {
-        console.log(res.user)
-        updateProfile(name, image)
+      .then(() => {
+        updateProfileInfo(name, photo).then();
+        emailVerification().then();
+        toast.success("Register success");
+        form.reset();
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
   return (
-    <div className="my-6 space-y-3 rounded-xl lg:w-1/2 mx-auto">
+    <div className="my-6 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
       <h1 className="text-2xl font-bold text-center">Register</h1>
       <form onSubmit={handleRegister} className="space-y-5">
         <div className="space-y-1 text-sm">
@@ -54,7 +57,7 @@ const Register = () => {
           </label>
           <input
             type="text"
-            name="image"
+            name="photo"
             placeholder="Your Image URL"
             className="w-full px-4 py-3 rounded-xl border"
             style={{ outline: "none" }}

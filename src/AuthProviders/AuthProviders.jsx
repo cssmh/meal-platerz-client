@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth/cordova";
 import { createContext, useEffect, useState } from "react";
@@ -34,7 +35,7 @@ const AuthProviders = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const updateProfile = (name, photo) => {
+  const updateProfileInfo = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -70,7 +71,7 @@ const AuthProviders = ({ children }) => {
     googleLogin,
     createNewUser,
     login,
-    updateProfile,
+    updateProfileInfo,
     resetPassword,
     emailVerification,
     logOut,

@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import useContextHook from "../../useCustomHook/useContextHook";
 
 const Navbar = () => {
+  const { user, logOut } = useContextHook();
+  const handleLogOut = () => {
+    logOut().then().catch();
+  };
+
   // use theme from local storage if available or set light theme
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
@@ -74,36 +80,40 @@ const Navbar = () => {
                   Available Foods
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to={"/add-food"}
-                  className={({ isActive }) =>
-                    isActive ? "text-blue-500" : ""
-                  }
-                >
-                  Add Food
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/my-foods"}
-                  className={({ isActive }) =>
-                    isActive ? "text-blue-500" : ""
-                  }
-                >
-                  My Added Foods
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/my-food-request"}
-                  className={({ isActive }) =>
-                    isActive ? "text-blue-500" : ""
-                  }
-                >
-                  My Food Request
-                </NavLink>
-              </li>
+              {user?.email && (
+                <>
+                  <li>
+                    <NavLink
+                      to={"/add-food"}
+                      className={({ isActive }) =>
+                        isActive ? "text-blue-500" : ""
+                      }
+                    >
+                      Add Food
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to={"/my-foods"}
+                      className={({ isActive }) =>
+                        isActive ? "text-blue-500" : ""
+                      }
+                    >
+                      My Added Foods
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to={"/my-food-request"}
+                      className={({ isActive }) =>
+                        isActive ? "text-blue-500" : ""
+                      }
+                    >
+                      My Food Request
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
           <a className="btn btn-ghost text-xl px-0">NexUsFood</a>
@@ -126,41 +136,47 @@ const Navbar = () => {
                 Available Foods
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to={"/add-food"}
-                className={({ isActive }) => (isActive ? "text-blue-500" : "")}
-              >
-                Add Food
-              </NavLink>
-            </li>
-            <li tabIndex={0}>
-              <details>
-                <summary className="">Dashboard</summary>
-                <ul className="p-2 menu menu-sm dropdown-content z-[1] w-40">
-                  <li>
-                    <NavLink
-                      to={"/my-foods"}
-                      className={({ isActive }) =>
-                        isActive ? "text-blue-500" : ""
-                      }
-                    >
-                      My Added Foods
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/my-food-request"}
-                      className={({ isActive }) =>
-                        isActive ? "text-blue-500" : ""
-                      }
-                    >
-                      My Food Request
-                    </NavLink>
-                  </li>
-                </ul>
-              </details>
-            </li>
+            {user?.email && (
+              <li>
+                <NavLink
+                  to={"/add-food"}
+                  className={({ isActive }) =>
+                    isActive ? "text-blue-500" : ""
+                  }
+                >
+                  Add Food
+                </NavLink>
+              </li>
+            )}
+            {user?.email && (
+              <li tabIndex={0}>
+                <details>
+                  <summary className="">Dashboard</summary>
+                  <ul className="p-2 menu menu-sm dropdown-content z-[1] w-40">
+                    <li>
+                      <NavLink
+                        to={"/my-foods"}
+                        className={({ isActive }) =>
+                          isActive ? "text-blue-500" : ""
+                        }
+                      >
+                        My Added Foods
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/my-food-request"}
+                        className={({ isActive }) =>
+                          isActive ? "text-blue-500" : ""
+                        }
+                      >
+                        My Food Request
+                      </NavLink>
+                    </li>
+                  </ul>
+                </details>
+              </li>
+            )}
           </ul>
         </div>
         <div className="navbar-end">
@@ -194,9 +210,20 @@ const Navbar = () => {
             </svg>
           </label>
           {/* theme  part ended*/}
-          <Link to={"/login"}>
-            <p className="bg-redFood rounded-md text-white py-1 px-[10px]">Login</p>
-          </Link>
+          {user?.email ? (
+            <button
+              onClick={handleLogOut}
+              className="bg-redFood rounded-md text-white py-1 px-[10px]"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to={"/login"}>
+              <p className="bg-redFood rounded-md text-white py-1 px-[10px]">
+                Login
+              </p>
+            </Link>
+          )}
         </div>
       </div>
     </div>
