@@ -26,7 +26,7 @@ const Navbar = () => {
   // use theme from local storage if available or set light theme end
 
   return (
-    <div className="border-b">
+    <div className="border-b border-base-300">
       <div className="navbar max-w-7xl mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
