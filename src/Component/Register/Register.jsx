@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import useContextHook from "../../useCustomHook/useContextHook";
 
 const Register = () => {
+  const { createNewUser, updateProfile } = useContextHook();
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -8,6 +11,14 @@ const Register = () => {
     const image = e.target.image.value;
     const password = e.target.password.value;
     console.log(name, email, image, password);
+    createNewUser(email, password)
+      .then((res) => {
+        console.log(res.user)
+        updateProfile(name, image)
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
   return (
     <div className="my-6 space-y-3 rounded-xl lg:w-1/2 mx-auto">
