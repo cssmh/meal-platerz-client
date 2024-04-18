@@ -4,6 +4,9 @@ import Home from "../Component/Home/Home";
 import ErrorPage from "../Component/ErrorPage/ErrorPage";
 import Login from "../Component/Login/Login";
 import Register from "../Component/Register/Register";
+import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
+import MyProfile from "../Component/MyProfile/MyProfile";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +24,18 @@ const Root = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/available-foods",
+        element: <AvailableFoods></AvailableFoods>,
+      },
+      {
+        path: "/my-profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
       },
     ],
   },

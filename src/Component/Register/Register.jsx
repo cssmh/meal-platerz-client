@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useContextHook from "../../useCustomHook/useContextHook";
 
 const Register = () => {
   const { createNewUser, updateProfileInfo, emailVerification } =
     useContextHook();
+  const navigateTo = useNavigate();
+  const location = useLocation();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -17,7 +19,7 @@ const Register = () => {
         updateProfileInfo(name, photo).then();
         emailVerification().then();
         toast.success("Register success");
-        form.reset();
+        navigateTo(location?.state ? location.state : "/");
       })
       .catch((err) => {
         console.log(err.message);

@@ -1,4 +1,4 @@
-const FeaturedFoods = () => {
+const MyProfile = () => {
     return (
         <div>
             
@@ -6,4 +6,4 @@ const FeaturedFoods = () => {
     );
 };
 
-export default FeaturedFoods;
+export default MyProfile;

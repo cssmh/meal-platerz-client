@@ -1,10 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
-import useContextHook from "../../useCustomHook/useContextHook";
 import { toast } from "react-toastify";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useContextHook from "../../useCustomHook/useContextHook";
 
 const Login = () => {
-  const { login } = useContextHook();
+  const { login, googleLogin } = useContextHook();
   const navigateTo = useNavigate();
+  const location = useLocation();
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -12,9 +13,20 @@ const Login = () => {
     login(email, password)
       .then(() => {
         toast.success("logged in success");
-        navigateTo("/");
+        navigateTo(location?.state ? location.state : "/");
       })
       .catch((err) => toast.error(err.message));
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        toast.success("User logged in success");
+        navigateTo(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   return (
@@ -64,7 +76,11 @@ const Login = () => {
         <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <button aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button
+          onClick={handleGoogleLogin}
+          aria-label="Log in with Google"
+          className="p-3 rounded-sm"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -77,6 +93,7 @@ const Login = () => {
       <p className="text-xs text-center sm:px-6 dark:text-gray-600">
         Do not have an account?{" "}
         <Link
+          state={location.state}
           to={"/register"}
           rel="noopener noreferrer"
           className="underline dark:text-redFood"
