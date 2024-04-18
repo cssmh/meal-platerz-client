@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Banner from "../../assets/banner.png";
 const Home = () => {
   return (
@@ -21,6 +22,23 @@ const Home = () => {
               by fostering the sharing of excess food resources. We believe that
               in a world where millions go hungry while tons of food are wasted,
               there is an urgent need for collective action
+            </p>
+            <p>
+              <Link>
+                <button className="bg-redFood rounded-md px-4 py-2">
+                  Foods
+                </button>
+              </Link>
+              <Link>
+                <button className="rounded-md px-4 py-[7px] border border-redFood ml-1">
+                  Blogs
+                </button>
+              </Link>
+              <Link>
+                <button className="rounded-md px-4 py-[7px] border border-redFood ml-1">
+                  Reviews
+                </button>
+              </Link>
             </p>
           </div>
         </div>
