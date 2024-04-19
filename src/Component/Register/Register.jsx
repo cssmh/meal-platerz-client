@@ -1,8 +1,11 @@
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 
 const Register = () => {
+  const [view, setView] = useState(true);
   const { createNewUser, updateProfileInfo, emailVerification } =
     useContextHook();
   const navigateTo = useNavigate();
@@ -65,17 +68,23 @@ const Register = () => {
             style={{ outline: "none" }}
           />
         </div>
-        <div className="space-y-1 text-sm">
+        <div className="space-y-1 text-sm relative">
           <label htmlFor="password" className="block dark:text-gray-600">
             Password
           </label>
           <input
-            type="password"
+            type={view ? "password" : "text"}
             name="password"
             placeholder="Password"
             className="w-full px-4 py-3 rounded-xl border"
             style={{ outline: "none" }}
           />
+          <span
+            className="absolute top-[36px] right-3"
+            onClick={() => setView(!view)}
+          >
+            {view ? <FaRegEyeSlash /> : <FaRegEye />}
+          </span>
         </div>
         <button className="block w-full p-3 text-center dark:text-gray-50 dark:bg-redFood rounded-xl">
           Register

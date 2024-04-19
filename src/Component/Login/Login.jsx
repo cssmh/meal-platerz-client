@@ -1,8 +1,11 @@
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 
 const Login = () => {
+  const [view, setView] = useState(true);
   const { login, googleLogin } = useContextHook();
   const navigateTo = useNavigate();
   const location = useLocation();
@@ -46,18 +49,24 @@ const Login = () => {
             style={{ outline: "none" }}
           />
         </div>
-        <div className="space-y-1 text-sm">
+        <div className="space-y-1 text-sm relative">
           <label htmlFor="password" className="block dark:text-gray-600">
             Password
           </label>
           <input
-            type="password"
+            type={view ? "password" : "text"}
             name="password"
             placeholder="Password"
             required
             className="w-full px-4 py-3 rounded-xl border"
             style={{ outline: "none" }}
           />
+          <span
+            className="absolute top-[36px] right-3"
+            onClick={() => setView(!view)}
+          >
+            {view ? <FaRegEyeSlash /> : <FaRegEye />}
+          </span>
           <div className="flex justify-end text-xs dark:text-gray-600">
             <a rel="noopener noreferrer" href="#">
               Forgot Password?

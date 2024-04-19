@@ -1,9 +1,22 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
+
 const FeaturedFoods = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  const [featuredFoods, setFeaturedFoods] = useState([]);
+  useEffect(() => {
+    axios.get("Food.json").then((res) => {
+      setFeaturedFoods(res.data);
+    });
+  }, []);
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-12">
+      {featuredFoods.map((foods, idx) => (
+        <FeaturedFoodsCard key={idx} getFoods={foods}></FeaturedFoodsCard>
+      ))}
+    </div>
+  );
 };
 
 export default FeaturedFoods;
