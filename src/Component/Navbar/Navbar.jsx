@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../../public/meal.jpg";
+import logo from "../../assets/meal.jpg";
 import useContextHook from "../../useCustomHook/useContextHook";
 
 const Navbar = () => {

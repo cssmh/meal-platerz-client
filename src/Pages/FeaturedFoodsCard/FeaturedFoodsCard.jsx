@@ -11,32 +11,43 @@ const FeaturedFoodsCard = ({ getFoods }) => {
     foodQuantity,
     pickupLocation,
   } = getFoods;
+
   return (
-    <div>
-      <div className="flex flex-col bg-white border shadow-sm rounded-xl">
+    <div className="max-w-md mx-auto">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <img
-          className="w-full h-auto rounded-t-xl"
+          className="w-full h-48 object-cover object-center"
           src={foodImage}
-          alt="Image"
+          alt="Food"
         />
-        <div className="p-2 md:p-3 flex justify-between">
-          <div>
-            <h3 className="text-lg font-semibold">{foodName}e</h3>
-            <p className="mt-1 text-gray-500 dark:text-neutral-400">
-              {foodQuantity}
+        <div className="p-4">
+          <div className="mb-2">
+            <h3 className="text-lg font-semibold text-gray-800">{foodName}</h3>
+            <p className="text-sm text-gray-600">
+              Quantity for {foodQuantity} person
             </p>
-            <Link className="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-redFood text-white">
-              View Details
-            </Link>
+            <p className="text-sm text-gray-600 mt-1">
+              Expire in {expiredDateTime}
+            </p>
           </div>
-          <div className="space-y-1">
-            <div className="flex items-center gap-1">
-              <img src={donatorImage} className="w-12 rounded-full" alt="" />
-              <p>{donatorName}</p>
+          <Link className="inline-block bg-red-500 text-white px-4 py-2 rounded-md text-sm font-semibold">
+            View Details
+          </Link>
+        </div>
+        <div className="flex justify-around px-4 py-3 bg-gray-100 gap-1">
+          <div className="flex-1">
+            <div className="flex items-center justify-center">
+              <img
+                className="w-8 h-8 rounded-full mr-2 object-cover"
+                src={donatorImage}
+                alt="donator"
+              />
+              <p className="text-sm text-gray-800">{donatorName}</p>
             </div>
-            <p>{expiredDateTime}</p>
-            <p>{pickupLocation}</p>
           </div>
+          <p className="flex-1 text-xs text-gray-600">
+            Location: <span className="text-redFood">{pickupLocation}</span>
+          </p>
         </div>
       </div>
     </div>
