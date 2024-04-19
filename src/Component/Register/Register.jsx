@@ -1,5 +1,5 @@
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import useContextHook from "../../useCustomHook/useContextHook";
 
 const Register = () => {

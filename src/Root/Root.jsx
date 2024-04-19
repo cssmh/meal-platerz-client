@@ -7,6 +7,9 @@ import Register from "../Component/Register/Register";
 import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
 import MyProfile from "../Component/MyProfile/MyProfile";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AddFood from "../Pages/AddFood/AddFood";
+import MyFoods from "../Pages/MyFoods/MyFoods";
+import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -15,25 +18,49 @@ const Root = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Login />,
       },
       {
         path: "/register",
-        element: <Register></Register>,
+        element: <Register />,
       },
       {
         path: "/available-foods",
-        element: <AvailableFoods></AvailableFoods>,
+        element: <AvailableFoods />,
       },
       {
         path: "/my-profile",
         element: (
           <PrivateRoute>
-            <MyProfile></MyProfile>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/add-food",
+        element: (
+          <PrivateRoute>
+            <AddFood />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-foods",
+        element: (
+          <PrivateRoute>
+            <MyFoods />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-food-request",
+        element: (
+          <PrivateRoute>
+            <MyFoodRequest />
           </PrivateRoute>
         ),
       },

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import logo from "../../../public/meal.jpg";
 import useContextHook from "../../useCustomHook/useContextHook";
 
 const Navbar = () => {
@@ -99,7 +100,8 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl px-0">MealPlaterz</a>
+          <img src={logo} className="w-11 mr-1" />
+          <a className="font-semibold text-xl px-0">MealPlaterz</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
