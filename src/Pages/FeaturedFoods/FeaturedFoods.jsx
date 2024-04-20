@@ -5,8 +5,8 @@ import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
 const FeaturedFoods = () => {
   const [featuredFoods, setFeaturedFoods] = useState([]);
   useEffect(() => {
-    axios.get("Food.json").then((res) => {
-      setFeaturedFoods(res.data);
+    axios.get("http://localhost:5000/allfoods").then((res) => {
+      setFeaturedFoods(res.data?.result);
     });
   }, []);
 

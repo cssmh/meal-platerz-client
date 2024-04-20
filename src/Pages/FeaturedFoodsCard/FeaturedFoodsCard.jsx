@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const FeaturedFoodsCard = ({ getFoods }) => {
   const {
-    additionalNotes,
+    _id,
     donatorImage,
     donatorName,
     expiredDateTime,
@@ -30,7 +30,7 @@ const FeaturedFoodsCard = ({ getFoods }) => {
               Expire in {expiredDateTime}
             </p>
           </div>
-          <Link className="inline-block bg-red-500 text-white px-4 py-2 rounded-md text-sm font-semibold">
+          <Link to={`/food/${_id}`} className="inline-block bg-red-500 text-white px-4 py-2 rounded-md text-sm font-semibold">
             View Details
           </Link>
         </div>

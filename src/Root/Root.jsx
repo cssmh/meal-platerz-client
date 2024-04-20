@@ -10,6 +10,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AddFood from "../Pages/AddFood/AddFood";
 import MyFoods from "../Pages/MyFoods/MyFoods";
 import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
+import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +64,16 @@ const Root = createBrowserRouter([
             <MyFoodRequest />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/food/:id",
+        element: (
+          <PrivateRoute>
+            <FoodDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/food/${params.id}`),
       },
     ],
   },
