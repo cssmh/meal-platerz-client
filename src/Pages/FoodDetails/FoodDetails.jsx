@@ -1,18 +1,20 @@
 import { useLoaderData } from "react-router-dom";
 import BannerFood from "./BannerFood";
+import AddRequest from "../AddRequest/AddRequest";
 
 const FoodDetails = () => {
-  const loadData = useLoaderData();
+  const loadFoodData = useLoaderData();
   const {
     additionalNotes,
     donatorImage,
+    foodDonatorEmail,
     donatorName,
     expiredDateTime,
     foodImage,
     foodName,
     foodQuantity,
     pickupLocation,
-  } = loadData;
+  } = loadFoodData;
 
   return (
     <div>
@@ -32,9 +34,7 @@ const FoodDetails = () => {
           <p>{additionalNotes.slice(0, 30)}</p>
           <p>Pickup Location: {pickupLocation}</p>
           <p className="text-redFood">Donar: {donatorName}</p>
-          <button className="bg-redFood text-white px-3 py-2 rounded-md">
-            Request for this food
-          </button>
+          <AddRequest getFood={loadFoodData}></AddRequest>
         </div>
       </div>
       <div className="max-w-[1200px] lg:mx-auto mb-9 lg:mb-16 mx-6">
