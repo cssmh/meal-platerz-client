@@ -38,7 +38,7 @@ const AddRequest = ({ getFood }) => {
       </Button>
       <Dialog open={open} fullWidth maxWidth="lg">
         <DialogActions>
-          <Button onClick={closePop} color="info">
+          <Button onClick={closePop} color="error">
             x
           </Button>
         </DialogActions>
@@ -126,8 +126,8 @@ const AddRequest = ({ getFood }) => {
               ></textarea>
             </div>
             <div className="form-control mt-5">
-              <button className="btn btn-outline border-none bg-green-400 hover:bg-green-400 text-white">
-                Purchase Book
+              <button className="btn btn-outline border-none bg-red-400 hover:bg-red-400 text-white">
+                Request this Food
               </button>
             </div>
           </form>
