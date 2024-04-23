@@ -24,7 +24,7 @@ const AvailableFoods = () => {
   useEffect(() => {
     axios
       .get("http://localhost:5000/allFoods")
-      .then((res) => setTotalFoodsForSearch(res.data.result));
+      .then((res) => setTotalFoodsForSearch(res.data?.result));
   }, []);
   // for search book end
 

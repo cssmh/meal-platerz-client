@@ -170,35 +170,35 @@ const Navbar = () => {
               {user?.displayName}
             </p>
           )}
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} onClick={handleProfileClick}>
-              <img
-                src={user?.photoURL}
-                alt={user?.displayName}
-                className="w-10 rounded-full mr-2"
-              />
-            </label>
-            {showProfileOptions && (
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <p className="pointer-events-none">Hi, {user?.displayName}</p>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/my-profile"}
-                    className={({ isActive }) =>
-                      isActive ? "text-blue-500" : ""
-                    }
-                  >
-                    View Profile
-                  </NavLink>
-                </li>
-              </ul>
-            )}
-          </div>
+          {user?.email && (
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} onClick={handleProfileClick}>
+                <img src={user?.photoURL} className="w-10 rounded-full mr-2" />
+              </label>
+              {showProfileOptions && (
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <p className="pointer-events-none">
+                      Hi, {user?.displayName}
+                    </p>
+                  </li>
+                  <li>
+                    <NavLink
+                      to={"/my-profile"}
+                      className={({ isActive }) =>
+                        isActive ? "text-blue-500" : ""
+                      }
+                    >
+                      View Profile
+                    </NavLink>
+                  </li>
+                </ul>
+              )}
+            </div>
+          )}
           {user?.email ? (
             <button
               onClick={handleLogOut}
