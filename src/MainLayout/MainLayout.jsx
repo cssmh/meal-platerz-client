@@ -11,7 +11,7 @@ const MainLayout = () => {
       {navigationForSpinner.state === "loading" ? (
         <p>loading</p>
       ) : (
-        <div className="min-h-[40vh] md:min-h-[70vh]">
+        <div className="min-h-[70vh]">
           <Outlet></Outlet>
         </div>
       )}
