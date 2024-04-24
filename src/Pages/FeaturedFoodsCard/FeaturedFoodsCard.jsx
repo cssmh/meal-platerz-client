@@ -13,7 +13,7 @@ const FeaturedFoodsCard = ({ getFoods }) => {
     expired_time,
     additional_notes,
     donator_email,
-    owner_phone,
+    donator_phone,
   } = getFoods;
 
   return (
@@ -28,12 +28,12 @@ const FeaturedFoodsCard = ({ getFoods }) => {
           <div className="mb-2">
             <h3 className="text-lg font-semibold text-gray-800">{food_name}</h3>
             <p className="text-sm text-gray-600">
-              Quantity for {food_quantity} person
+              Quantity: {food_quantity} People can be served
             </p>
             <p className="text-sm text-gray-600 mt-1">
               Expire in: {expired_date} {expired_time}
             </p>
-            <p className="text-sm text-gray-600 mt-1">Phone {owner_phone}</p>
+            <p className="text-sm text-gray-600 mt-1">Phone {donator_phone}</p>
           </div>
           <Link
             to={`/food/${_id}`}

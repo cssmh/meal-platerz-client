@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import UpdateMyFood from "./UpdateMyFood";
 
 const MyFoodsRow = ({ getFood, handleDelete }) => {
@@ -43,7 +44,9 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
       <td>
         <div className="flex items-center gap-3">
           <div>
-            <p className="font-bold">{food_name}</p>
+            <Link to={`/food/${_id}`}>
+              <p className="font-bold">{food_name}</p>
+            </Link>
           </div>
         </div>
       </td>

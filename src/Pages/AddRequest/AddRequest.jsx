@@ -2,24 +2,27 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
+import axios from "axios";
+import swal from "sweetalert";
 
 const AddRequest = ({ getFood }) => {
   const { user } = useContextHook();
   const {
-    foodName,
-    foodImage,
-    foodDonatorEmail,
-    donatorName,
-    pickupLocation,
-    expiredDateTime,
+    _id,
+    food_name,
+    food_image,
+    donator_email,
+    donator_name,
+    pickup_location,
+    expired_date,
+    expired_time,
   } = getFood;
 
   const [open, setOpen] = useState(false);
   const [todayDateTime, setTodayDateTime] = useState("");
-  // console.log(todayDateTime);
 
   useEffect(() => {
-    const today = moment().format("YYYY-MM-DDTHH:mm");
+    const today = moment().format("DD-MM-YYYY hh:mm A");
     setTodayDateTime(today);
   }, []);
 
@@ -29,6 +32,49 @@ const AddRequest = ({ getFood }) => {
 
   const closePop = () => {
     setOpen(false);
+  };
+
+  const handleAddRequest = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const food_id = _id;
+    const user_email = user?.email;
+    const user_phone = form.user_phone.value;
+    const request_date = todayDateTime;
+    const message_to_donator = form.message_to_donator.value;
+    const donation_money = parseInt(form.donation_money.value);
+    const status = "pending";
+
+    const requestFoodData = {
+      food_id,
+      food_name,
+      food_image,
+      donator_email,
+      donator_name,
+      user_email,
+      user_phone,
+      request_date,
+      pickup_location,
+      expired_date,
+      expired_time,
+      message_to_donator,
+      donation_money,
+      status,
+    };
+
+    axios
+      .post("http://localhost:5000/addRequest", requestFoodData)
+      .then((res) => {
+        if (res.data?.insertedId) {
+          swal("Congratulations!", "Request Complete", "success");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setOpen(false);
+      });
   };
 
   return (
@@ -43,69 +89,81 @@ const AddRequest = ({ getFood }) => {
           </Button>
         </DialogActions>
         <DialogContent>
-          <form className="md:w-[65%] mx-auto">
+          <form onSubmit={handleAddRequest} className="md:w-[70%] mx-auto">
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">Book Name</span>
+                  <span className="label-text">Food Name</span>
                 </label>
                 <input
                   type="text"
+                  defaultValue={food_name}
+                  name="food_name"
                   readOnly
-                  name="book_name"
                   className="input input-bordered"
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">Book Image URL</span>
+                  <span className="label-text">Donator Email</span>
                 </label>
                 <input
                   type="text"
+                  name="donator_email"
+                  defaultValue={donator_email}
                   readOnly
-                  name="book_image_URL"
                   className="input input-bordered"
                   style={{ outline: "none" }}
                 />
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
                 <label className="label">
                   <span className="label-text">Your Email</span>
                 </label>
                 <input
-                  type="email"
+                  type="text"
+                  defaultValue={user?.email}
                   readOnly
-                  name="book_purchaser_email"
                   className="input input-bordered"
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">Book Provider Email</span>
+                  <span className="label-text">Your Phone</span>
                 </label>
                 <input
-                  type="email"
-                  readOnly
-                  name="book_provider_email"
+                  type="text"
+                  name="user_phone"
                   className="input input-bordered"
                   style={{ outline: "none" }}
                 />
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">Your Phone Number</span>
+                  <span className="label-text">Request Date (Today)</span>
                 </label>
                 <input
                   type="text"
-                  required
-                  name="phone"
-                  defaultValue="+880"
+                  defaultValue={todayDateTime}
+                  readOnly
+                  className="input input-bordered"
+                  style={{ outline: "none" }}
+                />
+              </div>
+              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+                <label className="label">
+                  <span className="label-text">Donate Some Money</span>
+                </label>
+                <input
+                  type="text"
+                  defaultValue="0"
+                  name="donation_money"
                   className="input input-bordered"
                   style={{ outline: "none" }}
                 />
@@ -113,12 +171,10 @@ const AddRequest = ({ getFood }) => {
             </div>
             <div className="form-control mx-3 lg:mx-0">
               <label className="label">
-                <span className="label-text">
-                  Any Message for Book Provider?
-                </span>
+                <span className="label-text">Any Message for Donator?</span>
               </label>
               <textarea
-                name="instruction"
+                name="message_to_donator"
                 cols="5"
                 rows="5"
                 className="border p-1 rounded-xl"
@@ -127,7 +183,7 @@ const AddRequest = ({ getFood }) => {
             </div>
             <div className="form-control mt-5">
               <button className="btn btn-outline border-none bg-red-400 hover:bg-red-400 text-white">
-                Request this Food
+                Update Food
               </button>
             </div>
           </form>
