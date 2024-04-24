@@ -44,7 +44,7 @@ const FeaturedFoodsCard = ({ getFoods }) => {
         </div>
         <div className="flex justify-around px-4 py-3 bg-gray-100 gap-1">
           <div className="flex-1">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center gap-1">
               <img
                 className="w-8 h-8 rounded-full mr-2 object-cover"
                 src={donator_image}

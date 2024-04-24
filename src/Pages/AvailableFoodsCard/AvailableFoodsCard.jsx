@@ -11,10 +11,9 @@ const AvailableFoodsCard = ({ getFoods }) => {
     pickup_location,
     expired_date,
     expired_time,
-    additional_notes,
-    donator_email,
     owner_phone,
   } = getFoods;
+  
   return (
     <div className="max-w-md mx-auto">
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -43,7 +42,7 @@ const AvailableFoodsCard = ({ getFoods }) => {
         </div>
         <div className="flex justify-around px-4 py-3 bg-gray-100 gap-1">
           <div className="flex-1">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center gap-1">
               <img
                 className="w-8 h-8 rounded-full object-cover"
                 src={donator_image}

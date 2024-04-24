@@ -5,7 +5,6 @@ import { DotLoader } from "react-spinners";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContextHook();
   const location = useLocation();
-  // console.log(location);
 
   if (loading) {
     return (
@@ -16,7 +15,7 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  if (!loading && user?.email) {
+  if (user.email) {
     return children;
   } else {
     return <Navigate state={location.pathname} to="/login"></Navigate>;

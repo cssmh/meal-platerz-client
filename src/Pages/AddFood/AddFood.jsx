@@ -34,6 +34,7 @@ const AddFood = () => {
     const donator_image = user?.photoURL;
     const donator_name = user?.displayName;
     const donator_email = user?.email;
+    const food_status = "available";
 
     const foodInformation = {
       food_name,
@@ -47,6 +48,7 @@ const AddFood = () => {
       donator_image,
       donator_name,
       donator_email,
+      food_status,
     };
 
     axios
