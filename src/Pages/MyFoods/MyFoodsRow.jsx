@@ -1,4 +1,6 @@
-const MyFoodsRow = ({ getFood, handleDelete, handleUpdate }) => {
+import UpdateMyFood from "./UpdateMyFood";
+
+const MyFoodsRow = ({ getFood, handleDelete }) => {
   const {
     _id,
     food_image,
@@ -13,7 +15,7 @@ const MyFoodsRow = ({ getFood, handleDelete, handleUpdate }) => {
       <th>
         <div className="flex gap-5 items-center">
           <button
-            onClick={() => handleDelete(_id)}
+            onClick={() => handleDelete(_id, food_name)}
             className="btn btn-sm btn-circle btn-outline"
           >
             <svg
@@ -51,12 +53,7 @@ const MyFoodsRow = ({ getFood, handleDelete, handleUpdate }) => {
       <td>{expired_time}</td>
       <td>{food_status}</td>
       <th>
-        <button
-          onClick={() => handleUpdate(_id)}
-          className="btn bg-green-500 hover:bg-green-500 text-white btn-sm"
-        >
-          Update
-        </button>
+        <UpdateMyFood foodInfo={getFood}></UpdateMyFood>
       </th>
     </tr>
   );

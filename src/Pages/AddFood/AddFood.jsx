@@ -26,28 +26,28 @@ const AddFood = () => {
     const food_name = form.food_name.value;
     const food_image = form.food_image.value;
     const food_quantity = parseInt(form.food_quantity.value);
-    const pickup_location = form.pickup_location.value;
+    const donator_name = user?.displayName;
+    const donator_image = user?.photoURL;
+    const donator_email = user?.email;
+    const donator_phone = form.phone.value;
     const expired_date = formattedDate;
     const expired_time = formattedTime;
-    const owner_phone = form.phone.value;
+    const pickup_location = form.pickup_location.value;
     const additional_notes = form.additional_notes.value;
-    const donator_image = user?.photoURL;
-    const donator_name = user?.displayName;
-    const donator_email = user?.email;
     const food_status = "available";
 
     const foodInformation = {
       food_name,
       food_image,
       food_quantity,
-      pickup_location,
+      donator_name,
+      donator_image,
+      donator_email,
+      donator_phone,
       expired_date,
       expired_time,
-      owner_phone,
+      pickup_location,
       additional_notes,
-      donator_image,
-      donator_name,
-      donator_email,
       food_status,
     };
 

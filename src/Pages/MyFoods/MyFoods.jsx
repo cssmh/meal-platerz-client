@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
 import MyFoodsRow from "./MyFoodsRow";
+import swal from "sweetalert";
 
 const MyFoods = () => {
   const { user } = useContextHook();
@@ -20,10 +21,31 @@ const MyFoods = () => {
     console.log(idx);
   };
 
-  const handleDelete = (idx) => {
-    console.log(idx);
+  const handleDelete = (idx, name) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, it can't be recovered!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        // main code
+        axios.delete(`http://localhost:5000/delete-food/${idx}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
+            const remaining = myFoods.filter((food) => food._id !== idx);
+            setMyFoods(remaining);
+            swal(`${name} Deleted!`, {
+              icon: "success",
+            });
+          }
+        });
+      } else {
+        swal("Your file is safe!");
+      }
+    });
   };
-  
+
   return (
     <div>
       <div className="overflow-x-auto my-10">
