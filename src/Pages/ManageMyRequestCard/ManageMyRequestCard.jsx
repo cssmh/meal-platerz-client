@@ -2,25 +2,20 @@ import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 
-const SingleFoodCard = ({ getReq }) => {
+const ManageMyRequestCard = ({ getReq }) => {
   const {
-    donation_money,
-    donator_email,
-    donator_name,
-    expired_date,
-    expired_time,
+    _id,
     food_id,
-    food_image,
-    food_name,
-    message_to_donator,
-    pickup_location,
-    request_date,
-    status,
-    user_email,
     user_image,
     user_name,
+    user_email,
     user_phone,
-    _id,
+    request_date,
+    expired_date,
+    expired_time,
+    message_to_donator,
+    donation_money,
+    status,
   } = getReq;
 
   const handleUpdateStatus = (e, idx, foodIdx) => {
@@ -57,14 +52,18 @@ const SingleFoodCard = ({ getReq }) => {
         <title>MealPlaterz | Food Request</title>
       </Helmet>
       <div className="text-center border border-redFood py-4 rounded-md space-y-1 mx-1 md:mx-0">
-        <img src={user_image} className="mx-auto" alt="no image" />
+        <img src={user_image} className="w-36 mx-auto" alt="no image" />
         <h1 className="text-blue-800 text-lg">Requester Information</h1>
         <p>{user_name}</p>
-        <p>Email: {user_email}</p>
+        <div className="flex justify-center gap-1">
+          <p className="text-cyan-600">Email: {user_email}</p>
+          <p className="text-red-600">Phone: {user_phone}</p>
+        </div>
+        <p className="text-blue-600">Request Date & Time: {request_date}</p>
+        <p>{message_to_donator}</p>
         <p>
           Expire Date & Time: {expired_date} {expired_time}
         </p>
-        <p>Request Date & Time: {request_date}</p>
         <p>Donation: {donation_money} BDT</p>
         <div className="text-center mt-1">
           <select
@@ -82,4 +81,4 @@ const SingleFoodCard = ({ getReq }) => {
   );
 };
 
-export default SingleFoodCard;
+export default ManageMyRequestCard;

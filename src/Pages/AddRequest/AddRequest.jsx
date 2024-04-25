@@ -1,12 +1,15 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
+import axios from "axios";
 import moment from "moment";
+import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
-import axios from "axios";
-import swal from "sweetalert";
 
 const AddRequest = ({ getFood }) => {
   const { user } = useContextHook();
+  const [open, setOpen] = useState(false);
+  const [todayDateTime, setTodayDateTime] = useState("");
+
   const {
     _id,
     food_name,
@@ -18,10 +21,6 @@ const AddRequest = ({ getFood }) => {
     expired_date,
     expired_time,
   } = getFood;
-  console.log(getFood);
-
-  const [open, setOpen] = useState(false);
-  const [todayDateTime, setTodayDateTime] = useState("");
 
   useEffect(() => {
     const today = moment().format("DD-MM-YYYY hh:mm A");
@@ -46,7 +45,8 @@ const AddRequest = ({ getFood }) => {
     const user_phone = form.user_phone.value;
     const request_date = todayDateTime;
     const message_to_donator = form.message_to_donator.value;
-    const donation_money = parseInt(form.donation_money.value);
+    const getDonation = parseInt(form.donation_money.value);
+    const donation_money = getDonation > 0 ? getDonation : 0;
     const status = "Pending";
 
     const requestFoodData = {

@@ -6,12 +6,12 @@ import Login from "../Component/Login/Login";
 import Register from "../Component/Register/Register";
 import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
 import MyProfile from "../Component/MyProfile/MyProfile";
+import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AddFood from "../Pages/AddFood/AddFood";
-import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
 import FoodDetails from "../Pages/FoodDetails/FoodDetails";
-import MyFoods from "../Pages/MyFoods/MyFoods";
-import ManageSingleFood from "../Pages/MyFoods/ManageSingleFood";
+import MyFoods from "../Pages/ManageMyFoods/ManageMyFoods";
+import ManageMyRequest from "../Pages/ManageMyRequest/ManageMyRequest";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -80,7 +80,7 @@ const Root = createBrowserRouter([
         path: "/manage/:id",
         element: (
           <PrivateRoute>
-            <ManageSingleFood />
+            <ManageMyRequest />
           </PrivateRoute>
         ),
         loader: ({ params }) =>

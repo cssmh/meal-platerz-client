@@ -1,4 +1,4 @@
-const MyFoodRequestCard = ({ getFoods, handleRequestedDelete }) => {
+const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
   const {
     _id,
     food_id,
@@ -26,17 +26,17 @@ const MyFoodRequestCard = ({ getFoods, handleRequestedDelete }) => {
         <div>
           <p className="text-2xl">{food_name}</p>
           <p className="text-lg text-blue-900">Donar Information</p>
-          <h1>{donator_name}</h1>
+          <h1 className="text-cyan-600">{donator_name}</h1>
           <p>{donator_email}</p>
           <p>{donator_phone}</p>
         </div>
       </div>
       <div className="px-[70px] mt-2">
-        <p>Pickup Location: {pickup_location}</p>
+        <p className="text-sky-600-600">Pickup Location: {pickup_location}</p>
         <p>
           Expire Date Time: {expired_date} {expired_time}
         </p>
-        <p>Your Request Date: {request_date}</p>
+        <p className="text-blue-600">Your Request Date: {request_date}</p>
         <p>Your Donation: {donation_money} BDT</p>
         <p>
           Status:{" "}
@@ -56,4 +56,4 @@ const MyFoodRequestCard = ({ getFoods, handleRequestedDelete }) => {
   );
 };
 
-export default MyFoodRequestCard;
+export default MyRequestedFoodsCard;

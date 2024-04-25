@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import useContextHook from "../../useCustomHook/useContextHook";
-import MyFoodsRow from "./MyFoodsRow";
 import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
+import useContextHook from "../../useCustomHook/useContextHook";
+import MyFoodsRow from "../ManageMyFoodsRow/ManageMyFoodsRow";
 
-const MyFoods = () => {
+const ManageMyFoods = () => {
   const { user } = useContextHook();
   const [isLoading, setIsLoading] = useState(true);
   const [myFoods, setMyFoods] = useState([]);
@@ -17,10 +17,6 @@ const MyFoods = () => {
         setIsLoading(false);
       });
   }, [user?.email]);
-
-  const handleUpdate = (idx) => {
-    console.log(idx);
-  };
 
   const handleDelete = (idx, name) => {
     swal({
@@ -70,7 +66,6 @@ const MyFoods = () => {
               <MyFoodsRow
                 key={food._id}
                 handleDelete={handleDelete}
-                handleUpdate={handleUpdate}
                 getFood={food}
               ></MyFoodsRow>
             ))}
@@ -81,4 +76,4 @@ const MyFoods = () => {
   );
 };
 
-export default MyFoods;
+export default ManageMyFoods;

@@ -152,6 +152,7 @@ const UpdateMyFood = ({ foodInfo }) => {
                     </label>
                     <input
                       type="date"
+                      required
                       onChange={handleDateChange}
                       className="input input-bordered w-full"
                       style={{ outline: "none" }}
@@ -163,6 +164,7 @@ const UpdateMyFood = ({ foodInfo }) => {
                     </label>
                     <input
                       type="time"
+                      required
                       onChange={handleTimeChange}
                       className="input input-bordered w-full"
                       style={{ outline: "none" }}
