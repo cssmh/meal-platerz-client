@@ -14,10 +14,12 @@ const AddRequest = ({ getFood }) => {
     food_image,
     donator_email,
     donator_name,
+    donator_phone,
     pickup_location,
     expired_date,
     expired_time,
   } = getFood;
+  console.log(getFood);
 
   const [open, setOpen] = useState(false);
   const [todayDateTime, setTodayDateTime] = useState("");
@@ -54,6 +56,7 @@ const AddRequest = ({ getFood }) => {
       food_image,
       donator_email,
       donator_name,
+      donator_phone,
       user_name,
       user_image,
       user_email,
