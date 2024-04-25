@@ -1,4 +1,4 @@
-const MyFoodRequestCard = ({ getFoods }) => {
+const MyFoodRequestCard = ({ getFoods, handleRequestedDelete }) => {
   const {
     _id,
     food_id,
@@ -47,7 +47,7 @@ const MyFoodRequestCard = ({ getFoods }) => {
           </span>
         </p>
         {status !== "Delivered" && (
-          <button className="mt-1 btn btn-sm border-black bg-base-100 hover:bg-black text-black hover:text-white">
+          <button onClick={() => handleRequestedDelete(_id, food_name)} className="mt-1 btn btn-sm border-black bg-base-100 hover:bg-black text-black hover:text-white">
             Cancel Request
           </button>
         )}

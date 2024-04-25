@@ -3,6 +3,7 @@ import useContextHook from "../../useCustomHook/useContextHook";
 import axios from "axios";
 import { SyncLoader } from "react-spinners";
 import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
+import swal from "sweetalert";
 
 const MyFoodRequest = () => {
   const { user } = useContextHook();
@@ -17,6 +18,35 @@ const MyFoodRequest = () => {
     });
   }, [url]);
 
+  const handleRequestedDelete = (idx, food_name) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, it can't be recovered!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        // main code
+        axios
+          .delete(`http://localhost:5000/my-request-food/${idx}`)
+          .then((res) => {
+            if (res.data?.deletedCount > 0) {
+              const remaining = myFoodRequest.filter(
+                (food) => food._id !== idx
+              );
+              setMyFoodRequest(remaining);
+              swal(`${food_name} Deleted!`, {
+                icon: "success",
+              });
+            }
+          });
+      } else {
+        swal("Your file is safe!");
+      }
+    });
+  };
+
   return (
     <div>
       {isLoading ? (
@@ -29,6 +59,7 @@ const MyFoodRequest = () => {
             <MyFoodRequestCard
               key={food._id}
               getFoods={food}
+              handleRequestedDelete={handleRequestedDelete}
             ></MyFoodRequestCard>
           ))}
         </div>
