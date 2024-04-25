@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AvailableFoodsCard from "../AvailableFoodsCard/AvailableFoodsCard";
 import { SyncLoader } from "react-spinners";
+import { Helmet } from "react-helmet-async";
 
 const AvailableFoods = () => {
   let searchTerm;
@@ -41,6 +42,9 @@ const AvailableFoods = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>MealPlaterz | Available Foods</title>
+      </Helmet>
       {isLoading ? (
         <div className="flex justify-center my-5">
           <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />

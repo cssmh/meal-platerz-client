@@ -7,7 +7,6 @@ import swal from "sweetalert";
 
 const AddRequest = ({ getFood }) => {
   const { user } = useContextHook();
-  console.log(user);
   const {
     _id,
     food_name,

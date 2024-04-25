@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
 import MyFoodsRow from "./MyFoodsRow";
 import swal from "sweetalert";
+import { Helmet } from "react-helmet-async";
 
 const MyFoods = () => {
   const { user } = useContextHook();
@@ -48,6 +49,9 @@ const MyFoods = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>MealPlaterz | My Foods</title>
+      </Helmet>
       <div className="overflow-x-auto my-10">
         <table className="table max-w-7xl mx-auto">
           <thead>

@@ -1,13 +1,20 @@
-import moment from "moment";
 import axios from "axios";
+import moment from "moment";
 import swal from "sweetalert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
+import { Helmet } from "react-helmet-async";
 
 const AddFood = () => {
   const { user } = useContextHook();
   const [expiredDate, setExpiredDate] = useState("");
   const [expiredTime, setExpiredTime] = useState("");
+  const [todayDate, setTodayDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    setTodayDate(today);
+  }, []);
 
   const handleDateChange = (e) => {
     setExpiredDate(e.target.value);
@@ -34,7 +41,7 @@ const AddFood = () => {
     const expired_time = formattedTime;
     const pickup_location = form.pickup_location.value;
     const additional_notes = form.additional_notes.value;
-    const food_status = "Available";
+    const food_status = "available";
 
     const foodInformation = {
       food_name,
@@ -47,8 +54,8 @@ const AddFood = () => {
       expired_date,
       expired_time,
       pickup_location,
-      additional_notes,
       food_status,
+      additional_notes,
     };
 
     axios
@@ -66,6 +73,9 @@ const AddFood = () => {
 
   return (
     <div className="my-8">
+      <Helmet>
+        <title>MealPlaterz | Add Food</title>
+      </Helmet>
       <form onSubmit={handleAddFood} className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row gap-3">
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
@@ -129,6 +139,7 @@ const AddFood = () => {
               <input
                 type="date"
                 required
+                min={todayDate}
                 onChange={handleDateChange}
                 className="input input-bordered w-full"
                 style={{ outline: "none" }}

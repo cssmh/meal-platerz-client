@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 
 const SingleFoodCard = ({ getReq }) => {
@@ -52,26 +52,31 @@ const SingleFoodCard = ({ getReq }) => {
   };
 
   return (
-    <div className="text-center border border-redFood py-4 rounded-md space-y-1 mx-1 md:mx-0">
-      <img src={user_image} className="mx-auto" alt="no image" />
-      <h1 className="text-blue-800 text-lg">Requester Information</h1>
-      <p>{user_name}</p>
-      <p>Email: {user_email}</p>
-      <p>
-        Expire Date & Time: {expired_date} {expired_time}
-      </p>
-      <p>Request Date & Time: {request_date}</p>
-      <p>Donation: {donation_money} BDT</p>
-      <div className="text-center mt-1">
-        <select
-          defaultValue={status}
-          onChange={(e) => handleUpdateStatus(e, _id, food_id)}
-          className="input input-bordered"
-          style={{ outline: "none" }}
-        >
-          <option value="Pending">Pending</option>
-          <option value="Delivered">Delivered</option>
-        </select>
+    <div>
+      <Helmet>
+        <title>MealPlaterz | Food Request</title>
+      </Helmet>
+      <div className="text-center border border-redFood py-4 rounded-md space-y-1 mx-1 md:mx-0">
+        <img src={user_image} className="mx-auto" alt="no image" />
+        <h1 className="text-blue-800 text-lg">Requester Information</h1>
+        <p>{user_name}</p>
+        <p>Email: {user_email}</p>
+        <p>
+          Expire Date & Time: {expired_date} {expired_time}
+        </p>
+        <p>Request Date & Time: {request_date}</p>
+        <p>Donation: {donation_money} BDT</p>
+        <div className="text-center mt-1">
+          <select
+            defaultValue={status}
+            onChange={(e) => handleUpdateStatus(e, _id, food_id)}
+            className="input input-bordered"
+            style={{ outline: "none" }}
+          >
+            <option value="Pending">Pending</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </div>
       </div>
     </div>
   );
