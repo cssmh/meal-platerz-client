@@ -36,7 +36,7 @@ const MyFoodRequest = () => {
                 (food) => food._id !== idx
               );
               setMyFoodRequest(remaining);
-              swal(`${food_name} Deleted!`, {
+              swal(`${food_name} Canceled!`, {
                 icon: "success",
               });
             }

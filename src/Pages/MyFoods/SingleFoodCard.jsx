@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import swal from "sweetalert";
 
 const SingleFoodCard = ({ getReq }) => {
@@ -22,9 +23,24 @@ const SingleFoodCard = ({ getReq }) => {
     _id,
   } = getReq;
 
-  const handleUpdateStatus = (e, idx) => {
+  const handleUpdateStatus = (e, idx, foodIdx) => {
     const newStatus = e.target.value;
     const updatedStatus = { newStatus };
+
+    if (newStatus === "Pending") {
+      const foodStatus = "available";
+      axios
+        .put(`http://localhost:5000/change-status/${foodIdx}`, { foodStatus })
+        .then((res) => console.log(res.data))
+        .catch((res) => console.log(res));
+    } else if (newStatus === "Delivered") {
+      const foodStatus = "Unavailable";
+      axios
+        .put(`http://localhost:5000/change-status/${foodIdx}`, { foodStatus })
+        .then((res) => console.log(res.data))
+        .catch((res) => console.log(res));
+    }
+
     axios
       .put(`http://localhost:5000/request-status/${idx}`, updatedStatus)
       .then((res) => {
@@ -41,21 +57,20 @@ const SingleFoodCard = ({ getReq }) => {
       <h1 className="text-blue-800 text-lg">Requester Information</h1>
       <p>{user_name}</p>
       <p>Email: {user_email}</p>
-      <p>Expire Time & Date: {expired_date} {expired_time}</p>
-      <p>Request Time & Date: {request_date}</p>
+      <p>
+        Expire Date & Time: {expired_date} {expired_time}
+      </p>
+      <p>Request Date & Time: {request_date}</p>
+      <p>Donation: {donation_money} BDT</p>
       <div className="text-center mt-1">
         <select
           defaultValue={status}
-          onChange={(e) => handleUpdateStatus(e, _id)}
+          onChange={(e) => handleUpdateStatus(e, _id, food_id)}
           className="input input-bordered"
           style={{ outline: "none" }}
         >
-          <option value="Pending">
-            <button className="btn btn-primary">Pending</button>
-          </option>
-          <option value="Delivered">
-            <button className="btn btn-primary">Delivered</button>
-          </option>
+          <option value="Pending">Pending</option>
+          <option value="Delivered">Delivered</option>
         </select>
       </div>
     </div>

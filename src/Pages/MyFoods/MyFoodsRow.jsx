@@ -10,6 +10,7 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
     expired_time,
     food_status,
   } = getFood;
+  console.log(food_status);
   
   return (
     <tr>
