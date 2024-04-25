@@ -81,7 +81,7 @@ const UpdateMyFood = ({ foodInfo }) => {
   return (
     <div>
       <Button onClick={handlePopUp} color="success" variant="contained">
-        Update
+        Edit
       </Button>
       <Dialog open={open} fullWidth maxWidth="lg">
         <DialogActions>

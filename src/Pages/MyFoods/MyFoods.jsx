@@ -58,6 +58,7 @@ const MyFoods = () => {
               <th>Time</th>
               <th>Status</th>
               <th>Update</th>
+              <th>Manage</th>
             </tr>
           </thead>
           <tbody>

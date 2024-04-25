@@ -78,12 +78,12 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to={"/my-foods"}
+                      to={"/manage-my-foods"}
                       className={({ isActive }) =>
                         isActive ? "text-blue-500" : ""
                       }
                     >
-                      My Added Foods
+                      Manage My Foods
                     </NavLink>
                   </li>
                   <li>
@@ -137,15 +137,15 @@ const Navbar = () => {
               <li tabIndex={0}>
                 <details>
                   <summary className="">Dashboard</summary>
-                  <ul className="p-2 menu menu-sm dropdown-content z-[1] w-40">
+                  <ul className="p-2 menu menu-sm dropdown-content z-[1] w-[170px]">
                     <li>
                       <NavLink
-                        to={"/my-foods"}
+                        to={"/manage-my-foods"}
                         className={({ isActive }) =>
                           isActive ? "text-blue-500" : ""
                         }
                       >
-                        My Added Foods
+                        Manage My Foods
                       </NavLink>
                     </li>
                     <li>

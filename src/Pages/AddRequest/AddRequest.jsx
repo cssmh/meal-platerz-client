@@ -7,6 +7,7 @@ import swal from "sweetalert";
 
 const AddRequest = ({ getFood }) => {
   const { user } = useContextHook();
+  console.log(user);
   const {
     _id,
     food_name,
@@ -38,12 +39,14 @@ const AddRequest = ({ getFood }) => {
     e.preventDefault();
     const form = e.target;
     const food_id = _id;
+    const user_name = user?.displayName;
+    const user_image = user?.photoURL;
     const user_email = user?.email;
     const user_phone = form.user_phone.value;
     const request_date = todayDateTime;
     const message_to_donator = form.message_to_donator.value;
     const donation_money = parseInt(form.donation_money.value);
-    const status = "pending";
+    const status = "Pending";
 
     const requestFoodData = {
       food_id,
@@ -51,6 +54,8 @@ const AddRequest = ({ getFood }) => {
       food_image,
       donator_email,
       donator_name,
+      user_name,
+      user_image,
       user_email,
       user_phone,
       request_date,
@@ -162,7 +167,6 @@ const AddRequest = ({ getFood }) => {
                 </label>
                 <input
                   type="text"
-                  defaultValue="0"
                   name="donation_money"
                   className="input input-bordered"
                   style={{ outline: "none" }}

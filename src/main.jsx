@@ -14,3 +14,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Toaster position="top-center" reverseOrder={false} />
   </React.StrictMode>
 );
+
+// console.log(Object.keys(getFoods).join(","));

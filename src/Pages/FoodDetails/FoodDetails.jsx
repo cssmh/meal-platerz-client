@@ -42,7 +42,7 @@ const FoodDetails = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-[1200px] mx-auto mb-7">
+      <div className="max-w-[1200px] mx-4 lg:mx-auto mb-7">
         <div className="flex gap-1">
           <button className="bg-redFood px-3 py-2 text-white rounded-md mb-2">
             Description

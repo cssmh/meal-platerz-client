@@ -34,7 +34,7 @@ const AddFood = () => {
     const expired_time = formattedTime;
     const pickup_location = form.pickup_location.value;
     const additional_notes = form.additional_notes.value;
-    const food_status = "available";
+    const food_status = "Available";
 
     const foodInformation = {
       food_name,

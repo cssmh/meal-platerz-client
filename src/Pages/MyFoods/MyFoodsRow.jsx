@@ -10,7 +10,7 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
     expired_time,
     food_status,
   } = getFood;
-
+  
   return (
     <tr>
       <th>
@@ -58,6 +58,13 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
       <th>
         <UpdateMyFood foodInfo={getFood}></UpdateMyFood>
       </th>
+      <td>
+        <Link to={`/manage/${_id}`}>
+          <button className="bg-redFood px-[10px] py-[7px] text-white rounded-lg">
+            Request
+          </button>
+        </Link>
+      </td>
     </tr>
   );
 };
