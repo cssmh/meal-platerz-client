@@ -13,6 +13,7 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
     food_status,
     food_quantity,
   } = foodData;
+  console.log("Unavailable");
 
   return (
     <tr>
@@ -20,7 +21,9 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
         <div className="flex gap-4 items-center">
           <button
             onClick={() => handleDelete(_id, food_name)}
-            className="btn btn-sm btn-circle btn-outline"
+            className={`${
+              food_status === "Unavailable" && "pointer-events-none opacity-50"
+            } btn btn-sm btn-circle btn-outline`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -65,12 +68,17 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
         <UpdateMyFood
           foodData={foodData}
           setFoodData={setFoodData}
+          food_status={food_status}
         ></UpdateMyFood>
       </th>
       <td>
         <Link to={`/manage/${_id}`}>
-          <button className="bg-redFood px-[10px] py-[7px] text-white rounded-lg">
-            Manage
+          <button
+            className={`${
+              food_status === "Unavailable" ? "bg-cyan-600" : "bg-redFood"
+            } px-[10px] py-[7px] text-white rounded-lg`}
+          >
+            {food_status === "Unavailable" ? "Delivered" : "Manage"}
           </button>
         </Link>
       </td>

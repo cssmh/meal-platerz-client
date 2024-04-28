@@ -1,14 +1,11 @@
 const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
   const {
     _id,
-    food_id,
     food_name,
     food_image,
     donator_email,
     donator_name,
     donator_phone,
-    user_email,
-    user_phone,
     request_date,
     pickup_location,
     expired_date,
@@ -21,7 +18,7 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
     <div className="border border-redFood rounded-md mx-1 lg:mx-0 py-5">
       <div className="flex flex-col lg:flex-row justify-center items-center gap-3">
         <div className="space-y-1 text-center">
-          <img src={food_image} className="w-64 mx-auto" alt="food" />
+          <img src={food_image} className="w-60 mx-auto" alt="food" />
         </div>
         <div>
           <p className="text-2xl">{food_name}</p>
@@ -32,12 +29,12 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
         </div>
       </div>
       <div className="px-[70px] mt-2">
-        <p className="text-sky-600-600">Pickup Location: {pickup_location}</p>
+        <p className="text-cyan-600">Pickup Location: {pickup_location}</p>
         <p>
-          Expire Date Time: {expired_date} {expired_time}
+          Expire In: {expired_date} {expired_time}
         </p>
-        <p className="text-blue-600">Your Request Date: {request_date}</p>
-        <p>Your Donation: {donation_money} BDT</p>
+        <p className="text-blue-600">Your Request: {request_date}</p>
+        <p>Thanks for your {donation_money} BDT donation</p>
         <p>
           Status:{" "}
           <span
@@ -47,7 +44,10 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
           </span>
         </p>
         {status !== "Delivered" && (
-          <button onClick={() => handleRequestedDelete(_id, food_name)} className="mt-1 btn btn-sm border-black bg-base-100 hover:bg-black text-black hover:text-white">
+          <button
+            onClick={() => handleRequestedDelete(_id, food_name)}
+            className="mt-1 btn btn-sm border-black bg-base-100 hover:bg-black text-black hover:text-white"
+          >
             Cancel Request
           </button>
         )}

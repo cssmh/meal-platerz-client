@@ -4,7 +4,7 @@ import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 
-const UpdateMyFood = ({ foodData, setFoodData }) => {
+const UpdateMyFood = ({ foodData, setFoodData, food_status }) => {
   const {
     _id,
     food_name,
@@ -79,7 +79,6 @@ const UpdateMyFood = ({ foodData, setFoodData }) => {
     axios
       .put(`http://localhost:5000/update-food/${_id}`, updatedFoodData)
       .then((res) => {
-        console.log(res.data);
         if (res.data?.modifiedCount > 0) {
           setFoodData(updatedFoodData);
           swal("Good job!", "Food Info Updated", "success");
@@ -95,7 +94,12 @@ const UpdateMyFood = ({ foodData, setFoodData }) => {
 
   return (
     <div>
-      <Button onClick={handlePopUp} color="success" variant="contained">
+      <Button
+        className={`${food_status === "Unavailable" && "pointer-events-none"}`}
+        onClick={handlePopUp}
+        color="success"
+        variant="contained"
+      >
         Edit
       </Button>
       <Dialog open={open} fullWidth maxWidth="lg">

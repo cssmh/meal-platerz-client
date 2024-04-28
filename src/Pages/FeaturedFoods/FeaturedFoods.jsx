@@ -24,19 +24,21 @@ const FeaturedFoods = () => {
           <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {featuredFoods.slice(0, 8).map((foods, idx) => (
-            <FeaturedFoodsCard key={idx} getFoods={foods}></FeaturedFoodsCard>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {featuredFoods.slice(0, 8).map((foods, idx) => (
+              <FeaturedFoodsCard key={idx} getFoods={foods}></FeaturedFoodsCard>
+            ))}
+          </div>
+          <div className="flex justify-center mt-8">
+            <Link to="/available-foods">
+              <button className="text-white bg-redFood font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                Show all
+              </button>
+            </Link>
+          </div>
+        </>
       )}
-      <div className="flex justify-center mt-8">
-        <Link to="/available-foods">
-          <button className="text-white bg-redFood font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-            Show all
-          </button>
-        </Link>
-      </div>
     </div>
   );
 };

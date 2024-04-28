@@ -4,6 +4,7 @@ import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
+import toast from "react-hot-toast";
 
 const AddRequest = ({ getFood }) => {
   const { user } = useContextHook();
@@ -45,9 +46,14 @@ const AddRequest = ({ getFood }) => {
     const user_phone = form.user_phone.value;
     const request_date = todayDateTime;
     const message_to_donator = form.message_to_donator.value;
-    const getDonation = parseInt(form.donation_money.value);
-    const donation_money = getDonation > 0 ? getDonation : 0;
+    const donation = form.donation_money.value;
+    const donation_money = donation > 0 ? donation : 0;
     const status = "Pending";
+
+    const regex = /^[1-9]+$/;
+    if (!regex.test(parseInt(donation))) {
+      return toast.error("The donation amount is invalid");
+    }
 
     const requestFoodData = {
       food_id,
@@ -131,7 +137,7 @@ const AddRequest = ({ getFood }) => {
                   <span className="label-text">Your Email</span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   defaultValue={user?.email}
                   readOnly
                   className="input input-bordered"
@@ -145,6 +151,8 @@ const AddRequest = ({ getFood }) => {
                 <input
                   type="text"
                   name="user_phone"
+                  defaultValue={"+880"}
+                  required
                   className="input input-bordered"
                   style={{ outline: "none" }}
                 />

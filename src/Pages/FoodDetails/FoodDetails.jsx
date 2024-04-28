@@ -47,12 +47,13 @@ const FoodDetails = () => {
             <p>
               Expire In: {expired_date} {expired_time}
             </p>
-            {user.email !== donator_email &&
-              (food_status === "available" ? (
+            {food_status === "available" ? (
+              user.email !== donator_email && (
                 <AddRequest getFood={loadFoodData}></AddRequest>
-              ) : (
-                <p className="text-redFood">This Food is already Delivered!</p>
-              ))}
+              )
+            ) : (
+              <p className="text-redFood">This Food is already Delivered!</p>
+            )}
           </div>
         </div>
       </div>
