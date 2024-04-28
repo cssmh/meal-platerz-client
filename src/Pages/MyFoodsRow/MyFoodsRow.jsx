@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import UpdateMyFood from "../UpdateMyFood/UpdateMyFood";
+import { useState } from "react";
 
 const MyFoodsRow = ({ getFood, handleDelete }) => {
+  const [foodData, setFoodData] = useState(getFood);
   const {
     _id,
     food_image,
@@ -9,12 +11,13 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
     expired_date,
     expired_time,
     food_status,
-  } = getFood;
+    food_quantity,
+  } = foodData;
 
   return (
     <tr>
       <th>
-        <div className="flex gap-5 items-center">
+        <div className="flex gap-4 items-center">
           <button
             onClick={() => handleDelete(_id, food_name)}
             className="btn btn-sm btn-circle btn-outline"
@@ -51,12 +54,18 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
         </div>
       </td>
       <td>
+        <span className="pl-4">{food_quantity}</span>
+      </td>
+      <td>
         <span>{expired_date}</span>
       </td>
       <td>{expired_time}</td>
       <td>{food_status}</td>
       <th>
-        <UpdateMyFood foodInfo={getFood}></UpdateMyFood>
+        <UpdateMyFood
+          foodData={foodData}
+          setFoodData={setFoodData}
+        ></UpdateMyFood>
       </th>
       <td>
         <Link to={`/manage/${_id}`}>

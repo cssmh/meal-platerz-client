@@ -10,8 +10,8 @@ import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AddFood from "../Pages/AddFood/AddFood";
 import FoodDetails from "../Pages/FoodDetails/FoodDetails";
-import MyFoods from "../Pages/ManageMyFoods/ManageMyFoods";
-import ManageMyRequest from "../Pages/ManageMyRequest/ManageMyRequest";
+import MyFoods from "../Pages/MyFoods/MyFoods";
+import MyPending from "../Pages/MyPending/MyPending";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -80,11 +80,11 @@ const Root = createBrowserRouter([
         path: "/manage/:id",
         element: (
           <PrivateRoute>
-            <ManageMyRequest />
+            <MyPending />
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/manage-request/${params.id}`),
+          fetch(`http://localhost:5000/pending-request/${params.id}`),
       },
     ],
   },

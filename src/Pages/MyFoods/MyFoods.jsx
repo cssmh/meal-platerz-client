@@ -3,9 +3,9 @@ import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
-import MyFoodsRow from "../ManageMyFoodsRow/ManageMyFoodsRow";
+import MyFoodsRow from "../MyFoodsRow/MyFoodsRow";
 
-const ManageMyFoods = () => {
+const MyFoods = () => {
   const { user } = useContextHook();
   const [isLoading, setIsLoading] = useState(true);
   const [myFoods, setMyFoods] = useState([]);
@@ -27,7 +27,6 @@ const ManageMyFoods = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        // main code
         axios.delete(`http://localhost:5000/delete-food/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             const remaining = myFoods.filter((food) => food._id !== idx);
@@ -54,6 +53,7 @@ const ManageMyFoods = () => {
             <tr>
               <th>Food Image</th>
               <th>Food Name</th>
+              <th>Quantity</th>
               <th>Expired Date</th>
               <th>Time</th>
               <th>Status</th>
@@ -76,4 +76,4 @@ const ManageMyFoods = () => {
   );
 };
 
-export default ManageMyFoods;
+export default MyFoods;

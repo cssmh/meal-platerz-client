@@ -30,7 +30,7 @@ const MyFoodRequest = () => {
       if (willDelete) {
         // main code
         axios
-          .delete(`http://localhost:5000/my-request-food/${idx}`)
+          .delete(`http://localhost:5000/my-request/${idx}`)
           .then((res) => {
             if (res.data?.deletedCount > 0) {
               const remaining = myFoodRequest.filter(

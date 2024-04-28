@@ -2,7 +2,7 @@ import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 
-const ManageMyRequestCard = ({ getReq }) => {
+const MyPendingCard = ({ getReq }) => {
   const {
     _id,
     food_id,
@@ -25,19 +25,19 @@ const ManageMyRequestCard = ({ getReq }) => {
     if (newStatus === "Pending") {
       const foodStatus = "available";
       axios
-        .put(`http://localhost:5000/change-status/${foodIdx}`, { foodStatus })
+        .put(`http://localhost:5000/food-status/${foodIdx}`, { foodStatus })
         .then((res) => console.log(res.data))
         .catch((res) => console.log(res));
     } else if (newStatus === "Delivered") {
       const foodStatus = "Unavailable";
       axios
-        .put(`http://localhost:5000/change-status/${foodIdx}`, { foodStatus })
+        .put(`http://localhost:5000/food-status/${foodIdx}`, { foodStatus })
         .then((res) => console.log(res.data))
         .catch((res) => console.log(res));
     }
 
     axios
-      .put(`http://localhost:5000/request-status/${idx}`, updatedStatus)
+      .put(`http://localhost:5000/requested-status/${idx}`, updatedStatus)
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
           swal("Thank You!", `Updated to ${newStatus}`, "success");
@@ -81,4 +81,4 @@ const ManageMyRequestCard = ({ getReq }) => {
   );
 };
 
-export default ManageMyRequestCard;
+export default MyPendingCard;

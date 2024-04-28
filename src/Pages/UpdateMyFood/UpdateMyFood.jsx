@@ -2,9 +2,9 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import axios from "axios";
 import moment from "moment";
 import swal from "sweetalert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const UpdateMyFood = ({ foodInfo }) => {
+const UpdateMyFood = ({ foodData, setFoodData }) => {
   const {
     _id,
     food_name,
@@ -12,13 +12,28 @@ const UpdateMyFood = ({ foodInfo }) => {
     food_quantity,
     donator_phone,
     pickup_location,
-    food_status,
+    expired_date,
+    expired_time,
     additional_notes,
-  } = foodInfo;
+  } = foodData;
 
   const [open, setOpen] = useState(false);
-  const [expiredDate, setExpiredDate] = useState("");
   const [expiredTime, setExpiredTime] = useState("");
+  const [expiredDate, setExpiredDate] = useState("");
+  const [todayDate, setTodayDate] = useState("");
+
+  // To avoid yesterday date
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    setTodayDate(today);
+    setExpiredDate(today);
+  }, []);
+  // To avoid yesterday date end
+
+  useEffect(() => {
+    setExpiredDate(moment(expired_date, "DD-MM-YYYY").format("YYYY-MM-DD"));
+    setExpiredTime(moment(expired_time, "HH:mm").format("HH:mm"));
+  }, [expired_date, expired_time]);
 
   const handleDateChange = (e) => {
     setExpiredDate(e.target.value);
@@ -27,9 +42,6 @@ const UpdateMyFood = ({ foodInfo }) => {
   const handleTimeChange = (e) => {
     setExpiredTime(e.target.value);
   };
-
-  const formattedDate = moment(expiredDate).format("DD-MM-YYYY");
-  const formattedTime = moment(expiredTime, "HH:mm").format("hh:mm A");
 
   const handlePopUp = () => {
     setOpen(true);
@@ -43,12 +55,13 @@ const UpdateMyFood = ({ foodInfo }) => {
     e.preventDefault();
     const form = e.target;
     const food_name = form.food_name.value;
-    const food_image = form.food_image.value;
+    const food_image = form.food_image_url.value;
     const food_quantity = parseInt(form.food_quantity.value);
     const donator_phone = form.donator_phone.value;
-    const expired_date = formattedDate;
-    const expired_time = formattedTime;
+    const expired_date = moment(expiredDate).format("DD-MM-YYYY");
+    const expired_time = moment(expiredTime, "HH:mm").format("hh:mm A");
     const pickup_location = form.pickup_location.value;
+    const food_status = "available";
     const additional_notes = form.additional_notes.value;
 
     const updatedFoodData = {
@@ -60,6 +73,7 @@ const UpdateMyFood = ({ foodInfo }) => {
       expired_time,
       pickup_location,
       additional_notes,
+      food_status,
     };
 
     axios
@@ -67,6 +81,7 @@ const UpdateMyFood = ({ foodInfo }) => {
       .then((res) => {
         console.log(res.data);
         if (res.data?.modifiedCount > 0) {
+          setFoodData(updatedFoodData);
           swal("Good job!", "Food Info Updated", "success");
         }
       })
@@ -110,8 +125,8 @@ const UpdateMyFood = ({ foodInfo }) => {
                 </label>
                 <input
                   type="text"
+                  name="food_image_url"
                   defaultValue={food_image}
-                  name="food_image"
                   className="input input-bordered"
                   style={{ outline: "none" }}
                 />
@@ -152,7 +167,8 @@ const UpdateMyFood = ({ foodInfo }) => {
                     </label>
                     <input
                       type="date"
-                      required
+                      min={todayDate}
+                      value={expiredDate}
                       onChange={handleDateChange}
                       className="input input-bordered w-full"
                       style={{ outline: "none" }}
@@ -164,7 +180,7 @@ const UpdateMyFood = ({ foodInfo }) => {
                     </label>
                     <input
                       type="time"
-                      required
+                      value={expiredTime}
                       onChange={handleTimeChange}
                       className="input input-bordered w-full"
                       style={{ outline: "none" }}

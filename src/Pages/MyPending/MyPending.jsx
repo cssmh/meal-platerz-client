@@ -1,16 +1,16 @@
 import { useLoaderData } from "react-router-dom";
-import ManageMyRequestCard from "../ManageMyRequestCard/ManageMyRequestCard";
+import MyPendingCard from "../MyPendingCard/MyPendingCard";
 
-const ManageMyRequest = () => {
+const MyPending = () => {
   const loadRequestedData = useLoaderData();
 
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
       {loadRequestedData.map((req) => (
-        <ManageMyRequestCard key={req._id} getReq={req}></ManageMyRequestCard>
+        <MyPendingCard key={req._id} getReq={req}></MyPendingCard>
       ))}
     </div>
   );
 };
 
-export default ManageMyRequest;
+export default MyPending;

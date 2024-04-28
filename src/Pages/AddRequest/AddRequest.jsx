@@ -70,7 +70,7 @@ const AddRequest = ({ getFood }) => {
     };
 
     axios
-      .post("http://localhost:5000/addRequest", requestFoodData)
+      .post("http://localhost:5000/add-request", requestFoodData)
       .then((res) => {
         if (res.data?.insertedId) {
           swal("Congratulations!", "Request Complete", "success");
@@ -189,7 +189,7 @@ const AddRequest = ({ getFood }) => {
             </div>
             <div className="form-control mt-5">
               <button className="btn btn-outline border-none bg-red-400 hover:bg-red-400 text-white">
-                Update Food
+                Request for This Food
               </button>
             </div>
           </form>
