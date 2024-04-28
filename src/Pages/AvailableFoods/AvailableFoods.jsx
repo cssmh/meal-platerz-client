@@ -59,7 +59,6 @@ const AvailableFoods = () => {
             style={{ outline: "none" }}
             onChange={(e) => {
               searchTerm = e.target.value;
-              // console.log(searchTerm);
               if (searchTerm === "") {
                 setAllFoods(totalFoodsForSearch);
               } else {

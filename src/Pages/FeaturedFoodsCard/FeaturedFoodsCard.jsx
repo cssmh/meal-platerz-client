@@ -18,7 +18,7 @@ const FeaturedFoodsCard = ({ getFoods }) => {
     <div className="max-w-md mx-auto">
       <div className="h-full bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
         <img
-          className="w-full h-48 mx-auto lg:mx-0 object-cover object-center"
+          className="px-1 md:px-0 md:w-[300px] md:h-48 mx-auto lg:mx-0 object-cover object-center"
           src={food_image}
           alt="Food"
         />

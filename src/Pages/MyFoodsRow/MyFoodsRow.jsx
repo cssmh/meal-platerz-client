@@ -13,7 +13,6 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
     food_status,
     food_quantity,
   } = foodData;
-  console.log("Unavailable");
 
   return (
     <tr>

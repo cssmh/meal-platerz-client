@@ -9,7 +9,10 @@ const FeaturedFoods = () => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios.get("http://localhost:5000/allfoods").then((res) => {
-      setFeaturedFoods(res.data?.result);
+      const sortedFoods = res.data?.result.sort(
+        (a, b) => b.food_quantity - a.food_quantity
+      );
+      setFeaturedFoods(sortedFoods);
       setIsLoading(false);
     });
   }, []);
@@ -17,7 +20,7 @@ const FeaturedFoods = () => {
   return (
     <div className="my-9">
       <h1 className="text-center font-semibold text-2xl mb-8">
-        Featured foods
+        Featured Foods (Highest Quantity to Lowest)
       </h1>
       {isLoading ? (
         <div className="flex justify-center my-5">
@@ -33,7 +36,7 @@ const FeaturedFoods = () => {
           <div className="flex justify-center mt-8">
             <Link to="/available-foods">
               <button className="text-white bg-redFood font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                Show all
+                Show all available Foods
               </button>
             </Link>
           </div>

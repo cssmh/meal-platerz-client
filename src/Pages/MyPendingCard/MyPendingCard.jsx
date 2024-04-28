@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
@@ -18,8 +18,11 @@ const MyPendingCard = ({ getReq }) => {
     message_to_donator,
     donation_money,
     status,
+    delivered_at,
   } = getReq;
   const [foodStatus, setFoodStatus] = useState(status);
+  const [todayDateTime, setTodayDateTime] = useState("");
+  const [delivered, setDelivered] = useState(delivered_at);
 
   const handleUpdateStatus = (e, idx, foodIdx) => {
     const newStatus = e.target.value;
@@ -46,9 +49,33 @@ const MyPendingCard = ({ getReq }) => {
           setFoodStatus(newStatus);
           swal("Thank You!", `Updated to ${newStatus}`, "success");
         }
+        if (newStatus === "Delivered") {
+          axios
+            .patch(`http://localhost:5000/add-time/${idx}`, { todayDateTime })
+            .then(() => setDelivered(todayDateTime))
+            .catch();
+        }
       })
       .then();
   };
+
+  // Set today's date and time for delivered booking
+  useEffect(() => {
+    const today = new Date();
+    const formattedDate = `${today.getDate().toString().padStart(2, "0")}-${(
+      today.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${today.getFullYear()}`;
+    const formattedTime = today.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    const dateTime = `${formattedDate}, ${formattedTime}`;
+    setTodayDateTime(dateTime);
+  }, []);
+  // Set today's date and time for delivered booking end
 
   return (
     <div>
@@ -65,9 +92,17 @@ const MyPendingCard = ({ getReq }) => {
         </div>
         <p>Requested on: {request_date}</p>
         <p>{message_to_donator}</p>
-        <p className="text-blue-600">
-          Expire in: {expired_date} {expired_time}
+        <p>
+          Expire in:{" "}
+          <span className="text-blue-600">
+            {expired_date} {expired_time}
+          </span>
         </p>
+        {foodStatus === "Delivered" && (
+          <p>
+            Delivered: <span className="text-cyan-500">{delivered}</span>
+          </p>
+        )}
         <p>Donation: {donation_money} BDT</p>
         <div className="text-center mt-1">
           <select
