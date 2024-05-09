@@ -3,6 +3,7 @@ import FeaturedFoods from "../../Pages/FeaturedFoods/FeaturedFoods";
 import Banner from "../Banner/Banner";
 import Stats from "../Stats/Stats";
 import WeOffer from "../WeOffer/WeOffer";
+import Solution from "../Solution/Solution";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <FeaturedFoods></FeaturedFoods>
+      <Solution></Solution>
       <Stats></Stats>
       <WeOffer></WeOffer>
     </div>

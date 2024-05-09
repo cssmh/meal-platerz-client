@@ -1,7 +1,8 @@
 const WeOffer = () => {
   return (
     <div className="my-10">
-      <div className="dark:bg-gray-100 dark:text-gray-800 p-10 lg:p-16">
+      <div className="p-10 lg:p-16">
+      {/* dark:text-gray-800  */}
         <h2 className="mb-8 text-2xl font-semibold leading-none text-center">
           What do we have to offer<span className="text-redFood">?</span>
         </h2>

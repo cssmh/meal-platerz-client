@@ -10,8 +10,9 @@ const Banner = () => {
           backgroundSize: "cover",
         }}
       >
-        <div className="hero-overlay bg-opacity-5"></div>
-        <div className="max-w-2xl mr-auto ml-4 md:ml-12">
+        {/* <div className="hero-overlay bg-opacity-5"></div> */}
+        <div className="max-w-2xl mr-auto ml-4 md:ml-12"> 
+        {/* text-white */}
           <div className="space-y-3">
             <h1 className="text-2xl md:text-4xl font-bold flex-11">
               Building Communities <br /> by Sharing Excess Food <br />{" "}
