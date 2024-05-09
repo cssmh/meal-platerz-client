@@ -5,19 +5,21 @@ import { SyncLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import useContextHook from "../../useCustomHook/useContextHook";
 import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyFoodRequest = () => {
   const { user } = useContextHook();
+  const { axiosSecure } = useAxiosHook();
   const [isLoading, setIsLoading] = useState(true);
   const [myFoodRequest, setMyFoodRequest] = useState([]);
 
-  const url = `http://localhost:5000/my-requested?email=${user?.email}`;
+  const url = `/my-requested?email=${user?.email}`;
   useEffect(() => {
-    axios.get(url)?.then((res) => {
+    axiosSecure.get(url).then((res) => {
       setMyFoodRequest(res?.data);
       setIsLoading(false);
     });
-  }, [url]);
+  }, [url, axiosSecure]);
 
   const handleRequestedDelete = (idx, food_name) => {
     swal({

@@ -9,7 +9,10 @@ const MainLayout = () => {
     <div>
       <Navbar></Navbar>
       {navigationForSpinner.state === "loading" ? (
-        <p>loading</p>
+        <div className="fixed top-0 right-0 bottom-0 left-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+          <DotLoader color="#36d7b7" />
+          <p className="text-white">Loading..</p>
+        </div>
       ) : (
         <div className="min-h-[70vh]">
           <Outlet></Outlet>

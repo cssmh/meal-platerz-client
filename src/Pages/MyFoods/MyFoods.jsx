@@ -4,19 +4,19 @@ import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
 import MyFoodsRow from "../MyFoodsRow/MyFoodsRow";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyFoods = () => {
+  const { axiosSecure } = useAxiosHook();
   const { user } = useContextHook();
   const [isLoading, setIsLoading] = useState(true);
   const [myFoods, setMyFoods] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/myFoods?email=${user?.email}`)
-      .then((res) => {
-        setMyFoods(res.data);
-        setIsLoading(false);
-      });
-  }, [user?.email]);
+    axiosSecure.get(`/myFoods?email=${user?.email}`).then((res) => {
+      setMyFoods(res.data);
+      setIsLoading(false);
+    });
+  }, [user?.email, axiosSecure]);
 
   const handleDelete = (idx, name) => {
     swal({

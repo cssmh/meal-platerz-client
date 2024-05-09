@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const provider = new GoogleAuthProvider();
@@ -56,15 +57,30 @@ const AuthProviders = ({ children }) => {
   };
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // console.log("i am spying", currentUser);
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      // console.log("user in ", currentUser);
       setUser(currentUser);
+      const getEmail = currentUser?.email || user?.email;
+      const emailToSend = { email: getEmail };
       setLoading(false);
+      if (getEmail) {
+        await axios
+          .post("http://localhost:5000/jwt", emailToSend, {
+            withCredentials: true,
+          })
+          .then((res) => console.log("login token res", res?.data));
+      } else {
+        await axios
+          .post("http://localhost:5000/logout", emailToSend, {
+            withCredentials: true,
+          })
+          .then((res) => console.log("logout token res", res?.data));
+      }
     });
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [user?.email]);
 
   const authInfo = {
     user,

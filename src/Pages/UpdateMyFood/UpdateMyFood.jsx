@@ -1,8 +1,8 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
-import axios from "axios";
 import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const UpdateMyFood = ({ foodData, setFoodData, food_status }) => {
   const {
@@ -11,6 +11,7 @@ const UpdateMyFood = ({ foodData, setFoodData, food_status }) => {
     food_image,
     food_quantity,
     donator_phone,
+    donator_email,
     pickup_location,
     expired_date,
     expired_time,
@@ -18,6 +19,7 @@ const UpdateMyFood = ({ foodData, setFoodData, food_status }) => {
   } = foodData;
 
   const [open, setOpen] = useState(false);
+  const { axiosSecure } = useAxiosHook();
   const [expiredTime, setExpiredTime] = useState("");
   const [expiredDate, setExpiredDate] = useState("");
   const [todayDate, setTodayDate] = useState("");
@@ -76,8 +78,8 @@ const UpdateMyFood = ({ foodData, setFoodData, food_status }) => {
       food_status,
     };
 
-    axios
-      .put(`http://localhost:5000/update-food/${_id}`, updatedFoodData)
+    axiosSecure
+      .put(`/update-food/${_id}/${donator_email}`, updatedFoodData)
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
           setFoodData(updatedFoodData);
