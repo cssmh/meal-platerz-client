@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-import { RouterProvider } from "react-router-dom";
 import Root from "./Root/Root";
 import { Toaster } from "react-hot-toast";
+import { RouterProvider } from "react-router-dom";
 import AuthProviders from "./AuthProviders/AuthProviders";
 import { HelmetProvider } from "react-helmet-async";
+import Internet from "./Component/Internet";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -15,13 +16,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RouterProvider router={Root} />
       </AuthProviders>
     </HelmetProvider>
-    <Toaster position="top-center" reverseOrder={false} />
+    <Internet />
+    <Toaster position="bottom-center" reverseOrder={false} />
   </React.StrictMode>
 );
 
 // console.log(Object.keys(getFoods).join(","));
-{/* <div className="mt-5 text-center">
+{
+  /* <div className="mt-5 text-center">
   <button className="text-white bg-cyan-600 px-3 py-[6px] rounded-lg">
     Delete all Requested Foods
   </button>
-</div>; */}
+</div>; */
+}

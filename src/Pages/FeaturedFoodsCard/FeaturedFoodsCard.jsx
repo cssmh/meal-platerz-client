@@ -15,7 +15,7 @@ const FeaturedFoodsCard = ({ getFoods }) => {
   } = getFoods;
 
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md mx-auto hover:scale-105 transition-all duration-300">
       <div className="h-full bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
         <img
           className="px-1 md:px-0 md:w-[300px] md:h-48 mx-auto lg:mx-0 object-cover object-center"
