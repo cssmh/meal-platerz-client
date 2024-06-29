@@ -1,21 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
 import { Link } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
+import { useQuery } from "@tanstack/react-query";
+import { getAllFoods } from "../../api/Foods";
+import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
 
 const FeaturedFoods = () => {
-  const [featuredFoods, setFeaturedFoods] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    axios.get("http://localhost:5000/allfoods").then((res) => {
-      const sortedFoods = res.data?.result.sort(
-        (a, b) => b.food_quantity - a.food_quantity
-      );
-      setFeaturedFoods(sortedFoods);
-      setIsLoading(false);
-    });
-  }, []);
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["FeaturedFoods"],
+    queryFn: async () => await getAllFoods(),
+  });
+  const featuredFoods = data?.result?.sort(
+    (a, b) => b.food_quantity - a.food_quantity
+  );
 
   return (
     <div className="my-9">
