@@ -50,12 +50,12 @@ const AvailableFoods = () => {
           <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
         </div>
       ) : (
-        <div className="text-center mt-5 mb-6">
+        <div className="text-center mt-4 mb-4">
           <input
             type="text"
             name="name"
             placeholder="Search for Food Name"
-            className="input input-bordered rounded-2xl focus:border-redFood min-w-[75%] md:min-w-[320px] border-red-500"
+            className="text-sm border p-[10px]  rounded-xl focus:border-redFood min-w-[75%] md:min-w-[340px] border-red-500"
             style={{ outline: "none" }}
             onChange={(e) => {
               searchTerm = e.target.value;

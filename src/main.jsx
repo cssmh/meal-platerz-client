@@ -7,7 +7,6 @@ import { Toaster } from "react-hot-toast";
 import { RouterProvider } from "react-router-dom";
 import AuthProviders from "./AuthProviders/AuthProviders";
 import { HelmetProvider } from "react-helmet-async";
-import Internet from "./Component/Internet";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,7 +15,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RouterProvider router={Root} />
       </AuthProviders>
     </HelmetProvider>
-    <Internet />
     <Toaster position="bottom-center" reverseOrder={false} />
   </React.StrictMode>
 );
