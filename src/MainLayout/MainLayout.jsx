@@ -3,6 +3,7 @@ import Navbar from "../Component/Navbar/Navbar";
 import Footer from "../Component/Footer/Footer";
 import { useEffect, useState } from "react";
 import BigLoader from "../Component/BigLoader";
+import Header from "../Component/Header";
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(false);
@@ -18,6 +19,7 @@ const MainLayout = () => {
 
   return (
     <div>
+      <Header></Header>
       <Navbar></Navbar>
       <div className="min-h-[70vh]">
         <Outlet></Outlet>

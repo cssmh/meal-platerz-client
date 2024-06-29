@@ -3,7 +3,7 @@ import FeaturedFoods from "../../Pages/FeaturedFoods/FeaturedFoods";
 import Banner from "../Banner/Banner";
 import Stats from "../Stats/Stats";
 import WeOffer from "../WeOffer/WeOffer";
-import Solution from "../Solution/Solution";
+import AppStore from "../AppStore";
 
 const Home = () => {
   return (
@@ -11,11 +11,11 @@ const Home = () => {
       <Helmet>
         <title>MealPlaterz | Home</title>
       </Helmet>
-      <Banner></Banner>
-      <FeaturedFoods></FeaturedFoods>
-      <Solution></Solution>
-      <WeOffer></WeOffer>
-      <Stats></Stats>
+      <Banner />
+      <FeaturedFoods />
+      <WeOffer />
+      <AppStore />
+      <Stats />
     </div>
   );
 };

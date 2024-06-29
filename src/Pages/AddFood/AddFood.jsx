@@ -72,7 +72,7 @@ const AddFood = () => {
   };
 
   return (
-    <div className="my-8">
+    <div className="my-5">
       <Helmet>
         <title>MealPlaterz | Add Food</title>
       </Helmet>
