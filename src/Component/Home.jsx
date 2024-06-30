@@ -4,7 +4,7 @@ import Banner from "./Banner";
 import Stats from "./Stats";
 import WeOffer from "./WeOffer";
 import AppStore from "./AppStore";
-import Client from "./Client";
+import OurClient from "./OurClient";
 
 const Home = () => {
   return (
@@ -16,7 +16,7 @@ const Home = () => {
       <FeaturedFoods />
       <WeOffer />
       <AppStore />
-      <Client />
+      <OurClient />
       <Stats />
     </div>
   );

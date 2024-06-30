@@ -1,7 +1,7 @@
 const Stats = () => {
   return (
     <section className="px-6 my-6">
-      <div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
+      <div className="container grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto">
         <div className="flex justify-center p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50">
           <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood">
             <svg

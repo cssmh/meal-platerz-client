@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import AvailableFoodsCard from "../AvailableFoodsCard/AvailableFoodsCard";
 import { SyncLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
+import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
 
 const AvailableFoods = () => {
   let searchTerm;
@@ -71,12 +71,9 @@ const AvailableFoods = () => {
               }
             }}
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mt-4">
-            {allFoods.map((foods) => (
-              <AvailableFoodsCard
-                key={foods._id}
-                getFoods={foods}
-              ></AvailableFoodsCard>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-2">
+            {allFoods?.map((foods) => (
+              <FeaturedFoodsCard key={foods._id} getFoods={foods} />
             ))}
           </div>
           {allFoods.length > 0 && (

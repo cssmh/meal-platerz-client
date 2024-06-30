@@ -26,8 +26,8 @@ const FoodDetails = () => {
         <title>MealPlaterz | FoodDetails</title>
       </Helmet>
       <BannerFood></BannerFood>
-      <div className="text-center mx-1 max-w-md border-2 py-2 my-5 lg:mx-auto">
-        <h1 className="font-semibold text-xl lg:text-[22px] text-blue-800 mb-1">
+      <div className="text-center mx-auto max-w-md border-2 py-2 my-5 lg:mx-auto">
+        <h1 className="font-semibold text-xl md:text-[22px] text-blue-800 mb-1">
           Donator Information
         </h1>
         <p className="text-cyan-600">Name: {donator_name}</p>
@@ -38,8 +38,8 @@ const FoodDetails = () => {
         <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-7">
           <img
             src={food_image}
-            className="mx-auto lg:mx-0 lg:ml-auto w-4/5 lg:w-[400px]"
-            alt=""
+            className="mx-auto lg:mx-0 md:ml-auto w-2/5 md:w-[280px] rounded-lg"
+            alt="food"
           />
           <div className="space-y-1 lg:space-y-[6px] mx-6 lg:mx-0 text-center lg:text-left">
             <h1 className="text-2xl lg:text-4xl font-semibold">{food_name}</h1>

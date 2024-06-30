@@ -24,9 +24,9 @@ const FeaturedFoods = () => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {featuredFoods.slice(0, 8).map((foods, idx) => (
-              <FeaturedFoodsCard key={idx} getFoods={foods}></FeaturedFoodsCard>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto">
+            {featuredFoods?.slice(0, 8).map((foods, idx) => (
+              <FeaturedFoodsCard key={idx} getFoods={foods} />
             ))}
           </div>
           <div className="flex justify-center mt-8">

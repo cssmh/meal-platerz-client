@@ -1,10 +1,10 @@
 const WeOffer = () => {
   return (
     <div className="mb-6">
-      <h2 className="mb-8 text-2xl font-semibold leading-none text-center">
+      <h2 className="mb-8 text-2xl font-semibold leading-none text-center px-3 md:px-0">
         What do we have to offer<span className="text-redFood">?</span>
       </h2>
-      <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid gap-2 md:gap-6 grid-cols-2 lg:grid-cols-3 px-5 md:px-0">
         <li className="flex justify-center items-center space-x-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"

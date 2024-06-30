@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 const FeaturedFoodsCard = ({ getFoods }) => {
   const {
     _id,
@@ -15,23 +14,27 @@ const FeaturedFoodsCard = ({ getFoods }) => {
   } = getFoods;
 
   return (
-    <div className="max-w-md mx-auto hover:scale-105 transition-all duration-300">
-      <div className="h-full bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
+    <div className="flex flex-col shadow-lg rounded-lg bg-white hover:scale-105 transition-all duration-300 overflow-hidden">
+      <div className="flex-grow">
         <img
-          className="px-1 md:px-0 md:w-[300px] md:h-48 mx-auto lg:mx-0 object-cover object-center"
-          src={food_image}
           alt="Food"
+          src={food_image}
+          className="w-full rounded-2xl h-[200px] md:h-48 object-cover object-center p-3"
         />
-        <div className="p-4 text-left flex-1">
+        <div className="px-3 text-left flex-1">
           <div className="mb-2">
-            <h3 className="text-lg font-semibold text-gray-800">{food_name}</h3>
+            <h3 className="text-lg font-semibold text-gray-800 truncate">
+              {food_name}
+            </h3>
             <p className="text-sm text-gray-600">
               Quantity for {food_quantity} person
             </p>
-            <p className="text-sm text-gray-600 mt-1">
-              Expire in {expired_date} {expired_time}
+            <p className="text-sm text-gray-600 mt-1 truncate">
+              Expires in {expired_date} {expired_time}
             </p>
-            <p className="text-sm text-gray-600 mt-1">Phone: {donator_phone}</p>
+            <p className="text-sm text-gray-600 mt-1 truncate">
+              Phone: {donator_phone}
+            </p>
           </div>
           <Link
             to={`/food/${_id}`}
@@ -40,19 +43,19 @@ const FeaturedFoodsCard = ({ getFoods }) => {
             View Details
           </Link>
         </div>
-        <div className="flex justify-around items-center px-2 py-3 bg-gray-100 gap-1">
-          <div className="flex items-center justify-center gap-1">
-            <img
-              className="w-8 h-8 rounded-full object-cover"
-              src={donator_image}
-              alt="donator"
-            />
-            <p className="text-sm text-gray-800">{donator_name}</p>
-          </div>
-          <p className="text-xs text-gray-600">
-            Location: <span className="text-redFood">{pickup_location}</span>
-          </p>
+      </div>
+      <div className="p-2 flex justify-between items-center bg-gray-100 gap-1 mt-2">
+        <div className="flex items-center justify-center gap-1">
+          <img
+            className="w-8 h-8 rounded-full object-cover"
+            src={donator_image}
+            alt="donator"
+          />
+          <p className="text-sm text-gray-800 truncate">{donator_name}</p>
         </div>
+        <p className="text-xs text-gray-600 truncate">
+          Location: <span className="text-redFood">{pickup_location}</span>
+        </p>
       </div>
     </div>
   );
