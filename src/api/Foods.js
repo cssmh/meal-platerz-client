@@ -45,3 +45,9 @@ export const addFood = async (foodInfo) => {
   const { data } = await axiosSecure.post("/add-food", foodInfo);
   return data;
 };
+
+// add req
+export const addReq = async (reqInfo) => {
+  const { data } = await axiosSecure.post("/add-request", reqInfo);
+  return data;
+};

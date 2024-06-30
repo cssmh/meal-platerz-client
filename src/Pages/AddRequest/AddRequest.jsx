@@ -5,6 +5,7 @@ import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import { addReq } from "../../api/Foods";
 
 const AddRequest = ({ getFood }) => {
   const { user } = useAuth();
@@ -36,7 +37,7 @@ const AddRequest = ({ getFood }) => {
     setOpen(false);
   };
 
-  const handleAddRequest = (e) => {
+  const handleAddRequest = async (e) => {
     e.preventDefault();
     const form = e.target;
     const food_id = _id;
@@ -75,19 +76,11 @@ const AddRequest = ({ getFood }) => {
       status,
     };
 
-    axios
-      .post("http://localhost:5000/add-request", requestFoodData)
-      .then((res) => {
-        if (res.data?.insertedId) {
-          swal("Congratulations!", "Request Complete", "success");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        setOpen(false);
-      });
+    const res = await addReq(requestFoodData);
+    if (res?.insertedId) {
+      swal("Congratulations!", "Request added", "success");
+      setOpen(false);
+    }
   };
 
   return (

@@ -60,7 +60,7 @@ const AddFood = () => {
     };
 
     const res = await addFood(foodInformation);
-    if (res.data?.insertedId) {
+    if (res?.insertedId) {
       swal("Thank You!", `${food_name} added`, "success");
       form.reset();
     }

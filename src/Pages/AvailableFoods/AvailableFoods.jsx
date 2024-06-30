@@ -11,7 +11,6 @@ const AvailableFoods = () => {
   const [page, setPage] = useState(1);
   const isMobile = useResLimit("(max-width: 767px)");
   const [limit, setLimit] = useState(isMobile ? 4 : 8);
-  console.log(page);
 
   useEffect(() => {
     setLimit(isMobile ? 4 : 8);
