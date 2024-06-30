@@ -1,8 +1,14 @@
 import axiosSecure from ".";
 
-// Fetch all foods from db
-export const getAllFoods = async () => {
-  const { data } = await axiosSecure("/allFoods");
+export const getAllFoods = async (page, limit, searchTerm) => {
+  const { data } = await axiosSecure(
+    `/allFoods?page=${page}&limit=${limit}&search=${searchTerm}`
+  );
+  return data;
+};
+
+export const getFeaturedFoods = async () => {
+  const { data } = await axiosSecure("/allFoods?limit=8");
   return data;
 };
 

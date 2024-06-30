@@ -13,6 +13,7 @@ import {
 import app from "./firebase.config";
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { clearCookie, setToken } from "../api/Auth";
 
 export const AuthContext = createContext(null);
 const provider = new GoogleAuthProvider();
@@ -64,17 +65,13 @@ const AuthProviders = ({ children }) => {
       const emailToSend = { email: getEmail };
       setLoading(false);
       if (getEmail) {
-        await axios
-          .post("http://localhost:5000/jwt", emailToSend, {
-            withCredentials: true,
-          })
-          .then((res) => console.log("login token res", res?.data));
+        await setToken(emailToSend).then((res) =>
+          console.log("login token res", res?.data)
+        );
       } else {
-        await axios
-          .post("http://localhost:5000/logout", emailToSend, {
-            withCredentials: true,
-          })
-          .then((res) => console.log("logout token res", res?.data));
+        await clearCookie(emailToSend).then((res) =>
+          console.log("logout token res", res?.data)
+        );
       }
     });
     return () => {

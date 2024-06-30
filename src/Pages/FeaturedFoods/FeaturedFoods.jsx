@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getAllFoods } from "../../api/Foods";
+import { getFeaturedFoods } from "../../api/Foods";
 import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
 import SkeletonCard from "../SkeletonCard";
 import { useEffect, useState } from "react";
@@ -16,7 +16,7 @@ const FeaturedFoods = () => {
 
   const { data = [], isLoading } = useQuery({
     queryKey: ["FeaturedFoods"],
-    queryFn: async () => await getAllFoods(),
+    queryFn: async () => await getFeaturedFoods(),
   });
   const featuredFoods = data?.result?.sort(
     (a, b) => b.food_quantity - a.food_quantity
@@ -36,7 +36,7 @@ const FeaturedFoods = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto">
-            {featuredFoods?.slice(0, 8).map((foods, idx) => (
+            {featuredFoods?.map((foods, idx) => (
               <FeaturedFoodsCard key={idx} getFoods={foods} />
             ))}
           </div>

@@ -57,7 +57,7 @@ const FoodDetails = () => {
               Expire In: {expired_date} {expired_time}
             </p>
             {isFoodExpired(expired_date, expired_time) ? (
-              <p>This Food is expired!</p>
+              <p className="text-pink-700">This Food is expired!</p>
             ) : food_status === "available" ? (
               user.email !== donator_email && (
                 <AddRequest getFood={loadFoodData} />
