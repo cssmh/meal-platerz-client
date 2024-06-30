@@ -2,13 +2,13 @@ import axios from "axios";
 import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
-import useContextHook from "../../useCustomHook/useContextHook";
 import MyFoodsRow from "../MyFoodsRow/MyFoodsRow";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosHook from "../../hooks/useAxiosHook";
+import useAuth from "../../hooks/useAuth";
 
 const MyFoods = () => {
   const { axiosSecure } = useAxiosHook();
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [myFoods, setMyFoods] = useState([]);
   useEffect(() => {

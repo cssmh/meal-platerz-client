@@ -2,11 +2,11 @@ import { useLoaderData } from "react-router-dom";
 import BannerFood from "./BannerFood";
 import { Helmet } from "react-helmet-async";
 import AddRequest from "../AddRequest/AddRequest";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../hooks/useAuth";
 
 const FoodDetails = () => {
   const loadFoodData = useLoaderData();
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const {
     food_image,
     food_name,

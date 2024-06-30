@@ -2,11 +2,11 @@ import axios from "axios";
 import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
-import useContextHook from "../../useCustomHook/useContextHook";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../hooks/useAuth";
 
 const AddFood = () => {
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const [expiredDate, setExpiredDate] = useState("");
   const [expiredTime, setExpiredTime] = useState("");
   const [todayDate, setTodayDate] = useState("");

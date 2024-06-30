@@ -3,12 +3,12 @@ import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
-import useContextHook from "../../useCustomHook/useContextHook";
 import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosHook from "../../hooks/useAxiosHook";
+import useAuth from "../../hooks/useAuth";
 
 const MyFoodRequest = () => {
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const { axiosSecure } = useAxiosHook();
   const [isLoading, setIsLoading] = useState(true);
   const [myFoodRequest, setMyFoodRequest] = useState([]);

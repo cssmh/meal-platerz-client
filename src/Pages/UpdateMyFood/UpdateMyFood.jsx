@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosHook from "../../hooks/useAxiosHook";
 
 const UpdateMyFood = ({ foodData, setFoodData, food_status }) => {
   const {
