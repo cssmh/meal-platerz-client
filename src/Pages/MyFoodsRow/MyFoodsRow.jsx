@@ -12,6 +12,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
     expired_time,
     food_status,
     food_quantity,
+    requestCount,
   } = foodData;
 
   return (
@@ -78,7 +79,9 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
               food_status === "Unavailable" ? "bg-cyan-600" : "bg-redFood"
             } px-[10px] py-[7px] text-white rounded-lg`}
           >
-            {food_status === "Unavailable" ? "Delivered" : "Requests"}
+            {food_status === "Unavailable"
+              ? "Delivered"
+              : `Request(${requestCount})`}
           </button>
         </Link>
       </td>

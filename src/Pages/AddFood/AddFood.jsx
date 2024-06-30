@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
+import { addFood } from "../../api/Foods";
 
 const AddFood = () => {
   const { user } = useAuth();
@@ -27,7 +28,7 @@ const AddFood = () => {
   const formattedDate = moment(expiredDate).format("DD-MM-YYYY");
   const formattedTime = moment(expiredTime, "HH:mm").format("hh:mm A");
 
-  const handleAddFood = (e) => {
+  const handleAddFood = async (e) => {
     e.preventDefault();
     const form = e.target;
     const food_name = form.food_name.value;
@@ -58,17 +59,11 @@ const AddFood = () => {
       additional_notes,
     };
 
-    axios
-      .post("http://localhost:5000/add-food", foodInformation)
-      .then((res) => {
-        if (res.data?.insertedId) {
-          swal("Thank You!", `${food_name} added`, "success");
-          form.reset();
-        }
-      })
-      .then(() => {
-        // console.log(err);
-      });
+    const res = await addFood(foodInformation);
+    if (res.data?.insertedId) {
+      swal("Thank You!", `${food_name} added`, "success");
+      form.reset();
+    }
   };
 
   return (

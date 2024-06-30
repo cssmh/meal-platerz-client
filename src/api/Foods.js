@@ -39,3 +39,9 @@ export const updateMyFood = async (id, email, updatedData) => {
   );
   return data;
 };
+
+// add food
+export const addFood = async (foodInfo) => {
+  const { data } = await axiosSecure.post("/add-food", foodInfo);
+  return data;
+};

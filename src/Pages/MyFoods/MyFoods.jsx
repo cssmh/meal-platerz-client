@@ -48,7 +48,7 @@ const MyFoods = () => {
       </Helmet>
       {isLoading ? (
         <div className="flex justify-center my-5">
-          {/* <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} /> */}
+          <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
         </div>
       ) : (
         <div className="overflow-x-auto my-5">
@@ -66,7 +66,7 @@ const MyFoods = () => {
               </tr>
             </thead>
             <tbody>
-              {myFoods.map((food) => (
+              {myFoods?.map((food) => (
                 <MyFoodsRow
                   key={food._id}
                   handleDelete={handleDelete}
