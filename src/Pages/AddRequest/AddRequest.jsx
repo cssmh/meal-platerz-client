@@ -50,8 +50,8 @@ const AddRequest = ({ getFood }) => {
     const donation_money = donation > 0 ? donation : 0;
     const status = "Pending";
 
-    const regex = /^[1-9]+$/;
-    if (!regex.test(parseInt(donation))) {
+    const regex = /^([1-9][0-9]*)?$/;
+    if (!regex.test(donation)) {
       return toast.error("The donation amount is invalid");
     }
 

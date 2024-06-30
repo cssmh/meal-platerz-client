@@ -14,7 +14,7 @@ const FeaturedFoodsCard = ({ getFoods }) => {
   } = getFoods;
 
   return (
-    <div className="flex flex-col shadow-lg rounded-lg bg-white hover:scale-105 transition-all duration-300 overflow-hidden">
+    <div className="border flex flex-col shadow-lg rounded-lg bg-white hover:scale-105 transition-all duration-300 overflow-hidden">
       <div className="flex-grow">
         <img
           alt="Food"

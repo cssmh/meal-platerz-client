@@ -35,7 +35,9 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
           Expire In: {expired_date} {expired_time}
         </p>
         <p className="text-blue-600">Your Request: {request_date}</p>
-        <p>Thanks for your {donation_money} BDT donation</p>
+        {donation_money > 0 && (
+          <p>Thanks for your {donation_money} BDT donation</p>
+        )}
         <div className="flex gap-2">
           <p>
             Status:{" "}
@@ -48,7 +50,6 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
             </span>
           </p>
           <p>
-            on{" "}
             <span className="text-cyan-500">
               {delivered_at && delivered_at}
             </span>

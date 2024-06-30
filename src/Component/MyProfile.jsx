@@ -11,18 +11,15 @@ const MyProfile = () => {
         <title>MealPlaterz | My Profile</title>
       </Helmet>
       <div className="max-w-lg p-8 sm:flex mx-auto my-8 sm:space-x-6">
-        <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
+        <div className="w-2/3 mb-6 md:w-36">
           <img
             src={photoURL}
             alt="no photo"
             className="object-cover object-center w-full h-full rounded dark:bg-gray-500"
           />
         </div>
-        <div className="flex flex-col space-y-4">
-          <div>
-            <h2 className="text-2xl font-semibold">{displayName}</h2>
-            <span className="text-sm dark:text-gray-600">User</span>
-          </div>
+        <div className="flex flex-col space-y-2">
+          <h2 className="text-2xl font-semibold">{displayName}</h2>
           <div className="space-y-1">
             <span className="flex items-center space-x-2">
               <svg

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
+import useResLimit from "../../hooks/useResLimit";
+import SkeletonCard from "../SkeletonCard";
 
 const AvailableFoods = () => {
   let searchTerm;
@@ -13,6 +15,12 @@ const AvailableFoods = () => {
   const [totalFoodsCount, setTotalFoodsCount] = useState(0);
   const [totalFoodsForSearch, setTotalFoodsForSearch] = useState([]);
   const foodsPerPageCount = Math.ceil(totalFoodsCount / limit);
+  const isMobile = useResLimit("(max-width: 767px)");
+  const [skeletonSize, setSkeletonSize] = useState(isMobile ? 1 : 4);
+
+  useEffect(() => {
+    setSkeletonSize(isMobile ? 1 : 4);
+  }, [isMobile]);
 
   // for search book
   useEffect(() => {
@@ -45,33 +53,35 @@ const AvailableFoods = () => {
       <Helmet>
         <title>MealPlaterz | Available Foods</title>
       </Helmet>
+      <div className="text-center my-4">
+        <input
+          type="text"
+          name="name"
+          placeholder="Search for Food Name"
+          className="text-sm border p-[10px]  rounded-xl focus:border-redFood min-w-[75%] md:min-w-[340px] border-red-500"
+          style={{ outline: "none" }}
+          onChange={(e) => {
+            searchTerm = e.target.value;
+            if (searchTerm === "") {
+              setAllFoods(totalFoodsForSearch);
+            } else {
+              const searchItem = allFoods.filter((foods) =>
+                foods.food_name.toLowerCase().includes(searchTerm.toLowerCase())
+              );
+              setAllFoods(searchItem);
+            }
+          }}
+        />
+      </div>
       {isLoading ? (
-        <div className="flex justify-center my-5">
-          <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto">
+          {[...Array(skeletonSize)].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
         </div>
       ) : (
-        <div className="text-center mt-4 mb-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Search for Food Name"
-            className="text-sm border p-[10px]  rounded-xl focus:border-redFood min-w-[75%] md:min-w-[340px] border-red-500"
-            style={{ outline: "none" }}
-            onChange={(e) => {
-              searchTerm = e.target.value;
-              if (searchTerm === "") {
-                setAllFoods(totalFoodsForSearch);
-              } else {
-                const searchItem = allFoods.filter((foods) =>
-                  foods.food_name
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase())
-                );
-                setAllFoods(searchItem);
-              }
-            }}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-2">
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-3">
             {allFoods?.map((foods) => (
               <FeaturedFoodsCard key={foods._id} getFoods={foods} />
             ))}
@@ -133,7 +143,7 @@ const AvailableFoods = () => {
               </div>
             </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );

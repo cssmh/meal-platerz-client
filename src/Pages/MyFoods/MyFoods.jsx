@@ -1,22 +1,24 @@
-import axios from "axios";
 import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
 import MyFoodsRow from "../MyFoodsRow/MyFoodsRow";
-import useAxiosHook from "../../hooks/useAxiosHook";
 import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { deleteMyFood, getMyFoods } from "../../api/Foods";
+import { SyncLoader } from "react-spinners";
 
 const MyFoods = () => {
-  const { axiosSecure } = useAxiosHook();
-  const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
-  const [myFoods, setMyFoods] = useState([]);
-  useEffect(() => {
-    axiosSecure.get(`/myFoods?email=${user?.email}`).then((res) => {
-      setMyFoods(res.data);
-      setIsLoading(false);
-    });
-  }, [user?.email, axiosSecure]);
+  const { loading, user } = useAuth();
+  const {
+    data: myFoods = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["myFoods", user?.email],
+    queryFn: async () => {
+      return await getMyFoods(user?.email);
+    },
+    enabled: !loading && !!user?.email,
+  });
 
   const handleDelete = (idx, name) => {
     swal({
@@ -27,17 +29,14 @@ const MyFoods = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://localhost:5000/delete-food/${idx}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            const remaining = myFoods.filter((food) => food._id !== idx);
-            setMyFoods(remaining);
+        deleteMyFood(user?.email, idx).then((data) => {
+          if (data?.deletedCount > 0) {
+            refetch();
             swal(`${name} Deleted!`, {
               icon: "success",
             });
           }
         });
-      } else {
-        swal("Your file is safe!");
       }
     });
   };
@@ -47,31 +46,38 @@ const MyFoods = () => {
       <Helmet>
         <title>MealPlaterz | My Foods</title>
       </Helmet>
-      <div className="overflow-x-auto my-10">
-        <table className="table max-w-7xl mx-auto">
-          <thead>
-            <tr>
-              <th>Food Image</th>
-              <th>Food Name</th>
-              <th>Quantity</th>
-              <th>Expired Date</th>
-              <th>Time</th>
-              <th>Status</th>
-              <th>Update</th>
-              <th>Manage</th>
-            </tr>
-          </thead>
-          <tbody>
-            {myFoods.map((food) => (
-              <MyFoodsRow
-                key={food._id}
-                handleDelete={handleDelete}
-                getFood={food}
-              ></MyFoodsRow>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {isLoading ? (
+        <div className="flex justify-center my-5">
+          <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
+        </div>
+      ) : (
+        <div className="overflow-x-auto my-5">
+          <table className="table max-w-7xl mx-auto">
+            <thead>
+              <tr>
+                <th>Food Image</th>
+                <th>Food Name</th>
+                <th>Quantity</th>
+                <th>Expired Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myFoods.map((food) => (
+                <MyFoodsRow
+                  key={food._id}
+                  handleDelete={handleDelete}
+                  getFood={food}
+                  refetch={refetch}
+                ></MyFoodsRow>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
-import { SyncLoader } from "react-spinners";
 import { useQuery } from "@tanstack/react-query";
 import { getAllFoods } from "../../api/Foods";
 import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
+import SkeletonCard from "../SkeletonCard";
+import { useEffect, useState } from "react";
+import useResLimit from "../../hooks/useResLimit";
 
 const FeaturedFoods = () => {
+  const isMobile = useResLimit("(max-width: 767px)");
+  const [skeletonSize, setSkeletonSize] = useState(isMobile ? 1 : 4);
+
+  useEffect(() => {
+    setSkeletonSize(isMobile ? 1 : 4);
+  }, [isMobile]);
+
   const { data = [], isLoading } = useQuery({
     queryKey: ["FeaturedFoods"],
     queryFn: async () => await getAllFoods(),
@@ -14,13 +23,15 @@ const FeaturedFoods = () => {
   );
 
   return (
-    <div className="my-9">
+    <div className="mt-9">
       <h1 className="text-center font-semibold text-2xl mb-8">
         Featured Foods (Highest Quantity to Lowest)
       </h1>
       {isLoading ? (
-        <div className="flex justify-center my-5">
-          <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto">
+          {[...Array(skeletonSize)].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
         </div>
       ) : (
         <>

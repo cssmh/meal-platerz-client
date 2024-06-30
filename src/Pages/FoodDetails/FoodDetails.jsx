@@ -3,10 +3,11 @@ import BannerFood from "./BannerFood";
 import { Helmet } from "react-helmet-async";
 import AddRequest from "../AddRequest/AddRequest";
 import useAuth from "../../hooks/useAuth";
+import moment from "moment";
 
 const FoodDetails = () => {
-  const loadFoodData = useLoaderData();
   const { user } = useAuth();
+  const loadFoodData = useLoaderData();
   const {
     food_image,
     food_name,
@@ -20,12 +21,20 @@ const FoodDetails = () => {
     food_status,
   } = loadFoodData;
 
+  const isFoodExpired = (expiryDate, expiryTime) => {
+    const foodExpiryDateTime = moment(
+      `${expiryDate} ${expiryTime}`,
+      "DD-MM-YYYY hh:mm A"
+    );
+    return moment().isAfter(foodExpiryDateTime);
+  };
+
   return (
     <div>
       <Helmet>
         <title>MealPlaterz | FoodDetails</title>
       </Helmet>
-      <BannerFood></BannerFood>
+      <BannerFood />
       <div className="text-center mx-auto max-w-md border-2 py-2 my-5 lg:mx-auto">
         <h1 className="font-semibold text-xl md:text-[22px] text-blue-800 mb-1">
           Donator Information
@@ -43,13 +52,15 @@ const FoodDetails = () => {
           />
           <div className="space-y-1 lg:space-y-[6px] mx-6 lg:mx-0 text-center lg:text-left">
             <h1 className="text-2xl lg:text-4xl font-semibold">{food_name}</h1>
-            <p>Quantity: {food_quantity} (no. of person to be served)</p>
+            <p>Quantity: {food_quantity} (no. of persons to be served)</p>
             <p>
               Expire In: {expired_date} {expired_time}
             </p>
-            {food_status === "available" ? (
+            {isFoodExpired(expired_date, expired_time) ? (
+              <p>This Food is expired!</p>
+            ) : food_status === "available" ? (
               user.email !== donator_email && (
-                <AddRequest getFood={loadFoodData}></AddRequest>
+                <AddRequest getFood={loadFoodData} />
               )
             ) : (
               <p className="text-redFood">This Food is already Delivered!</p>

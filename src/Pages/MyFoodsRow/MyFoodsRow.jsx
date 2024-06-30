@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import UpdateMyFood from "../UpdateMyFood/UpdateMyFood";
 import { useState } from "react";
 
-const MyFoodsRow = ({ getFood, handleDelete }) => {
+const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
   const [foodData, setFoodData] = useState(getFood);
   const {
     _id,
@@ -68,6 +68,7 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
           foodData={foodData}
           setFoodData={setFoodData}
           food_status={food_status}
+          refetch={refetch}
         ></UpdateMyFood>
       </th>
       <td>
@@ -77,7 +78,7 @@ const MyFoodsRow = ({ getFood, handleDelete }) => {
               food_status === "Unavailable" ? "bg-cyan-600" : "bg-redFood"
             } px-[10px] py-[7px] text-white rounded-lg`}
           >
-            {food_status === "Unavailable" ? "Delivered" : "Manage"}
+            {food_status === "Unavailable" ? "Delivered" : "Requests"}
           </button>
         </Link>
       </td>

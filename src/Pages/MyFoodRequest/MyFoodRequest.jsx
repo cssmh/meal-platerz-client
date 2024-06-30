@@ -1,25 +1,25 @@
 import axios from "axios";
 import swal from "sweetalert";
-import { useEffect, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
-import useAxiosHook from "../../hooks/useAxiosHook";
 import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { deleteMyRequest, getMyRequests } from "../../api/Foods";
 
 const MyFoodRequest = () => {
-  const { user } = useAuth();
-  const { axiosSecure } = useAxiosHook();
-  const [isLoading, setIsLoading] = useState(true);
-  const [myFoodRequest, setMyFoodRequest] = useState([]);
-
-  const url = `/my-requested?email=${user?.email}`;
-  useEffect(() => {
-    axiosSecure.get(url).then((res) => {
-      setMyFoodRequest(res?.data);
-      setIsLoading(false);
-    });
-  }, [url, axiosSecure]);
+  const { loading, user } = useAuth();
+  const {
+    data: myFoodRequest = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["myFoodRequest", user?.email],
+    queryFn: async () => {
+      return await getMyRequests(user?.email);
+    },
+    enabled: !loading && !!user?.email,
+  });
 
   const handleRequestedDelete = (idx, food_name) => {
     swal({
@@ -30,18 +30,14 @@ const MyFoodRequest = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        // main code
-        axios.delete(`http://localhost:5000/my-request/${idx}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            const remaining = myFoodRequest.filter((food) => food._id !== idx);
-            setMyFoodRequest(remaining);
-            swal(`${food_name} Canceled!`, {
+        deleteMyRequest(user?.email, idx).then((data) => {
+          if (data?.deletedCount > 0) {
+            refetch();
+            swal(`Request on ${food_name} Canceled!`, {
               icon: "success",
             });
           }
         });
-      } else {
-        swal("Your file is safe!");
       }
     });
   };
@@ -57,7 +53,7 @@ const MyFoodRequest = () => {
             <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
           </div>
         ) : myFoodRequest.length === 0 ? (
-          <p className="text-center my-4 text-redFood text-xl italic">
+          <p className="text-center my-3 text-redFood text-xl italic">
             You have&apos;nt requested for any food
           </p>
         ) : (
