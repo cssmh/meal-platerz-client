@@ -4,7 +4,11 @@ const Solution = () => {
   return (
     <section className="bg-gradient-to-br from-purple-400 to-blue-400 my-10">
       <div className="container mx-auto flex flex-col justify-around p-4 text-center md:p-10 lg:flex-row">
-        <div className="flex flex-col justify-center lg:text-left">
+        <div
+          data-aos="zoom-out-down"
+          data-aos-duration="800"
+          className="flex flex-col justify-center lg:text-left"
+        >
           <p className="mb-1 text-sm font-medium tracking-widest uppercase">
             Join our community to share and save food
           </p>
@@ -34,7 +38,13 @@ const Solution = () => {
             </button>
           </div>
         </div>
-        <img src={appStore} className="md:w-1/2" alt="" />
+        <img
+          data-aos="flip-left"
+          data-aos-duration="700"
+          src={appStore}
+          className="md:w-1/2"
+          alt="no picture"
+        />
       </div>
     </section>
   );

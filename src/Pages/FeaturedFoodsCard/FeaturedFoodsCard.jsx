@@ -14,7 +14,11 @@ const FeaturedFoodsCard = ({ getFoods }) => {
   } = getFoods;
 
   return (
-    <div className="border flex flex-col shadow-lg rounded-lg bg-white hover:scale-105 transition-all duration-300 overflow-hidden">
+    <div
+      data-aos="zoom-in-up"
+      data-aos-duration="700"
+      className="border flex flex-col shadow-lg rounded-lg bg-white hover:scale-105 transition-all duration-300 overflow-hidden"
+    >
       <div className="flex-grow">
         <img
           alt="Food"

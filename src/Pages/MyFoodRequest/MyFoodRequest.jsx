@@ -6,6 +6,7 @@ import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { deleteMyRequest, getMyRequests } from "../../api/Foods";
+import SmallLoader from "../../Component/SmallLoader";
 
 const MyFoodRequest = () => {
   const { loading, user } = useAuth();
@@ -49,16 +50,14 @@ const MyFoodRequest = () => {
       </Helmet>
       <div>
         {isLoading ? (
-          <div className="flex justify-center my-5">
-            <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
-          </div>
+          <SmallLoader />
         ) : myFoodRequest.length === 0 ? (
           <p className="text-center my-3 text-redFood text-xl italic">
             You have&apos;nt requested for any food
           </p>
         ) : (
           <div className="mb-8">
-            <p className="text-center my-4 text-blue-900 text-xl italic">
+            <p className="text-center my-3 text-blue-900 text-xl italic">
               Your requested all foods Here
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">

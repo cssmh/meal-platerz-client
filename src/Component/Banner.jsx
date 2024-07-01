@@ -4,6 +4,9 @@ const Banner = () => {
   return (
     <div>
       <div
+        data-aos="fade-up"
+        data-aos-duration="900"
+        data-aos-anchor-placement="top-bottom"
         className="hero min-h-[60vh] lg:min-h-[80vh] bg-cover"
         style={{
           backgroundImage: `url(${BannerBG})`,
@@ -11,8 +14,8 @@ const Banner = () => {
         }}
       >
         {/* <div className="hero-overlay bg-opacity-5"></div> */}
-        <div className="max-w-2xl mr-auto ml-4 md:ml-12"> 
-        {/* text-white */}
+        <div className="max-w-2xl mr-auto ml-4 md:ml-12">
+          {/* text-white */}
           <div className="space-y-3">
             <h1 className="text-2xl md:text-4xl font-bold flex-11">
               Building Communities <br /> by Sharing Excess Food <br />{" "}

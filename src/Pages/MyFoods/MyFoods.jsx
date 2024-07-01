@@ -5,6 +5,7 @@ import { deleteMyFood } from "../../api/Foods";
 import { SyncLoader } from "react-spinners";
 import useMyFoods from "../../hooks/useMyFoods";
 import useAuth from "../../hooks/useAuth";
+import SmallLoader from "../../Component/SmallLoader";
 
 const MyFoods = () => {
   const { user } = useAuth();
@@ -37,11 +38,9 @@ const MyFoods = () => {
         <title>MealPlaterz | My Foods</title>
       </Helmet>
       {isLoading ? (
-        <div className="flex justify-center my-5">
-          <SyncLoader color="#FF0000" size={10} speedMultiplier={0.6} />
-        </div>
+        <SmallLoader />
       ) : (
-        <div className="overflow-x-auto my-5">
+        <div className="overflow-x-auto my-3">
           <table className="table max-w-7xl mx-auto">
             <thead>
               <tr>

@@ -1,7 +1,7 @@
 import { ThreeCircles } from "react-loader-spinner";
 const BigLoader = () => {
   return (
-    <div className="w-full min-h-[96vh] flex justify-center items-center">
+    <div className="w-full min-h-[95vh] flex justify-center items-center">
       <ThreeCircles
         height="130"
         width="130"

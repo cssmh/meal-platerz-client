@@ -3,19 +3,24 @@ import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import { getMyPending, unavailableId } from "../../api/Foods";
+import SmallLoader from "../../Component/SmallLoader";
 
 const MyPending = () => {
   const { loading, user } = useAuth();
   const { id } = useParams();
 
-  const { data: requestedData, refetch: refetchReq } = useQuery({
+  const {
+    isLoading,
+    data: requestedData,
+    refetch: refetchReq,
+  } = useQuery({
     queryKey: ["myPending", id],
     queryFn: async () => {
       return await getMyPending(id);
     },
   });
 
-  const { data: unavailableIds = [] } = useQuery({
+  const { isLoading: idLoading, data: unavailableIds = [] } = useQuery({
     enabled: !loading && !!user?.email,
     queryKey: ["unavailableIds", user?.email],
     queryFn: async () => {
@@ -23,6 +28,8 @@ const MyPending = () => {
       return data?.map((food) => food._id);
     },
   });
+
+  if ((loading || isLoading, idLoading)) return <SmallLoader />;
 
   return (
     <div>
