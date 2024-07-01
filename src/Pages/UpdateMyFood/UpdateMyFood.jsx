@@ -98,7 +98,7 @@ const UpdateMyFood = ({ foodData, setFoodData, food_status, refetch }) => {
       <Button
         className={`${food_status === "Unavailable" && "pointer-events-none"}`}
         onClick={handlePopUp}
-        color="success"
+        color={food_status === "available" ? "success" : "inherit"}
         variant="contained"
       >
         Edit

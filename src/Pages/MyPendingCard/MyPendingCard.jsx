@@ -1,10 +1,14 @@
-import axios from "axios";
+import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import toast from "react-hot-toast";
-import swal from "sweetalert";
+import {
+  addTime,
+  updateFoodStatus,
+  updateRequestedStatus,
+} from "../../api/Foods";
+import useMyFoods from "../../hooks/useMyFoods";
 
-const MyPendingCard = ({ getReq }) => {
+const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
   const {
     _id,
     food_id,
@@ -20,44 +24,11 @@ const MyPendingCard = ({ getReq }) => {
     status,
     delivered_at,
   } = getReq;
+
   const [foodStatus, setFoodStatus] = useState(status);
   const [todayDateTime, setTodayDateTime] = useState("");
   const [delivered, setDelivered] = useState(delivered_at);
-
-  const handleUpdateStatus = (e, idx, foodIdx) => {
-    const newStatus = e.target.value;
-    const updatedStatus = { newStatus };
-
-    if (newStatus === "Pending") {
-      const foodStatus = "available";
-      axios
-        .put(`http://localhost:5000/food-status/${foodIdx}`, { foodStatus })
-        .then()
-        .catch((err) => toast.error(err));
-    } else if (newStatus === "Delivered") {
-      const foodStatus = "Unavailable";
-      axios
-        .put(`http://localhost:5000/food-status/${foodIdx}`, { foodStatus })
-        .then()
-        .catch((err) => toast.error(err));
-    }
-
-    axios
-      .put(`http://localhost:5000/requested-status/${idx}`, updatedStatus)
-      .then((res) => {
-        if (res.data?.modifiedCount > 0) {
-          setFoodStatus(newStatus);
-          swal("Thank You!", `Updated to ${newStatus}`, "success");
-        }
-        if (newStatus === "Delivered") {
-          axios
-            .patch(`http://localhost:5000/add-time/${idx}`, { todayDateTime })
-            .then(() => setDelivered(todayDateTime))
-            .catch();
-        }
-      })
-      .then();
-  };
+  const { refetch } = useMyFoods();
 
   // Set today's date and time for delivered booking
   useEffect(() => {
@@ -77,13 +48,43 @@ const MyPendingCard = ({ getReq }) => {
   }, []);
   // Set today's date and time for delivered booking end
 
+  const handleUpdateStatus = async (e, idx, foodIdx) => {
+    const newStatus = e.target.value;
+
+    try {
+      if (newStatus === "Pending") {
+        const foodStatus = "available";
+        await updateFoodStatus(foodIdx, foodStatus);
+      } else if (newStatus === "Delivered") {
+        const foodStatus = "Unavailable";
+        await updateFoodStatus(foodIdx, foodStatus);
+        addTime(idx, todayDateTime);
+        setDelivered(todayDateTime);
+      }
+
+      const updatedStatus = { newStatus };
+      await updateRequestedStatus(idx, updatedStatus);
+      setFoodStatus(newStatus);
+      refetch();
+      refetchReq();
+      swal("Thank You!", `Updated to ${newStatus}`, "success");
+    } catch (error) {
+      console.error("Error updating status:", error);
+      swal("Error", "Failed to update status", "error");
+    }
+  };
+
   return (
     <div>
       <Helmet>
         <title>MealPlaterz | Food Request</title>
       </Helmet>
       <div className="text-center border border-redFood py-4 rounded-md space-y-1 mx-1 md:mx-0">
-        <img src={user_image} className="w-28 mx-auto" alt="no image" />
+        <img
+          src={user_image}
+          className="w-24 rounded-lg mx-auto"
+          alt="no image"
+        />
         <h1 className="text-blue-800 text-lg">Requester Information</h1>
         <p>{user_name}</p>
         <div className="flex justify-center gap-1">
@@ -110,7 +111,9 @@ const MyPendingCard = ({ getReq }) => {
             onChange={(e) => handleUpdateStatus(e, _id, food_id)}
             className="input input-bordered"
             style={{ outline: "none" }}
-            disabled={foodStatus === "Delivered"}
+            disabled={
+              foodStatus === "Delivered" || unavailableIds?.includes(food_id)
+            }
           >
             <option value="Pending">Pending</option>
             <option value="Delivered">Delivered</option>

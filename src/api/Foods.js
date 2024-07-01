@@ -51,3 +51,42 @@ export const addReq = async (reqInfo) => {
   const { data } = await axiosSecure.post("/add-request", reqInfo);
   return data;
 };
+
+// get single food
+export const getFood = async (idx) => {
+  const { data } = await axiosSecure(`food/${idx}`);
+  return data;
+};
+
+// get my pending
+export const getMyPending = async (idx) => {
+  const { data } = await axiosSecure(`/pending-request/${idx}`);
+  return data;
+};
+
+// update food status myPendingCard
+export const updateFoodStatus = async (idx, foodStatus) => {
+  const { data } = await axiosSecure.put(`/food-status/${idx}`, { foodStatus });
+  return data;
+};
+
+export const updateRequestedStatus = async (idx, updatedStatus) => {
+  const { data } = await axiosSecure.put(
+    `/requested-status/${idx}`,
+    updatedStatus
+  );
+  return data;
+};
+
+export const addTime = async (idx, todayDateTime) => {
+  const { data } = await axiosSecure.patch(`/add-time/${idx}`, {
+    todayDateTime,
+  });
+  return data;
+};
+// update food status myPendingCard end
+
+export const unavailableId = async (email) => {
+  const { data } = await axiosSecure.get(`/unavailable-ids?email=${email}`);
+  return data;
+};

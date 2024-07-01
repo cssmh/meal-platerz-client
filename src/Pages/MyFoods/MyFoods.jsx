@@ -1,24 +1,14 @@
 import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
 import MyFoodsRow from "../MyFoodsRow/MyFoodsRow";
-import useAuth from "../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
-import { deleteMyFood, getMyFoods } from "../../api/Foods";
+import { deleteMyFood } from "../../api/Foods";
 import { SyncLoader } from "react-spinners";
+import useMyFoods from "../../hooks/useMyFoods";
+import useAuth from "../../hooks/useAuth";
 
 const MyFoods = () => {
-  const { loading, user } = useAuth();
-  const {
-    data: myFoods = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["myFoods", user?.email],
-    queryFn: async () => {
-      return await getMyFoods(user?.email);
-    },
-    enabled: !loading && !!user?.email,
-  });
+  const { user } = useAuth();
+  const { isLoading, myFoods, refetch } = useMyFoods();
 
   const handleDelete = (idx, name) => {
     swal({
