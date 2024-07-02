@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getFeaturedFoods } from "../../api/Foods";
-import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
+import FoodsCard from "../FoodsCard/FoodsCard";
 import SkeletonCard from "../SkeletonCard";
 import { useEffect, useState } from "react";
 import useResLimit from "../../hooks/useResLimit";
@@ -14,7 +14,11 @@ const FeaturedFoods = () => {
     setSkeletonSize(isMobile ? 1 : 4);
   }, [isMobile]);
 
-  const { data = [], isLoading } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["FeaturedFoods"],
     queryFn: async () => await getFeaturedFoods(),
   });
@@ -22,12 +26,21 @@ const FeaturedFoods = () => {
     (a, b) => b.food_quantity - a.food_quantity
   );
 
+  const aosDuration = (num) => {
+    return 400 + num * 700;
+  };
+
   return (
-    <div className="mt-9">
-      <h1 className="text-center font-semibold text-2xl mb-8">
-        Featured Foods (Highest Quantity to Lowest)
+    <div>
+      <h1 className="text-center font-semibold text-lg md:text-xl my-5">
+        Featured Foods Sorted by Quantity (Highest to Lowest)
       </h1>
-      {isLoading ? (
+
+      {error ? (
+        <div className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600">
+          An error occurred while fetching Featured Foods!
+        </div>
+      ) : isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto">
           {[...Array(skeletonSize)].map((_, index) => (
             <SkeletonCard key={index} />
@@ -37,10 +50,14 @@ const FeaturedFoods = () => {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto">
             {featuredFoods?.map((foods, idx) => (
-              <FeaturedFoodsCard key={idx} getFoods={foods} />
+              <FoodsCard
+                key={foods._id}
+                getFoods={foods}
+                aosDuration={aosDuration(idx)}
+              />
             ))}
           </div>
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-8 mb-4">
             <Link to="/available-foods">
               <button className="text-white bg-redFood font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                 Show all available Foods

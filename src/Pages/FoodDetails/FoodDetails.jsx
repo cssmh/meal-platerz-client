@@ -1,13 +1,23 @@
+import moment from "moment";
 import { useLoaderData } from "react-router-dom";
-import BannerFood from "./BannerFood";
+import MenuDetails from "./MenuDetails";
 import { Helmet } from "react-helmet-async";
 import AddRequest from "../AddRequest/AddRequest";
 import useAuth from "../../hooks/useAuth";
-import moment from "moment";
+import { useQuery } from "@tanstack/react-query";
+import SmallLoader from "../../Component/SmallLoader";
 
 const FoodDetails = () => {
   const { user } = useAuth();
-  const loadFoodData = useLoaderData();
+  const food = useLoaderData();
+
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["foodData", food],
+    queryFn: async () => {
+      return await food;
+    },
+  });
+
   const {
     food_image,
     food_name,
@@ -19,7 +29,7 @@ const FoodDetails = () => {
     expired_time,
     additional_notes,
     food_status,
-  } = loadFoodData;
+  } = data;
 
   const isFoodExpired = (expiryDate, expiryTime) => {
     const foodExpiryDateTime = moment(
@@ -29,12 +39,14 @@ const FoodDetails = () => {
     return moment().isAfter(foodExpiryDateTime);
   };
 
+  if (isLoading) return <SmallLoader />;
+
   return (
     <div>
       <Helmet>
         <title>MealPlaterz | FoodDetails</title>
       </Helmet>
-      <BannerFood />
+      <MenuDetails />
       <div className="text-center mx-auto max-w-md border-2 py-2 my-5 lg:mx-auto">
         <h1 className="font-semibold text-xl md:text-[22px] text-blue-800 mb-1">
           Donator Information
@@ -59,9 +71,7 @@ const FoodDetails = () => {
             {isFoodExpired(expired_date, expired_time) ? (
               <p className="text-pink-700">This Food is expired!</p>
             ) : food_status === "available" ? (
-              user.email !== donator_email && (
-                <AddRequest getFood={loadFoodData} />
-              )
+              user.email !== donator_email && <AddRequest getFood={data} />
             ) : (
               <p className="text-redFood">This Food is already Delivered!</p>
             )}
@@ -70,9 +80,9 @@ const FoodDetails = () => {
       </div>
       <div className="max-w-[1200px] mx-4 lg:mx-auto mb-7">
         <div className="flex gap-1">
-          <button className="bg-redFood px-3 py-2 text-white rounded-md mb-2">
+          <p className="bg-redFood px-3 py-2 text-white rounded-md mb-2">
             Description
-          </button>
+          </p>
         </div>
         <p>{additional_notes}</p>
       </div>

@@ -1,16 +1,16 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
-import axios from "axios";
 import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import useAuth from "../../hooks/useAuth";
 import { addReq } from "../../api/Foods";
+import UseMyRequest from "../../hooks/UseMyRequest";
 
 const AddRequest = ({ getFood }) => {
-  const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [todayDateTime, setTodayDateTime] = useState("");
+  const { myFoodRequest, user, refetch } = UseMyRequest();
+  const [matchFound, setMatchFound] = useState([]);
 
   const {
     _id,
@@ -24,12 +24,28 @@ const AddRequest = ({ getFood }) => {
     expired_time,
   } = getFood;
 
+  // Check if the selected food is already requested or not
+  useEffect(() => {
+    const matching = myFoodRequest?.filter((req) =>
+      food_name.includes(req?.food_name)
+    );
+    setMatchFound(matching);
+  }, [myFoodRequest, food_name]);
+  // Check if the selected food is already requested or not end
+
   useEffect(() => {
     const today = moment().format("DD-MM-YYYY hh:mm A");
     setTodayDateTime(today);
   }, []);
 
   const handlePopUp = () => {
+    if (matchFound?.length > 0) {
+      return swal({
+        text: "You already Requested for this!",
+        icon: "error",
+        timer: 2000,
+      });
+    }
     setOpen(true);
   };
 
@@ -78,6 +94,7 @@ const AddRequest = ({ getFood }) => {
 
     const res = await addReq(requestFoodData);
     if (res?.insertedId) {
+      refetch();
       swal("Congratulations!", "Request added", "success");
       setOpen(false);
     }

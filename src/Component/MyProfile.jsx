@@ -10,7 +10,7 @@ const MyProfile = () => {
       <Helmet>
         <title>MealPlaterz | My Profile</title>
       </Helmet>
-      <div className="max-w-lg p-8 sm:flex mx-auto my-8 sm:space-x-6">
+      <div className="max-w-xl p-8 sm:flex mx-auto my-8 sm:space-x-6">
         <div className="w-2/3 mb-6 md:w-36">
           <img
             src={photoURL}
@@ -35,11 +35,18 @@ const MyProfile = () => {
               </svg>
               <span className="dark:text-gray-600">{email}</span>
             </span>
-            <span className="flex items-center space-x-2">
-              <span className="dark:text-gray-600">
-                LastSign-In {metadata?.lastSignInTime}
+            <p className="text-sm text-gray-600 mb-2">
+              Account Created:{" "}
+              {new Date(parseInt(metadata?.createdAt, 10)).toLocaleString()}
+              <span className="flex items-center space-x-2">
+                <span className="dark:text-gray-600">
+                  LastSign-In {metadata?.lastSignInTime}
+                </span>
               </span>
-            </span>
+            </p>
+            <button className="bg-redFood text-white px-3 py-[5px] rounded-lg">
+              Edit Profile
+            </button>
           </div>
         </div>
       </div>

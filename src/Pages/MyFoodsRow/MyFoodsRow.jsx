@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import UpdateMyFood from "../UpdateMyFood/UpdateMyFood";
 import { useState } from "react";
+import UpdateMyFood from "../UpdateMyFood/UpdateMyFood";
 
 const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
   const [foodData, setFoodData] = useState(getFood);
@@ -41,29 +41,29 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
             </svg>
           </button>
           <div className="avatar">
-            <div className="mask w-16">
+            <div className="mask w-16 rounded-tr-2xl rounded-bl-2xl">
               <img src={food_image} alt="no image" />
             </div>
           </div>
         </div>
       </th>
       <td>
-        <div className="flex items-center gap-3">
-          <div>
-            <Link to={`/food/${_id}`}>
-              <p className="font-bold">{food_name}</p>
-            </Link>
-          </div>
-        </div>
+        <Link to={`/food/${_id}`}>{food_name}</Link>
       </td>
       <td>
-        <span className="pl-4">{food_quantity}</span>
+        <span className="pl-4 text-emerald-600">{food_quantity}</span>
       </td>
       <td>
         <span>{expired_date}</span>
       </td>
       <td>{expired_time}</td>
-      <td>{food_status}</td>
+      <td
+        className={
+          food_status === "available" ? "text-emerald-600" : "text-redFood"
+        }
+      >
+        {food_status}
+      </td>
       <th>
         <UpdateMyFood
           foodData={foodData}
@@ -81,7 +81,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
           >
             {food_status === "Unavailable"
               ? "Delivered"
-              : `Request(${requestCount})`}
+              : `Request(${requestCount || 0})`}
           </button>
         </Link>
       </td>

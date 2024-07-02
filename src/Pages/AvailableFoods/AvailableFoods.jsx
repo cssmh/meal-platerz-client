@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import FeaturedFoodsCard from "../FeaturedFoodsCard/FeaturedFoodsCard";
+import FoodsCard from "../FoodsCard/FoodsCard";
 import useResLimit from "../../hooks/useResLimit";
 import SkeletonCard from "../SkeletonCard";
 import { useQuery } from "@tanstack/react-query";
@@ -23,6 +23,21 @@ const AvailableFoods = () => {
       return await getAllFoods(page, limit, searchTerm);
     },
   });
+  const sortedFoods = Array.isArray(data?.result)
+    ? [...data.result].sort((a, b) => {
+        // Extract day, month, year from the date string
+        const [dayA, monthA, yearA] = a.expired_date.split("-").map(Number);
+        const [dayB, monthB, yearB] = b.expired_date.split("-").map(Number);
+
+        // Create Date objects for comparison
+        const dateA = new Date(yearA, monthA - 1, dayA);
+        const dateB = new Date(yearB, monthB - 1, dayB);
+
+        // Compare dates
+        return dateA - dateB;
+      })
+    : []; // Default value if data.result is not iterable or undefined/null
+  // Now sortedFoods contains foods sorted by expired_date in ascending order, or an empty array if data.result is not valid
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -37,24 +52,28 @@ const AvailableFoods = () => {
     if (page < data?.totalPages) setPage(page + 1);
   };
 
+  const aosDuration = (num) => {
+    return 400 + num * 700;
+  };
+
   return (
     <div>
       <Helmet>
         <title>MealPlaterz | Available Foods</title>
       </Helmet>
-      <div className="text-center my-4">
+      <div className="text-center mt-3 mb-2">
         <input
           type="text"
           name="name"
           onChange={handleSearch}
-          placeholder="Search for Food Name"
-          className="text-sm border p-[10px]  rounded-xl focus:border-redFood min-w-[75%] md:min-w-[340px] border-red-500"
+          placeholder="Search for Food Name and Location"
+          className="text-sm border py-[9px] px-[11px] rounded-xl focus:border-redFood min-w-[75%] md:min-w-[340px] border-red-500"
           style={{ outline: "none" }}
         />
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto">
-          {[...Array(4)].map((_, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto mt-4">
+          {[...Array(8)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
         </div>
@@ -65,11 +84,20 @@ const AvailableFoods = () => {
               No Food found!
             </p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-3">
-              {data?.result?.map((foods) => (
-                <FeaturedFoodsCard key={foods._id} getFoods={foods} />
-              ))}
-            </div>
+            <>
+              <h1 className="text-center font-semibold text-lg md:text-xl">
+                Available Foods Sorted by Expiration Date
+              </h1>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-2">
+                {sortedFoods?.map((food, idx) => (
+                  <FoodsCard
+                    key={food._id}
+                    getFoods={food}
+                    aosDuration={aosDuration(idx)}
+                  />
+                ))}
+              </div>
+            </>
           )}
           {data?.result?.length > 0 && (
             <div className="flex justify-center mb-4">
@@ -121,6 +149,7 @@ const AvailableFoods = () => {
                     <option value="4">4</option>
                     <option value="8">8</option>
                     <option value="12">12</option>
+                    <option value="16">16</option>
                   </select>
                 </div>
               </div>

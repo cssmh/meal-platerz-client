@@ -1,7 +1,9 @@
 const WeOffer = () => {
   return (
-    <div className="my-6">
-      <h2 className="mb-8 text-2xl font-semibold leading-none text-center px-3 md:px-0">
+    <div className="mb-6">
+      <h2
+        className="mb-8 text-2xl font-semibold leading-none text-center px-3 md:px-0"
+      >
         What do we have to offer<span className="text-redFood">?</span>
       </h2>
       <ul className="grid gap-2 md:gap-6 grid-cols-2 lg:grid-cols-3 px-5 md:px-0">

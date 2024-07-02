@@ -1,26 +1,12 @@
-import axios from "axios";
 import swal from "sweetalert";
-import { SyncLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
-import useAuth from "../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
-import { deleteMyRequest, getMyRequests } from "../../api/Foods";
+import { deleteMyRequest } from "../../api/Foods";
 import SmallLoader from "../../Component/SmallLoader";
+import UseMyRequest from "../../hooks/UseMyRequest";
 
 const MyFoodRequest = () => {
-  const { loading, user } = useAuth();
-  const {
-    data: myFoodRequest = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["myFoodRequest", user?.email],
-    queryFn: async () => {
-      return await getMyRequests(user?.email);
-    },
-    enabled: !loading && !!user?.email,
-  });
+  const { isLoading, myFoodRequest, refetch, user } = UseMyRequest();
 
   const handleRequestedDelete = (idx, food_name) => {
     swal({

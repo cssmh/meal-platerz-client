@@ -15,7 +15,7 @@ const useMyFoods = () => {
     },
     enabled: !loading && !!user?.email,
   });
-  return { isLoading, myFoods, refetch };
+  return { isLoading, myFoods, refetch, user };
 };
 
 export default useMyFoods;

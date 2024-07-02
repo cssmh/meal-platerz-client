@@ -5,7 +5,7 @@ const Solution = () => {
     <section className="bg-gradient-to-br from-purple-400 to-blue-400 my-10">
       <div className="container mx-auto flex flex-col justify-around p-4 text-center md:p-10 lg:flex-row">
         <div
-          data-aos="zoom-out-down"
+          data-aos="zoom-in"
           data-aos-duration="800"
           className="flex flex-col justify-center lg:text-left"
         >
@@ -40,7 +40,7 @@ const Solution = () => {
         </div>
         <img
           data-aos="flip-left"
-          data-aos-duration="700"
+          data-aos-duration="1000"
           src={appStore}
           className="md:w-1/2"
           alt="no picture"

@@ -32,7 +32,7 @@ export const deleteMyRequest = async (email, id) => {
   return data;
 };
 
-export const updateMyFood = async (id, email, updatedData) => {
+export const updateMyFoods = async (id, email, updatedData) => {
   const { data } = await axiosSecure.put(
     `/update-food/${id}/${email}`,
     updatedData

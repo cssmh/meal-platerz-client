@@ -1,4 +1,3 @@
-import axios from "axios";
 import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
@@ -59,10 +58,15 @@ const AddFood = () => {
       additional_notes,
     };
 
-    const res = await addFood(foodInformation);
-    if (res?.insertedId) {
-      swal("Thank You!", `${food_name} added`, "success");
-      form.reset();
+    try {
+      const res = await addFood(foodInformation);
+      if (res?.insertedId) {
+        swal("Thank You!", `${food_name} added`, "success");
+        form.reset();
+      }
+    } catch (error) {
+      console.error("Error adding food:", error);
+      swal("Oops!", "Failed to add food. Please try again later.", "error");
     }
   };
 

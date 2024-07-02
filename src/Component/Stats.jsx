@@ -3,7 +3,11 @@ const Stats = () => {
     <section className="px-6 my-6">
       <div className="container grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto">
         <div className="flex justify-center p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50">
-          <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood">
+          <div
+            data-aos="fade-right"
+            data-aos-duration="400"
+            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -16,12 +20,28 @@ const Stats = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center align-middle">
-            <p className="text-3xl font-semibold leading-none">200</p>
-            <p className="capitalize">Orders</p>
+            <p
+              data-aos="fade-right"
+              data-aos-duration="600"
+              className="text-3xl font-semibold leading-none"
+            >
+              200
+            </p>
+            <p
+              data-aos="fade-right"
+              data-aos-duration="800"
+              className="capitalize"
+            >
+              Orders
+            </p>
           </div>
         </div>
         <div className="flex justify-center p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50">
-          <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood">
+          <div
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -35,12 +55,28 @@ const Stats = () => {
             </svg>
           </div>
           <div className="flex justify-center flex-col align-middle">
-            <p className="text-3xl font-semibold leading-none">120</p>
-            <p className="capitalize">New customers</p>
+            <p
+              data-aos="fade-right"
+              data-aos-duration="1200"
+              className="text-3xl font-semibold leading-none"
+            >
+              120
+            </p>
+            <p
+              data-aos="fade-right"
+              data-aos-duration="1400"
+              className="capitalize"
+            >
+              New customers
+            </p>
           </div>
         </div>
         <div className="flex justify-center p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50">
-          <div className="flex p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood">
+          <div
+            data-aos="fade-right"
+            data-aos-duration="1600"
+            className="flex p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -56,12 +92,28 @@ const Stats = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center align-middle">
-            <p className="text-3xl font-semibold leading-none">72%</p>
-            <p className="capitalize">Growth</p>
+            <p
+              data-aos="fade-right"
+              data-aos-duration="1800"
+              className="text-3xl font-semibold leading-none"
+            >
+              72%
+            </p>
+            <p
+              data-aos="fade-right"
+              data-aos-duration="2000"
+              className="capitalize"
+            >
+              Growth
+            </p>
           </div>
         </div>
         <div className="flex justify-center p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50">
-          <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood">
+          <div
+            data-aos="fade-right"
+            data-aos-duration="2200"
+            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -72,8 +124,20 @@ const Stats = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center align-middle">
-            <p className="text-3xl font-semibold leading-none">13%</p>
-            <p className="capitalize">Bounce rate</p>
+            <p
+              data-aos="fade-right"
+              data-aos-duration="2400"
+              className="text-3xl font-semibold leading-none"
+            >
+              13%
+            </p>
+            <p
+              data-aos="fade-right"
+              data-aos-duration="2600"
+              className="capitalize"
+            >
+              Bounce rate
+            </p>
           </div>
         </div>
       </div>

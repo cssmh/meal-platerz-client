@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
-import { updateMyFood } from "../../api/Foods";
+import { updateMyFoods } from "../../api/Foods";
 
 const UpdateMyFood = ({ foodData, setFoodData, food_status, refetch }) => {
   const {
@@ -52,7 +52,7 @@ const UpdateMyFood = ({ foodData, setFoodData, food_status, refetch }) => {
     setOpen(false);
   };
 
-  const handleUpdateFood = (e) => {
+  const handleUpdateFood = async (e) => {
     e.preventDefault();
     const form = e.target;
     const food_name = form.food_name.value;
@@ -77,20 +77,18 @@ const UpdateMyFood = ({ foodData, setFoodData, food_status, refetch }) => {
       food_status,
     };
 
-    updateMyFood(_id, donator_email, updatedFoodData)
-      .then((data) => {
-        if (data?.modifiedCount > 0) {
-          refetch();
-          setFoodData(updatedFoodData);
-          swal("Good job!", "Food Info Updated", "success");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        setOpen(false);
-      });
+    const res = await updateMyFoods(_id, donator_email, updatedFoodData);
+    try {
+      if (res?.modifiedCount > 0) {
+        refetch();
+        setFoodData(updatedFoodData);
+        swal("Good job!", "Food Info Updated", "success");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setOpen(false);
+    }
   };
 
   return (

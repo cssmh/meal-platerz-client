@@ -2,14 +2,11 @@ import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
 import MyFoodsRow from "../MyFoodsRow/MyFoodsRow";
 import { deleteMyFood } from "../../api/Foods";
-import { SyncLoader } from "react-spinners";
 import useMyFoods from "../../hooks/useMyFoods";
-import useAuth from "../../hooks/useAuth";
 import SmallLoader from "../../Component/SmallLoader";
 
 const MyFoods = () => {
-  const { user } = useAuth();
-  const { isLoading, myFoods, refetch } = useMyFoods();
+  const { isLoading, myFoods, refetch, user } = useMyFoods();
 
   const handleDelete = (idx, name) => {
     swal({

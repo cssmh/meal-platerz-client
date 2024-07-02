@@ -59,19 +59,16 @@ const AuthProviders = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      // console.log("user in ", currentUser);
       setUser(currentUser);
       const getEmail = currentUser?.email || user?.email;
       const emailToSend = { email: getEmail };
       setLoading(false);
       if (getEmail) {
-        await setToken(emailToSend).then((res) =>
-          console.log("login token res", res?.data)
-        );
+        const res = await setToken(emailToSend);
+        console.log("login token res", res);
       } else {
-        await clearCookie(emailToSend).then((res) =>
-          console.log("logout token res", res?.data)
-        );
+        const res = await clearCookie(emailToSend);
+        console.log("logout token res", res);
       }
     });
     return () => {
