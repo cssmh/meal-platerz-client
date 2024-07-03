@@ -79,38 +79,42 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
       <Helmet>
         <title>MealPlaterz | Food Request</title>
       </Helmet>
-      <div className="text-center border border-redFood py-4 rounded-md space-y-1 mx-1 md:mx-0">
+      <div className="border border-red-500 rounded-md space-y-1 mx-1 md:mx-0 h-96 flex flex-col justify-center items-center">
         <img
           src={user_image}
-          className="w-24 rounded-lg mx-auto"
-          alt="no image"
+          className="w-20 h-20 rounded-full mx-auto"
+          alt="User Avatar"
         />
-        <h1 className="text-blue-800 text-lg">Requester Information</h1>
-        <p>{user_name}</p>
-        <div className="flex justify-center gap-1">
-          <p className="text-cyan-600">{user_email}</p>
-          <p className="text-red-600">{user_phone}</p>
+        <h1 className="text-blue-800 text-xl font-semibold">
+          Requester Information
+        </h1>
+        <p className="text-lg ">{user_name}</p>
+        <div className="flex">
+          <span className="text-cyan-600">{user_email}</span>
+          <span className="text-red-600">{user_phone}</span>
         </div>
-        <p>Requested on: {request_date}</p>
-        <p>{message_to_donator}</p>
-        <p>
-          Expire in:{" "}
-          <span className="text-blue-600">
-            {expired_date} {expired_time}
-          </span>
+        {message_to_donator && <p>a{message_to_donator}</p>}
+        <p className="text-lg">
+          Requested: <span className="">{request_date}</span>
         </p>
-        {foodStatus === "Delivered" && (
-          <p>
-            Delivered: <span className="text-cyan-500">{delivered}</span>
+        {foodStatus === "Delivered" ? (
+          <p className="text-lg">
+            ✔️ Delivered: <span className="text-cyan-500">{delivered}</span>
+          </p>
+        ) : (
+          <p className="text-lg">
+            Expires in:{" "}
+            <span className="text-blue-600 ">
+              {expired_date} {expired_time}
+            </span>
           </p>
         )}
         <p>Donation: {donation_money} BDT</p>
-        <div className="text-center mt-1">
+        <div className="text-center mt-4">
           <select
             defaultValue={foodStatus}
             onChange={(e) => handleUpdateStatus(e, _id, food_id)}
-            className="input input-bordered"
-            style={{ outline: "none" }}
+            className="input input-bordered py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
             disabled={
               foodStatus === "Delivered" || unavailableIds?.includes(food_id)
             }

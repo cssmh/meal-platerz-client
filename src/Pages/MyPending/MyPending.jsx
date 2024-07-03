@@ -35,7 +35,7 @@ const MyPending = () => {
     <div>
       {requestedData?.length === 0 ? (
         <p className="text-center my-[10px] text-redFood text-xl italic">
-          No one Requested fot This Food
+          No one Requested for This Food
         </p>
       ) : (
         <div className="mb-8">

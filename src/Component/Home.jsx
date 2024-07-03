@@ -3,7 +3,7 @@ import FeaturedFoods from "../Pages/FeaturedFoods/FeaturedFoods";
 import Banner from "./Banner";
 import Stats from "./Stats";
 import WeOffer from "./WeOffer";
-import AppStore from "./AppStore";
+import OurApp from "./OurApp";
 import OurClient from "./OurClient";
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
       <Banner />
       <FeaturedFoods />
       <WeOffer />
-      <AppStore />
+      <OurApp />
       <OurClient />
       <Stats />
     </div>

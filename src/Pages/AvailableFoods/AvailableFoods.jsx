@@ -23,21 +23,16 @@ const AvailableFoods = () => {
       return await getAllFoods(page, limit, searchTerm);
     },
   });
+
   const sortedFoods = Array.isArray(data?.result)
     ? [...data.result].sort((a, b) => {
-        // Extract day, month, year from the date string
         const [dayA, monthA, yearA] = a.expired_date.split("-").map(Number);
         const [dayB, monthB, yearB] = b.expired_date.split("-").map(Number);
-
-        // Create Date objects for comparison
         const dateA = new Date(yearA, monthA - 1, dayA);
         const dateB = new Date(yearB, monthB - 1, dayB);
-
-        // Compare dates
         return dateA - dateB;
       })
-    : []; // Default value if data.result is not iterable or undefined/null
-  // Now sortedFoods contains foods sorted by expired_date in ascending order, or an empty array if data.result is not valid
+    : [];
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);

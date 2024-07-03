@@ -8,6 +8,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
     _id,
     food_image,
     food_name,
+    donator_email,
     expired_date,
     expired_time,
     food_status,
@@ -73,7 +74,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
         ></UpdateMyFood>
       </th>
       <td>
-        <Link to={`/manage/${_id}`}>
+        <Link to={`/req-for/${_id}/${donator_email}`}>
           <button
             className={`${
               food_status === "Unavailable" ? "bg-cyan-600" : "bg-redFood"

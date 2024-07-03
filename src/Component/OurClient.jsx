@@ -18,8 +18,7 @@ const OurClient = () => {
       quote:
         "This platform is amazing! It not only helps the environment but also brings people together. I have made great connections through food sharing.",
       role: "Secretary",
-      image:
-        "https://i.ibb.co/rdwSkfC/dia.jpg",
+      image: "https://i.ibb.co/rdwSkfC/dia.jpg",
     },
     {
       name: "Tourist Offl",

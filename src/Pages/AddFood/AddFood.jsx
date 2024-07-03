@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
 import { addFood } from "../../api/Foods";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const AddFood = () => {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [expiredDate, setExpiredDate] = useState("");
   const [expiredTime, setExpiredTime] = useState("");
   const [todayDate, setTodayDate] = useState("");
@@ -28,6 +30,7 @@ const AddFood = () => {
   const formattedTime = moment(expiredTime, "HH:mm").format("hh:mm A");
 
   const handleAddFood = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const food_name = form.food_name.value;
@@ -64,6 +67,7 @@ const AddFood = () => {
         swal("Thank You!", `${food_name} added`, "success");
         form.reset();
       }
+      setLoading(false);
     } catch (error) {
       console.error("Error adding food:", error);
       swal("Oops!", "Failed to add food. Please try again later.", "error");
@@ -185,7 +189,13 @@ const AddFood = () => {
         </div>
         <div className="form-control mt-6">
           <button className="btn bg-redFood hover:bg-redFood text-white">
-            Add Food
+            {loading ? (
+              <div className="flex justify-center">
+                <TbFidgetSpinner className="animate-spin text-xl my-[2px]" />
+              </div>
+            ) : (
+              "Add Food"
+            )}
           </button>
         </div>
       </form>

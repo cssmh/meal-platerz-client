@@ -1,12 +1,13 @@
 import play from "../assets/play.png";
-import appStore from "../assets/appStore.png";
-const Solution = () => {
+import appStore from "../assets/app.png";
+
+const OurApp = () => {
   return (
     <section className="bg-gradient-to-br from-purple-400 to-blue-400 my-10">
       <div className="container mx-auto flex flex-col justify-around p-4 text-center md:p-10 lg:flex-row">
         <div
-          data-aos="zoom-in"
-          data-aos-duration="800"
+          data-aos="fade-up"
+          data-aos-duration="1000"
           className="flex flex-col justify-center lg:text-left"
         >
           <p className="mb-1 text-sm font-medium tracking-widest uppercase">
@@ -39,7 +40,7 @@ const Solution = () => {
           </div>
         </div>
         <img
-          data-aos="flip-left"
+          data-aos="zoom-in"
           data-aos-duration="1000"
           src={appStore}
           className="md:w-1/2"
@@ -50,4 +51,4 @@ const Solution = () => {
   );
 };
 
-export default Solution;
+export default OurApp;

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const FoodsCard = ({ getFoods, aosDuration }) => {
   const {

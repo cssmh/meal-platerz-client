@@ -77,13 +77,13 @@ const Root = createBrowserRouter([
         loader: async ({ params }) => await getFood(params.id),
       },
       {
-        path: "/manage/:id",
+        path: "/req-for/:id/:email",
         element: (
           <PrivateRoute>
             <MyPending />
           </PrivateRoute>
         ),
-        loader: async ({ params }) => await getMyPending(params.id),
+        loader: async ({ params }) => await getMyPending(params?.id, params?.email),
       },
     ],
   },

@@ -3,10 +3,11 @@ import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const Login = () => {
   const [view, setView] = useState(true);
-  const { login, googleLogin } = useAuth();
+  const { login, googleLogin, loading } = useAuth();
   const navigateTo = useNavigate();
   const location = useLocation();
   const handleLogin = (e) => {
@@ -74,7 +75,13 @@ const Login = () => {
           </div>
         </div>
         <button className="block w-full p-3 text-center rounded-xl dark:text-gray-50 dark:bg-redFood">
-          Login
+          {loading ? (
+            <div className="flex justify-center">
+              <TbFidgetSpinner className="animate-spin text-xl my-[2px]" />
+            </div>
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">

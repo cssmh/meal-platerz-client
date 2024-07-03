@@ -20,11 +20,10 @@ const FeaturedFoods = () => {
     error,
   } = useQuery({
     queryKey: ["FeaturedFoods"],
-    queryFn: async () => await getFeaturedFoods(),
+    queryFn: async () => {
+      return await getFeaturedFoods();
+    },
   });
-  const featuredFoods = data?.result?.sort(
-    (a, b) => b.food_quantity - a.food_quantity
-  );
 
   const aosDuration = (num) => {
     return 400 + num * 700;
@@ -35,7 +34,6 @@ const FeaturedFoods = () => {
       <h1 className="text-center font-semibold text-lg md:text-xl my-5">
         Featured Foods Sorted by Quantity (Highest to Lowest)
       </h1>
-
       {error ? (
         <div className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600">
           An error occurred while fetching Featured Foods!
@@ -49,7 +47,7 @@ const FeaturedFoods = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto">
-            {featuredFoods?.map((foods, idx) => (
+            {data?.map((foods, idx) => (
               <FoodsCard
                 key={foods._id}
                 getFoods={foods}

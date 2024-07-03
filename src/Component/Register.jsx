@@ -10,6 +10,7 @@ const Register = () => {
     useAuth();
   const navigateTo = useNavigate();
   const location = useLocation();
+  
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;

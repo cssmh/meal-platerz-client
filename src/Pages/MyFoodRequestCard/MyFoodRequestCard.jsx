@@ -1,6 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
+import { getFood } from "../../api/Foods";
+import SmallLoader from "../../Component/SmallLoader";
+
 const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
   const {
     _id,
+    food_id,
     food_name,
     food_image,
     donator_email,
@@ -15,12 +20,20 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
     delivered_at,
   } = getFoods;
 
+  const { data = "", isLoading } = useQuery({
+    queryKey: ["getFoodData", food_id],
+    queryFn: async () => {
+      const res = await getFood(food_id);
+      return res.food_status;
+    },
+  });
+
+  if (isLoading) return <SmallLoader />;
+
   return (
     <div className="border border-redFood rounded-md mx-1 lg:mx-0 py-5">
-      <div className="flex flex-col lg:flex-row justify-center items-center gap-3">
-        <div className="space-y-1 text-center">
-          <img src={food_image} className="w-60 mx-auto" alt="food" />
-        </div>
+      <div className="flex flex-col md:flex-row px-2 md:px-[70px] items-center gap-3">
+        <img src={food_image} className="w-3/5 md:w-32 rounded-lg" alt="food" />
         <div>
           <p className="text-2xl">{food_name}</p>
           <p className="text-lg text-blue-900">Donar Information</p>
@@ -29,7 +42,7 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
           <p>{donator_phone}</p>
         </div>
       </div>
-      <div className="px-[70px] mt-2">
+      <div className="px-3 md:px-[70px] mt-2">
         <p className="text-cyan-600">Pickup Location: {pickup_location}</p>
         <p>
           Expire In: {expired_date} {expired_time}
@@ -39,21 +52,22 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
           <p>Thanks for your {donation_money} BDT donation</p>
         )}
         <div className="flex gap-2">
-          <p>
-            Status:{" "}
-            <span
-              className={
-                status === "Pending" ? "text-redFood" : "text-green-500"
-              }
-            >
-              {status}
-            </span>
-          </p>
-          <p>
-            <span className="text-cyan-500">
-              {delivered_at && delivered_at}
-            </span>
-          </p>
+          {data === "available" ? (
+            <p>
+              Status:{" "}
+              <span className={status === "Pending" && "text-redFood"}>
+                {status}
+              </span>
+            </p>
+          ) : data === "Unavailable" && delivered_at ? (
+            <p>
+              Delivered: <span className="text-cyan-500">{delivered_at}</span>{" "}
+            </p>
+          ) : (
+            <p className="text-redFood">
+              Sorry, This food is already delivered to someone else!
+            </p>
+          )}
         </div>
         {status !== "Delivered" && (
           <button

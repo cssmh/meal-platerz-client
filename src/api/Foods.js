@@ -8,7 +8,7 @@ export const getAllFoods = async (page, limit, searchTerm) => {
 };
 
 export const getFeaturedFoods = async () => {
-  const { data } = await axiosSecure("/allFoods?limit=8");
+  const { data } = await axiosSecure("/featured-foods");
   return data;
 };
 
@@ -59,8 +59,8 @@ export const getFood = async (idx) => {
 };
 
 // get my pending
-export const getMyPending = async (idx) => {
-  const { data } = await axiosSecure(`/pending-request/${idx}`);
+export const getMyPending = async (idx, email) => {
+  const { data } = await axiosSecure(`/pending-request/${idx}/${email}`);
   return data;
 };
 
