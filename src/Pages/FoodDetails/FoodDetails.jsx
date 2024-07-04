@@ -6,6 +6,7 @@ import AddRequest from "../AddRequest/AddRequest";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import SmallLoader from "../../Component/SmallLoader";
+import { useState } from "react";
 
 const FoodDetails = () => {
   const { user } = useAuth();
@@ -29,8 +30,10 @@ const FoodDetails = () => {
     expired_time,
     additional_notes,
     food_status,
+    user_review,
   } = data;
 
+  const [show, setShow] = useState(user_review ? false : true);
   const isFoodExpired = (expiryDate, expiryTime) => {
     const foodExpiryDateTime = moment(
       `${expiryDate} ${expiryTime}`,
@@ -90,11 +93,23 @@ const FoodDetails = () => {
       </div>
       <div className="max-w-[1200px] mx-4 lg:mx-auto mb-7">
         <div className="flex gap-1">
-          <p className="bg-redFood px-3 py-2 text-white rounded-md mb-2">
+          <button
+            onClick={() => setShow(true)}
+            className="bg-redFood px-3 py-2 text-white rounded-md mb-2"
+          >
             Description
-          </p>
+          </button>
+          {user_review && (
+            <button
+              onClick={() => setShow(false)}
+              className="bg-blue-500 px-3 py-2 text-white rounded-md mb-2"
+            >
+              Review
+            </button>
+          )}
         </div>
-        <p>{additional_notes}</p>
+        {show && <p>{additional_notes}</p>}
+        {!show && <p>{user_review}</p>}
       </div>
     </div>
   );

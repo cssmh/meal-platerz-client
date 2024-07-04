@@ -87,6 +87,14 @@ export const addTime = async (idx, todayDateTime) => {
 // update food status myPendingCard end
 
 export const unavailableId = async (email) => {
-  const { data } = await axiosSecure.get(`/unavailable-ids?email=${email}`);
+  const { data } = await axiosSecure(`/unavailable-ids?email=${email}`);
+  return data;
+};
+
+// add review
+export const addReviews = async (id, email, review) => {
+  const { data } = await axiosSecure.put(`/add-review/${id}/${email}`, {
+    review,
+  });
   return data;
 };
