@@ -1,7 +1,5 @@
 import axios from "axios";
-import { clearCookie } from "./Auth";
-import { useContext } from "react";
-import { AuthContext } from "../Shared/AuthProviders";
+import { clearCookie, userLogout } from "./Auth";
 
 const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_server_URL,
@@ -11,12 +9,11 @@ const axiosSecure = axios.create({
 axiosSecure.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log("Error in the interceptor", error.response.status);
+    // console.log("Error in the interceptor", error.response.status);
     if (error.response.status === 401 || error.response.status === 403) {
+      await userLogout();
       await clearCookie();
-      const { logOut } = useContext(AuthContext);
-      await logOut();
-      window.location.replace("/login");
+      history.push("/login");
     }
 
     return Promise.reject(error);

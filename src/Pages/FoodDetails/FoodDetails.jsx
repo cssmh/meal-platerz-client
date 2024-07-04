@@ -41,6 +41,10 @@ const FoodDetails = () => {
 
   if (isLoading) return <SmallLoader />;
 
+  const isExpired = isFoodExpired(expired_date, expired_time);
+  const isAvailable = food_status === "available";
+  const isUserDonator = user?.email === donator_email;
+
   return (
     <div>
       <Helmet>
@@ -68,10 +72,16 @@ const FoodDetails = () => {
             <p>
               Expire In: {expired_date} {expired_time}
             </p>
-            {isFoodExpired(expired_date, expired_time) ? (
+            {isExpired ? (
               <p className="text-pink-700">This Food is expired!</p>
-            ) : food_status === "available" ? (
-              user.email !== donator_email && <AddRequest getFood={data} />
+            ) : isAvailable ? (
+              isUserDonator ? (
+                <p className="text-blue-700">You have listed this food item.</p>
+              ) : (
+                <AddRequest getFood={data} />
+              )
+            ) : isUserDonator ? (
+              <p className="text-redFood">You Shared this Food!</p>
             ) : (
               <p className="text-redFood">This Food is already Delivered!</p>
             )}

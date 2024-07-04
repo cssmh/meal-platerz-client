@@ -11,7 +11,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "./firebase.config";
-import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { clearCookie, setToken } from "../api/Auth";
 
