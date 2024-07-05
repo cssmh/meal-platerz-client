@@ -1,10 +1,11 @@
+import toast from "react-hot-toast";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { addReviews, getFood } from "../../api/Foods";
-import SmallLoader from "../../Component/SmallLoader";
-import ReviewModal from "../ReviewModal";
-import { useState } from "react";
-import toast from "react-hot-toast";
 import useFood from "../../hooks/useFood";
+import { Link } from "react-router-dom";
+import ReviewModal from "../Modal/ReviewModal";
+import SkeletonCard from "../SkeletonCard";
 
 const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
   const {
@@ -32,11 +33,9 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
     queryKey: ["getFoodData", food_id],
     queryFn: async () => {
       const res = await getFood(food_id);
-      return res.food_status;
+      return res?.food_status;
     },
   });
-
-  if (isLoading || loading) return <SmallLoader />;
 
   const closeModal = () => setIsOpen(false);
   const handleAddReview = async (e) => {
@@ -56,12 +55,16 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
     }
   };
 
+  if (isLoading || loading) return <SkeletonCard />;
+
   return (
     <div className="border border-redFood rounded-md mx-1 lg:mx-0 py-5">
       <div className="flex flex-col md:flex-row px-2 md:px-[70px] items-center gap-3">
         <img src={food_image} className="w-3/5 md:w-32 rounded-lg" alt="food" />
         <div>
-          <p className="text-2xl">{food_name}</p>
+          <Link to={`/food/${food_id}`}>
+            <p className="text-2xl">{food_name}</p>
+          </Link>
           <p className="text-lg text-blue-900">Donator Information</p>
           <h1 className="text-cyan-600">{donator_name}</h1>
           <p>{donator_email}</p>
@@ -98,7 +101,8 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
         {status === "Delivered" ? (
           food.user_review ? (
             <p>
-              <span className="text-green-600">Your review:</span> {food?.user_review}
+              <span className="text-green-600">Your review -</span>{" "}
+              {food?.user_review}
               <button
                 className="ml-2 text-blue-500 hover:underline"
                 onClick={() => {

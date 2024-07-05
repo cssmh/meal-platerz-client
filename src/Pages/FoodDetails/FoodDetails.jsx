@@ -1,12 +1,12 @@
 import moment from "moment";
 import { useLoaderData } from "react-router-dom";
 import MenuDetails from "./MenuDetails";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AddRequest from "../AddRequest/AddRequest";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import SmallLoader from "../../Component/SmallLoader";
-import { useState } from "react";
 
 const FoodDetails = () => {
   const { user } = useAuth();
@@ -33,7 +33,9 @@ const FoodDetails = () => {
     user_review,
   } = data;
 
-  const [show, setShow] = useState(user_review ? false : true);
+  const [show, setShow] = useState(
+    user_review !== undefined && user_review !== null
+  );
   const isFoodExpired = (expiryDate, expiryTime) => {
     const foodExpiryDateTime = moment(
       `${expiryDate} ${expiryTime}`,

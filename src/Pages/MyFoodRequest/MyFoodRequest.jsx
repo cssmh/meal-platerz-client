@@ -29,15 +29,15 @@ const MyFoodRequest = () => {
     });
   };
 
+  if (isLoading) return <SmallLoader />;
+
   return (
     <div>
       <Helmet>
         <title>MealPlaterz | My Food Request</title>
       </Helmet>
       <div>
-        {isLoading ? (
-          <SmallLoader />
-        ) : myFoodRequest.length === 0 ? (
+        {myFoodRequest?.length === 0 ? (
           <p className="text-center my-3 text-redFood text-xl italic">
             You have&apos;nt requested for any food
           </p>
