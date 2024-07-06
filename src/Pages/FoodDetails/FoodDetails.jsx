@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useLoaderData } from "react-router-dom";
 import MenuDetails from "./MenuDetails";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AddRequest from "../AddRequest/AddRequest";
 import useAuth from "../../hooks/useAuth";
@@ -33,9 +33,13 @@ const FoodDetails = () => {
     user_review,
   } = data;
 
-  const [show, setShow] = useState(
-    user_review !== undefined && user_review !== null
-  );
+  const [show, setShow] = useState(true);
+  useEffect(() => {
+    if (!isLoading) {
+      setShow(user_review ? false : true);
+    }
+  }, [isLoading, user_review]);
+
   const isFoodExpired = (expiryDate, expiryTime) => {
     const foodExpiryDateTime = moment(
       `${expiryDate} ${expiryTime}`,
@@ -43,12 +47,11 @@ const FoodDetails = () => {
     );
     return moment().isAfter(foodExpiryDateTime);
   };
-
-  if (isLoading) return <SmallLoader />;
-
   const isExpired = isFoodExpired(expired_date, expired_time);
   const isAvailable = food_status === "available";
   const isUserDonator = user?.email === donator_email;
+
+  if (isLoading) return <SmallLoader />;
 
   return (
     <div>

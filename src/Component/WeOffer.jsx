@@ -1,6 +1,6 @@
 const WeOffer = () => {
   return (
-    <div className="mb-6">
+    <div className="mb-8">
       <h2
         className="mb-8 text-2xl font-semibold leading-none text-center px-3 md:px-0"
       >

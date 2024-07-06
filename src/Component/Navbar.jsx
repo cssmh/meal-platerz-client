@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-sm">
       <div className="border-b border-base-300">
-        <div className="navbar max-w-7xl mx-auto py-0">
+        <div className="navbar min-h-[60px] max-w-7xl mx-auto py-0">
           <div className="navbar-start">
             <div className="dropdown">
               <div
@@ -102,8 +102,8 @@ const Navbar = () => {
                 )}
               </ul>
             </div>
-            <img src={logo} className="w-0 md:w-11 md:mr-1" alt="Logo" />
-            <Link to="/" className="font-semibold lg:text-2xl px-0">
+            <img src={logo} className="w-0 md:w-10 md:mr-1" alt="Logo" />
+            <Link to="/" className="font-semibold lg:text-[21px] px-0">
               MealPlaterz
             </Link>
           </div>
@@ -182,7 +182,7 @@ const Navbar = () => {
               <label tabIndex={0} onClick={handleProfileClick}>
                 <img
                   src={user?.photoURL || defaultAvatar}
-                  className="w-10 rounded-full mr-2"
+                  className="w-9 rounded-full mr-2"
                   alt="User avatar"
                 />
               </label>
