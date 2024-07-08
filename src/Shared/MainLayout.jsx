@@ -8,14 +8,14 @@ import Header from "../Component/Header";
 const MainLayout = () => {
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, []);
 
-  if (loading) return <BigLoader />;
+  // if (loading) return <BigLoader />;
 
   return (
     <div>

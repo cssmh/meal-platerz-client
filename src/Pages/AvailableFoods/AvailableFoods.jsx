@@ -24,16 +24,6 @@ const AvailableFoods = () => {
     },
   });
 
-  const sortedFoods = Array.isArray(data?.result)
-    ? [...data.result].sort((a, b) => {
-        const [dayA, monthA, yearA] = a.expired_date.split("-").map(Number);
-        const [dayB, monthB, yearB] = b.expired_date.split("-").map(Number);
-        const dateA = new Date(yearA, monthA - 1, dayA);
-        const dateB = new Date(yearB, monthB - 1, dayB);
-        return dateA - dateB;
-      })
-    : [];
-
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     setPage(1);
@@ -84,7 +74,7 @@ const AvailableFoods = () => {
                 Available Foods Sorted by Expiration Date
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-2">
-                {sortedFoods?.map((food, idx) => (
+                {data.result.map((food, idx) => (
                   <FoodsCard
                     key={food._id}
                     getFoods={food}

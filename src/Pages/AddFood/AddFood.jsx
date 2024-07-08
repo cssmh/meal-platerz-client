@@ -1,4 +1,3 @@
-import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -26,9 +25,6 @@ const AddFood = () => {
     setExpiredTime(e.target.value);
   };
 
-  const formattedDate = moment(expiredDate).format("DD-MM-YYYY");
-  const formattedTime = moment(expiredTime, "HH:mm").format("hh:mm A");
-
   const handleAddFood = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -40,11 +36,7 @@ const AddFood = () => {
     const donator_image = user?.photoURL;
     const donator_email = user?.email;
     const donator_phone = form.phone.value;
-    const expired_date = formattedDate;
-    const expired_time = formattedTime;
-    const pickup_location = form.pickup_location.value;
-    const additional_notes = form.additional_notes.value;
-    const food_status = "available";
+    const combinedDateTime = `${expiredDate} ${formatTime(expiredTime)}`;
 
     const foodInformation = {
       food_name,
@@ -54,11 +46,10 @@ const AddFood = () => {
       donator_image,
       donator_email,
       donator_phone,
-      expired_date,
-      expired_time,
-      pickup_location,
-      food_status,
-      additional_notes,
+      expired_date: combinedDateTime,
+      pickup_location: form.pickup_location.value,
+      food_status: "available",
+      additional_notes: form.additional_notes.value,
     };
 
     try {
@@ -71,7 +62,18 @@ const AddFood = () => {
     } catch (error) {
       console.error("Error adding food:", error);
       swal("Oops!", "Failed to add food. Please try again later.", "error");
+      setLoading(false);
     }
+  };
+
+  const formatTime = (timeString) => {
+    const [hours, minutes] = timeString.split(":");
+    const formattedTime = new Date(`2000-01-01T${hours}:${minutes}:00`);
+    return formattedTime.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
   };
 
   return (
