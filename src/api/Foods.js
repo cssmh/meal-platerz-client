@@ -91,10 +91,24 @@ export const unavailableId = async (email) => {
   return data;
 };
 
-// add review
+// add review on separate food
 export const addReviews = async (id, email, review) => {
   const { data } = await axiosSecure.put(`/add-review/${id}/${email}`, {
     review,
   });
+  return data;
+};
+
+// add review on website
+// export const addReviewAsClient = async (id, email, review) => {
+//   const { data } = await axiosSecure.put(`/add-review/${id}/${email}`, {
+//     review,
+//   });
+//   return data;
+// };
+
+// get client say
+export const getClientSays = async () => {
+  const { data } = await axiosSecure("/all-reviews");
   return data;
 };

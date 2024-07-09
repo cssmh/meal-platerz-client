@@ -79,7 +79,7 @@ const FoodDetails = () => {
               Expire In: {expireIn} at {expiration_time}
             </p>
             {isExpired ? (
-              <p className="text-pink-700">This Food is expired!</p>
+              <p className="text-pink-700">This food item has expired!</p>
             ) : isAvailable ? (
               isUserDonator ? (
                 <p className="text-blue-700">You have listed this food item.</p>
@@ -87,9 +87,9 @@ const FoodDetails = () => {
                 <AddRequest getFood={data} />
               )
             ) : isUserDonator ? (
-              <p className="text-redFood">You Shared this Food!</p>
+              <p className="text-redFood">You shared this food item.</p>
             ) : (
-              <p className="text-redFood">This Food is already Delivered!</p>
+              <p className="text-redFood">This food item has been delivered!</p>
             )}
           </div>
         </div>

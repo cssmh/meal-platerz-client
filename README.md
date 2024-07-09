@@ -30,7 +30,7 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
 2. **Navigation and Accessibility:**
 
    - Secure private routes and redirects.
-   <!-- - Forgot password functionality. -->
+   - Forgot password functionality.
    - Seamless navigation for logged-in users.
 
 3. **User Interface:**
@@ -43,20 +43,11 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
 
    - Post, manage, and update food listings.
    - Search functionality by food type or location.
-   <!-- - Swipeable carousel for featured food items. -->
 
 5. **User-Specific Features:**
 
-   <!-- - Personal dashboard with analytics. -->
-
    - Manage food listings and availability.
    - Update profile information and preferences.
-   <!-- - Leave reviews and feedback on shared meals. -->
-
-<!-- 6. **Admin Capabilities:**
-
-   - Comprehensive admin dashboard for data oversight.
-   - Manage food listings and user interactions. -->
 
 7. **Advanced Functionalities:**
 

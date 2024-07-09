@@ -14,7 +14,6 @@ const Banner = () => {
     >
       {/* <div className="hero-overlay bg-opacity-5"></div> */}
       <div className="max-w-2xl mr-auto ml-4 md:ml-12">
-        {/* text-white */}
         <div className="space-y-3">
           <h1 className="text-2xl md:text-4xl font-semibold flex-11">
             Building Communities <br /> by Sharing Excess Food <br /> Resources
@@ -26,20 +25,20 @@ const Banner = () => {
             there is an urgent need for collective action
           </p>
           <p>
-            <Link>
-              <button className="bg-redFood rounded-md px-4 py-2 text-white">
-                Foods
-              </button>
+            <Link className="bg-redFood rounded-md px-4 py-2 text-white">
+              Foods
             </Link>
-            <Link>
-              <button className="rounded-md px-4 py-[7px] border border-redFood ml-1">
-                Blogs
-              </button>
+            <Link
+              to={"/blogs"}
+              className="rounded-md px-4 py-[7px] border border-redFood ml-1"
+            >
+              Blogs
             </Link>
-            <Link>
-              <button className="rounded-md px-4 py-[7px] border border-redFood ml-1">
-                Reviews
-              </button>
+            <Link
+              to={"/review"}
+              className="rounded-md px-4 py-[7px] border border-redFood ml-1"
+            >
+              Reviews
             </Link>
           </p>
         </div>

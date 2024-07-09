@@ -12,7 +12,9 @@ import AddFood from "../Pages/AddFood/AddFood";
 import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 import MyFoods from "../Pages/MyFoods/MyFoods";
 import MyPending from "../Pages/MyPending/MyPending";
-import { getFood, getMyPending } from "../api/Foods";
+import { getFood } from "../api/Foods";
+import Blogs from "../Component/Blogs";
+import Reviews from "../Component/Reviews";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -82,7 +84,15 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <MyPending />
           </PrivateRoute>
-        )
+        ),
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/review",
+        element: <Reviews />,
       },
     ],
   },
