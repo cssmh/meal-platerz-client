@@ -9,7 +9,7 @@ import {
 import useMyFoods from "../../hooks/useMyFoods";
 import moment from "moment";
 
-const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
+const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
   const {
     _id,
     food_id,
@@ -23,12 +23,10 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
     message_to_donator,
     donation_money,
     status,
-    delivered_at,
+    delivered_date,
   } = getReq;
 
-  const [foodStatus, setFoodStatus] = useState(status);
   const [todayDateTime, setTodayDateTime] = useState("");
-  const [delivered, setDelivered] = useState(delivered_at);
   const { refetch } = useMyFoods();
 
   useEffect(() => {
@@ -36,24 +34,22 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
     setTodayDateTime(today);
   }, []);
 
-  const handleUpdateStatus = async (e, idx, foodIdx) => {
+  const handleUpdateStatus = async (e, idx, foodId) => {
     const newStatus = e.target.value;
 
     try {
       if (newStatus === "Pending") {
-        const foodStatus = "available";
-        await updateFoodStatus(foodIdx, foodStatus);
+        await updateFoodStatus(foodId, "available");
+        refetch();
       } else if (newStatus === "Delivered") {
-        const foodStatus = "Unavailable";
-        await updateFoodStatus(foodIdx, foodStatus);
-        addTime(idx, todayDateTime);
-        setDelivered(todayDateTime);
+        await updateFoodStatus(foodId, "Unavailable");
+        await addTime(idx, todayDateTime);
+        refetchReq();
+        idFetch();
+        refetch();
       }
 
-      const updatedStatus = { newStatus };
-      await updateRequestedStatus(idx, updatedStatus);
-      setFoodStatus(newStatus);
-      refetch();
+      await updateRequestedStatus(idx, { newStatus });
       refetchReq();
       swal("Thank You!", `Updated to ${newStatus}`, "success");
     } catch (error) {
@@ -61,6 +57,16 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
       swal("Error", "Failed to update status", "error");
     }
   };
+
+  const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
+  const reqDate = moment(request_date, "YYYY-MM-DD hh:mm A").format(
+    "DD MMM YYYY [at] hh:mm A"
+  );
+  const deliverDate =
+    delivered_date &&
+    moment(delivered_date, "YYYY-MM-DD hh:mm A").format(
+      "DD MMM YYYY [at] hh:mm A"
+    );
 
   return (
     <div>
@@ -73,38 +79,36 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
           className="w-20 h-20 rounded-full mx-auto"
           alt="User Avatar"
         />
-        <h1 className="text-blue-800 text-xl font-semibold">
-          Requester Information
-        </h1>
+        <h1 className="text-blue-800 text-xl">Requester Information</h1>
         <p>{user_name}</p>
         <div className="flex">
           <span className="text-cyan-600">{user_email}</span>
           <span className="text-red-600">{user_phone}</span>
         </div>
-        {message_to_donator && <p>a{message_to_donator}</p>}
+        {message_to_donator && <p>message: {message_to_donator}</p>}
         <p>
-          Requested: <span className="">{request_date}</span>
+          Requested: <span className="">{reqDate}</span>
         </p>
-        {foodStatus === "Delivered" ? (
+        {status === "Delivered" ? (
           <p>
-            ✔️ Delivered: <span className="text-cyan-500">{delivered}</span>
+            ✔️ Delivered: <span className="text-cyan-500">{deliverDate}</span>
           </p>
         ) : (
           <p>
             Expires in:{" "}
             <span className="text-blue-600 ">
-              {expiration_date} at {expiration_time}
+              {expireIn} at {expiration_time}
             </span>
           </p>
         )}
         <p>Donation: {donation_money} BDT</p>
         <div className="text-center mt-4">
           <select
-            defaultValue={foodStatus}
+            defaultValue={status}
             onChange={(e) => handleUpdateStatus(e, _id, food_id)}
             className="input input-bordered py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
             disabled={
-              foodStatus === "Delivered" || unavailableIds?.includes(food_id)
+              status === "Delivered" || unavailableIds?.includes(food_id)
             }
           >
             <option value="Pending">Pending</option>

@@ -82,8 +82,7 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <MyPending />
           </PrivateRoute>
-        ),
-        loader: async ({ params }) => await getMyPending(params?.id, params?.email),
+        )
       },
     ],
   },

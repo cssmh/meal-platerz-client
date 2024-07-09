@@ -6,6 +6,7 @@ import useFood from "../../hooks/useFood";
 import { Link } from "react-router-dom";
 import ReviewModal from "../Modal/ReviewModal";
 import SkeletonCard from "../SkeletonCard";
+import moment from "moment";
 
 const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
   const {
@@ -23,7 +24,7 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
     user_email,
     donation_money,
     status,
-    delivered_at,
+    delivered_date,
   } = getFoods;
 
   const { isLoading: loading, food, refetch } = useFood(food_id);
@@ -36,6 +37,15 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
       return res?.food_status;
     },
   });
+  const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
+  const reqDate = moment(request_date, "YYYY-MM-DD hh:mm A").format(
+    "DD MMM YYYY [at] hh:mm A"
+  );
+  const deliverDate =
+    delivered_date &&
+    moment(delivered_date, "YYYY-MM-DD hh:mm A").format(
+      "DD MMM YYYY [at] hh:mm A"
+    );
 
   const closeModal = () => setIsOpen(false);
   const handleAddReview = async (e) => {
@@ -74,9 +84,9 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
       <div className="px-3 md:px-[70px] mt-2">
         <p className="text-cyan-600">Pickup Location: {pickup_location}</p>
         <p>
-          Expire In: {expiration_date} at {expiration_time}
+          Expire In: {expireIn} at {expiration_time}
         </p>
-        <p>Your Request: {request_date}</p>
+        <p>Your Request: {reqDate}</p>
         {donation_money > 0 && (
           <p>Thanks for your {donation_money} BDT donation</p>
         )}
@@ -88,9 +98,9 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
                 {status}
               </span>
             </p>
-          ) : data === "Unavailable" && delivered_at ? (
+          ) : data === "Unavailable" && delivered_date ? (
             <p className="text-blue-600">
-              Delivered: <span>{delivered_at}</span>{" "}
+              Delivered: <span>{deliverDate}</span>{" "}
             </p>
           ) : (
             <p className="text-redFood">

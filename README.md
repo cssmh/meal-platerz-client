@@ -75,12 +75,11 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
 - [firebase](https://www.npmjs.com/package/firebase)
 - [flowbite-react](https://www.npmjs.com/package/flowbite-react)
 - [lottie-react](https://www.npmjs.com/package/lottie-react)
-<!-- - [react-countup](https://www.npmjs.com/package/react-countup) -->
+- [moment](https://www.npmjs.com/package/moment)
 - [react-helmet-async](https://www.npmjs.com/package/react-helmet-async)
 - [react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
 - [react-icons](https://www.npmjs.com/package/react-icons)
 - [npm i @headlessui/react](https://www.npmjs.com/package/@headlessui/react)
-  <!-- - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer) -->
 - [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)
 - [react-router-dom](https://www.npmjs.com/package/react-router-dom)
 - [sweetalert](https://www.npmjs.com/package/sweetalert)

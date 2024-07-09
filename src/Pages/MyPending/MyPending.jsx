@@ -1,31 +1,35 @@
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
-import { unavailableId } from "../../api/Foods";
+import { getMyPending, unavailableId } from "../../api/Foods";
 import SmallLoader from "../../Component/SmallLoader";
 
 const MyPending = () => {
   const { loading, user } = useAuth();
-  const getPending = useLoaderData();
+  const { id, email } = useParams();
 
   const {
     isLoading,
     data: requestedData,
     refetch: refetchReq,
   } = useQuery({
-    queryKey: ["myPending", getPending],
+    queryKey: ["myPending", id, email],
     queryFn: async () => {
-      return await getPending;
+      return await getMyPending(id, email);
     },
   });
 
-  const { isLoading: idLoading, data: unavailableIds = [] } = useQuery({
+  const {
+    isLoading: idLoading,
+    data: unavailableIds = [],
+    refetch: idFetch,
+  } = useQuery({
     enabled: !loading && !!user?.email,
     queryKey: ["unavailableIds", user?.email],
     queryFn: async () => {
       const data = await unavailableId(user?.email);
-      return data?.map((food) => food._id);
+      return data?.map((food) => food?._id);
     },
   });
 
@@ -49,6 +53,7 @@ const MyPending = () => {
                 getReq={req}
                 unavailableIds={unavailableIds}
                 refetchReq={refetchReq}
+                idFetch={idFetch}
               ></MyPendingCard>
             ))}
           </div>

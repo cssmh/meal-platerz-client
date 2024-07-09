@@ -79,7 +79,7 @@ export const updateRequestedStatus = async (idx, updatedStatus) => {
 };
 
 export const addTime = async (idx, todayDateTime) => {
-  const { data } = await axiosSecure.patch(`/add-time/${idx}`, {
+  const { data } = await axiosSecure.put(`/add-time/${idx}`, {
     todayDateTime,
   });
   return data;

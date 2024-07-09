@@ -20,6 +20,7 @@ const FoodsCard = ({ getFoods }) => {
     "YYYY-MM-DD hh:mm A"
   );
   const isExpired = moment().isAfter(expiredDateTime);
+  const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
 
   return (
     <div
@@ -48,7 +49,7 @@ const FoodsCard = ({ getFoods }) => {
                 isExpired ? "text-red-500" : "text-gray-600"
               }`}
             >
-              Expires on {expiration_date} at {expiration_time}
+              Expires on: {expireIn} at {expiration_time}
             </p>
             <p className="text-sm text-gray-600 mt-1 truncate">
               Phone: {donator_phone}

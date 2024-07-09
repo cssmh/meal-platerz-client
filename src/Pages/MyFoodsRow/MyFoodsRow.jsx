@@ -20,6 +20,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
     "YYYY-MM-DD hh:mm A"
   );
   const isExpired = moment().isAfter(expiredDateTime);
+  const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
 
   return (
     <tr>
@@ -60,7 +61,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
         <span className="pl-4 text-emerald-600">{food_quantity}</span>
       </td>
       <td>
-        <span>{expiration_date}</span>
+        <span>{expireIn}</span>
       </td>
       <td>
         <span>{expiration_time}</span>

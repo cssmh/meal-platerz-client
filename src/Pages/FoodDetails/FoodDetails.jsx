@@ -45,6 +45,7 @@ const FoodDetails = () => {
     "YYYY-MM-DD hh:mm A"
   );
   const isExpired = moment().isAfter(expiredDateTime);
+  const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
   const isAvailable = food_status === "available";
   const isUserDonator = user?.email === donator_email;
 
@@ -75,7 +76,7 @@ const FoodDetails = () => {
             <h1 className="text-2xl lg:text-4xl font-semibold">{food_name}</h1>
             <p>Quantity: {food_quantity} (no. of persons to be served)</p>
             <p>
-              Expire In: {expiration_date} at {expiration_time}
+              Expire In: {expireIn} at {expiration_time}
             </p>
             {isExpired ? (
               <p className="text-pink-700">This Food is expired!</p>
