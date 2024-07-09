@@ -1,5 +1,4 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
-import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { updateMyFoods } from "../../api/Foods";
@@ -14,7 +13,6 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
     donator_email,
     pickup_location,
     expired_date,
-    expired_time,
     additional_notes,
   } = foodData;
 
@@ -23,18 +21,18 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
   const [expiredDate, setExpiredDate] = useState("");
   const [todayDate, setTodayDate] = useState("");
 
-  // To avoid yesterday date
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     setTodayDate(today);
-    setExpiredDate(today);
-  }, []);
-  // To avoid yesterday date end
-
-  useEffect(() => {
-    setExpiredDate(moment(expired_date, "DD-MM-YYYY").format("YYYY-MM-DD"));
-    setExpiredTime(moment(expired_time, "HH:mm").format("HH:mm"));
-  }, [expired_date, expired_time]);
+    // Split expired_date into date and time components
+    if (expired_date) {
+      const [date, time] = expired_date.split(" ");
+      setExpiredDate(date);
+      setExpiredTime(formatTimeTo24Hour(time));
+    } else {
+      setExpiredDate(today);
+    }
+  }, [expired_date]);
 
   const handleDateChange = (e) => {
     setExpiredDate(e.target.value);
@@ -59,22 +57,17 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
     const food_image = form.food_image_url.value;
     const food_quantity = parseInt(form.food_quantity.value);
     const donator_phone = form.donator_phone.value;
-    const expired_date = moment(expiredDate).format("DD-MM-YYYY");
-    const expired_time = moment(expiredTime, "HH:mm").format("hh:mm A");
     const pickup_location = form.pickup_location.value;
-    const food_status = "available";
-    const additional_notes = form.additional_notes.value;
 
     const updatedFoodData = {
       food_name,
       food_image,
       food_quantity,
       donator_phone,
-      expired_date,
-      expired_time,
+      expired_date: `${expiredDate} ${formatTime(expiredTime)}`,
       pickup_location,
-      additional_notes,
-      food_status,
+      additional_notes: form.additional_notes.value,
+      food_status: "available",
     };
 
     const res = await updateMyFoods(_id, donator_email, updatedFoodData);
@@ -88,6 +81,31 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
     } finally {
       setOpen(false);
     }
+  };
+
+  const formatTime = (timeString) => {
+    const [hours, minutes] = timeString.split(":");
+    const formattedTime = new Date(`2000-01-01T${hours}:${minutes}:00`);
+    return formattedTime.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+  };
+
+  const formatTimeTo24Hour = (timeString) => {
+    const [time, modifier] = timeString.split(" ");
+    let [hours, minutes] = time.split(":");
+
+    if (hours === "12") {
+      hours = "00";
+    }
+
+    if (modifier === "PM") {
+      hours = parseInt(hours, 10) + 12;
+    }
+
+    return `${hours}:${minutes}`;
   };
 
   return (
