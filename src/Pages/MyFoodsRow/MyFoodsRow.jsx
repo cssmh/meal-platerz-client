@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import UpdateMyFood from "../UpdateMyFood/UpdateMyFood";
 import moment from "moment";
 
 const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
-  const [foodData, setFoodData] = useState(getFood);
   const {
     _id,
     food_image,
@@ -15,7 +13,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
     food_status,
     food_quantity,
     requestCount,
-  } = foodData;
+  } = getFood;
 
   const expirationDateTime = `${expired_date} ${expired_time}`;
   const format = "DD-MM-YYYY hh:mm A";
@@ -77,8 +75,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
 
       <th>
         <UpdateMyFood
-          foodData={foodData}
-          setFoodData={setFoodData}
+          foodData={getFood}
           food_status={food_status}
           refetch={refetch}
         ></UpdateMyFood>

@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { updateMyFoods } from "../../api/Foods";
 
-const UpdateMyFood = ({ foodData, setFoodData, food_status, refetch }) => {
+const UpdateMyFood = ({ foodData, food_status, refetch }) => {
   const {
     _id,
     food_name,
@@ -81,7 +81,6 @@ const UpdateMyFood = ({ foodData, setFoodData, food_status, refetch }) => {
     try {
       if (res?.modifiedCount > 0) {
         refetch();
-        setFoodData(updatedFoodData);
         swal("Good job!", "Food Info Updated", "success");
       }
     } catch (error) {
