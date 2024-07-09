@@ -36,7 +36,6 @@ const AddFood = () => {
     const donator_image = user?.photoURL;
     const donator_email = user?.email;
     const donator_phone = form.phone.value;
-    const combinedDateTime = `${expiredDate} ${formatTime(expiredTime)}`;
 
     const foodInformation = {
       food_name,
@@ -46,7 +45,8 @@ const AddFood = () => {
       donator_image,
       donator_email,
       donator_phone,
-      expired_date: combinedDateTime,
+      expiration_date: `${expiredDate}`,
+      expiration_time: `${formatTime(expiredTime)}`,
       pickup_location: form.pickup_location.value,
       food_status: "available",
       additional_notes: form.additional_notes.value,

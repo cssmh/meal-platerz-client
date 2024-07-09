@@ -1,7 +1,7 @@
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-const FoodsCard = ({ getFoods, aosDuration }) => {
+const FoodsCard = ({ getFoods }) => {
   const {
     _id,
     food_image,
@@ -10,22 +10,22 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
     donator_name,
     food_quantity,
     pickup_location,
-    expired_date,
-    expired_time,
+    expiration_date,
+    expiration_time,
     donator_phone,
   } = getFoods;
 
   const expiredDateTime = moment(
-    `${expired_date} ${expired_time}`,
-    "DD-MM-YYYY hh:mm A"
+    `${expiration_date} ${expiration_time}`,
+    "YYYY-MM-DD hh:mm A"
   );
   const isExpired = moment().isAfter(expiredDateTime);
 
   return (
     <div
       data-aos="fade-up"
+      data-aos-duration="700"
       data-aos-anchor-placement="center-bottom"
-      data-aos-duration={aosDuration}
       className="group border flex flex-col shadow-lg rounded-lg bg-white hover:scale-105 transition-all duration-300 overflow-hidden"
     >
       <div className="flex-grow">
@@ -48,7 +48,7 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
                 isExpired ? "text-red-500" : "text-gray-600"
               }`}
             >
-              Expires on {expired_date} at {expired_time}
+              Expires on {expiration_date} at {expiration_time}
             </p>
             <p className="text-sm text-gray-600 mt-1 truncate">
               Phone: {donator_phone}

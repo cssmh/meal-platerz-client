@@ -37,10 +37,6 @@ const AvailableFoods = () => {
     if (page < data?.totalPages) setPage(page + 1);
   };
 
-  const aosDuration = (num) => {
-    return 400 + num * 700;
-  };
-
   return (
     <div>
       <Helmet>
@@ -74,11 +70,10 @@ const AvailableFoods = () => {
                 Available Foods Sorted by Expiration Date
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-2">
-                {data.result.map((food, idx) => (
+                {data?.result?.map((food, idx) => (
                   <FoodsCard
                     key={food._id}
                     getFoods={food}
-                    aosDuration={aosDuration(idx)}
                   />
                 ))}
               </div>

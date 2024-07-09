@@ -8,15 +8,18 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
     food_image,
     food_name,
     donator_email,
-    expired_date,
+    expiration_date,
+    expiration_time,
     food_status,
     food_quantity,
     requestCount,
   } = getFood;
 
-  const expirationDateTime = `${expired_date}`;
-  const expirationMoment = new Date(expirationDateTime);
-  const isExpired = expirationMoment < new Date();
+  const expiredDateTime = moment(
+    `${expiration_date} ${expiration_time}`,
+    "YYYY-MM-DD hh:mm A"
+  );
+  const isExpired = moment().isAfter(expiredDateTime);
 
   return (
     <tr>
@@ -57,7 +60,10 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
         <span className="pl-4 text-emerald-600">{food_quantity}</span>
       </td>
       <td>
-        <span>{expired_date}</span>
+        <span>{expiration_date}</span>
+      </td>
+      <td>
+        <span>{expiration_time}</span>
       </td>
       <td
         className={

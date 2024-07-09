@@ -26,8 +26,8 @@ const FoodDetails = () => {
     donator_email,
     food_quantity,
     pickup_location,
-    expired_date,
-    expired_time,
+    expiration_date,
+    expiration_time,
     additional_notes,
     food_status,
     user_review,
@@ -40,14 +40,11 @@ const FoodDetails = () => {
     }
   }, [isLoading, user_review]);
 
-  const isFoodExpired = (expiryDate, expiryTime) => {
-    const foodExpiryDateTime = moment(
-      `${expiryDate} ${expiryTime}`,
-      "DD-MM-YYYY hh:mm A"
-    );
-    return moment().isAfter(foodExpiryDateTime);
-  };
-  const isExpired = isFoodExpired(expired_date, expired_time);
+  const expiredDateTime = moment(
+    `${expiration_date} ${expiration_time}`,
+    "YYYY-MM-DD hh:mm A"
+  );
+  const isExpired = moment().isAfter(expiredDateTime);
   const isAvailable = food_status === "available";
   const isUserDonator = user?.email === donator_email;
 
@@ -78,7 +75,7 @@ const FoodDetails = () => {
             <h1 className="text-2xl lg:text-4xl font-semibold">{food_name}</h1>
             <p>Quantity: {food_quantity} (no. of persons to be served)</p>
             <p>
-              Expire In: {expired_date} {expired_time}
+              Expire In: {expiration_date} at {expiration_time}
             </p>
             {isExpired ? (
               <p className="text-pink-700">This Food is expired!</p>

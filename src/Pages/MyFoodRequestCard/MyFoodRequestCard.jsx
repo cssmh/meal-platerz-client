@@ -18,8 +18,8 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
     donator_phone,
     request_date,
     pickup_location,
-    expired_date,
-    expired_time,
+    expiration_date,
+    expiration_time,
     user_email,
     donation_money,
     status,
@@ -74,9 +74,9 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
       <div className="px-3 md:px-[70px] mt-2">
         <p className="text-cyan-600">Pickup Location: {pickup_location}</p>
         <p>
-          Expire In: {expired_date} {expired_time}
+          Expire In: {expiration_date} at {expiration_time}
         </p>
-        <p className="text-blue-600">Your Request: {request_date}</p>
+        <p>Your Request: {request_date}</p>
         {donation_money > 0 && (
           <p>Thanks for your {donation_money} BDT donation</p>
         )}
@@ -89,7 +89,7 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
               </span>
             </p>
           ) : data === "Unavailable" && delivered_at ? (
-            <p>
+            <p className="text-blue-600">
               Delivered: <span>{delivered_at}</span>{" "}
             </p>
           ) : (

@@ -20,8 +20,8 @@ const AddRequest = ({ getFood }) => {
     donator_name,
     donator_phone,
     pickup_location,
-    expired_date,
-    expired_time,
+    expiration_date,
+    expiration_time,
   } = getFood;
 
   // Check if the selected food is already requested or not
@@ -31,10 +31,9 @@ const AddRequest = ({ getFood }) => {
     );
     setMatchFound(matching);
   }, [myFoodRequest, food_name]);
-  // Check if the selected food is already requested or not end
 
   useEffect(() => {
-    const today = moment().format("DD-MM-YYYY hh:mm A");
+    const today = moment().format("YYYY-MM-DD hh:mm A");
     setTodayDateTime(today);
   }, []);
 
@@ -71,6 +70,9 @@ const AddRequest = ({ getFood }) => {
     if (!regex.test(donation)) {
       return toast.error("The donation amount is invalid");
     }
+    if (!/^(\+?8801|01)(\d{9})$/.test(user_phone)) {
+      return toast.error("Enter a valid phone number!");
+    }
 
     const requestFoodData = {
       food_id,
@@ -85,11 +87,11 @@ const AddRequest = ({ getFood }) => {
       user_phone,
       request_date,
       pickup_location,
-      expired_date,
-      expired_time,
-      message_to_donator,
-      donation_money,
+      expiration_date,
+      expiration_time,
       status,
+      donation_money,
+      message_to_donator,
     };
 
     const res = await addReq(requestFoodData);

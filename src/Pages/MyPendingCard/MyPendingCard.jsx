@@ -7,6 +7,7 @@ import {
   updateRequestedStatus,
 } from "../../api/Foods";
 import useMyFoods from "../../hooks/useMyFoods";
+import moment from "moment";
 
 const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
   const {
@@ -17,8 +18,8 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
     user_email,
     user_phone,
     request_date,
-    expired_date,
-    expired_time,
+    expiration_date,
+    expiration_time,
     message_to_donator,
     donation_money,
     status,
@@ -30,23 +31,10 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
   const [delivered, setDelivered] = useState(delivered_at);
   const { refetch } = useMyFoods();
 
-  // Set today's date and time for delivered booking
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = `${today.getDate().toString().padStart(2, "0")}-${(
-      today.getMonth() + 1
-    )
-      .toString()
-      .padStart(2, "0")}-${today.getFullYear()}`;
-    const formattedTime = today.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-    const dateTime = `${formattedDate}, ${formattedTime}`;
-    setTodayDateTime(dateTime);
+    const today = moment().format("YYYY-MM-DD hh:mm A");
+    setTodayDateTime(today);
   }, []);
-  // Set today's date and time for delivered booking end
 
   const handleUpdateStatus = async (e, idx, foodIdx) => {
     const newStatus = e.target.value;
@@ -88,24 +76,24 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq }) => {
         <h1 className="text-blue-800 text-xl font-semibold">
           Requester Information
         </h1>
-        <p className="text-lg ">{user_name}</p>
+        <p>{user_name}</p>
         <div className="flex">
           <span className="text-cyan-600">{user_email}</span>
           <span className="text-red-600">{user_phone}</span>
         </div>
         {message_to_donator && <p>a{message_to_donator}</p>}
-        <p className="text-lg">
+        <p>
           Requested: <span className="">{request_date}</span>
         </p>
         {foodStatus === "Delivered" ? (
-          <p className="text-lg">
+          <p>
             ✔️ Delivered: <span className="text-cyan-500">{delivered}</span>
           </p>
         ) : (
-          <p className="text-lg">
+          <p>
             Expires in:{" "}
             <span className="text-blue-600 ">
-              {expired_date} {expired_time}
+              {expiration_date} at {expiration_time}
             </span>
           </p>
         )}

@@ -24,10 +24,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 );
 
 // console.log(Object.keys(getFoods).join(","));
-{
-  /* <div className="mt-5 text-center">
-  <button className="text-white bg-cyan-600 px-3 py-[6px] rounded-lg">
-    Delete all Requested Foods
-  </button>
-</div>; */
-}

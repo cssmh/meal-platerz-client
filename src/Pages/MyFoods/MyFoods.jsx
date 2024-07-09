@@ -44,7 +44,8 @@ const MyFoods = () => {
                 <th>Food Image</th>
                 <th>Food Name</th>
                 <th>Quantity</th>
-                <th>Expired Date & Time</th>
+                <th>Expired Date</th>
+                <th>Time</th>
                 <th>Status</th>
                 <th>Update</th>
                 <th>Manage</th>
