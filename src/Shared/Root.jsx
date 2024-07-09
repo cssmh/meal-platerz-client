@@ -14,7 +14,7 @@ import MyFoods from "../Pages/MyFoods/MyFoods";
 import MyPending from "../Pages/MyPending/MyPending";
 import { getFood } from "../api/Foods";
 import Blogs from "../Component/Blogs";
-import Reviews from "../Component/Reviews";
+import AllReviews from "../Component/AllReviews";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -91,8 +91,8 @@ const Root = createBrowserRouter([
         element: <Blogs />,
       },
       {
-        path: "/review",
-        element: <Reviews />,
+        path: "/all-reviews",
+        element: <AllReviews />,
       },
     ],
   },

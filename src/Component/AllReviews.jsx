@@ -1,22 +1,55 @@
+import { useState } from "react";
+import swal from "sweetalert";
 import { useQuery } from "@tanstack/react-query";
-import { getClientSays } from "../api/Foods";
-import SkeletonCard from "../Pages/SkeletonCard";
-const Reviews = () => {
+import { addReviewAsClient, getClientSays } from "../api/Foods";
+import ReviewModal from "../Pages/Modal/ReviewModal";
+import useAuth from "../hooks/useAuth";
+
+const AllReviews = () => {
+  const { user } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["allReviews"],
+    queryKey: ["allAllReviews"],
     queryFn: async () => {
       return await getClientSays();
     },
   });
+  console.log(data);
 
-  if (isLoading) return <SkeletonCard />;
+  const closeModal = () => setIsOpen(false);
+  const handleAddReview = async (e) => {
+    e.preventDefault();
+    const reviewData = {
+      name: user?.displayName,
+      email: user?.email,
+      quote: e.target.review.value,
+      role: "client",
+      image: user?.photoURL,
+    };
+    try {
+      const res = await addReviewAsClient(reviewData);
+      if (res?.insertedId) {
+        swal("Thank You!", "Review added", "success");
+        refetch();
+      }
+    } catch (error) {
+      console.error("Error adding REview:", error);
+      swal("Oops!", "Failed to add REview. Please try again later.", "error");
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-400 to-blue-500 py-10">
+    <div className="min-h-screen bg-gradient-to-r from-green-400 to-blue-500 py-9">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-semibold text-center text-white mb-10">
-          What Our Users Says
+        <h1 className="text-2xl md:text-5xl font-semibold text-center text-white">
+          What Our Client Says
         </h1>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="mb-2 text-white bg-green-500 rounded-lg p-1"
+        >
+          Add your Review
+        </button>
         <div className="space-y-6">
           {isLoading
             ? [...Array(3)].map((_, idx) => (
@@ -57,8 +90,13 @@ const Reviews = () => {
               ))}
         </div>
       </div>
+      <ReviewModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        handleAddReview={handleAddReview}
+      />
     </div>
   );
 };
 
-export default Reviews;
+export default AllReviews;

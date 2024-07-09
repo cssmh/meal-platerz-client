@@ -9,7 +9,7 @@ const OurClient = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      return await getClientSays();
+      return await getClientSays(5);
     },
   });
 

@@ -35,7 +35,7 @@ const Banner = () => {
               Blogs
             </Link>
             <Link
-              to={"/review"}
+              to={"/all-reviews"}
               className="rounded-md px-4 py-[7px] border border-redFood ml-1"
             >
               Reviews

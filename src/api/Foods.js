@@ -100,15 +100,13 @@ export const addReviews = async (id, email, review) => {
 };
 
 // add review on website
-// export const addReviewAsClient = async (id, email, review) => {
-//   const { data } = await axiosSecure.put(`/add-review/${id}/${email}`, {
-//     review,
-//   });
-//   return data;
-// };
+export const addReviewAsClient = async (reviewData) => {
+  const { data } = await axiosSecure.post("/add-review", reviewData);
+  return data;
+};
 
 // get client say
-export const getClientSays = async () => {
-  const { data } = await axiosSecure("/all-reviews");
+export const getClientSays = async (limit) => {
+  const { data } = await axiosSecure(`/all-reviews?limit=${limit}`);
   return data;
 };
