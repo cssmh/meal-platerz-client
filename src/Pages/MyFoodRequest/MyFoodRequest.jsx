@@ -3,10 +3,10 @@ import { Helmet } from "react-helmet-async";
 import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
 import { deleteMyRequest } from "../../api/Foods";
 import SmallLoader from "../../Component/SmallLoader";
-import UseMyRequest from "../../hooks/UseMyRequest";
+import useMyRequest from "../../hooks/UseMyRequest";
 
 const MyFoodRequest = () => {
-  const { isLoading, myFoodRequest, refetch, user } = UseMyRequest();
+  const { isLoading, myFoodRequest, refetch, user } = useMyRequest();
 
   const handleRequestedDelete = (idx, food_name) => {
     swal({
@@ -47,7 +47,7 @@ const MyFoodRequest = () => {
               Your requested all foods Here
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
-              {myFoodRequest.map((food) => (
+              {myFoodRequest?.map((food) => (
                 <MyFoodRequestCard
                   key={food._id}
                   getFoods={food}

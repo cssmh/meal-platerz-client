@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getClientSays } from "../api/Foods";
 
 const OurClient = () => {
-  const { data, isLoading, refetch } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
       return await getClientSays(5);

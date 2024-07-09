@@ -9,12 +9,11 @@ const AllReviews = () => {
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["allAllReviews"],
+    queryKey: ["allReviews"],
     queryFn: async () => {
-      return await getClientSays();
+      return await getClientSays("", true);
     },
   });
-  console.log(data);
 
   const closeModal = () => setIsOpen(false);
   const handleAddReview = async (e) => {
@@ -29,12 +28,13 @@ const AllReviews = () => {
     try {
       const res = await addReviewAsClient(reviewData);
       if (res?.insertedId) {
+        setIsOpen(false);
         swal("Thank You!", "Review added", "success");
         refetch();
       }
     } catch (error) {
       console.error("Error adding REview:", error);
-      swal("Oops!", "Failed to add REview. Please try again later.", "error");
+      swal("Oops!", "Complete at least one food handover first", "error");
     }
   };
 
@@ -94,6 +94,7 @@ const AllReviews = () => {
         isOpen={isOpen}
         closeModal={closeModal}
         handleAddReview={handleAddReview}
+        width={"xl"}
       />
     </div>
   );

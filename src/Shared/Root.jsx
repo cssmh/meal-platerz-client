@@ -88,11 +88,19 @@ const Root = createBrowserRouter([
       },
       {
         path: "/blogs",
-        element: <Blogs />,
+        element: (
+          <PrivateRoute>
+            <Blogs />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/all-reviews",
-        element: <AllReviews />,
+        element: (
+          <PrivateRoute>
+            <AllReviews />,
+          </PrivateRoute>
+        ),
       },
     ],
   },

@@ -4,12 +4,12 @@ import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addReq } from "../../api/Foods";
-import UseMyRequest from "../../hooks/UseMyRequest";
+import useMyRequest from "../../hooks/UseMyRequest";
 
 const AddRequest = ({ getFood }) => {
   const [open, setOpen] = useState(false);
   const [todayDateTime, setTodayDateTime] = useState("");
-  const { myFoodRequest, user, refetch } = UseMyRequest();
+  const { myFoodRequest, user, refetch } = useMyRequest();
   const [matchFound, setMatchFound] = useState([]);
 
   const {

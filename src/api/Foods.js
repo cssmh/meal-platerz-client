@@ -106,7 +106,9 @@ export const addReviewAsClient = async (reviewData) => {
 };
 
 // get client say
-export const getClientSays = async (limit) => {
-  const { data } = await axiosSecure(`/all-reviews?limit=${limit}`);
+export const getClientSays = async (limit, sort) => {
+  const { data } = await axiosSecure(
+    `/all-reviews?limit=${limit}&sort=${sort}`
+  );
   return data;
 };
