@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addReq } from "../../api/Foods";
-import useMyRequest from "../../hooks/UseMyRequest";
+import useMyRequest from "../../hooks/useMyRequest";
 
 const AddRequest = ({ getFood }) => {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ const AddRequest = ({ getFood }) => {
   // Check if the selected food is already requested or not
   useEffect(() => {
     const matching = myFoodRequest?.filter((req) =>
-      food_name.includes(req?.food_name)
+      food_name?.includes(req?.food_name)
     );
     setMatchFound(matching);
   }, [myFoodRequest, food_name]);

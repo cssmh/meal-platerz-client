@@ -4,6 +4,8 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
 import { addFood } from "../../api/Foods";
 import { TbFidgetSpinner } from "react-icons/tb";
+import useMyFoods from "../../hooks/useMyFoods";
+import toast from "react-hot-toast";
 
 const AddFood = () => {
   const { user } = useAuth();
@@ -11,6 +13,7 @@ const AddFood = () => {
   const [expiredDate, setExpiredDate] = useState("");
   const [expiredTime, setExpiredTime] = useState("");
   const [todayDate, setTodayDate] = useState("");
+  const { myFoods } = useMyFoods();
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -37,7 +40,17 @@ const AddFood = () => {
     const donator_email = user?.email;
     const donator_phone = form.phone.value;
 
-    const foodInformation = {
+    const isDuplicate = myFoods?.find((food) => food.food_name === food_name);
+    if (isDuplicate) {
+      setLoading(false);
+      return toast.error("You already added this Book!");
+    }
+    if (!/^[0-9]+$/.test(food_quantity)) {
+      setLoading(false);
+      return toast.error("Use only numbers for food quantity");
+    }
+
+    const foodInfo = {
       food_name,
       food_image,
       food_quantity,
@@ -53,7 +66,7 @@ const AddFood = () => {
     };
 
     try {
-      const res = await addFood(foodInformation);
+      const res = await addFood(foodInfo);
       if (res?.insertedId) {
         swal("Thank You!", `${food_name} added`, "success");
         form.reset();
