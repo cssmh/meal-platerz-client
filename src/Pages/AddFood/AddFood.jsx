@@ -13,7 +13,7 @@ const AddFood = () => {
   const [expiredDate, setExpiredDate] = useState("");
   const [expiredTime, setExpiredTime] = useState("");
   const [todayDate, setTodayDate] = useState("");
-  const { myFoods } = useMyFoods();
+  const { myFoods, refetch } = useMyFoods();
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -69,6 +69,7 @@ const AddFood = () => {
       const res = await addFood(foodInfo);
       if (res?.insertedId) {
         swal("Thank You!", `${food_name} added`, "success");
+        refetch();
         form.reset();
       }
       setLoading(false);

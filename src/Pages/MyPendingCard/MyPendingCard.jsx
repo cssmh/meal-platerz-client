@@ -8,6 +8,9 @@ import {
 } from "../../api/Foods";
 import useMyFoods from "../../hooks/useMyFoods";
 import moment from "moment";
+import useFood from "../../hooks/useFood";
+import useIsExpire from "../../hooks/useIsExpire";
+import SkeletonCard from "../SkeletonCard";
 
 const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
   const {
@@ -27,7 +30,9 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
   } = getReq;
 
   const [todayDateTime, setTodayDateTime] = useState("");
-  const { refetch } = useMyFoods();
+  const { isLoading, food } = useFood(food_id);
+  const { isLoading: loading, refetch } = useMyFoods();
+  const isExpired = useIsExpire(food?.expiration_date, expiration_time);
 
   useEffect(() => {
     const today = moment().format("YYYY-MM-DD hh:mm A");
@@ -58,6 +63,7 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
     }
   };
 
+  // format
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
   const reqDate = moment(request_date, "YYYY-MM-DD hh:mm A").format(
     "DD MMM YYYY [at] hh:mm A"
@@ -67,6 +73,8 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
     moment(delivered_date, "YYYY-MM-DD hh:mm A").format(
       "DD MMM YYYY [at] hh:mm A"
     );
+
+  if (isLoading || loading) return <SkeletonCard />;
 
   return (
     <div>
@@ -93,10 +101,12 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
           <p>
             ✔️ Delivered: <span className="text-cyan-500">{deliverDate}</span>
           </p>
+        ) : isExpired ? (
+          <p className="text-red-600">This Food is Expired</p>
         ) : (
           <p>
             Expires in:{" "}
-            <span className="text-blue-600 ">
+            <span className="text-blue-600">
               {expireIn} at {expiration_time}
             </span>
           </p>
@@ -108,7 +118,9 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
             onChange={(e) => handleUpdateStatus(e, _id, food_id)}
             className="input input-bordered py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
             disabled={
-              status === "Delivered" || unavailableIds?.includes(food_id)
+              isExpired ||
+              status === "Delivered" ||
+              unavailableIds?.includes(food_id)
             }
           >
             <option value="Pending">Pending</option>

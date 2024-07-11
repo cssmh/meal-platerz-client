@@ -7,6 +7,7 @@ import AddRequest from "../AddRequest/AddRequest";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import SmallLoader from "../../Component/SmallLoader";
+import useIsExpire from "../../hooks/useIsExpire";
 
 const FoodDetails = () => {
   const { user } = useAuth();
@@ -40,11 +41,7 @@ const FoodDetails = () => {
     }
   }, [isLoading, user_review]);
 
-  const expiredDateTime = moment(
-    `${expiration_date} ${expiration_time}`,
-    "YYYY-MM-DD hh:mm A"
-  );
-  const isExpired = moment().isAfter(expiredDateTime);
+  const isExpired = useIsExpire(expiration_date, expiration_time);
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
   const isAvailable = food_status === "available";
   const isUserDonator = user?.email === donator_email;

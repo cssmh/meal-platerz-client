@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import UpdateMyFood from "../UpdateMyFood/UpdateMyFood";
 import moment from "moment";
+import useIsExpire from "../../hooks/useIsExpire";
 
 const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
   const {
@@ -15,12 +16,9 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
     requestCount,
   } = getFood;
 
-  const expiredDateTime = moment(
-    `${expiration_date} ${expiration_time}`,
-    "YYYY-MM-DD hh:mm A"
-  );
-  const isExpired = moment().isAfter(expiredDateTime);
-  const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
+  const isExpired = useIsExpire(expiration_date, expiration_time);
+  const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY"); 
+  // format just
 
   return (
     <tr>

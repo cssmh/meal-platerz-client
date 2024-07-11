@@ -1,5 +1,6 @@
 import moment from "moment";
 import { Link } from "react-router-dom";
+import useIsExpire from "../../hooks/useIsExpire";
 
 const FoodsCard = ({ getFoods }) => {
   const {
@@ -15,11 +16,7 @@ const FoodsCard = ({ getFoods }) => {
     donator_phone,
   } = getFoods;
 
-  const expiredDateTime = moment(
-    `${expiration_date} ${expiration_time}`,
-    "YYYY-MM-DD hh:mm A"
-  );
-  const isExpired = moment().isAfter(expiredDateTime);
+  const isExpired = useIsExpire(expiration_date, expiration_time);
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
 
   return (
