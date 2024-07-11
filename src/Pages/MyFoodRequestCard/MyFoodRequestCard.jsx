@@ -143,8 +143,8 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
         isOpen={isOpen}
         closeModal={closeModal}
         handleAddReview={handleAddReview}
-        review={food?.user_review}
         width={"md"}
+        review={food?.user_review}
       />
     </div>
   );

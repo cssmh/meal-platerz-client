@@ -1,9 +1,15 @@
 import { useState } from "react";
 import swal from "sweetalert";
 import { useQuery } from "@tanstack/react-query";
-import { addReviewAsClient, getClientSays } from "../api/Foods";
+import {
+  addReviewAsClient,
+  deleteReviewAsClient,
+  getClientSays,
+} from "../api/Foods";
 import ReviewModal from "../Pages/Modal/ReviewModal";
 import useAuth from "../hooks/useAuth";
+import { FaTrash } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const AllReviews = () => {
   const { user } = useAuth();
@@ -17,14 +23,18 @@ const AllReviews = () => {
 
   const closeModal = () => setIsOpen(false);
   const handleAddReview = async (e) => {
+    const getReview = e.target.review.value;
     e.preventDefault();
     const reviewData = {
       name: user?.displayName,
       email: user?.email,
-      quote: e.target.review.value,
+      quote: getReview,
       role: "client",
       image: user?.photoURL,
     };
+    if (getReview.length < 1) {
+      return toast.error("Review cannot be empty.");
+    }
     try {
       const res = await addReviewAsClient(reviewData);
       if (res?.insertedId) {
@@ -35,6 +45,28 @@ const AllReviews = () => {
     } catch (error) {
       console.error("Error adding REview:", error);
       swal("Oops!", "Complete at least one food handover first", "error");
+    }
+  };
+
+  const handleDelete = (id, email) => {
+    try {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, it can't be recovered!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const res = await deleteReviewAsClient(id, email);
+          if (res?.deletedCount > 0) {
+            refetch();
+            toast.success("Review deleted successfully.");
+          }
+        }
+      });
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -82,9 +114,19 @@ const AllReviews = () => {
                       <h2 className="text-2xl font-semibold text-gray-800 mb-2">
                         {client?.name}
                       </h2>
-                      <p className="text-gray-600 mb-4 italic">{`"${client?.quote}"`}</p>
+                      <p className="text-gray-600 mb-4 italic">
+                        {`"${client?.quote}"`}
+                      </p>
                       <p className="text-gray-500 text-sm">{client?.role}</p>
                     </div>
+                    {client?.email === user?.email && (
+                      <button
+                        onClick={() => handleDelete(client?._id, client?.email)}
+                        className="px-3"
+                      >
+                        <FaTrash />
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}

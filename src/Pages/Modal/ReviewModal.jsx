@@ -2,11 +2,11 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 const ReviewModal = ({
-  handleAddReview,
-  closeModal,
   isOpen,
-  review,
+  closeModal,
+  handleAddReview,
   width,
+  review,
 }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>

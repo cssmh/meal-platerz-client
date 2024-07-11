@@ -105,6 +105,12 @@ export const addReviewAsClient = async (reviewData) => {
   return data;
 };
 
+// delete review on website
+export const deleteReviewAsClient = async (id, email) => {
+  const { data } = await axiosSecure.delete(`/review?id=${id}&email=${email}`);
+  return data;
+};
+
 // get client say
 export const getClientSays = async (limit, sort) => {
   const { data } = await axiosSecure(
