@@ -81,42 +81,53 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
       <Helmet>
         <title>MealPlaterz | Food Request</title>
       </Helmet>
-      <div className="border border-red-500 rounded-md space-y-1 mx-1 md:mx-0 h-96 flex flex-col justify-center items-center">
-        <img
-          src={user_image}
-          className="w-20 h-20 rounded-full mx-auto"
-          alt="User Avatar"
-        />
-        <h1 className="text-blue-800 text-xl">Requester Information</h1>
-        <p>{user_name}</p>
-        <div className="flex">
-          <span className="text-cyan-600">{user_email}</span>
-          <span className="text-red-600">{user_phone}</span>
+      <div className="border border-red-500 rounded-md mx-1 md:mx-0 h-auto flex flex-col p-4">
+        <div className="flex items-center space-x-4">
+          <img
+            src={user_image}
+            className="w-16 h-16 rounded-full"
+            alt="User Avatar"
+          />
+          <div>
+            <h1 className="text-blue-800 text-lg">Requester Information</h1>
+            <p className="text-gray-700">{user_name}</p>
+          </div>
         </div>
-        {message_to_donator && <p>message: {message_to_donator}</p>}
-        <p>
-          Requested: <span className="">{reqDate}</span>
-        </p>
-        {status === "Delivered" ? (
-          <p>
-            ✔️ Delivered: <span className="text-cyan-500">{deliverDate}</span>
+        <div className="mt-2 space-y-1">
+          <p className="text-cyan-600">{user_email}</p>
+          <p className="text-red-600">{user_phone}</p>
+          {message_to_donator && (
+            <p className="text-gray-600">
+              Message: {message_to_donator}
+            </p>
+          )}
+          <p className="text-gray-600">
+            Requested: <span>{reqDate}</span>
           </p>
-        ) : isExpired ? (
-          <p className="text-red-600">This Food is Expired</p>
-        ) : (
-          <p>
-            Expires in:{" "}
-            <span className="text-blue-600">
-              {expireIn} at {expiration_time}
-            </span>
+          {status === "Delivered" ? (
+            <p className="text-gray-600">
+              ✔️ Delivered: <span className="text-cyan-500">{deliverDate}</span>
+            </p>
+          ) : (
+            <p className="text-gray-600">
+              Expires in:{" "}
+              <span className="text-blue-600">
+                {expireIn} at {expiration_time}{" "}
+                <span className="text-redFood">
+                  {isExpired && "(Expired!)"}
+                </span>
+              </span>
+            </p>
+          )}
+          <p className="text-gray-600">
+            Donation: {donation_money} BDT
           </p>
-        )}
-        <p>Donation: {donation_money} BDT</p>
-        <div className="text-center mt-4">
+        </div>
+        <div className="text-center mt-2">
           <select
             defaultValue={status}
             onChange={(e) => handleUpdateStatus(e, _id, food_id)}
-            className="input input-bordered py-2 px-4 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
+            className="input input-bordered py-1 px-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none"
             disabled={
               isExpired ||
               status === "Delivered" ||

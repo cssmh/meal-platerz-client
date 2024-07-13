@@ -1,3 +1,4 @@
+import moment from "moment";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -6,7 +7,7 @@ import useFood from "../../hooks/useFood";
 import { Link } from "react-router-dom";
 import ReviewModal from "../Modal/ReviewModal";
 import SkeletonCard from "../SkeletonCard";
-import moment from "moment";
+import useIsExpire from "../../hooks/useIsExpire";
 
 const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
   const {
@@ -29,6 +30,7 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
 
   const { isLoading: loading, food, refetch } = useFood(food_id);
   const [isOpen, setIsOpen] = useState(false);
+  const isExpired = useIsExpire(food?.expiration_date, food?.expiration_time);
 
   const { data = "", isLoading } = useQuery({
     queryKey: ["getFoodData", food_id],
@@ -37,6 +39,7 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
       return res?.food_status;
     },
   });
+
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
   const reqDate = moment(request_date, "YYYY-MM-DD hh:mm A").format(
     "DD MMM YYYY [at] hh:mm A"
@@ -68,39 +71,50 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
   if (isLoading || loading) return <SkeletonCard />;
 
   return (
-    <div className="border border-redFood rounded-md mx-1 lg:mx-0 py-5">
-      <div className="flex flex-col md:flex-row px-2 md:px-[70px] items-center gap-3">
-        <img src={food_image} className="w-3/5 md:w-32 rounded-lg" alt="food" />
-        <div>
+    <div
+      className={`border rounded-md mx-1 lg:mx-0 py-4 ${
+        isExpired ? "border-gray-500 bg-gray-200" : "border-redFood"
+      }`}
+    >
+      <div className="flex flex-col md:flex-row px-2 md:px-8 items-center gap-3">
+        <img src={food_image} className="w-24 md:w-32 rounded-md" alt="food" />
+        <div className="flex flex-col items-start">
           <Link to={`/food/${food_id}`}>
-            <p className="text-2xl">{food_name}</p>
+            <p className="text-xl">{food_name}</p>
           </Link>
           <p className="text-lg text-blue-900">Donator Information</p>
           <h1 className="text-cyan-600">{donator_name}</h1>
-          <p>{donator_email}</p>
-          <p>{donator_phone}</p>
+          <div className="flex flex-col md:flex-row gap-1">
+            <p>{donator_email}</p>
+            <p>({donator_phone})</p>
+          </div>
         </div>
       </div>
-      <div className="px-3 md:px-[70px] mt-2">
-        <p className="text-cyan-600">Pickup Location: {pickup_location}</p>
-        <p>
-          Expire In: {expireIn} at {expiration_time}
+      <div className="space-y-1 px-3 md:px-8 mt-1">
+        <p className="text-gray-600">
+          Pickup Location:{" "}
+          <span className="text-cyan-600">{pickup_location}</span>
         </p>
+        {!delivered_date && (
+          <p className="text-redFood">
+            Expire In: {expireIn} at {expiration_time}
+          </p>
+        )}
         <p>Your Request: {reqDate}</p>
         {donation_money > 0 && (
           <p>Thanks for your {donation_money} BDT donation</p>
         )}
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           {data === "available" ? (
             <p>
               Status:{" "}
-              <span className={status === "Pending" && "text-redFood"}>
+              <span className={status === "Pending" ? "text-redFood" : ""}>
                 {status}
               </span>
             </p>
           ) : data === "Unavailable" && delivered_date ? (
             <p className="text-blue-600">
-              Delivered: <span>{deliverDate}</span>{" "}
+              Delivered: <span>{deliverDate}</span>
             </p>
           ) : (
             <p className="text-redFood">
@@ -108,16 +122,24 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
             </p>
           )}
         </div>
-        {status === "Delivered" ? (
-          food.user_review ? (
-            <p>
-              <span className="text-green-600">Your review -</span>{" "}
-              {food?.user_review}
+        {isExpired ? (
+          <>
+            <p className="text-red-500 mt-1">This food has expired.</p>
+            <button
+              onClick={() => handleRequestedDelete(_id, food_name)}
+              className="mt-1 btn btn-sm border-black bg-gray-200"
+            >
+              Cancel Request
+            </button>
+          </>
+        ) : status === "Delivered" ? (
+          food?.user_review ? (
+            <p className="bg-blue-50 p-2 rounded-md border">
+              <span className="text-green-600 font-semibold">Your Review:</span>{" "}
+              <span className="text-gray-700">{food?.user_review}</span>
               <button
-                className="ml-2 text-blue-500 hover:underline"
-                onClick={() => {
-                  setIsOpen(true);
-                }}
+                className="ml-4 text-sm text-blue-500 hover:underline hover:text-blue-700 transition-colors duration-200"
+                onClick={() => setIsOpen(true)}
               >
                 Edit
               </button>
