@@ -25,10 +25,6 @@ const FeaturedFoods = () => {
     },
   });
 
-  const aosDuration = (num) => {
-    return 400 + num * 700;
-  };
-
   return (
     <div>
       <h1 className="text-center font-semibold text-lg md:text-xl my-5">
@@ -51,7 +47,7 @@ const FeaturedFoods = () => {
               <FoodsCard
                 key={foods._id}
                 getFoods={foods}
-                aosDuration={aosDuration(idx)}
+                aosDuration={idx * 300}
               />
             ))}
           </div>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import BannerBG from "../assets/Banner.jpg";
+import BannerImg from "../assets/food-banner.jpg";
+
 const Banner = () => {
   return (
     <div
@@ -8,12 +9,12 @@ const Banner = () => {
       data-aos-anchor-placement="top-bottom"
       className="hero min-h-[60vh] lg:min-h-[80vh] bg-cover"
       style={{
-        backgroundImage: `url(${BannerBG})`,
+        backgroundImage: `url(${BannerImg})`,
         backgroundSize: "cover",
       }}
     >
-      {/* <div className="hero-overlay bg-opacity-5"></div> */}
-      <div className="max-w-2xl mr-auto ml-4 md:ml-12">
+      <div className="hero-overlay bg-opacity-60 md:bg-opacity-0"></div>
+      <div className="max-w-2xl mr-auto ml-4 md:ml-12 text-white md:text-black">
         <div className="space-y-3">
           <h1 className="text-2xl md:text-4xl font-semibold flex-11">
             Building Communities <br /> by Sharing Excess Food <br /> Resources

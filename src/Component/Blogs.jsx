@@ -1,4 +1,4 @@
-import banner from "../assets/Banner.jpg";
+import bannerImg from "../assets/food-banner.jpg";
 import { FaRegClock } from "react-icons/fa";
 import { BsPeople } from "react-icons/bs";
 import { AiOutlineFileText } from "react-icons/ai";
@@ -22,7 +22,7 @@ const Blogs = () => {
             >
               <div className="flex flex-col md:flex-row">
                 <img
-                  src={banner}
+                  src={bannerImg}
                   alt="Blog Post"
                   className="w-full md:w-1/3 h-64 object-cover"
                 />

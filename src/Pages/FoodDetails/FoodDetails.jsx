@@ -51,7 +51,7 @@ const FoodDetails = () => {
   return (
     <div>
       <Helmet>
-        <title>MealPlaterz | FoodDetails</title>
+        <title>MealPlaterz | {food_name}</title>
       </Helmet>
       <MenuDetails />
       <div className="text-center mx-auto max-w-md border-2 py-2 my-5 lg:mx-auto">

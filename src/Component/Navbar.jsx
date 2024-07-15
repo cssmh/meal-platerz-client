@@ -18,15 +18,16 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-sm">
+      <div className="bg-primary/50 py-[1px]">
+        <p className="text-[13px] text-white px-3 md:px-12">
+          Contact: +880176761606*
+        </p>
+      </div>
       <div className="border-b border-base-300">
         <div className="navbar min-h-[60px] max-w-7xl mx-auto py-0">
           <div className="navbar-start">
             <div className="dropdown">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-sm btn-ghost lg:hidden"
-              >
+              <label tabIndex={0} className="btn btn-sm btn-ghost lg:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -41,14 +42,14 @@ const Navbar = () => {
                     d="M4 6h16M4 12h8m-8 6h16"
                   />
                 </svg>
-              </div>
+              </label>
               <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
                   <NavLink
-                    to={"/"}
+                    to="/"
                     className={({ isActive }) =>
                       isActive ? "text-blue-500" : ""
                     }
@@ -58,7 +59,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to={"/available-foods"}
+                    to="/available-foods"
                     className={({ isActive }) =>
                       isActive ? "text-blue-500" : ""
                     }
@@ -70,7 +71,7 @@ const Navbar = () => {
                   <>
                     <li>
                       <NavLink
-                        to={"/add-food"}
+                        to="/add-food"
                         className={({ isActive }) =>
                           isActive ? "text-blue-500" : ""
                         }
@@ -80,7 +81,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <NavLink
-                        to={"/manage-my-foods"}
+                        to="/manage-my-foods"
                         className={({ isActive }) =>
                           isActive ? "text-blue-500" : ""
                         }
@@ -90,7 +91,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <NavLink
-                        to={"/my-food-request"}
+                        to="/my-food-request"
                         className={({ isActive }) =>
                           isActive ? "text-blue-500" : ""
                         }
@@ -111,7 +112,7 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1">
               <li>
                 <NavLink
-                  to={"/"}
+                  to="/"
                   className={({ isActive }) =>
                     isActive ? "text-blue-500" : ""
                   }
@@ -121,7 +122,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to={"/available-foods"}
+                  to="/available-foods"
                   className={({ isActive }) =>
                     isActive ? "text-blue-500" : ""
                   }
@@ -132,7 +133,7 @@ const Navbar = () => {
               {user?.email && (
                 <li>
                   <NavLink
-                    to={"/add-food"}
+                    to="/add-food"
                     className={({ isActive }) =>
                       isActive ? "text-blue-500" : ""
                     }
@@ -148,7 +149,7 @@ const Navbar = () => {
                     <ul className="p-2 menu menu-sm dropdown-content z-[1] w-[170px]">
                       <li>
                         <NavLink
-                          to={"/manage-my-foods"}
+                          to="/manage-my-foods"
                           className={({ isActive }) =>
                             isActive ? "text-blue-500" : ""
                           }
@@ -158,7 +159,7 @@ const Navbar = () => {
                       </li>
                       <li>
                         <NavLink
-                          to={"/my-food-request"}
+                          to="/my-food-request"
                           className={({ isActive }) =>
                             isActive ? "text-blue-500" : ""
                           }
@@ -198,7 +199,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to={"/my-profile"}
+                      to="/my-profile"
                       className={({ isActive }) =>
                         isActive ? "text-blue-500" : ""
                       }
@@ -217,7 +218,7 @@ const Navbar = () => {
                 Logout
               </button>
             ) : (
-              <Link to={"/login"}>
+              <Link to="/login">
                 <p className="bg-redFood rounded-md text-white py-1 px-[10px]">
                   Login
                 </p>

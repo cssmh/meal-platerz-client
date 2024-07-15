@@ -74,6 +74,7 @@ const AvailableFoods = () => {
                   <FoodsCard
                     key={food._id}
                     getFoods={food}
+                    aosDuration={idx * 300}
                   />
                 ))}
               </div>

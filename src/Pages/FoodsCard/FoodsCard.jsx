@@ -2,7 +2,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import useIsExpire from "../../hooks/useIsExpire";
 
-const FoodsCard = ({ getFoods }) => {
+const FoodsCard = ({ getFoods, aosDuration }) => {
   const {
     _id,
     food_image,
@@ -22,7 +22,7 @@ const FoodsCard = ({ getFoods }) => {
   return (
     <div
       data-aos="fade-up"
-      data-aos-duration="700"
+      data-aos-duration={aosDuration}
       data-aos-anchor-placement="center-bottom"
       className="group border flex flex-col shadow-lg rounded-lg bg-white hover:scale-105 transition-all duration-300 overflow-hidden"
     >
