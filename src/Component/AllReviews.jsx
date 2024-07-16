@@ -8,7 +8,7 @@ import {
 } from "../api/Foods";
 import ReviewModal from "../Pages/Modal/ReviewModal";
 import useAuth from "../hooks/useAuth";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaPlus } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const AllReviews = () => {
@@ -43,7 +43,7 @@ const AllReviews = () => {
         refetch();
       }
     } catch (error) {
-      console.error("Error adding REview:", error);
+      console.error("Error adding Review:", error);
       swal("Oops!", "Complete at least one food handover first", "error");
     }
   };
@@ -71,63 +71,64 @@ const AllReviews = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-400 to-blue-500 py-9">
+    <div className="bg-gray-100 py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-2xl md:text-5xl font-semibold text-center text-white">
-          What Our Client Says
+        <h1 className="text-2xl md:text-3xl font-semibold text-center">
+          What Our Clients Say
         </h1>
-        <button
-          onClick={() => setIsOpen(true)}
-          className="mb-2 text-white bg-green-500 rounded-lg p-1"
-        >
-          Add your Review
-        </button>
-        <div className="space-y-6">
+        <div className="text-center my-4">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="flex items-center justify-center text-white bg-green-500 rounded-2xl p-2"
+          >
+            <FaPlus className="mr-2" /> Add Your Review
+          </button>
+        </div>
+        <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {isLoading
             ? [...Array(3)].map((_, idx) => (
                 <div
                   key={idx}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+                  className="bg-white rounded-lg shadow-lg p-6 animate-pulse"
                 >
-                  <div className="animate-pulse flex flex-col md:flex-row items-center">
-                    <div className="w-20 h-20 rounded-full bg-gray-300 mx-auto md:mx-4 my-4"></div>
-                    <div className="p-6 flex-1">
-                      <h2 className="text-2xl font-semibold text-gray-800 mb-2 w-32 h-6 bg-gray-300 rounded"></h2>
-                      <p className="text-gray-600 mb-4 italic w-56 h-4 bg-gray-300 rounded"></p>
-                      <p className="text-gray-500 text-sm w-24 h-4 bg-gray-300 rounded"></p>
+                  <div className="flex items-center mb-4">
+                    <div className="w-16 h-16 rounded-full bg-gray-300"></div>
+                    <div className="ml-4 flex-1">
+                      <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                      <div className="h-4 bg-gray-300 rounded w-1/4"></div>
                     </div>
                   </div>
+                  <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-300 rounded w-3/4"></div>
                 </div>
               ))
             : data?.map((client) => (
                 <div
                   key={client?._id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+                  className="bg-white rounded-lg shadow-lg p-6"
                 >
-                  <div className="flex flex-col md:flex-row items-center">
+                  <div className="flex items-center mb-4">
                     <img
                       src={client?.image}
                       alt={client?.name}
-                      className="w-20 h-20 rounded-full object-cover mx-auto md:mx-4 my-4"
+                      className="w-16 h-16 rounded-full object-cover border-2 border-green-500"
                     />
-                    <div className="p-6 flex-1">
-                      <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+                    <div className="ml-4 flex-1">
+                      <h2 className="text-xl font-semibold text-gray-800">
                         {client?.name}
                       </h2>
-                      <p className="text-gray-600 mb-4 italic">
-                        {`"${client?.quote}"`}
-                      </p>
                       <p className="text-gray-500 text-sm">{client?.role}</p>
                     </div>
                     {client?.email === user?.email && (
                       <button
                         onClick={() => handleDelete(client?._id, client?.email)}
-                        className="px-3"
+                        className="text-red-500 hover:text-red-600"
                       >
                         <FaTrash />
                       </button>
                     )}
                   </div>
+                  <p className="text-gray-600 italic">{`"${client?.quote}"`}</p>
                 </div>
               ))}
         </div>
