@@ -17,7 +17,7 @@
 
 ## Description
 
-MealPlaterz is a community-driven platform dedicated to reducing food waste by facilitating the sharing of surplus food among community members. It provides a user-friendly interface where users can post available food items, connect with neighbors, and contribute to a more sustainable environment
+MealPlaterz is a community-driven platform dedicated to reducing food waste by facilitating the sharing of surplus food among community members. It provides a user-friendly interface where users can post available food items, connect with neighbors, and contribute to a more sustainable environment.
 
 ## Features
 
