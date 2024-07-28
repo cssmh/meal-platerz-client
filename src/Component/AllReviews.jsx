@@ -23,8 +23,13 @@ const AllReviews = () => {
 
   const closeModal = () => setIsOpen(false);
   const handleAddReview = async (e) => {
-    const getReview = e.target.review.value;
     e.preventDefault();
+    const getReview = e.target.review.value;
+
+    if (getReview.length < 1) {
+      return toast.error("Review cannot be empty.");
+    }
+
     const reviewData = {
       name: user?.displayName,
       email: user?.email,
@@ -32,9 +37,7 @@ const AllReviews = () => {
       role: "client",
       image: user?.photoURL,
     };
-    if (getReview.length < 1) {
-      return toast.error("Review cannot be empty.");
-    }
+
     try {
       const res = await addReviewAsClient(reviewData);
       if (res?.insertedId) {
@@ -43,8 +46,10 @@ const AllReviews = () => {
         refetch();
       }
     } catch (error) {
-      console.error("Error adding Review:", error);
-      swal("Oops!", "Complete at least one food handover first", "error");
+      const errorMessage =
+        error?.response?.data?.message || "An unexpected error occurred.";
+      swal("Oops!", errorMessage, "error", { timer: 2000 });
+      setIsOpen(false);
     }
   };
 
@@ -76,10 +81,10 @@ const AllReviews = () => {
         <h1 className="text-2xl md:text-3xl font-semibold text-center">
           What Our Clients Say
         </h1>
-        <div className="text-center my-4">
+        <div className="text-center my-2">
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center justify-center text-white bg-green-500 rounded-2xl p-2"
+            className="flex items-center justify-center text-white bg-green-500 rounded-3xl p-2"
           >
             <FaPlus className="mr-2" /> Add Your Review
           </button>

@@ -118,3 +118,9 @@ export const getClientSays = async (limit, sort) => {
   );
   return data;
 };
+
+// update name and photo of all my foods data
+export const updateMyImgName = async (email, imgNameData) => {
+  const { data } = await axiosSecure.put(`/my-all-foods/${email}`, imgNameData);
+  return data;
+};

@@ -4,22 +4,35 @@ import useAuth from "../hooks/useAuth";
 import EditProfileModal from "../Pages/Modal/EditProfileModal";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import useMyFoods from "../hooks/useMyFoods";
+import { updateMyImgName } from "../api/Foods";
 
 const MyProfile = () => {
   const { user, updateProfileInfo } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(user?.displayName);
   const [photo, setPhoto] = useState(user?.photoURL);
+  const { myFoods } = useMyFoods();
 
   const closeModal = () => setIsOpen(false);
-  const handleUpdateProfile = (e) => {
+  const handleUpdateProfile = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const photo = form.photo.value || defaultAvatar;
+    const updateMyAllFoodInfo = {
+      name,
+      photo,
+    };
     try {
       updateProfileInfo(name, photo);
       setName(name);
+      if (myFoods?.length > 0) {
+        const res = await updateMyImgName(user?.email, updateMyAllFoodInfo);
+        if (res?.modifiedCount > 0) {
+          toast.success("Food information updated");
+        }
+      }
       toast.success("Updated Successfully");
       setPhoto(photo);
     } catch (error) {
