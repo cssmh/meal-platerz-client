@@ -41,6 +41,7 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
 
 4. **Food Sharing Management:**
 
+   - Each food had expire date and time with condition.
    - Post, manage, and update food listings.
    - Search functionality by food type or location.
 

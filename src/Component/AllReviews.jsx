@@ -42,7 +42,7 @@ const AllReviews = () => {
       const res = await addReviewAsClient(reviewData);
       if (res?.insertedId) {
         setIsOpen(false);
-        swal("Thank You!", "Review added", "success");
+        swal("Thank You!", "Review added", "success", { timer: 2000 });
         refetch();
       }
     } catch (error) {
@@ -53,23 +53,13 @@ const AllReviews = () => {
     }
   };
 
-  const handleDelete = (id, email) => {
+  const handleDelete = async (id, email) => {
     try {
-      swal({
-        title: "Are you sure?",
-        text: "Once deleted, it can't be recovered!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
-          const res = await deleteReviewAsClient(id, email);
-          if (res?.deletedCount > 0) {
-            refetch();
-            toast.success("Review deleted successfully.");
-          }
-        }
-      });
+      const res = await deleteReviewAsClient(id, email);
+      if (res?.deletedCount > 0) {
+        refetch();
+        toast.success("Review deleted successfully.");
+      }
     } catch (error) {
       toast.error(error.message);
     }
