@@ -10,7 +10,6 @@ import useMyFoods from "../../hooks/useMyFoods";
 import moment from "moment";
 import useFood from "../../hooks/useFood";
 import useIsExpire from "../../hooks/useIsExpire";
-import SkeletonCard from "../SkeletonCard";
 
 const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
   const {
@@ -74,7 +73,28 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
       "DD MMM YYYY [at] hh:mm A"
     );
 
-  if (isLoading || loading) return <SkeletonCard />;
+  if (isLoading || loading)
+    return (
+      <div className="border border-gray-300 rounded-md mx-1 md:mx-0 h-auto flex flex-col p-4 animate-pulse">
+        <div className="flex items-center space-x-4">
+          <div className="w-20 h-20 rounded-full bg-gray-300"></div>
+          <div>
+            <div className="h-4 bg-gray-300 rounded w-24 mb-2"></div>
+            <div className="h-3 bg-gray-300 rounded w-36"></div>
+          </div>
+        </div>
+        <div className="mt-2 space-y-2">
+          <div className="h-3 bg-gray-300 rounded w-40"></div>
+          <div className="h-3 bg-gray-300 rounded w-32"></div>
+          <div className="h-3 bg-gray-300 rounded w-56"></div>
+          <div className="h-3 bg-gray-300 rounded w-28"></div>
+          <div className="h-3 bg-gray-300 rounded w-44"></div>
+        </div>
+        <div className="text-center mt-2">
+          <div className="h-8 bg-gray-300 rounded w-24 mx-auto"></div>
+        </div>
+      </div>
+    );
 
   return (
     <div>
@@ -97,9 +117,7 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
           <p className="text-cyan-600">{user_email}</p>
           <p className="text-red-600">{user_phone}</p>
           {message_to_donator && (
-            <p className="text-gray-600">
-              Message: {message_to_donator}
-            </p>
+            <p className="text-gray-600">Message: {message_to_donator}</p>
           )}
           <p className="text-gray-600">
             Requested: <span>{reqDate}</span>
@@ -119,9 +137,7 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
               </span>
             </p>
           )}
-          <p className="text-gray-600">
-            Donation: {donation_money} BDT
-          </p>
+          <p className="text-gray-600">Donation: {donation_money} BDT</p>
         </div>
         <div className="text-center mt-2">
           <select

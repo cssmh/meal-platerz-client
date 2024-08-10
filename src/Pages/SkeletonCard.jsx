@@ -1,8 +1,8 @@
 const SkeletonCard = () => {
   return (
-    <div className="flex flex-col shadow-lg rounded-lg bg-white mb-3">
+    <div className="flex flex-col shadow-lg rounded-lg bg-white mb-1">
       <div className="flex-grow">
-        <div className="w-full h-[200px] md:h-48 bg-gray-200 animate-pulse rounded-2xl p-3"></div>
+        <div className="w-full h-[200px] md:h-32 bg-gray-200 animate-pulse rounded-2xl p-3"></div>
         <div className="px-3 text-left flex-1">
           <div className="mb-2">
             <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4 mb-2"></div>

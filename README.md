@@ -69,6 +69,7 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
 - [lottie-react](https://www.npmjs.com/package/lottie-react)
 - [moment](https://www.npmjs.com/package/moment)
 - [react-helmet-async](https://www.npmjs.com/package/react-helmet-async)
+- [react-stripe](https://github.com/stripe/react-stripe-js)
 - [react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
 - [react-icons](https://www.npmjs.com/package/react-icons)
 - [npm i @headlessui/react](https://www.npmjs.com/package/@headlessui/react)
