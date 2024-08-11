@@ -6,12 +6,15 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import useMyFoods from "../hooks/useMyFoods";
 import { updateMyImgName } from "../api/Foods";
+import useUser from "../hooks/useUser";
+import Countdown from "./Countdown";
 
 const MyProfile = () => {
   const { user, updateProfileInfo } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(user?.displayName);
   const [photo, setPhoto] = useState(user?.photoURL);
+  const { userData } = useUser();
   const { myFoods } = useMyFoods();
 
   const closeModal = () => setIsOpen(false);
@@ -47,7 +50,7 @@ const MyProfile = () => {
       <Helmet>
         <title>MealPlaterz | My Profile</title>
       </Helmet>
-      <div className="max-w-xl p-8 sm:flex mx-auto my-8 sm:space-x-6">
+      <div className="max-w-xl px-8 sm:flex mx-auto mt-8 sm:space-x-6">
         <div className="w-2/3 mb-6 md:w-36">
           <img
             src={photo}
@@ -92,6 +95,13 @@ const MyProfile = () => {
           </div>
         </div>
       </div>
+      {userData.premium_date && (
+        <>
+          <p className="text-center">Congratulations to be a Premium member</p>
+          <p className="text-center">Time Remaining</p>
+          <p className="text-center"><Countdown /></p>
+        </>
+      )}
       <EditProfileModal
         isOpen={isOpen}
         closeModal={closeModal}

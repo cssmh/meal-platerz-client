@@ -6,28 +6,29 @@ import { addPremiumDate, paymentIntent } from "../api/Payment";
 import { useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import SmallLoader from "./SmallLoader";
+import Countdown from "./Countdown";
 
 const PaymentForm = () => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
-  const [clientSecret, setClientSecret] = useState(" ");
-  const [error, setError] = useState(" ");
+  const [clientSecret, setClientSecret] = useState("");
+  const [error, setError] = useState("");
   const [hasInteracted, setHasInteracted] = useState(false);
   const [price, setPrice] = useState(200);
-  let [transactionId, setTransactionId] = useState("");
-  let [isExpired, setIsExpired] = useState();
-  let [milliSecond, setMilliSecond] = useState(60000);
+  const [transactionId, setTransactionId] = useState("");
+  const [isExpired, setIsExpired] = useState(true);
+  const [milliSecond, setMilliSecond] = useState(60000);
   const navigate = useNavigate();
   const { userData, refetch, isLoading } = useUser();
 
   useEffect(() => {
     if (userData?.premium_date) {
-      const isExpired = new Date() > new Date(userData?.premium_date);
+      const premiumExpiration = new Date(userData.premium_date);
+      const isExpired = new Date() > premiumExpiration;
       setIsExpired(isExpired);
     }
   }, [userData?.premium_date]);
-  console.log(isExpired);
 
   useEffect(() => {
     if (typeof price !== "number" || price < 1) {
@@ -45,25 +46,22 @@ const PaymentForm = () => {
   }, [price]);
 
   const handlePeriod = (e) => {
-    setPrice(parseInt(e) * 50);
-    if (parseInt(e) === 1) {
-      setMilliSecond(60000);
-    } else {
-      setMilliSecond(parseInt(e) * 86400000);
-    }
+    const days = parseInt(e);
+    setPrice(days * 50);
+    setMilliSecond(days === 1 ? 60000 : days * 86400000);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
+    if (!stripe || !elements) return;
+
     const card = elements.getElement(CardElement);
     if (card == null) {
       return;
     }
     // Use your card Element with other Stripe.js APIs
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -88,20 +86,17 @@ const PaymentForm = () => {
       });
 
     if (confirmError) {
-      toast.error(confirmError?.message);
-    } else {
-      if (paymentIntent?.status === "succeeded") {
-        setTransactionId(paymentIntent?.id);
-        const res = await addPremiumDate(user?.email, {
-          premium_date: Date.now() + milliSecond,
-          paymentIntent_Id: paymentIntent?.id,
-        });
-        console.log(res);
-        if (res?.modifiedCount > 0) {
-          refetch();
-          toast.success("Payment success");
-          navigate("/");
-        }
+      toast.error(confirmError.message);
+    } else if (paymentIntent?.status === "succeeded") {
+      setTransactionId(paymentIntent.id);
+      const res = await addPremiumDate(user?.email, {
+        premium_date: Date.now() + milliSecond,
+        paymentIntent_Id: paymentIntent.id,
+      });
+      if (res?.modifiedCount > 0) {
+        refetch();
+        toast.success("Payment successful");
+        navigate("/");
       }
     }
   };
@@ -149,7 +144,7 @@ const PaymentForm = () => {
           </select>
         </div>
         <div className="space-y-1 text-sm">
-          <p>Price : $</p>
+          <p className="text-green-500">Price: ${price}</p>
         </div>
         <CardElement
           options={{
@@ -178,18 +173,24 @@ const PaymentForm = () => {
           >
             {error || " "}
           </p>
-          {transactionId && (
-            <p className="text-green-500">
-              Your transaction id is: {transactionId}
-            </p>
+          {!isExpired ? (
+            <Countdown />
+          ) : (
+            transactionId && (
+              <p className="text-green-500">
+                Your transaction id is: {transactionId}
+              </p>
+            )
           )}
         </div>
         <button
           disabled={!stripe || !clientSecret || !isExpired}
           type="submit"
-          className="btn btn-sm hover:bg-orange-200 hover:border-none bg-orange-200"
+          className={`btn btn-sm ${
+            isExpired ? "hover:bg-orange-200" : "bg-gray-300 cursor-not-allowed"
+          } hover:border-none bg-orange-200`}
         >
-          Pay for Premium membership
+          Pay for Premium Membership
         </button>
       </form>
     </div>
