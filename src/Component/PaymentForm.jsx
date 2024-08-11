@@ -1,8 +1,11 @@
+import toast from "react-hot-toast";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import { paymentIntent } from "../api/Payment";
-import toast from "react-hot-toast";
+import { addPremiumDate, paymentIntent } from "../api/Payment";
+import { useNavigate } from "react-router-dom";
+import useUser from "../hooks/useUser";
+import SmallLoader from "./SmallLoader";
 
 const PaymentForm = () => {
   const { user } = useAuth();
@@ -13,7 +16,18 @@ const PaymentForm = () => {
   const [hasInteracted, setHasInteracted] = useState(false);
   const [price, setPrice] = useState(200);
   let [transactionId, setTransactionId] = useState("");
+  let [isExpired, setIsExpired] = useState();
   let [milliSecond, setMilliSecond] = useState(60000);
+  const navigate = useNavigate();
+  const { userData, refetch, isLoading } = useUser();
+
+  useEffect(() => {
+    if (userData?.premium_date) {
+      const isExpired = new Date() > new Date(userData?.premium_date);
+      setIsExpired(isExpired);
+    }
+  }, [userData?.premium_date]);
+  console.log(isExpired);
 
   useEffect(() => {
     if (typeof price !== "number" || price < 1) {
@@ -56,10 +70,8 @@ const PaymentForm = () => {
     });
 
     if (error) {
-      console.log("payment error", error);
       setError(error.message);
     } else {
-      console.log("Payment Method", paymentMethod);
       setError("");
     }
 
@@ -75,17 +87,21 @@ const PaymentForm = () => {
         },
       });
 
-    // const updatedUserData = {
-    //   isPremium: true,
-    //   expiryDate: Date.now() + milliSecond,
-    // };
-
     if (confirmError) {
       toast.error(confirmError?.message);
     } else {
       if (paymentIntent?.status === "succeeded") {
-        toast.success("Payment success");
         setTransactionId(paymentIntent?.id);
+        const res = await addPremiumDate(user?.email, {
+          premium_date: Date.now() + milliSecond,
+          paymentIntent_Id: paymentIntent?.id,
+        });
+        console.log(res);
+        if (res?.modifiedCount > 0) {
+          refetch();
+          toast.success("Payment success");
+          navigate("/");
+        }
       }
     }
   };
@@ -101,6 +117,8 @@ const PaymentForm = () => {
   const handleCardFocus = () => {
     setHasInteracted(true);
   };
+
+  if (isLoading) return <SmallLoader />;
 
   return (
     <div className="mx-auto w-full space-y-3 card shrink-0 max-w-md shadow-xl bg-base-100 text-center px-4 pt-5 pb-7 mt-5">
@@ -167,7 +185,7 @@ const PaymentForm = () => {
           )}
         </div>
         <button
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || !isExpired}
           type="submit"
           className="btn btn-sm hover:bg-orange-200 hover:border-none bg-orange-200"
         >

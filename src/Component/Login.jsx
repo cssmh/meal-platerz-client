@@ -4,33 +4,50 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { addUser } from "../api/users";
 
 const Login = () => {
   const [view, setView] = useState(true);
   const { login, googleLogin, loading } = useAuth();
   const navigateTo = useNavigate();
   const location = useLocation();
-  const handleLogin = (e) => {
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    login(email, password)
-      .then(() => {
-        toast.success("logged in success");
-        navigateTo(location?.state ? location.state : "/");
-      })
-      .catch((err) => toast.error(err.message));
+
+    try {
+      const res = await login(email, password);
+      const userData = {
+        email: email.toLowerCase(),
+        name: res?.user?.displayName,
+      };
+      const response = await addUser(userData);
+      if (response?.acknowledged) {
+        toast.success("Logged in successfully");
+        navigateTo(location?.state || "/");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then(() => {
-        toast.success("User logged in success");
-        navigateTo(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await googleLogin();
+      const userData = {
+        email: res?.user?.email.toLowerCase(),
+        name: res?.user?.displayName,
+      };
+      const response = await addUser(userData);
+      if (response?.acknowledged) {
+        toast.success("User logged in successfully");
+        navigateTo(location?.state || "/");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
@@ -38,7 +55,7 @@ const Login = () => {
       <h1 className="text-2xl font-bold text-center">Login</h1>
       <form onSubmit={handleLogin} className="space-y-5">
         <div className="space-y-1 text-sm">
-          <label htmlFor="Your Email" className="block dark:text-gray-600">
+          <label htmlFor="email" className="block dark:text-gray-600">
             Your Email
           </label>
           <input
@@ -63,7 +80,7 @@ const Login = () => {
             style={{ outline: "none" }}
           />
           <span
-            className="absolute top-[36px] right-3"
+            className="absolute top-[36px] right-3 cursor-pointer"
             onClick={() => setView(!view)}
           >
             {view ? <FaRegEyeSlash /> : <FaRegEye />}

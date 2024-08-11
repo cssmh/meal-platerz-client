@@ -3,32 +3,41 @@ import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { addUser } from "../api/users";
 
 const Register = () => {
   const [view, setView] = useState(true);
-  const { createNewUser, updateProfileInfo, emailVerification } =
-    useAuth();
+  const { createNewUser, updateProfileInfo, emailVerification } = useAuth();
   const navigateTo = useNavigate();
   const location = useLocation();
-  
-  const handleRegister = (e) => {
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    createNewUser(email, password)
-      .then(() => {
-        updateProfileInfo(name, photo).then();
-        emailVerification().then();
-        toast.success("Register success");
-        navigateTo(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+
+    try {
+      await createNewUser(email, password);
+      await updateProfileInfo(name, photo);
+      await emailVerification();
+
+      const userData = {
+        email: email.toLowerCase(),
+        name: name,
+      };
+      const response = await addUser(userData);
+      if (response?.acknowledged) {
+        toast.success("Registration successful");
+        navigateTo(location?.state || "/");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
+
   return (
     <div className="my-6 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
       <h1 className="text-2xl font-bold text-center">Register</h1>
