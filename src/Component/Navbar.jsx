@@ -1,12 +1,16 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
+import useExpired from "../hooks/useExpired";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [showProfileOptions, setShowProfileOptions] = useState(false);
+  const isExpired = useExpired();
+  const location = useLocation();
+  const userRef = useRef(null);
 
   const handleProfileClick = () => {
     setShowProfileOptions(!showProfileOptions);
@@ -14,6 +18,10 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut().then().catch();
+  };
+
+  const getLinkClasses = (path) => {
+    return location.pathname === path ? "text-blue-500" : "hover:text-blue-500";
   };
 
   return (
@@ -24,7 +32,7 @@ const Navbar = () => {
         </p>
       </div> */}
       <div className="border-b border-base-300">
-        <div className="navbar min-h-[60px] max-w-7xl mx-auto py-0">
+        <div className="navbar min-h-[58px] max-w-7xl mx-auto py-0">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-sm btn-ghost lg:hidden">
@@ -47,58 +55,54 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive ? "text-blue-500" : ""
-                    }
-                  >
-                    Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/available-foods"
-                    className={({ isActive }) =>
-                      isActive ? "text-blue-500" : ""
-                    }
-                  >
-                    Available Foods
-                  </NavLink>
-                </li>
+                <Link
+                  to="/"
+                  className={`flex items-center p-[2px] ${getLinkClasses("/")}`}
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/available-foods"
+                  className={`flex items-center p-[2px] ${getLinkClasses(
+                    "/available-foods"
+                  )}`}
+                >
+                  Available Foods
+                </Link>
                 {user?.email && (
                   <>
-                    <li>
-                      <NavLink
-                        to="/add-food"
-                        className={({ isActive }) =>
-                          isActive ? "text-blue-500" : ""
-                        }
-                      >
-                        Add Food
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/manage-my-foods"
-                        className={({ isActive }) =>
-                          isActive ? "text-blue-500" : ""
-                        }
-                      >
-                        Manage My Foods
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/my-food-request"
-                        className={({ isActive }) =>
-                          isActive ? "text-blue-500" : ""
-                        }
-                      >
-                        My Food Request
-                      </NavLink>
-                    </li>
+                    <Link
+                      to="/add-food"
+                      className={`flex items-center p-[2px] ${getLinkClasses(
+                        "/add-food"
+                      )}`}
+                    >
+                      Add Food
+                    </Link>
+                    <Link
+                      to="/be-premium"
+                      className={`flex items-center p-[2px] ${getLinkClasses(
+                        "/be-premium"
+                      )}`}
+                    >
+                      Be Premium
+                    </Link>
+                    <Link
+                      to="/manage-my-foods"
+                      className={`flex items-center p-[2px] ${getLinkClasses(
+                        "/manage-my-foods"
+                      )}`}
+                    >
+                      Manage My Foods
+                    </Link>
+                    <Link
+                      to="/my-food-request"
+                      className={`flex items-center p-[2px] ${getLinkClasses(
+                        "/my-food-request"
+                      )}`}
+                    >
+                      My Food Request
+                    </Link>
                   </>
                 )}
               </ul>
@@ -110,75 +114,61 @@ const Navbar = () => {
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive ? "text-blue-500" : ""
-                  }
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/available-foods"
-                  className={({ isActive }) =>
-                    isActive ? "text-blue-500" : ""
-                  }
-                >
-                  Available Foods
-                </NavLink>
-              </li>
+              <Link
+                to="/"
+                className={`flex items-center p-2 ${getLinkClasses("/")}`}
+              >
+                Home
+              </Link>
+              <Link
+                to="/available-foods"
+                className={`flex items-center p-2 ${getLinkClasses(
+                  "/available-foods"
+                )}`}
+              >
+                Available Foods
+              </Link>
               {user?.email && (
                 <>
-                  <li>
-                    <NavLink
-                      to="/add-food"
-                      className={({ isActive }) =>
-                        isActive ? "text-blue-500" : ""
-                      }
-                    >
-                      Add Food
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/be-premium"
-                      className={({ isActive }) =>
-                        isActive ? "text-blue-500" : ""
-                      }
-                    >
-                      Be Premium
-                    </NavLink>
-                  </li>
+                  <Link
+                    to="/add-food"
+                    className={`flex items-center px-2 ${getLinkClasses(
+                      "/add-food"
+                    )}`}
+                  >
+                    Add Food
+                  </Link>
+                  <Link
+                    to="/be-premium"
+                    className={`flex items-center p-2 ${getLinkClasses(
+                      "/be-premium"
+                    )}`}
+                  >
+                    Be Premium
+                  </Link>
                 </>
               )}
               {user?.email && (
                 <li tabIndex={0}>
                   <details>
-                    <summary className="">Dashboard</summary>
-                    <ul className="p-2 menu menu-sm dropdown-content z-[1] w-[170px]">
-                      <li>
-                        <NavLink
-                          to="/manage-my-foods"
-                          className={({ isActive }) =>
-                            isActive ? "text-blue-500" : ""
-                          }
-                        >
-                          Manage My Foods
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          to="/my-food-request"
-                          className={({ isActive }) =>
-                            isActive ? "text-blue-500" : ""
-                          }
-                        >
-                          My Food Request
-                        </NavLink>
-                      </li>
+                    <summary>Dashboard</summary>
+                    <ul className="menu menu-sm dropdown-content z-[1] w-[170px]">
+                      <Link
+                        to="/manage-my-foods"
+                        className={`flex items-center p-[3px] ${getLinkClasses(
+                          "/manage-my-foods"
+                        )}`}
+                      >
+                        Manage My Foods
+                      </Link>
+                      <Link
+                        to="/my-food-request"
+                        className={`flex items-center p-[3px] ${getLinkClasses(
+                          "/my-food-request"
+                        )}`}
+                      >
+                        My Food Request
+                      </Link>
                     </ul>
                   </details>
                 </li>
@@ -195,7 +185,9 @@ const Navbar = () => {
               <label tabIndex={0} onClick={handleProfileClick}>
                 <img
                   src={user?.photoURL || defaultAvatar}
-                  className="w-9 rounded-full mr-2"
+                  className={`${
+                    !isExpired && "border-[3px] border-yellow-500"
+                  } w-9 rounded-full mr-2`}
                   alt="avatar"
                 />
               </label>
@@ -210,14 +202,14 @@ const Navbar = () => {
                     </p>
                   </li>
                   <li>
-                    <NavLink
+                    <Link
                       to="/my-profile"
                       className={({ isActive }) =>
                         isActive ? "text-blue-500" : ""
                       }
                     >
                       View Profile
-                    </NavLink>
+                    </Link>
                   </li>
                 </ul>
               )}
