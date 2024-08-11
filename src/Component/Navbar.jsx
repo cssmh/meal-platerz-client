@@ -131,16 +131,28 @@ const Navbar = () => {
                 </NavLink>
               </li>
               {user?.email && (
-                <li>
-                  <NavLink
-                    to="/add-food"
-                    className={({ isActive }) =>
-                      isActive ? "text-blue-500" : ""
-                    }
-                  >
-                    Add Food
-                  </NavLink>
-                </li>
+                <>
+                  <li>
+                    <NavLink
+                      to="/add-food"
+                      className={({ isActive }) =>
+                        isActive ? "text-blue-500" : ""
+                      }
+                    >
+                      Add Food
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/be-premium"
+                      className={({ isActive }) =>
+                        isActive ? "text-blue-500" : ""
+                      }
+                    >
+                      Be Premium
+                    </NavLink>
+                  </li>
+                </>
               )}
               {user?.email && (
                 <li tabIndex={0}>
