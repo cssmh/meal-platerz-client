@@ -15,6 +15,7 @@ import MyPending from "../Pages/MyPending/MyPending";
 import { getFood } from "../api/Foods";
 import Blogs from "../Component/Blogs";
 import AllReviews from "../Component/AllReviews";
+import Payment from "../Component/Payment";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +43,14 @@ const Root = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/be-premium",
+        element: (
+          <PrivateRoute>
+            <Payment />
           </PrivateRoute>
         ),
       },
