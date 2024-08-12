@@ -62,7 +62,7 @@ const MyProfile = () => {
             />
           </div>
           <div className="flex flex-col space-y-4 sm:ml-6">
-            <h2 className="text-3xl font-semibold text-gray-800">{name}</h2>
+            <h2 className="text-2xl font-semibold text-gray-800">{name}</h2>
             <div className="flex flex-col space-y-2 text-gray-600">
               <div className="flex items-center space-x-2">
                 <svg
@@ -103,13 +103,13 @@ const MyProfile = () => {
         <div className="mt-8 text-center">
           {!isExpired && (
             <>
-              <p className="text-lg font-semibold text-green-600">
+              <p className="text-md font-semibold text-green-600">
                 Congratulations on being a Premium member!
               </p>
-              <p className="text-lg my-2">Time Remaining:</p>
+              <p className="text-md my-2">Time Remaining:</p>
             </>
           )}
-          <div className="p-4 bg-gray-200 rounded-lg shadow-md inline-block">
+          <div className="p-3 bg-gray-200 rounded-lg shadow-md inline-block">
             <Countdown />
           </div>
         </div>

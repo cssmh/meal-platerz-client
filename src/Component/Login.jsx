@@ -19,15 +19,13 @@ const Login = () => {
 
     try {
       const res = await login(email, password);
+      toast.success("Logged in successfully");
+      navigateTo(location?.state || "/");
       const userData = {
         email: email.toLowerCase(),
         name: res?.user?.displayName,
       };
-      const response = await addUser(userData);
-      if (response?.acknowledged) {
-        toast.success("Logged in successfully");
-        navigateTo(location?.state || "/");
-      }
+      await addUser(userData);
     } catch (err) {
       toast.error(err.message);
     }
@@ -36,15 +34,13 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       const res = await googleLogin();
+      toast.success("User logged in successfully");
+      navigateTo(location?.state || "/");
       const userData = {
         email: res?.user?.email.toLowerCase(),
         name: res?.user?.displayName,
       };
-      const response = await addUser(userData);
-      if (response?.acknowledged) {
-        toast.success("User logged in successfully");
-        navigateTo(location?.state || "/");
-      }
+      await addUser(userData);
     } catch (err) {
       toast.error(err.message);
     }

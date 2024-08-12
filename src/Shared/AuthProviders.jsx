@@ -61,7 +61,6 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       const getEmail = currentUser?.email || user?.email;
       const emailToSend = { email: getEmail };
-      setLoading(false);
       if (getEmail) {
         const res = await setToken(emailToSend);
         console.log("login token res", res);
@@ -69,6 +68,7 @@ const AuthProviders = ({ children }) => {
         const res = await clearCookie(emailToSend);
         console.log("logout token res", res);
       }
+      setLoading(false);
     });
     return () => {
       unSubscribe();

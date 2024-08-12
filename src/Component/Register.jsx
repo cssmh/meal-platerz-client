@@ -23,16 +23,14 @@ const Register = () => {
       await createNewUser(email, password);
       await updateProfileInfo(name, photo);
       await emailVerification();
+      toast.success("Registration successful");
+      navigateTo(location?.state || "/");
 
       const userData = {
         email: email.toLowerCase(),
         name: name,
       };
-      const response = await addUser(userData);
-      if (response?.acknowledged) {
-        toast.success("Registration successful");
-        navigateTo(location?.state || "/");
-      }
+      await addUser(userData);
     } catch (err) {
       toast.error(err.message);
     }

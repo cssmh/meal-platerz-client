@@ -26,9 +26,9 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      {/* <div className="bg-primary/50 py-[1px]">
+      {/* <div className="bg-primary/40 py-[1px]">
         <p className="text-[13px] text-white px-3 md:px-12">
-          Contact: +880176761606*
+          Contact: +880176761606* Offer!! Be our premium member!!
         </p>
       </div> */}
       <div className="border-b border-base-300">
@@ -186,7 +186,9 @@ const Navbar = () => {
                 <img
                   src={user?.photoURL || defaultAvatar}
                   className={`${
-                    !isExpired && "border-[3px] border-yellow-500"
+                    user?.email && !isExpired
+                      ? "border-[3px] border-yellow-500"
+                      : ""
                   } w-9 rounded-full mr-2`}
                   alt="avatar"
                 />
