@@ -36,6 +36,10 @@ const MyFoods = () => {
       </Helmet>
       {isLoading ? (
         <SmallLoader />
+      ) : myFoods.length === 0 ? (
+        <p className="text-redFood min-h-[76vh] flex justify-center items-center">
+          No food added by you
+        </p>
       ) : (
         <div className="overflow-x-auto my-3">
           <table className="table max-w-7xl mx-auto">

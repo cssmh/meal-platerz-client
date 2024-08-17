@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 import useUser from "./useUser";
 
-const useExpired = () => {
+const useIsPremium = () => {
   const { userData, isLoading } = useUser();
-  const [isExpired, setIsExpired] = useState(false);
+  const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
     let interval;
@@ -13,9 +13,11 @@ const useExpired = () => {
         if (userData?.premium_date) {
           const premiumDate = moment(parseInt(userData.premium_date, 10));
           const now = moment();
-          setIsExpired(premiumDate.isBefore(now, "second"));
+          // If the premium date is after now, the user is still premium
+          setIsPremium(premiumDate.isAfter(now, "second"));
         } else {
-          setIsExpired(true);
+          // If there's no premium_date, consider the user as not premium
+          setIsPremium(false);
         }
       }
     };
@@ -32,7 +34,7 @@ const useExpired = () => {
     };
   }, [userData, isLoading]);
 
-  return isExpired;
+  return isPremium;
 };
 
-export default useExpired;
+export default useIsPremium;

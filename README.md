@@ -56,6 +56,12 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
    - Interactive data visualizations with React CountUp and Google Charts.
    - Booking status management and prevention of duplicate listings.
    - Pagination for efficient search and results display.
+   
+8. **New Feature: Payment for Premium Membership**
+
+   - Users can now purchase premium membership for enhanced features.
+   - Payment form for purchasing premium membership using Tailwind CSS for styling.
+   - Continuous check for premium membership expiration to ensure up-to-date access.
 
 ## Packages Used
 

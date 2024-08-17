@@ -11,7 +11,7 @@ const MainLayout = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1500);
   }, []);
 
   if (loading) return <BigLoader />;

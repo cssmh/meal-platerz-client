@@ -15,7 +15,7 @@ import MyPending from "../Pages/MyPending/MyPending";
 import { getFood } from "../api/Foods";
 import Blogs from "../Component/Blogs";
 import AllReviews from "../Component/AllReviews";
-import Payment from "../Component/Payment";
+import Payment from "../Pages/Payment/Payment";
 const Root = createBrowserRouter([
   {
     path: "/",

@@ -1,16 +1,15 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
-import useExpired from "../hooks/useExpired";
+import useIsPremium from "../hooks/useIsPremium";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [showProfileOptions, setShowProfileOptions] = useState(false);
-  const isExpired = useExpired();
+  const isPremium = useIsPremium();
   const location = useLocation();
-  const userRef = useRef(null);
 
   const handleProfileClick = () => {
     setShowProfileOptions(!showProfileOptions);
@@ -186,7 +185,7 @@ const Navbar = () => {
                 <img
                   src={user?.photoURL || defaultAvatar}
                   className={`${
-                    user?.email && !isExpired
+                    user?.email && isPremium
                       ? "border-[3px] border-yellow-500"
                       : ""
                   } w-9 rounded-full mr-2`}

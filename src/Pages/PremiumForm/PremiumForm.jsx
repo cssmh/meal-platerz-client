@@ -1,12 +1,12 @@
 import toast from "react-hot-toast";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import useAuth from "../hooks/useAuth";
-import { addPremiumDate, paymentIntent } from "../api/Payment";
-import useUser from "../hooks/useUser";
-import SmallLoader from "./SmallLoader";
-import Countdown from "./Countdown";
-import useExpired from "../hooks/useExpired";
+import useAuth from "../../hooks/useAuth";
+import { addPremiumDate, paymentIntent } from "../../api/Payment";
+import useUser from "../../hooks/useUser";
+import SmallLoader from "../../Component/SmallLoader";
+import Countdown from "../../Component/Countdown";
+import useIsPremium from "../../hooks/useIsPremium";
 import { Helmet } from "react-helmet-async";
 
 const PremiumForm = () => {
@@ -19,8 +19,7 @@ const PremiumForm = () => {
   const [price, setPrice] = useState(200);
   const [milliSecond, setMilliSecond] = useState(60000);
   const { userData, refetch, isLoading } = useUser();
-  const isExpired = useExpired();
-  console.log(isExpired);
+  const isPremium = useIsPremium();
 
   useEffect(() => {
     if (typeof price !== "number" || price < 1) {
@@ -168,18 +167,18 @@ const PremiumForm = () => {
             >
               {error || " "}
             </p>
-            {!isExpired && <Countdown />}
-            {!isExpired && userData?.paymentIntent_Id && (
+            {isPremium && <Countdown />}
+            {isPremium && userData?.paymentIntent_Id && (
               <p className="text-green-500 ">
                 Your transaction id is: {userData.paymentIntent_Id}
               </p>
             )}
           </div>
           <button
-            disabled={!stripe || !clientSecret || !isExpired}
+            disabled={!stripe || !clientSecret || isPremium}
             type="submit"
             className={`btn btn-sm ${
-              isExpired
+              !isPremium
                 ? "hover:bg-orange-200"
                 : "bg-gray-300 cursor-not-allowed"
             } hover:border-none bg-orange-200`}
@@ -188,9 +187,9 @@ const PremiumForm = () => {
           </button>
         </form>
         <p className="text-sm text-green-500">
-          {userData?.premium_date && isExpired
-            ? "Your premium membership has expired."
-            : "Congratulations on being a Premium member!"}
+          {isPremium
+            ? "Congratulations on being a Premium member!"
+            : "Your premium membership has expired."}
         </p>
       </div>
       <p className="text-center my-5 max-w-xl mx-auto text-base bg-rose-100 text-rose-600 border border-rose-300 rounded-lg py-1 px-4 shadow-sm">

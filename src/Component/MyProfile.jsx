@@ -7,14 +7,14 @@ import toast from "react-hot-toast";
 import useMyFoods from "../hooks/useMyFoods";
 import { updateMyImgName } from "../api/Foods";
 import Countdown from "./Countdown";
-import useExpired from "../hooks/useExpired";
+import useIsPremium from "../hooks/useIsPremium";
 
 const MyProfile = () => {
   const { user, updateProfileInfo } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(user?.displayName);
   const [photo, setPhoto] = useState(user?.photoURL);
-  const isExpired = useExpired();
+  const isPremium = useIsPremium();
   const { myFoods } = useMyFoods();
 
   const closeModal = () => setIsOpen(false);
@@ -57,7 +57,7 @@ const MyProfile = () => {
               src={photo || defaultAvatar}
               alt="Profile"
               className={`${
-                !isExpired ? "border-yellow-300" : "border-gray-300"
+                isPremium ? "border-yellow-300" : "border-gray-300"
               } object-center w-full h-full rounded-full border-4 shadow-md`}
             />
           </div>
@@ -101,7 +101,7 @@ const MyProfile = () => {
           </div>
         </div>
         <div className="mt-8 text-center">
-          {!isExpired && (
+          {isPremium && (
             <>
               <p className="text-md font-semibold text-green-600">
                 Congratulations on being a Premium member!

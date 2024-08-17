@@ -5,6 +5,7 @@ import Stats from "./Stats";
 import WeOffer from "./WeOffer";
 import OurApp from "./OurApp";
 import OurClient from "./OurClient";
+import BePremium from "./BePremium";
 
 const Home = () => {
   return (
@@ -14,8 +15,9 @@ const Home = () => {
       </Helmet>
       <Banner />
       <FeaturedFoods />
-      <OurApp />
+      <BePremium />
       <WeOffer />
+      <OurApp />
       <OurClient />
       <Stats />
     </div>

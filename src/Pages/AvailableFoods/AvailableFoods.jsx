@@ -10,10 +10,10 @@ const AvailableFoods = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const isMobile = useResLimit("(max-width: 767px)");
-  const [limit, setLimit] = useState(isMobile ? 4 : 8);
+  const [limit, setLimit] = useState(isMobile ? 1 : 4);
 
   useEffect(() => {
-    setLimit(isMobile ? 4 : 8);
+    setLimit(isMobile ? 1 : 4);
     setPage(1);
   }, [isMobile]);
 
