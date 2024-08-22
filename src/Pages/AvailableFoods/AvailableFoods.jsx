@@ -40,7 +40,7 @@ const AvailableFoods = () => {
   return (
     <div>
       <Helmet>
-        <title>MealPlaterz | Available Foods</title>
+        <title>MealPlaterz | available Foods</title>
       </Helmet>
       <div className="text-center mt-3 mb-2">
         <input
@@ -54,7 +54,7 @@ const AvailableFoods = () => {
       </div>
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto mt-4">
-          {[...Array(8)].map((_, index) => (
+          {[...Array(4)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
         </div>

@@ -27,11 +27,13 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
       className="group border flex flex-col shadow-lg rounded-lg bg-white hover:scale-105 transition-all duration-300 overflow-hidden"
     >
       <div className="flex-grow">
-        <img
-          alt="Food"
-          src={food_image}
-          className="w-full h-[200px] md:h-48 object-cover object-center p-3 transition-transform duration-300 transform group-hover:scale-105 group-hover:shadow-xl"
-        />
+        <div className="group-hover:bg-redFood">
+          <img
+            alt="Food"
+            src={food_image}
+            className="w-full rounded-full border-2 border-white h-[200px] md:h-48 object-cover object-center p-3 transition-transform duration-300 transform group-hover:bg-white"
+          />
+        </div>
         <div className="px-3 text-left flex-1">
           <div className="mb-2">
             <h3 className="text-lg font-semibold text-gray-800">
@@ -52,26 +54,28 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
               Phone: {donator_phone}
             </p>
           </div>
-          <Link
-            to={`/food/${_id}`}
-            className="inline-block bg-red-500 text-white px-4 py-2 rounded-md text-sm font-semibold"
-          >
-            View Details
-          </Link>
         </div>
       </div>
-      <div className="p-2 flex justify-between items-center bg-gray-100 gap-1 mt-2">
-        <div className="flex items-center justify-center gap-1">
-          <img
-            className="w-8 h-8 rounded-full object-cover"
-            src={donator_image}
-            alt="donator"
-          />
-          <p className="text-sm text-gray-800 truncate">{donator_name}</p>
+      <div>
+        <Link
+          to={`/food/${_id}`}
+          className="mx-3 inline-block bg-red-500 text-white px-4 py-2 rounded-md text-sm font-semibold"
+        >
+          View Details
+        </Link>
+        <div className="p-2 flex justify-between items-center bg-gray-100 gap-1 mt-2">
+          <div className="flex items-center justify-center gap-1">
+            <img
+              className="w-8 h-8 rounded-full object-cover"
+              src={donator_image}
+              alt="donator"
+            />
+            <p className="text-sm text-gray-800 truncate">{donator_name}</p>
+          </div>
+          <p className="text-xs text-gray-600 truncate">
+            Location: <span className="text-redFood">{pickup_location}</span>
+          </p>
         </div>
-        <p className="text-xs text-gray-600 truncate">
-          Location: <span className="text-redFood">{pickup_location}</span>
-        </p>
       </div>
     </div>
   );
