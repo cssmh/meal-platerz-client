@@ -50,14 +50,14 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
    - Manage food listings and availability.
    - Update profile information and preferences.
 
-7. **Advanced Functionalities:**
+6. **Advanced Functionalities:**
 
    - Secure JWT authentication for user authorization.
    - Interactive data visualizations with React CountUp and Google Charts.
    - Booking status management and prevention of duplicate listings.
    - Pagination for efficient search and results display.
-   
-8. **New Feature: Payment for Premium Membership**
+
+7. **New Feature: Payment for Premium Membership**
 
    - Users can now purchase premium membership for enhanced features.
    - Payment form for purchasing premium membership using Tailwind CSS for styling.
@@ -67,7 +67,6 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
 
 ### Dependencies
 
-- [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query)
 - [aos](https://www.npmjs.com/package/aos)
 - [axios](https://www.npmjs.com/package/axios)
 - [firebase](https://www.npmjs.com/package/firebase)
@@ -78,6 +77,7 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
 - [react-stripe](https://github.com/stripe/react-stripe-js)
 - [react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
 - [react-icons](https://www.npmjs.com/package/react-icons)
+- [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query)
 - [npm i @headlessui/react](https://www.npmjs.com/package/@headlessui/react)
 - [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)
 - [react-router-dom](https://www.npmjs.com/package/react-router-dom)

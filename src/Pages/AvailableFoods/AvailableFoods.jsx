@@ -53,7 +53,7 @@ const AvailableFoods = () => {
         />
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto mt-4">
           {[...Array(4)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
@@ -69,7 +69,7 @@ const AvailableFoods = () => {
               <h1 className="text-center font-semibold text-lg md:text-xl">
                 Available Foods Sorted by Expiration Date
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-7xl mx-auto mt-2">
                 {data?.result?.map((food, idx) => (
                   <FoodsCard
                     key={food._id}
