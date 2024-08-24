@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
@@ -7,6 +7,7 @@ import useIsPremium from "../hooks/useIsPremium";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [isDown, setIsDown] = useState(false);
   const [showProfileOptions, setShowProfileOptions] = useState(false);
   const isPremium = useIsPremium();
   const location = useLocation();
@@ -23,8 +24,20 @@ const Navbar = () => {
     return location.pathname === path ? "text-blue-500" : "hover:text-blue-500";
   };
 
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 100) {
+        setIsDown(true);
+      } else {
+        setIsDown(false);
+      }
+    };
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
   return (
-    <header className="bg-opacity-40 sticky top-0 left-0 right-0 z-50 bg-white shadow-sm">
+    <header className="sticky bg-opacity-40 top-0 left-0 right-0 z-50 bg-white shadow-sm">
       {/* <div className="bg-primary/40 py-[1px]">
         <p className="text-[13px] text-white px-3 md:px-12">
           Contact: +880176761606* Offer!! Be our premium member!!
@@ -150,7 +163,7 @@ const Navbar = () => {
               {user?.email && (
                 <li tabIndex={0}>
                   <details>
-                    <summary>Dashboard</summary>
+                    <summary className="px-2">Dashboard</summary>
                     <ul className="menu menu-sm dropdown-content z-[1] w-[170px]">
                       <Link
                         to="/manage-my-foods"

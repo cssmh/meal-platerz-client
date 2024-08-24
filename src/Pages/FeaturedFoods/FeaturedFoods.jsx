@@ -26,8 +26,8 @@ const FeaturedFoods = () => {
   });
 
   return (
-    <div>
-      <h1 className="text-center font-semibold text-lg md:text-xl mb-5">
+    <div className="relative -top-12 lg:-top-[30px]">
+      <h1 className="text-center font-semibold text-lg md:text-xl mb-7">
         Featured Foods Sorted by Quantity (Highest to Lowest)
       </h1>
       {error ? (

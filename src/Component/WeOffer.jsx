@@ -1,6 +1,6 @@
 const WeOffer = () => {
   return (
-    <div className="mb-8">
+    <div className="relative -top-[20px] mb-8">
       <h2 className="mb-8 text-2xl font-semibold leading-none text-center px-3 md:px-0">
         What do we have to offer<span className="text-redFood">?</span>
       </h2>
