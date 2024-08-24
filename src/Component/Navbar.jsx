@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 bg-white shadow-sm">
+    <header className="bg-opacity-40 sticky top-0 left-0 right-0 z-50 bg-white shadow-sm">
       {/* <div className="bg-primary/40 py-[1px]">
         <p className="text-[13px] text-white px-3 md:px-12">
           Contact: +880176761606* Offer!! Be our premium member!!

@@ -27,7 +27,7 @@ const FeaturedFoods = () => {
 
   return (
     <div>
-      <h1 className="text-center font-semibold text-lg md:text-xl my-5">
+      <h1 className="text-center font-semibold text-lg md:text-xl mb-5">
         Featured Foods Sorted by Quantity (Highest to Lowest)
       </h1>
       {error ? (
@@ -42,7 +42,7 @@ const FeaturedFoods = () => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1200px] mx-auto">
             {data?.map((foods, idx) => (
               <FoodsCard
                 key={foods._id}

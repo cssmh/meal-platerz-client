@@ -109,7 +109,7 @@ const PremiumForm = () => {
   return (
     <div>
       <Helmet>
-        <title>MealPlaterz | Be Premium</title>
+        <title>Be Premium | MealPlaterz</title>
       </Helmet>
       <div className="mx-auto w-full space-y-3 card shrink-0 max-w-md shadow-xl bg-base-100 text-center px-4 pt-5 pb-7 mt-6">
         <h3 className="text-lg font-semibold">Process Your Payments</h3>

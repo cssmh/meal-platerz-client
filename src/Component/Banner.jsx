@@ -7,7 +7,7 @@ const Banner = () => {
       data-aos="fade-up"
       data-aos-duration="900"
       data-aos-anchor-placement="top-bottom"
-      className="hero min-h-[60vh] lg:min-h-[80vh] bg-cover"
+      className="hero min-h-[60vh] lg:min-h-[80vh] bg-cover relative -top-[59px]"
       style={{
         backgroundImage: `url(${BannerImg})`,
         backgroundSize: "cover",
