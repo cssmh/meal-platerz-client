@@ -7,7 +7,7 @@ import useUser from "../../hooks/useUser";
 import SmallLoader from "../../Component/SmallLoader";
 import Countdown from "../../Component/Countdown";
 import useIsPremium from "../../hooks/useIsPremium";
-import { Helmet } from "react-helmet-async";
+import PlaterHelmet from "../../Component/PlaterHelmet";
 
 const PremiumForm = () => {
   const { user } = useAuth();
@@ -108,9 +108,7 @@ const PremiumForm = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>Be Premium | MealPlaterz</title>
-      </Helmet>
+      <PlaterHelmet title={"Be Premium"} />
       <div className="mx-auto w-full space-y-3 card shrink-0 max-w-md shadow-xl bg-base-100 text-center px-4 pt-5 pb-7 mt-6">
         <h3 className="text-lg font-semibold">Process Your Payments</h3>
         <form onSubmit={handleSubmit} className="space-y-3">

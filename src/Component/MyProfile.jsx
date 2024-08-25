@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import defaultAvatar from "../assets/default.jpg";
-import { Helmet } from "react-helmet-async";
 import useAuth from "../hooks/useAuth";
 import EditProfileModal from "../Pages/Modal/EditProfileModal";
 import toast from "react-hot-toast";
@@ -8,6 +7,7 @@ import useMyFoods from "../hooks/useMyFoods";
 import { updateMyImgName } from "../api/Foods";
 import Countdown from "./Countdown";
 import useIsPremium from "../hooks/useIsPremium";
+import PlaterHelmet from "./PlaterHelmet";
 
 const MyProfile = () => {
   const { user, updateProfileInfo } = useAuth();
@@ -47,9 +47,7 @@ const MyProfile = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen p-8">
-      <Helmet>
-        <title>MealPlaterz | My Profile</title>
-      </Helmet>
+      <PlaterHelmet title={"My Profile"} />
       <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
         <div className="flex flex-col sm:flex-row items-center">
           <div className="w-32 h-32 mb-6 sm:mb-0 sm:w-48 sm:h-48">

@@ -1,11 +1,11 @@
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
 import { addFood } from "../../api/Foods";
 import { TbFidgetSpinner } from "react-icons/tb";
 import useMyFoods from "../../hooks/useMyFoods";
 import toast from "react-hot-toast";
+import PlaterHelmet from "../../Component/PlaterHelmet";
 
 const AddFood = () => {
   const { user } = useAuth();
@@ -92,9 +92,7 @@ const AddFood = () => {
 
   return (
     <div className="my-5">
-      <Helmet>
-        <title>MealPlaterz | Add Food</title>
-      </Helmet>
+      <PlaterHelmet title={"Add Food"} />
       <form onSubmit={handleAddFood} className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row gap-3">
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">

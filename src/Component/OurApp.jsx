@@ -3,7 +3,7 @@ import appStore from "../assets/app.png";
 
 const OurApp = () => {
   return (
-    <section className="relative -top-[10px] bg-gradient-to-br from-purple-400 to-blue-400 my-9">
+    <section className="bg-gradient-to-br from-purple-400 to-blue-400 my-5">
       <div className="container mx-auto flex flex-col justify-around p-4 text-center md:p-10 lg:flex-row">
         <div
           data-aos="fade-up"

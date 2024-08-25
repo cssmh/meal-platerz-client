@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import { getMyPending, unavailableId } from "../../api/Foods";
 import SmallLoader from "../../Component/SmallLoader";
+import PlaterHelmet from "../../Component/PlaterHelmet";
 
 const MyPending = () => {
   const { loading, user } = useAuth();
@@ -37,6 +38,7 @@ const MyPending = () => {
 
   return (
     <div>
+      <PlaterHelmet title={"User Request"} />
       {requestedData?.length === 0 ? (
         <p className="text-center my-[10px] text-redFood text-xl italic">
           No one Requested for This Food

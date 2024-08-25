@@ -11,6 +11,7 @@ const Navbar = () => {
   const [showProfileOptions, setShowProfileOptions] = useState(false);
   const isPremium = useIsPremium();
   const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const handleProfileClick = () => {
     setShowProfileOptions(!showProfileOptions);
@@ -26,7 +27,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 530) {
         setIsDown(true);
       } else {
         setIsDown(false);
@@ -37,7 +38,15 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky bg-opacity-40 top-0 left-0 right-0 z-50 bg-white shadow-sm">
+    <header
+      className={`sticky top-0 left-0 right-0 z-50 bg-white shadow-sm ${
+        isHome
+          ? isDown
+            ? "bg-opacity-100"
+            : "bg-opacity-30"
+          : "bg-opacity-100"
+      }`}
+    >
       {/* <div className="bg-primary/40 py-[1px]">
         <p className="text-[13px] text-white px-3 md:px-12">
           Contact: +880176761606* Offer!! Be our premium member!!

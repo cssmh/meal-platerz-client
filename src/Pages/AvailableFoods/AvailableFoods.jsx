@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import FoodsCard from "../FoodsCard/FoodsCard";
 import useResLimit from "../../hooks/useResLimit";
 import SkeletonCard from "../SkeletonCard";
 import { useQuery } from "@tanstack/react-query";
 import { getAllFoods } from "../../api/Foods";
+import PlaterHelmet from "../../Component/PlaterHelmet";
 
 const AvailableFoods = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,9 +39,7 @@ const AvailableFoods = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>MealPlaterz | available Foods</title>
-      </Helmet>
+      <PlaterHelmet title={"Available Foods"} />
       <div className="text-center mt-3 mb-2">
         <input
           type="text"
@@ -69,7 +67,7 @@ const AvailableFoods = () => {
               <h1 className="text-center font-semibold text-lg md:text-xl">
                 Available Foods Sorted by Expiration Date
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-7xl mx-auto mt-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto mt-2">
                 {data?.result?.map((food, idx) => (
                   <FoodsCard
                     key={food._id}

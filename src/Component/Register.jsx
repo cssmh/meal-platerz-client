@@ -4,6 +4,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { addUser } from "../api/users";
+import PlaterHelmet from "./PlaterHelmet";
 
 const Register = () => {
   const [view, setView] = useState(true);
@@ -38,6 +39,7 @@ const Register = () => {
 
   return (
     <div className="my-6 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
+      <PlaterHelmet title={"Register"} />
       <h1 className="text-2xl font-bold text-center">Register</h1>
       <form onSubmit={handleRegister} className="space-y-5">
         <div className="space-y-1 text-sm">

@@ -1,9 +1,9 @@
 import swal from "sweetalert";
-import { Helmet } from "react-helmet-async";
 import MyFoodsRow from "../MyFoodsRow/MyFoodsRow";
 import { deleteMyFood } from "../../api/Foods";
 import useMyFoods from "../../hooks/useMyFoods";
 import SmallLoader from "../../Component/SmallLoader";
+import PlaterHelmet from "../../Component/PlaterHelmet";
 
 const MyFoods = () => {
   const { isLoading, myFoods, refetch, user } = useMyFoods();
@@ -31,9 +31,7 @@ const MyFoods = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>MealPlaterz | My Foods</title>
-      </Helmet>
+      <PlaterHelmet title={"My Foods"} />
       {isLoading ? (
         <SmallLoader />
       ) : myFoods.length === 0 ? (

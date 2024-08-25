@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const BePremium = () => {
   return (
-    <div className="relative -top-[30px] bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-8 rounded-md shadow-lg flex flex-col md:flex-row items-center justify-between my-7">
+    <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-8 rounded-md shadow-lg flex flex-col md:flex-row items-center justify-between mb-12">
       <div className="flex items-center space-x-4">
         <FaStar className="text-yellow-400 text-4xl animate-pulse" />
         <div>

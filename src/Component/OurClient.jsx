@@ -14,7 +14,7 @@ const OurClient = () => {
   });
 
   return (
-    <div className="max-w-[1220px] mx-auto">
+    <div className="max-w-[1220px] mx-auto mt-10">
       <div className="text-redFood text-3xl md:text-5xl text-center font-medium">
         What Our Clients Say
       </div>

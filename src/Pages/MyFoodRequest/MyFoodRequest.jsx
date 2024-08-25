@@ -1,9 +1,9 @@
 import swal from "sweetalert";
-import { Helmet } from "react-helmet-async";
 import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
 import { deleteMyRequest } from "../../api/Foods";
 import SmallLoader from "../../Component/SmallLoader";
 import useMyRequest from "../../hooks/useMyRequest";
+import PlaterHelmet from "../../Component/PlaterHelmet";
 
 const MyFoodRequest = () => {
   const { isLoading, myFoodRequest, refetch, user } = useMyRequest();
@@ -33,9 +33,7 @@ const MyFoodRequest = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>MealPlaterz | My Food Request</title>
-      </Helmet>
+      <PlaterHelmet title={"My Food Request"} />
       <div>
         {myFoodRequest?.length === 0 ? (
           <p className="text-center my-3 text-redFood text-xl italic">

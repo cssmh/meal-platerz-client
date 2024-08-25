@@ -1,15 +1,13 @@
+import PlaterHelmet from "./PlaterHelmet";
 import bannerImg from "../assets/food-banner.jpg";
 import { FaRegClock } from "react-icons/fa";
 import { BsPeople } from "react-icons/bs";
 import { AiOutlineFileText } from "react-icons/ai";
-import { Helmet } from "react-helmet-async";
 
 const Blogs = () => {
   return (
     <div className="bg-gray-100 py-6">
-      <Helmet>
-        <title>MealPlaterz - Blogs</title>
-      </Helmet>
+      <PlaterHelmet title={"Blogs"} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl md:text-3xl font-semibold text-center mb-6">
           Community Food Sharing Blogs

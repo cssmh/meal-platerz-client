@@ -10,6 +10,7 @@ import ReviewModal from "../Pages/Modal/ReviewModal";
 import useAuth from "../hooks/useAuth";
 import { FaTrash, FaPlus } from "react-icons/fa";
 import toast from "react-hot-toast";
+import PlaterHelmet from "./PlaterHelmet";
 
 const AllReviews = () => {
   const { user } = useAuth();
@@ -67,6 +68,7 @@ const AllReviews = () => {
 
   return (
     <div className="bg-gray-100 py-6">
+      <PlaterHelmet title={"All Reviews"} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl md:text-3xl font-semibold text-center">
           What Our Clients Say
