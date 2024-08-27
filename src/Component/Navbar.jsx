@@ -43,7 +43,7 @@ const Navbar = () => {
         isHome
           ? isDown
             ? "bg-opacity-100"
-            : "bg-opacity-30"
+            : "bg-opacity-40"
           : "bg-opacity-100"
       }`}
     >

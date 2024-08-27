@@ -1,24 +1,21 @@
 const SkeletonCard = () => {
   return (
-    <div className="flex flex-col shadow-lg rounded-lg bg-white mb-1">
-      <div className="flex-grow">
-        <div className="w-full h-[200px] md:h-32 bg-gray-200 animate-pulse rounded-2xl p-3"></div>
-        <div className="px-3 text-left flex-1">
-          <div className="mb-2">
-            <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4 mb-2"></div>
-            <div className="h-4 bg-gray-200 animate-pulse rounded w-1/2 mb-1"></div>
-            <div className="h-4 bg-gray-200 animate-pulse rounded w-2/3 mb-1"></div>
-            <div className="h-4 bg-gray-200 animate-pulse rounded w-1/3 mb-1"></div>
-          </div>
-          <div className="inline-block bg-gray-200 animate-pulse h-8 w-24 rounded-md"></div>
+    <div className="mx-2 md:mx-0 flex flex-col bg-white shadow-lg rounded-lg overflow-hidden mt-1 mb-6">
+      <div className="relative w-full h-48 bg-gray-200 animate-pulse"></div>
+      <div className="p-3 flex flex-col justify-between flex-grow">
+        <div className="mb-4">
+          <div className="h-6 bg-gray-200 animate-pulse rounded w-3/4 mb-2"></div>
+          <div className="h-4 bg-gray-200 animate-pulse rounded w-1/2 mb-1"></div>
+          <div className="h-4 bg-gray-200 animate-pulse rounded w-2/3 mb-1"></div>
+          <div className="h-4 bg-gray-200 animate-pulse rounded w-1/3 mb-1"></div>
         </div>
-      </div>
-      <div className="p-2 flex justify-between items-center bg-gray-100 gap-1 mt-2">
-        <div className="flex items-center justify-center gap-1">
-          <div className="w-8 h-8 bg-gray-200 animate-pulse rounded-full"></div>
+        <div className="flex items-center mt-4">
+          <div className="w-10 h-10 bg-gray-200 animate-pulse rounded-full mr-2"></div>
           <div className="h-4 bg-gray-200 animate-pulse rounded w-1/2"></div>
         </div>
-        <div className="h-4 bg-gray-200 animate-pulse rounded w-1/3"></div>
+      </div>
+      <div className="p-3 bg-gray-100 border-t border-gray-200">
+        <div className="block text-center bg-gray-200 animate-pulse h-10 rounded-lg"></div>
       </div>
     </div>
   );

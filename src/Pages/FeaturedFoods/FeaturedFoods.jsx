@@ -35,14 +35,14 @@ const FeaturedFoods = () => {
           An error occurred while fetching Featured Foods!
         </div>
       ) : isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-[1300px] mx-auto md:mx-2 lg:mx-auto">
           {[...Array(skeletonSize)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1200px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-[1300px] mx-auto">
             {data?.map((foods, idx) => (
               <FoodsCard
                 key={foods._id}

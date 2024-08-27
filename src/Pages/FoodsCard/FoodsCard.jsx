@@ -24,7 +24,7 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
       data-aos="fade-up"
       data-aos-duration={aosDuration}
       data-aos-anchor-placement="center-bottom"
-      className="group flex flex-col bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      className="group flex flex-col bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
     >
       <div className="relative">
         <img
@@ -38,12 +38,12 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
           </div>
         )}
       </div>
-      <div className="p-4 flex flex-col justify-between flex-grow">
+      <div className="p-3 flex flex-col justify-between flex-grow">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 leading-tight">
+          <h3 className="text-lg font-semibold text-gray-900 leading-tight">
             {food_name}
           </h3>
-          <p className="text-sm text-gray-600 mt-2">
+          <p className="text-sm text-gray-600 mt-1">
             Quantity: {food_quantity} person{food_quantity > 1 ? "s" : ""}
           </p>
           <p
@@ -57,7 +57,7 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
         </div>
         <div className="flex items-center mt-4">
           <img
-            className="w-10 h-10 rounded-full object-cover mr-3"
+            className="w-10 h-10 rounded-full object-cover mr-2"
             src={donator_image}
             alt={donator_name}
           />
@@ -67,7 +67,7 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
           </div>
         </div>
       </div>
-      <div className="p-4 bg-gray-100 border-t border-gray-200">
+      <div className="p-3 bg-gray-100 border-t border-gray-200">
         <Link
           to={`/food/${_id}`}
           className="block text-center bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"

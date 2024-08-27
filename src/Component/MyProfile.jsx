@@ -50,13 +50,13 @@ const MyProfile = () => {
       <PlaterHelmet title={"My Profile"} />
       <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
         <div className="flex flex-col sm:flex-row items-center">
-          <div className="w-32 h-32 mb-6 sm:mb-0 sm:w-48 sm:h-48">
+          <div className="mb-6 sm:mb-0 sm:w-48 sm:h-48">
             <img
               src={photo || defaultAvatar}
               alt="Profile"
               className={`${
                 isPremium ? "border-yellow-300" : "border-gray-300"
-              } object-center w-full h-full rounded-full border-4 shadow-md`}
+              } object-center w-[70%] h-[70%] mx-auto rounded-full border-4 shadow-md`}
             />
           </div>
           <div className="flex flex-col space-y-4 sm:ml-6">
@@ -92,22 +92,22 @@ const MyProfile = () => {
             </div>
             <button
               onClick={() => setIsOpen(true)}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition"
+              className="bg-red-500 text-white px-4 py-[6px] rounded-lg shadow-md hover:bg-red-600 transition"
             >
               Edit Profile
             </button>
           </div>
         </div>
-        <div className="mt-8 text-center">
+        <div className="mt-4 text-center">
           {isPremium && (
             <>
-              <p className="text-md font-semibold text-green-600">
+              <p className="text-md text-green-600">
                 Congratulations on being a Premium member!
               </p>
-              <p className="text-md my-2">Time Remaining:</p>
+              <p className="text-md my-[6px]">Time Remaining:</p>
             </>
           )}
-          <div className="p-3 bg-gray-200 rounded-lg shadow-md inline-block">
+          <div className="px-3 py-2 bg-gray-200 rounded-lg shadow-md inline-block">
             <Countdown />
           </div>
         </div>

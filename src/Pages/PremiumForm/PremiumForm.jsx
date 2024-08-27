@@ -87,7 +87,12 @@ const PremiumForm = () => {
 
       if (res?.modifiedCount > 0) {
         refetch();
-        toast.success("Payment successful");
+        toast.success(
+          "Payment Successful! Enjoy your premium membership benefits!",
+          {
+            duration: 5000,
+          }
+        );
       }
     }
   };

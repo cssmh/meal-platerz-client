@@ -1,5 +1,5 @@
 {
-  "name": "food-exchange-client",
+  "name": "meal-platerz-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,18 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@headlessui/react": "^2.1.1",
     "@mui/material": "^5.15.15",
     "@stripe/react-stripe-js": "^2.7.3",
-    "@stripe/stripe-js": "^4.2.0",
+    "@stripe/stripe-js": "^4.3.0",
     "@tanstack/react-query": "^5.48.0",
     "aos": "^2.3.4",
     "axios": "^1.6.8",
     "firebase": "^10.12.3",
-    "localforage": "^1.10.0",
-    "match-sorter": "^6.3.4",
     "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
