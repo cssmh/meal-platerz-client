@@ -5,13 +5,15 @@ import { useEffect, useState } from "react";
 import BigLoader from "../Component/BigLoader";
 
 const MainLayout = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setLoading(false);
     }, 1500);
+
+    return () => clearTimeout(timeout);
+    // Clean up the timeout on component unmount
   }, []);
 
   if (loading) return <BigLoader />;

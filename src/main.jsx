@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
@@ -15,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProviders>
-          <RouterProvider router={Root} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <RouterProvider router={Root} />
+          </Suspense>
         </AuthProviders>
       </QueryClientProvider>
     </HelmetProvider>

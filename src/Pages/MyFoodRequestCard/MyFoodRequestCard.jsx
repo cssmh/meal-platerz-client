@@ -8,8 +8,10 @@ import { Link } from "react-router-dom";
 import ReviewModal from "../Modal/ReviewModal";
 import SkeletonCard from "../SkeletonCard";
 import useIsExpire from "../../hooks/useIsExpire";
+import useIsPremium from "../../hooks/useIsPremium";
 
 const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
+  const isPremium = useIsPremium();
   const {
     _id,
     food_id,
@@ -26,6 +28,7 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
     donation_money,
     status,
     delivered_date,
+    free_delivery,
   } = getFoods;
 
   const { isLoading: loading, food, refetch } = useFood(food_id);
@@ -96,13 +99,18 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
           <span className="text-cyan-600">{pickup_location}</span>
         </p>
         {!delivered_date && (
-          <p className="text-redFood">
-            Expire In: {expireIn} at {expiration_time}
+          <p>
+            Expire in: {expireIn} at {expiration_time}
           </p>
         )}
         <p>Your Request: {reqDate}</p>
         {donation_money > 0 && (
           <p>Thanks for your {donation_money} BDT donation</p>
+        )}
+        {free_delivery && isPremium ? (
+          <p className="text-green-600 font-semibold">Free Delivery Included</p>
+        ) : (
+          <p className="text-red-600">Membership expired! Upgrade to premium for free delivery.</p>
         )}
         <div className="flex gap-2 ">
           {data === "available" ? (

@@ -24,13 +24,13 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
       data-aos="fade-up"
       data-aos-duration={aosDuration}
       data-aos-anchor-placement="center-bottom"
-      className="group flex flex-col bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      className="group flex flex-col bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:bg-gray-50 transform hover:scale-105"
     >
       <div className="relative">
         <img
           alt={food_name}
           src={food_image}
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
         />
         {isExpired && (
           <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold py-1 px-2 rounded-md">

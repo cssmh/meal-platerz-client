@@ -29,6 +29,7 @@ const OurClient = () => {
         autoplay={{
           delay: 1500,
           disableOnInteraction: false,
+          pauseOnMouseEnter: false,
         }}
         modules={[Pagination, Autoplay]}
         className="mySwiper"

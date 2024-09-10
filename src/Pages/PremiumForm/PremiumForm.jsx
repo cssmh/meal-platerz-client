@@ -1,3 +1,4 @@
+import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
@@ -45,6 +46,11 @@ const PremiumForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isPremium) {
+      toast.error("You are already a Premium member!");
+      return;
+    }
+
     if (!stripe || !elements) return;
 
     const card = elements.getElement(CardElement);
@@ -87,12 +93,12 @@ const PremiumForm = () => {
 
       if (res?.modifiedCount > 0) {
         refetch();
-        toast.success(
-          "Payment Successful! Enjoy your premium membership benefits!",
-          {
-            duration: 5000,
-          }
-        );
+        swal({
+          title: "Payment Successful!",
+          text: "Enjoy your premium membership benefits!",
+          icon: "success",
+          timer: 3000,
+        });
       }
     }
   };

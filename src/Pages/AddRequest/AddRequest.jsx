@@ -1,16 +1,25 @@
-import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Switch,
+  FormControlLabel,
+} from "@mui/material";
 import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addReq } from "../../api/Foods";
+import useIsPremium from "../../hooks/useIsPremium";
 import useMyRequest from "../../hooks/useMyRequest";
 
 const AddRequest = ({ getFood }) => {
   const [open, setOpen] = useState(false);
   const [todayDateTime, setTodayDateTime] = useState("");
   const { myFoodRequest, user, refetch } = useMyRequest();
-  const [matchFound, setMatchFound] = useState([]);
+  const isPremium = useIsPremium();
+  const [freeDelivery, setFreeDelivery] = useState(false);
 
   const {
     _id,
@@ -24,33 +33,29 @@ const AddRequest = ({ getFood }) => {
     expiration_time,
   } = getFood;
 
-  // Check if the selected food is already requested or not
   useEffect(() => {
-    const matching = myFoodRequest?.filter((req) =>
-      food_name?.includes(req?.food_name)
-    );
-    setMatchFound(matching);
-  }, [myFoodRequest, food_name]);
-
-  useEffect(() => {
-    const today = moment().format("YYYY-MM-DD hh:mm A");
-    setTodayDateTime(today);
+    setTodayDateTime(moment().format("YYYY-MM-DD hh:mm A"));
   }, []);
 
   const handlePopUp = () => {
-    if (matchFound?.length > 0) {
-      return swal({
-        text: "You already Requested for this!",
+    const user_email = user?.email;
+    const hasRequest = myFoodRequest.some(
+      (request) =>
+        request.user_email === user_email && request.food_name === food_name
+    );
+
+    if (hasRequest) {
+      swal({
+        text: "You already requested this food!",
         icon: "error",
         timer: 2000,
       });
+      return;
     }
     setOpen(true);
   };
 
-  const closePop = () => {
-    setOpen(false);
-  };
+  const closePop = () => setOpen(false);
 
   const handleAddRequest = async (e) => {
     e.preventDefault();
@@ -63,15 +68,16 @@ const AddRequest = ({ getFood }) => {
     const request_date = todayDateTime;
     const message_to_donator = form.message_to_donator.value;
     const donation = form.donation_money.value;
-    const donation_money = donation > 0 ? donation : 0;
+    const donation_money = Number(donation) > 0 ? donation : 0;
     const status = "Pending";
 
-    const regex = /^([1-9][0-9]*)?$/;
-    if (!regex.test(donation)) {
-      return toast.error("The donation amount is invalid");
+    if (!/^[1-9]\d*$/.test(donation)) {
+      toast.error("The donation amount is invalid");
+      return;
     }
-    if (!/^(\+?8801|01)(\d{9})$/.test(user_phone)) {
-      return toast.error("Enter a valid phone number!");
+    if (!/^(\+?8801|01)\d{9}$/.test(user_phone)) {
+      toast.error("Enter a valid phone number!");
+      return;
     }
 
     const requestFoodData = {
@@ -92,13 +98,19 @@ const AddRequest = ({ getFood }) => {
       status,
       donation_money,
       message_to_donator,
+      free_delivery: isPremium && freeDelivery, // Add free delivery option if the user is premium
     };
 
-    const res = await addReq(requestFoodData);
-    if (res?.insertedId) {
-      refetch();
-      swal("Congratulations!", "Request added", "success");
-      setOpen(false);
+    try {
+      const res = await addReq(requestFoodData);
+      if (res?.insertedId) {
+        refetch();
+        swal("Congratulations!", "Request added", "success");
+        setOpen(false);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("An error occurred while adding the request.");
     }
   };
 
@@ -173,18 +185,6 @@ const AddRequest = ({ getFood }) => {
             <div className="flex flex-col md:flex-row gap-3">
               <div className="form-control md:w-2/3 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">Request Date (Today)</span>
-                </label>
-                <input
-                  type="text"
-                  defaultValue={todayDateTime}
-                  readOnly
-                  className="input input-bordered"
-                  style={{ outline: "none" }}
-                />
-              </div>
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
-                <label className="label">
                   <span className="label-text">Donate Some Money</span>
                 </label>
                 <input
@@ -194,14 +194,33 @@ const AddRequest = ({ getFood }) => {
                   style={{ outline: "none" }}
                 />
               </div>
+              <div className="form-control md:w-2/3 mx-auto lg:mx-0 flex justify-center">
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isPremium && freeDelivery}
+                      onChange={() =>
+                        isPremium ? setFreeDelivery((prev) => !prev) : null
+                      }
+                      disabled={!isPremium}
+                      color="success"
+                    />
+                  }
+                  label={
+                    isPremium
+                      ? "Want Free Delivery For this Food?"
+                      : "Be premium member to get free delivery"
+                  }
+                  labelPlacement="end"
+                  style={{ marginTop: 16 }}
+                />
+              </div>
             </div>
-            <div className="form-control mx-3 lg:mx-0">
-              <label className="label">
-                <span className="label-text">Any Message for Donator?</span>
-              </label>
+            <div className="form-control mx-3 lg:mx-0 mt-4">
               <textarea
                 name="message_to_donator"
                 cols="5"
+                placeholder="Any Message for Donator?"
                 rows="5"
                 className="border p-1 rounded-xl"
                 style={{ outline: "none" }}
