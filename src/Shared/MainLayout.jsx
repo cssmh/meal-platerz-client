@@ -13,7 +13,6 @@ const MainLayout = () => {
     }, 1500);
 
     return () => clearTimeout(timeout);
-    // Clean up the timeout on component unmount
   }, []);
 
   if (loading) return <BigLoader />;

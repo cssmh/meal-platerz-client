@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import FoodsCard from "../FoodsCard/FoodsCard";
-import useResLimit from "../../hooks/useResLimit";
-import SkeletonCard from "../SkeletonCard";
+import FoodsCard from "./FoodsCard";
+import useResLimit from "../hooks/useResLimit";
+import SkeletonCard from "../Component/SkeletonCard";
 import { useQuery } from "@tanstack/react-query";
-import { getAllFoods } from "../../api/Foods";
-import PlaterHelmet from "../../Component/PlaterHelmet";
+import { getAllFoods } from "../api/Foods";
+import PlaterHelmet from "../Component/PlaterHelmet";
 
 const AvailableFoods = () => {
   const [searchTerm, setSearchTerm] = useState("");

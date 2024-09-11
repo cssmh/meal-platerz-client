@@ -2,13 +2,13 @@ import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
-import { addPremiumDate, paymentIntent } from "../../api/Payment";
-import useUser from "../../hooks/useUser";
-import SmallLoader from "../../Component/SmallLoader";
-import Countdown from "../../Component/Countdown";
-import useIsPremium from "../../hooks/useIsPremium";
-import PlaterHelmet from "../../Component/PlaterHelmet";
+import useAuth from "../hooks/useAuth";
+import { addPremiumDate, paymentIntent } from "../api/Payment";
+import useUser from "../hooks/useUser";
+import SmallLoader from "../Component/SmallLoader";
+import Countdown from "../Component/Countdown";
+import useIsPremium from "../hooks/useIsPremium";
+import PlaterHelmet from "../Component/PlaterHelmet";
 
 const PremiumForm = () => {
   const { user } = useAuth();

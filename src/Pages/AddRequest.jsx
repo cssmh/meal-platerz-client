@@ -10,9 +10,9 @@ import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { addReq } from "../../api/Foods";
-import useIsPremium from "../../hooks/useIsPremium";
-import useMyRequest from "../../hooks/useMyRequest";
+import { addReq } from "../api/Foods";
+import useIsPremium from "../hooks/useIsPremium";
+import useMyRequest from "../hooks/useMyRequest";
 
 const AddRequest = ({ getFood }) => {
   const [open, setOpen] = useState(false);
@@ -208,8 +208,8 @@ const AddRequest = ({ getFood }) => {
                   }
                   label={
                     isPremium
-                      ? "Want Free Delivery For this Food?"
-                      : "Be premium member to get free delivery"
+                      ? "Get Free Delivery"
+                      : "Be premium member to get Free delivery"
                   }
                   labelPlacement="end"
                   style={{ marginTop: 16 }}

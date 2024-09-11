@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Link } from "react-router-dom";
-import useIsExpire from "../../hooks/useIsExpire";
+import useIsExpire from "../hooks/useIsExpire";
 
 const FoodsCard = ({ getFoods, aosDuration }) => {
   const {

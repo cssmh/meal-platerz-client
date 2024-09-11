@@ -1,8 +1,8 @@
+import toast from "react-hot-toast";
 import React, { useState } from "react";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
-import EditProfileModal from "../Pages/Modal/EditProfileModal";
-import toast from "react-hot-toast";
+import EditProfileModal from "./EditProfileModal";
 import useMyFoods from "../hooks/useMyFoods";
 import { updateMyImgName } from "../api/Foods";
 import Countdown from "./Countdown";

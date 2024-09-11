@@ -1,15 +1,11 @@
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import {
-  addTime,
-  updateFoodStatus,
-  updateRequestedStatus,
-} from "../../api/Foods";
-import useMyFoods from "../../hooks/useMyFoods";
+import { addTime, updateFoodStatus, updateRequestedStatus } from "../api/Foods";
+import useMyFoods from "../hooks/useMyFoods";
 import moment from "moment";
-import useFood from "../../hooks/useFood";
-import useIsExpire from "../../hooks/useIsExpire";
+import useFood from "../hooks/useFood";
+import useIsExpire from "../hooks/useIsExpire";
 
 const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
   const {

@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
 import { useState, useEffect } from "react";
-import { updateMyFoods } from "../../api/Foods";
+import { updateMyFoods } from "../api/Foods";
 import moment from "moment";
 
 const UpdateMyFood = ({ foodData, food_status, refetch }) => {

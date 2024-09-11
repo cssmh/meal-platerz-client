@@ -6,7 +6,7 @@ import {
   deleteReviewAsClient,
   getClientSays,
 } from "../api/Foods";
-import ReviewModal from "../Pages/Modal/ReviewModal";
+import ReviewModal from "./ReviewModal";
 import useAuth from "../hooks/useAuth";
 import { FaTrash, FaPlus } from "react-icons/fa";
 import toast from "react-hot-toast";

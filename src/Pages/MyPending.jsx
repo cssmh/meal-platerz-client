@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import MyPendingCard from "../MyPendingCard/MyPendingCard";
+import MyPendingCard from "./MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../hooks/useAuth";
-import { getMyPending, unavailableId } from "../../api/Foods";
-import SmallLoader from "../../Component/SmallLoader";
-import PlaterHelmet from "../../Component/PlaterHelmet";
+import useAuth from "../hooks/useAuth";
+import { getMyPending, unavailableId } from "../api/Foods";
+import SmallLoader from "../Component/SmallLoader";
+import PlaterHelmet from "../Component/PlaterHelmet";
 
 const MyPending = () => {
   const { loading, user } = useAuth();

@@ -3,11 +3,11 @@ import { useLoaderData } from "react-router-dom";
 import MenuDetails from "./MenuDetails";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import AddRequest from "../AddRequest/AddRequest";
-import useAuth from "../../hooks/useAuth";
+import AddRequest from "./AddRequest";
+import useAuth from "../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import SmallLoader from "../../Component/SmallLoader";
-import useIsExpire from "../../hooks/useIsExpire";
+import SmallLoader from "../Component/SmallLoader";
+import useIsExpire from "../hooks/useIsExpire";
 
 const FoodDetails = () => {
   const { user } = useAuth();

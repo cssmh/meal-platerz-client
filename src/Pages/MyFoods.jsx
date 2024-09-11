@@ -1,9 +1,9 @@
 import swal from "sweetalert";
-import MyFoodsRow from "../MyFoodsRow/MyFoodsRow";
-import { deleteMyFood } from "../../api/Foods";
-import useMyFoods from "../../hooks/useMyFoods";
-import SmallLoader from "../../Component/SmallLoader";
-import PlaterHelmet from "../../Component/PlaterHelmet";
+import MyFoodsRow from "./MyFoodsRow";
+import { deleteMyFood } from "../api/Foods";
+import useMyFoods from "../hooks/useMyFoods";
+import SmallLoader from "../Component/SmallLoader";
+import PlaterHelmet from "../Component/PlaterHelmet";
 
 const MyFoods = () => {
   const { isLoading, myFoods, refetch, user } = useMyFoods();

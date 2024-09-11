@@ -1,11 +1,11 @@
 import swal from "sweetalert";
-import MyFoodRequestCard from "../MyFoodRequestCard/MyFoodRequestCard";
-import { deleteMyRequest } from "../../api/Foods";
-import SmallLoader from "../../Component/SmallLoader";
-import useMyRequest from "../../hooks/useMyRequest";
-import PlaterHelmet from "../../Component/PlaterHelmet";
+import MyRequestedCard from "./MyRequestedCard";
+import { deleteMyRequest } from "../api/Foods";
+import SmallLoader from "../Component/SmallLoader";
+import useMyRequest from "../hooks/useMyRequest";
+import PlaterHelmet from "../Component/PlaterHelmet";
 
-const MyFoodRequest = () => {
+const MyRequest = () => {
   const { isLoading, myFoodRequest, refetch, user } = useMyRequest();
 
   const handleRequestedDelete = (idx, food_name) => {
@@ -46,11 +46,11 @@ const MyFoodRequest = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
               {myFoodRequest?.map((food) => (
-                <MyFoodRequestCard
+                <MyRequestedCard
                   key={food._id}
                   getFoods={food}
                   handleRequestedDelete={handleRequestedDelete}
-                ></MyFoodRequestCard>
+                ></MyRequestedCard>
               ))}
             </div>
           </div>
@@ -60,4 +60,4 @@ const MyFoodRequest = () => {
   );
 };
 
-export default MyFoodRequest;
+export default MyRequest;

@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import FeaturedFoods from "../Pages/FeaturedFoods/FeaturedFoods";
+import FeaturedFoods from "../Pages/FeaturedFoods";
 import Banner from "./Banner";
 import Stats from "./Stats";
 import WeOffer from "./WeOffer";

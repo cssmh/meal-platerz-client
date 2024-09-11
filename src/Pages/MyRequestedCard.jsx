@@ -2,15 +2,15 @@ import moment from "moment";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { addReviews, getFood } from "../../api/Foods";
-import useFood from "../../hooks/useFood";
+import { addReviews, getFood } from "../api/Foods";
+import useFood from "../hooks/useFood";
 import { Link } from "react-router-dom";
-import ReviewModal from "../Modal/ReviewModal";
-import SkeletonCard from "../SkeletonCard";
-import useIsExpire from "../../hooks/useIsExpire";
-import useIsPremium from "../../hooks/useIsPremium";
+import ReviewModal from "../Component/ReviewModal";
+import SkeletonCard from "../Component/SkeletonCard";
+import useIsExpire from "../hooks/useIsExpire";
+import useIsPremium from "../hooks/useIsPremium";
 
-const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
+const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
   const isPremium = useIsPremium();
   const {
     _id,
@@ -110,7 +110,9 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
         {free_delivery && isPremium ? (
           <p className="text-green-600 font-semibold">Free Delivery Included</p>
         ) : (
-          <p className="text-red-600">Membership expired! Upgrade to premium for free delivery.</p>
+          <p className="text-red-600">
+            Membership expired! Upgrade to premium for free delivery.
+          </p>
         )}
         <div className="flex gap-2 ">
           {data === "available" ? (
@@ -173,11 +175,11 @@ const MyRequestedFoodsCard = ({ getFoods, handleRequestedDelete }) => {
         isOpen={isOpen}
         closeModal={closeModal}
         handleAddReview={handleAddReview}
-        width={"md"}
+        width={"xl"}
         review={food?.user_review}
       />
     </div>
   );
 };
 
-export default MyRequestedFoodsCard;
+export default MyRequestedCard;

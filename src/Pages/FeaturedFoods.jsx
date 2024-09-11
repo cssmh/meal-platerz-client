@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getFeaturedFoods } from "../../api/Foods";
-import FoodsCard from "../FoodsCard/FoodsCard";
-import SkeletonCard from "../SkeletonCard";
+import { getFeaturedFoods } from "../api/Foods";
+import FoodsCard from "./FoodsCard";
+import SkeletonCard from "../Component/SkeletonCard";
 import { useEffect, useState } from "react";
-import useResLimit from "../../hooks/useResLimit";
+import useResLimit from "../hooks/useResLimit";
 
 const FeaturedFoods = () => {
   const isMobile = useResLimit("(max-width: 767px)");

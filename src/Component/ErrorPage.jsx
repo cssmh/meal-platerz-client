@@ -2,26 +2,22 @@ import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
-    <section className="flex items-center h-full p-16">
-      <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-        <div className="max-w-md text-center">
-          <h2 className="mb-6 font-extrabold text-9xl dark:text-gray-400">
-            <span className="sr-only">Error</span>404
-          </h2>
-          <p className="text-2xl font-semibold md:text-3xl">
-            Sorry, we could not find this page.
-          </p>
-          <p className="mt-4 mb-8">
-            But don't worry, you can find plenty of other things on our homepage.
-          </p>
-          <Link
-            to={"/"}
-            rel="noopener noreferrer"
-            className="px-8 py-3 font-semibold rounded dark:bg-redFood dark:text-gray-50"
-          >
-            Back to homepage
-          </Link>
-        </div>
+    <section className="flex items-center justify-center min-h-[96vh] p-6 bg-gray-100">
+      <div className="text-center">
+        <h2 className="text-9xl font-extrabold text-red-600">404</h2>
+        <p className="text-2xl font-semibold text-gray-800 mt-4">
+          Sorry, we couldn&apos;t find this page.
+        </p>
+        <p className="text-gray-600 mt-2">
+          But don&apos;t worry, you can find plenty of other things on our
+          homepage.
+        </p>
+        <Link
+          to={"/"}
+          className="mt-6 inline-block px-6 py-3 font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors duration-300"
+        >
+          Back to Homepage
+        </Link>
       </div>
     </section>
   );

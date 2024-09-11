@@ -1,21 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./MainLayout";
-import Home from "../Component/Home";
 import ErrorPage from "../Component/ErrorPage";
+import Home from "../Component/Home";
 import Login from "../Component/Login";
 import Register from "../Component/Register";
-import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
-import MyProfile from "../Component/MyProfile";
-import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
+import AvailableFoods from "../Pages/AvailableFoods";
 import PrivateRoute from "./PrivateRoute";
-import AddFood from "../Pages/AddFood/AddFood";
-import FoodDetails from "../Pages/FoodDetails/FoodDetails";
-import MyFoods from "../Pages/MyFoods/MyFoods";
-import MyPending from "../Pages/MyPending/MyPending";
+import MyProfile from "../Component/MyProfile";
+import Payment from "../Pages/Payment";
+import AddFood from "../Pages/AddFood";
+import MyFoods from "../Pages/MyFoods";
+import MyRequest from "../Pages/MyRequest";
+import FoodDetails from "../Pages/FoodDetails";
 import { getFood } from "../api/Foods";
+import MyPending from "../Pages/MyPending";
 import Blogs from "../Component/Blogs";
 import AllReviews from "../Component/AllReviews";
-import Payment from "../Pages/Payment/Payment";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -74,7 +74,7 @@ const Root = createBrowserRouter([
         path: "/my-food-request",
         element: (
           <PrivateRoute>
-            <MyFoodRequest />
+            <MyRequest />
           </PrivateRoute>
         ),
       },

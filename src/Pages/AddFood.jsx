@@ -1,11 +1,11 @@
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
-import { addFood } from "../../api/Foods";
+import useAuth from "../hooks/useAuth";
+import { addFood } from "../api/Foods";
 import { TbFidgetSpinner } from "react-icons/tb";
-import useMyFoods from "../../hooks/useMyFoods";
+import useMyFoods from "../hooks/useMyFoods";
 import toast from "react-hot-toast";
-import PlaterHelmet from "../../Component/PlaterHelmet";
+import PlaterHelmet from "../Component/PlaterHelmet";
 
 const AddFood = () => {
   const { user } = useAuth();
