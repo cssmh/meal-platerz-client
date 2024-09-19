@@ -66,7 +66,7 @@ const FoodDetails = () => {
         <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-7">
           <img
             src={food_image}
-            className="mx-auto lg:mx-0 md:ml-auto w-2/5 md:w-[280px] rounded-lg"
+            className="mx-auto lg:mx-0 md:ml-auto w-full md:w-[280px] rounded-lg"
             alt="food"
           />
           <div className="space-y-1 lg:space-y-[6px] mx-6 lg:mx-0 text-center lg:text-left">
