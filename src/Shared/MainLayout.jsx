@@ -1,11 +1,14 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../Component/Navbar";
 import Footer from "../Component/Footer";
 import { useEffect, useState } from "react";
 import BigLoader from "../Component/BigLoader";
+import FooterOld from "../Component/FooterOld";
 
 const MainLayout = () => {
+  const loc = useLocation();
   const [loading, setLoading] = useState(true);
+  const home = loc.pathname === "/";
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -23,7 +26,7 @@ const MainLayout = () => {
       <div className="min-h-[70vh]">
         <Outlet />
       </div>
-      <Footer />
+      {home ? <Footer /> : <FooterOld />}
     </div>
   );
 };

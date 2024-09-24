@@ -66,11 +66,11 @@ const FoodDetails = () => {
         <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-7">
           <img
             src={food_image}
-            className="mx-auto lg:mx-0 md:ml-auto w-full md:w-[280px] rounded-lg"
+            className="w-full h-48 md:w-[380px] md:h-[240px] rounded-md object-cover transition-transform duration-300 group-hover:scale-110"
             alt="food"
           />
           <div className="space-y-1 lg:space-y-[6px] mx-6 lg:mx-0 text-center lg:text-left">
-            <h1 className="text-2xl lg:text-4xl font-semibold">{food_name}</h1>
+            <h1 className="text-xl lg:text-2xl font-semibold">{food_name}</h1>
             <p>Quantity: {food_quantity} (no. of persons to be served)</p>
             <p>
               Expire In: {expireIn} at {expiration_time}

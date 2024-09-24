@@ -6,6 +6,7 @@ import WeOffer from "./WeOffer";
 import OurApp from "./OurApp";
 import OurClient from "./OurClient";
 import BePremium from "./BePremium";
+import PlateReview from "../Pages/PlateReview";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <OurApp />
       <OurClient />
       <Stats />
+      <PlateReview />
     </div>
   );
 };

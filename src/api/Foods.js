@@ -7,6 +7,11 @@ export const getAllFoods = async (page, limit, searchTerm) => {
   return data;
 };
 
+export const getAllFoodPhotos = async () => {
+  const { data } = await axiosSecure("/allFoods");
+  return data;
+};
+
 export const getFeaturedFoods = async () => {
   const { data } = await axiosSecure("/featured-foods");
   return data;
