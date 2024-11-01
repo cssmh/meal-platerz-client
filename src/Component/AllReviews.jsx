@@ -18,7 +18,7 @@ const AllReviews = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["allReviews"],
     queryFn: async () => {
-      return await getClientSays("", true);
+      return await getClientSays(true);
     },
   });
 

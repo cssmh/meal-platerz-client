@@ -79,7 +79,7 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
     try {
       if (res?.modifiedCount > 0) {
         refetch();
-        swal("Good job!", "Food Info Updated", "success");
+        swal("Good job!", "Food Info Updated", "success", { timer: 2000 });
       }
     } catch (error) {
       console.error(error);

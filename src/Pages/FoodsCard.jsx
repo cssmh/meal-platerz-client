@@ -14,6 +14,7 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
     expiration_date,
     expiration_time,
     donator_phone,
+    food_status,
   } = getFoods;
 
   const isExpired = useIsExpire(expiration_date, expiration_time);
@@ -32,11 +33,21 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
           src={food_image}
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
         />
-        {isExpired && (
-          <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold py-1 px-2 rounded-md">
-            Expired
-          </div>
-        )}
+        <div
+          className={`absolute top-2 right-2 text-xs font-semibold py-1 px-2 rounded-md ${
+            food_status === "Unavailable"
+              ? "bg-emerald-600"
+              : isExpired
+              ? "bg-red-600"
+              : ""
+          } text-white`}
+        >
+          {food_status === "Unavailable"
+            ? "Delivered"
+            : isExpired
+            ? "Expired"
+            : null}
+        </div>
       </div>
       <div className="p-3 flex flex-col justify-between flex-grow">
         <div>
@@ -48,10 +59,16 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
           </p>
           <p
             className={`text-sm mt-1 ${
-              isExpired ? "text-red-500" : "text-gray-500"
+              food_status === "Unavailable"
+                ? "text-emerald-500"
+                : isExpired
+                ? "text-red-500"
+                : "text-gray-500"
             }`}
           >
-            Expires on: {expireIn} at {expiration_time}
+            {food_status === "Unavailable"
+              ? "This food item has been successfully delivered on time."
+              : `Expires on: ${expireIn} at ${expiration_time}`}
           </p>
           <p className="text-sm text-gray-600 mt-2">Phone: {donator_phone}</p>
         </div>

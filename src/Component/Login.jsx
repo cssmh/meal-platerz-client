@@ -9,12 +9,14 @@ import PlaterHelmet from "./PlaterHelmet";
 
 const Login = () => {
   const [view, setView] = useState(true);
-  const { login, googleLogin, loading } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const { login, googleLogin } = useAuth();
   const navigateTo = useNavigate();
   const location = useLocation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -29,6 +31,8 @@ const Login = () => {
       await addUser(userData);
     } catch (err) {
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -18,7 +18,6 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
 
   const isExpired = useIsExpire(expiration_date, expiration_time);
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
-  // format just
 
   return (
     <tr>
@@ -66,19 +65,25 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
       </td>
       <td
         className={
-          isExpired || food_status === "Unavailable"
+          isExpired
             ? "text-redFood"
+            : food_status === "Unavailable"
+            ? "text-green-500"
             : "text-emerald-600"
         }
       >
-        {isExpired ? "Date Expired" : food_status}
+        {isExpired
+          ? "Food Expired"
+          : food_status === "Unavailable"
+          ? "Delivered"
+          : food_status}
       </td>
       <th>
         <UpdateMyFood
           foodData={getFood}
           food_status={food_status}
           refetch={refetch}
-        ></UpdateMyFood>
+        />
       </th>
       <td>
         <Link to={`/req-for/${_id}/${donator_email}`}>

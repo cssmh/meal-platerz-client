@@ -6,10 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getClientSays } from "../api/Foods";
 
 const OurClient = () => {
-  const { data, isLoading } = useQuery({
+  const { data = [], isLoading } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      return await getClientSays(5);
+      return await getClientSays();
     },
   });
 
@@ -30,24 +30,16 @@ const OurClient = () => {
           delay: 1500,
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
+          waitForTransition: false,
         }}
         modules={[Pagination, Autoplay]}
         className="mySwiper"
         slidesPerView={1}
         spaceBetween={10}
         breakpoints={{
-          480: {
-            slidesPerView: 1,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1000: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
+          480: { slidesPerView: 1, spaceBetween: 20 },
+          768: { slidesPerView: 2, spaceBetween: 20 },
+          1000: { slidesPerView: 3, spaceBetween: 20 },
         }}
       >
         {isLoading ? (

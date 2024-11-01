@@ -22,6 +22,7 @@ const MyFoods = () => {
             refetch();
             swal(`${name} Deleted!`, {
               icon: "success",
+              timer: 2000,
             });
           }
         });

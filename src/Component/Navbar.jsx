@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
 import useIsPremium from "../hooks/useIsPremium";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -12,6 +13,7 @@ const Navbar = () => {
   const isPremium = useIsPremium();
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const navigate = useNavigate();
 
   const handleProfileClick = () => {
     setShowProfileOptions(!showProfileOptions);
@@ -23,6 +25,15 @@ const Navbar = () => {
 
   const getLinkClasses = (path) => {
     return location.pathname === path ? "text-blue-500" : "hover:text-blue-500";
+  };
+
+  const handleProtectedRoute = (path) => {
+    if (!user?.email) {
+      toast.error("Please log in first to access this feature.");
+      navigate("/login");
+    } else {
+      navigate(path);
+    }
   };
 
   useEffect(() => {
@@ -52,11 +63,16 @@ const Navbar = () => {
           Contact: +880176761606* Offer!! Be our premium member!!
         </p>
       </div> */}
+      {/* <footer className="bg-gray-800 text-white py-4">
+        <p className="text-center text-xs">
+          Have a story to share? Contact us at +8801767616067.
+        </p>
+      </footer> */}
       <div className="border-b border-base-300">
         <div className="navbar min-h-[58px] max-w-7xl mx-auto py-0">
           <div className="navbar-start">
-            <div className="dropdown">
-              <label tabIndex={0} className="btn btn-sm btn-ghost lg:hidden">
+            <div className="dropdown lg:hidden">
+              <label tabIndex={0} className="btn btn-sm btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -90,45 +106,45 @@ const Navbar = () => {
                 >
                   Available Foods
                 </Link>
+                <button
+                  onClick={() => handleProtectedRoute("/add-food")}
+                  className={`flex items-center p-[2px] ${getLinkClasses(
+                    "/add-food"
+                  )}`}
+                >
+                  Add Food
+                </button>
+                <button
+                  onClick={() => handleProtectedRoute("/be-premium")}
+                  className={`flex items-center p-[2px] ${getLinkClasses(
+                    "/be-premium"
+                  )}`}
+                >
+                  Be Premium
+                </button>
                 {user?.email && (
-                  <>
-                    <Link
-                      to="/add-food"
-                      className={`flex items-center p-[2px] ${getLinkClasses(
-                        "/add-food"
-                      )}`}
-                    >
-                      Add Food
-                    </Link>
-                    <Link
-                      to="/be-premium"
-                      className={`flex items-center p-[2px] ${getLinkClasses(
-                        "/be-premium"
-                      )}`}
-                    >
-                      Be Premium
-                    </Link>
-                    <Link
-                      to="/manage-my-foods"
-                      className={`flex items-center p-[2px] ${getLinkClasses(
-                        "/manage-my-foods"
-                      )}`}
-                    >
-                      Manage My Foods
-                    </Link>
-                    <Link
-                      to="/my-food-request"
-                      className={`flex items-center p-[2px] ${getLinkClasses(
-                        "/my-food-request"
-                      )}`}
-                    >
-                      My Food Request
-                    </Link>
-                  </>
+                  <Link
+                    to="/manage-my-foods"
+                    className={`flex items-center p-[2px] ${getLinkClasses(
+                      "/manage-my-foods"
+                    )}`}
+                  >
+                    Manage My Foods
+                  </Link>
+                )}
+                {user?.email && (
+                  <Link
+                    to="/my-food-request"
+                    className={`flex items-center p-[2px] ${getLinkClasses(
+                      "/my-food-request"
+                    )}`}
+                  >
+                    My Food Request
+                  </Link>
                 )}
               </ul>
             </div>
-            <img src={logo} className="w-0 md:w-10 md:mr-1" alt="Logo" />
+            <img src={logo} className="w-10 md:mr-1" alt="Logo" />
             <Link to="/" className="font-semibold lg:text-[21px] px-0">
               MealPlaterz
             </Link>
@@ -149,26 +165,22 @@ const Navbar = () => {
               >
                 Available Foods
               </Link>
-              {user?.email && (
-                <>
-                  <Link
-                    to="/add-food"
-                    className={`flex items-center px-2 ${getLinkClasses(
-                      "/add-food"
-                    )}`}
-                  >
-                    Add Food
-                  </Link>
-                  <Link
-                    to="/be-premium"
-                    className={`flex items-center p-2 ${getLinkClasses(
-                      "/be-premium"
-                    )}`}
-                  >
-                    Be Premium
-                  </Link>
-                </>
-              )}
+              <button
+                onClick={() => handleProtectedRoute("/add-food")}
+                className={`flex items-center p-2 ${getLinkClasses(
+                  "/add-food"
+                )}`}
+              >
+                Add Food
+              </button>
+              <button
+                onClick={() => handleProtectedRoute("/be-premium")}
+                className={`flex items-center p-2 ${getLinkClasses(
+                  "/be-premium"
+                )}`}
+              >
+                Be Premium
+              </button>
               {user?.email && (
                 <li tabIndex={0}>
                   <details>
@@ -203,7 +215,11 @@ const Navbar = () => {
               </p>
             )}
             <div className="dropdown dropdown-end">
-              <label tabIndex={0} onClick={handleProfileClick}>
+              <label
+                tabIndex={0}
+                className="cursor-pointer"
+                onClick={handleProfileClick}
+              >
                 <img
                   src={user?.photoURL || defaultAvatar}
                   className={`${
@@ -240,13 +256,13 @@ const Navbar = () => {
             {user?.email ? (
               <button
                 onClick={handleLogOut}
-                className="bg-redFood rounded-md text-white py-1 px-[10px]"
+                className="bg-redFood rounded-md text-white py-1 px-2"
               >
                 Logout
               </button>
             ) : (
               <Link to="/login">
-                <p className="bg-redFood rounded-md text-white py-1 px-[10px]">
+                <p className="bg-redFood rounded-md text-white py-1 px-2">
                   Login
                 </p>
               </Link>

@@ -51,10 +51,10 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
 
       await updateRequestedStatus(idx, { newStatus });
       refetchReq();
-      swal("Thank You!", `Updated to ${newStatus}`, "success");
+      swal("Thank You!", `Updated to ${newStatus}`, "success", { timer: 2000 });
     } catch (error) {
       console.error("Error updating status:", error);
-      swal("Error", "Failed to update status", "error");
+      swal("Error", "Failed to update status", "error", { timer: 2000 });
     }
   };
 

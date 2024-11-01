@@ -68,14 +68,16 @@ const AddFood = () => {
     try {
       const res = await addFood(foodInfo);
       if (res?.insertedId) {
-        swal("Thank You!", `${food_name} added`, "success");
+        swal("Thank You!", `${food_name} added`, "success", { timer: 2000 });
         refetch();
         form.reset();
       }
       setLoading(false);
     } catch (error) {
       console.error("Error adding food:", error);
-      swal("Oops!", "Failed to add food. Please try again later.", "error");
+      swal("Oops!", "Failed to add food. Please try again later.", "error", {
+        timer: 2000,
+      });
       setLoading(false);
     }
   };

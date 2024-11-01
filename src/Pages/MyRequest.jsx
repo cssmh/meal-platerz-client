@@ -22,6 +22,7 @@ const MyRequest = () => {
             refetch();
             swal(`Request on ${food_name} Canceled!`, {
               icon: "success",
+              timer: 2000,
             });
           }
         });

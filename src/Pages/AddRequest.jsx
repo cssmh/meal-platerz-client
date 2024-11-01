@@ -98,14 +98,14 @@ const AddRequest = ({ getFood }) => {
       status,
       donation_money,
       message_to_donator,
-      free_delivery: isPremium && freeDelivery, // Add free delivery option if the user is premium
+      free_delivery: isPremium && freeDelivery,
     };
 
     try {
       const res = await addReq(requestFoodData);
       if (res?.insertedId) {
         refetch();
-        swal("Congratulations!", "Request added", "success");
+        swal("Congratulations!", "Request added", "success", { timer: 3000 });
         setOpen(false);
       }
     } catch (err) {

@@ -117,10 +117,8 @@ export const deleteReviewAsClient = async (id, email) => {
 };
 
 // get client say
-export const getClientSays = async (limit, sort) => {
-  const { data } = await axiosSecure(
-    `/all-reviews?limit=${limit}&sort=${sort}`
-  );
+export const getClientSays = async (sort = false) => {
+  const { data } = await axiosSecure(`/all-reviews?sort=${sort}`);
   return data;
 };
 
