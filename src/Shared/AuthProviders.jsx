@@ -63,10 +63,10 @@ const AuthProviders = ({ children }) => {
       const emailToSend = { email: getEmail };
       if (getEmail) {
         const res = await setToken(emailToSend);
-        console.log("login token res", res);
+        // console.log("login token res", res);
       } else {
         const res = await clearCookie(emailToSend);
-        console.log("logout token res", res);
+        // console.log("logout token res", res);
       }
       setLoading(false);
     });

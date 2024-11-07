@@ -41,7 +41,7 @@ const MyFoods = () => {
         </p>
       ) : (
         <div className="overflow-x-auto my-3">
-          <table className="table max-w-7xl mx-auto">
+          <table className="table max-w-7xl 2xl:max-w-[92%] mx-auto">
             <thead>
               <tr>
                 <th>Food Image</th>

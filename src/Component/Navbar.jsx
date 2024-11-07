@@ -69,7 +69,7 @@ const Navbar = () => {
         </p>
       </footer> */}
       <div className="border-b border-base-300">
-        <div className="navbar min-h-[58px] max-w-7xl mx-auto py-0">
+        <div className="navbar min-h-[58px] md:px-10 py-0">
           <div className="navbar-start">
             <div className="dropdown lg:hidden">
               <label tabIndex={0} className="btn btn-sm btn-ghost">

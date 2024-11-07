@@ -45,7 +45,7 @@ const MyRequest = () => {
             <p className="text-center my-3 text-blue-900 text-xl italic">
               Your requested all foods Here
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl 2xl:max-w-[90%] mx-auto">
               {myFoodRequest?.map((food) => (
                 <MyRequestedCard
                   key={food._id}

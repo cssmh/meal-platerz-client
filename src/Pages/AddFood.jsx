@@ -95,7 +95,10 @@ const AddFood = () => {
   return (
     <div className="my-5">
       <PlaterHelmet title={"Add Food"} />
-      <form onSubmit={handleAddFood} className="max-w-6xl mx-auto">
+      <form
+        onSubmit={handleAddFood}
+        className="max-w-6xl 2xl:max-w-[82%] mx-auto"
+      >
         <div className="flex flex-col md:flex-row gap-3">
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">

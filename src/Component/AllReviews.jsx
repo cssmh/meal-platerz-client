@@ -69,14 +69,14 @@ const AllReviews = () => {
   return (
     <div className="bg-gray-100 py-6">
       <PlaterHelmet title={"All Reviews"} />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl 2xl:max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl md:text-3xl font-semibold text-center">
           What Our Clients Say
         </h1>
         <div className="text-center my-2">
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center justify-center text-white bg-green-500 rounded-3xl p-2"
+            className="flex items-center justify-center text-white bg-green-500 rounded-3xl p-2 mb-4"
           >
             <FaPlus className="mr-2" /> Add Your Review
           </button>

@@ -95,7 +95,7 @@ const FoodDetails = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-[1200px] mx-4 lg:mx-auto mb-7">
+      <div className="max-w-[1200px] 2xl:max-w-[92%] mx-4 lg:mx-auto mb-7">
         <div className="flex gap-1">
           <button
             onClick={() => setShow(true)}

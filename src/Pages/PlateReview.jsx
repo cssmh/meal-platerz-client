@@ -49,6 +49,7 @@ const PlateReview = () => {
             480: { slidesPerView: 5, spaceBetween: 0 },
             768: { slidesPerView: 8, spaceBetween: 0 },
             1000: { slidesPerView: 12, spaceBetween: 0 },
+            1536: { slidesPerView: 16, spaceBetween: 0 },
           }}
         >
           {photos?.map((photo, idx) => (

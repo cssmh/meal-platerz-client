@@ -14,7 +14,7 @@ const OurClient = () => {
   });
 
   return (
-    <div className="max-w-[1220px] mx-auto mt-10">
+    <div className="max-w-[1220px] 2xl:max-w-[91%] mx-auto mt-10">
       <div className="text-redFood text-3xl md:text-5xl text-center font-medium">
         What Our Clients Say
       </div>
@@ -40,10 +40,11 @@ const OurClient = () => {
           480: { slidesPerView: 1, spaceBetween: 20 },
           768: { slidesPerView: 2, spaceBetween: 20 },
           1000: { slidesPerView: 3, spaceBetween: 20 },
+          1536: { slidesPerView: 4, spaceBetween: 20 },
         }}
       >
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto md:mx-2 lg:mx-auto mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:mx-2 lg:mx-auto mt-4">
             {[...Array(3)].map((_, index) => (
               <div key={index}>
                 <div className="overflow-hidden w-full m-4 flex justify-center rounded-lg">

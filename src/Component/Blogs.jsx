@@ -8,7 +8,7 @@ const Blogs = () => {
   return (
     <div className="bg-gray-100 py-6">
       <PlaterHelmet title={"Blogs"} />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl 2xl:max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl md:text-3xl font-semibold text-center mb-6">
           Community Food Sharing Blogs
         </h1>

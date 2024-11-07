@@ -48,7 +48,7 @@ const MyPending = () => {
           <p className="text-center my-[10px] text-blue-900 text-xl italic">
             User Requested for This Food
           </p>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="max-w-6xl 2xl:max-w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-5">
             {requestedData?.map((req) => (
               <MyPendingCard
                 key={req._id}

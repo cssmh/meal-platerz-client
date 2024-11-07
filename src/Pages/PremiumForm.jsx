@@ -140,58 +140,63 @@ const PremiumForm = () => {
   if (isLoading) return <SmallLoader />;
 
   return (
-    <div>
+    <div className="min-h-[90vh] 2xl:min-h-[80vh] flex items-center justify-center py-5 px-4 flex-col">
       <PlaterHelmet title={"Be Premium"} />
-      <div className="mx-auto w-full space-y-3 card shrink-0 max-w-md shadow-xl bg-base-100 text-center px-4 pt-5 pb-7 mt-6">
-        <h3 className="text-lg font-semibold">Process Your Payments</h3>
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <div className="space-y-1 text-sm">
+      <div className="max-w-xl w-full bg-white shadow-2xl rounded-2xl px-8 py-5 space-y-4 border border-purple-200">
+        <h2 className="text-2xl font-bold text-center text-purple-700">
+          Become a Premium Member
+        </h2>
+        <p className="text-center text-gray-600 text-base mb-6">
+          Unlock exclusive benefits by upgrading your account!
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
             <input
-              className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-300 rounded-lg"
+              className="w-full px-5 py-3 rounded-lg bg-purple-50 text-gray-800 border border-purple-300 focus:outline-none focus:border-purple-500 transition-all shadow-md placeholder-gray-400"
               name="name"
               id="name"
               type="text"
               defaultValue={user?.displayName}
-              placeholder="Name"
+              placeholder="Full Name"
               required
             />
           </div>
-          <div className="space-y-1 text-sm">
+          <div className="space-y-2">
             <select
               required
-              className="w-full border px-4 py-3 border-rose-300 focus:outline-rose-300 rounded-lg"
+              className="w-full px-5 py-3 rounded-lg bg-purple-50 text-gray-800 border border-purple-300 focus:outline-none focus:border-purple-500 transition-all shadow-md"
               onChange={(e) => handlePeriod(e.target.value)}
             >
-              <option value="1">1 Min</option>
-              <option value="3">3 Day</option>
-              <option value="7">7 Day</option>
-              <option value="15">15 Day</option>
-              <option value="30">30 Day</option>
+              <option value="1">1 Minute</option>
+              <option value="3">3 Days</option>
+              <option value="7">7 Days</option>
+              <option value="15">15 Days</option>
+              <option value="30">30 Days</option>
             </select>
           </div>
-          <div className="space-y-1 text-sm">
-            <p className="text-sm text-green-500">Price: ${price}</p>
-          </div>
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#424770",
-                  "::placeholder": {
-                    color: "#aab7c4",
+          <p className="text-lg font-semibold text-gray-800">Price: ${price}</p>
+          <div className="space-y-2">
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: "16px",
+                    color: "#424770",
+                    "::placeholder": {
+                      color: "#aab7c4",
+                    },
+                  },
+                  invalid: {
+                    color: "#9e2146",
                   },
                 },
-                invalid: {
-                  color: "#9e2146",
-                },
-              },
-            }}
-            className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150 ease-in-out"
-            onChange={handleCardChange}
-            onFocus={handleCardFocus}
-          />
-          <div className="min-h-[8px]">
+              }}
+              className="w-full p-4 rounded-lg bg-purple-50 text-gray-800 border border-purple-300 focus:outline-none focus:border-purple-500 transition-all shadow-md"
+              onChange={handleCardChange}
+              onFocus={handleCardFocus}
+            />
+          </div>
+          <div className="min-h-[16px]">
             <p
               className={`text-red-600 text-sm ${
                 error && hasInteracted ? "opacity-100" : "opacity-0"
@@ -199,27 +204,29 @@ const PremiumForm = () => {
             >
               {error || " "}
             </p>
-            {isPremium && <Countdown />}
+            {isPremium && (
+              <span className="flex justify-center">
+                <Countdown />
+              </span>
+            )}
             {isPremium && userData?.paymentIntent_Id && (
-              <p className="text-green-500 ">
+              <p className="text-green-500 text-sm flex justify-center">
                 Your transaction id is: {userData.paymentIntent_Id}
               </p>
             )}
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center">
             <button
               disabled={!stripe || !clientSecret || isPremium}
               type="submit"
-              className={`btn btn-sm flex items-center justify-center ${
-                loading && "pointer-events-none"
-              } ${
-                !isPremium
-                  ? "hover:bg-orange-200"
-                  : "bg-gray-300 cursor-not-allowed"
-              } hover:border-none bg-orange-200`}
+              className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-purple-600 hover:bg-purple-500"
+              }`}
             >
               {loading ? (
-                <div className="flex items-center gap-2">
+                <div className="flex justify-center items-center gap-2">
                   <span className="loading loading-spinner loading-xs"></span>
                   Processing...
                 </div>
@@ -229,15 +236,15 @@ const PremiumForm = () => {
             </button>
           </div>
         </form>
-        <p className="text-sm text-green-500">
+        <p className="text-center text-sm text-gray-600">
           {isPremium
             ? "Congratulations on being a Premium member!"
-            : "Your premium membership has expired."}
+            : "Be our Premium member today!"}
         </p>
       </div>
-      <p className="text-center my-5 max-w-xl mx-auto text-base bg-rose-100 text-rose-600 border border-rose-300 rounded-lg py-1 px-4 shadow-sm">
+      <div className="mt-6 text-center bg-purple-50 border border-purple-300 text-purple-600 rounded-lg py-3 px-4 shadow-sm">
         🍽️ Enjoy free food delivery with your Premium membership!
-      </p>
+      </div>
     </div>
   );
 };
