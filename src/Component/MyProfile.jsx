@@ -46,72 +46,60 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen p-8">
+    <div className="min-h-screen bg-gray-100 p-6 md:p-12">
       <PlaterHelmet title={"My Profile"} />
-      <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <div className="flex flex-col sm:flex-row items-center">
-          <div className="mb-6 sm:mb-0 sm:w-48 sm:h-48">
-            <img
-              src={photo || defaultAvatar}
-              alt="Profile"
-              className={`${
-                isPremium ? "border-yellow-300" : "border-gray-300"
-              } object-center w-[70%] h-[70%] mx-auto rounded-full border-4 shadow-md`}
-            />
-          </div>
-          <div className="flex flex-col space-y-4 sm:ml-6">
-            <h2 className="text-2xl font-semibold text-gray-800">{name}</h2>
-            <div className="flex flex-col space-y-2 text-gray-600">
-              <div className="flex items-center space-x-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                  aria-label="Email address"
-                  className="w-5 h-5 text-gray-500"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M274.6,25.623a32.006,32.006,0,0,0-37.2,0L16,183.766V496H496V183.766ZM464,402.693,339.97,322.96,464,226.492ZM256,51.662,454.429,193.4,311.434,304.615,256,268.979l-55.434,35.636L57.571,193.4ZM48,226.492,172.03,322.96,48,402.693ZM464,464H48V440.735L256,307.021,464,440.735Z"
-                  ></path>
-                </svg>
-                <span>{user?.email}</span>
-              </div>
-              <p className="text-sm">
-                Account Created:{" "}
-                {new Date(
-                  parseInt(user?.metadata?.createdAt, 10)
-                ).toLocaleDateString()}{" "}
-                at{" "}
-                {new Date(
-                  parseInt(user?.metadata?.createdAt, 10)
-                ).toLocaleTimeString()}
-              </p>
-              <p className="text-sm">
-                Last Sign-In: {user?.metadata?.lastSignInTime}
-              </p>
-            </div>
-            <button
-              onClick={() => setIsOpen(true)}
-              className="bg-red-500 text-white px-4 py-[6px] rounded-lg shadow-md hover:bg-red-600 transition"
-            >
-              Edit Profile
-            </button>
-          </div>
+      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 md:flex md:items-start">
+        {/* Profile Image and Basic Info */}
+        <div className="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
+          <img
+            src={photo || defaultAvatar}
+            alt="Profile"
+            className={`${
+              isPremium ? "border-yellow-300" : "border-gray-300"
+            } w-32 h-32 rounded-full border-4 shadow-md`}
+          />
+          <h2 className="text-xl font-semibold text-gray-800 mt-4">{name}</h2>
+          <p className="text-sm text-gray-500">{user?.email}</p>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="mt-4 bg-redFood text-white px-6 py-2 rounded-full shadow-md transition"
+          >
+            Edit Profile
+          </button>
         </div>
-        <div className="mt-4 text-center">
-          {isPremium && (
-            <>
-              <p className="text-md text-green-600">
-                Congratulations on being a Premium member!
-              </p>
-              <p className="text-md my-[6px]">Time Remaining:</p>
-            </>
-          )}
-          <div className="px-3 py-2 bg-gray-200 rounded-lg shadow-md inline-block">
-            <Countdown />
+        <div className="w-full md:w-2/3 mt-6 md:mt-0 md:pl-8 space-y-6">
+          <div className="text-gray-600">
+            <p className="text-lg font-semibold">Account Details</p>
+            <p className="text-sm">
+              <span className="font-semibold">Account Created:</span>{" "}
+              {new Date(
+                parseInt(user?.metadata?.createdAt, 10)
+              ).toLocaleDateString()}{" "}
+              at{" "}
+              {new Date(
+                parseInt(user?.metadata?.createdAt, 10)
+              ).toLocaleTimeString()}
+            </p>
+            <p className="text-sm">
+              <span className="font-semibold">Last Sign-In:</span>{" "}
+              {user?.metadata?.lastSignInTime}
+            </p>
           </div>
+          {isPremium && (
+            <div className="text-green-600 text-center">
+              <p className="text-md font-semibold">
+                🎉 Congratulations on being a Premium member!
+              </p>
+              <p className="text-sm">Time Remaining:</p>
+              <div className="mt-2 inline-block px-4 py-2 bg-green-100 rounded-lg shadow">
+                <Countdown />
+              </div>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Edit Profile Modal */}
       <EditProfileModal
         isOpen={isOpen}
         closeModal={closeModal}

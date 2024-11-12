@@ -140,32 +140,35 @@ const PremiumForm = () => {
   if (isLoading) return <SmallLoader />;
 
   return (
-    <div className="min-h-[90vh] 2xl:min-h-[80vh] flex items-center justify-center py-5 px-4 flex-col">
+    <div className="2xl:min-h-[87vh] flex items-center justify-center md:py-5 md:px-4 flex-col relative">
       <PlaterHelmet title={"Be Premium"} />
-      <div className="max-w-xl w-full bg-white shadow-2xl rounded-2xl px-8 py-5 space-y-4 border border-purple-200">
-        <h2 className="text-2xl font-bold text-center text-purple-700">
+      <div className="hidden lg:block 2xl:hidden absolute top-1/2 left-14 transform -translate-y-1/2 px-4 py-2 bg-rose-50 border-l-4 border-rose-300 text-rose-600 rounded-r-lg shadow-md">
+        🍽️ Enjoy free <br /> food delivery <br /> with your Premium membership!
+      </div>
+      <div className="max-w-[540px] 2xl:max-w-xl w-full bg-white shadow-2xl md:rounded-xl px-2 md:px-8 py-5 space-y-2 border border-rose-200">
+        <h2 className="text-lg md:text-xl font-medium text-center text-rose-600">
           Become a Premium Member
         </h2>
-        <p className="text-center text-gray-600 text-base mb-6">
+        <p className="text-center text-gray-600 text-sm">
           Unlock exclusive benefits by upgrading your account!
         </p>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-3 md:space-y-5">
           <div className="space-y-2">
             <input
-              className="w-full px-5 py-3 rounded-lg bg-purple-50 text-gray-800 border border-purple-300 focus:outline-none focus:border-purple-500 transition-all shadow-md placeholder-gray-400"
+              className="w-full px-4 py-3 rounded-lg bg-rose-50 text-gray-800 border border-rose-300 focus:outline-none focus:border-rose-500 transition-all shadow-md placeholder-gray-400"
               name="name"
               id="name"
               type="text"
+              required
               defaultValue={user?.displayName}
               placeholder="Full Name"
-              required
             />
           </div>
           <div className="space-y-2">
             <select
-              required
-              className="w-full px-5 py-3 rounded-lg bg-purple-50 text-gray-800 border border-purple-300 focus:outline-none focus:border-purple-500 transition-all shadow-md"
+              className="w-full px-4 py-3 rounded-lg bg-rose-50 text-gray-800 border border-rose-300 focus:outline-none focus:border-rose-500 transition-all shadow-md"
               onChange={(e) => handlePeriod(e.target.value)}
+              required
             >
               <option value="1">1 Minute</option>
               <option value="3">3 Days</option>
@@ -191,14 +194,14 @@ const PremiumForm = () => {
                   },
                 },
               }}
-              className="w-full p-4 rounded-lg bg-purple-50 text-gray-800 border border-purple-300 focus:outline-none focus:border-purple-500 transition-all shadow-md"
+              className="w-full p-4 rounded-lg bg-rose-50 text-gray-800 border border-rose-300 focus:outline-none focus:border-rose-500 transition-all shadow-md"
               onChange={handleCardChange}
               onFocus={handleCardFocus}
             />
           </div>
           <div className="min-h-[16px]">
             <p
-              className={`text-red-600 text-sm ${
+              className={`text-rose-600 text-sm ${
                 error && hasInteracted ? "opacity-100" : "opacity-0"
               }`}
             >
@@ -222,13 +225,31 @@ const PremiumForm = () => {
               className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
                 loading
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-purple-600 hover:bg-purple-500"
+                  : isPremium
+                  ? "bg-green-500 cursor-not-allowed"
+                  : "bg-rose-600 hover:bg-rose-500"
               }`}
             >
               {loading ? (
                 <div className="flex justify-center items-center gap-2">
                   <span className="loading loading-spinner loading-xs"></span>
                   Processing...
+                </div>
+              ) : isPremium ? (
+                <div className="flex items-center gap-2 justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-white"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Paid
                 </div>
               ) : (
                 "Pay for Premium Membership"
@@ -242,7 +263,7 @@ const PremiumForm = () => {
             : "Be our Premium member today!"}
         </p>
       </div>
-      <div className="mt-6 text-center bg-purple-50 border border-purple-300 text-purple-600 rounded-lg py-3 px-4 shadow-sm">
+      <div className="lg:hidden 2xl:block mt-6 text-center bg-rose-50 border border-rose-300 text-rose-600 rounded-lg py-3 md:px-4 shadow-sm">
         🍽️ Enjoy free food delivery with your Premium membership!
       </div>
     </div>
