@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { addFood } from "../api/Foods";
 import { TbFidgetSpinner } from "react-icons/tb";
 import useMyFoods from "../hooks/useMyFoods";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import PlaterHelmet from "../Component/PlaterHelmet";
 
 const AddFood = () => {
@@ -43,11 +43,11 @@ const AddFood = () => {
     const isDuplicate = myFoods?.find((food) => food.food_name === food_name);
     if (isDuplicate) {
       setLoading(false);
-      return toast.error("You already added this Book!");
+      return toast.warning("You already added this Book!");
     }
     if (!/^[0-9]+$/.test(food_quantity)) {
       setLoading(false);
-      return toast.error("Use only numbers for food quantity");
+      return toast.warning("Use only numbers for food quantity");
     }
 
     const foodInfo = {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { clearCookie, userLogout } from "./Auth";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_server_URL,
@@ -13,7 +13,9 @@ axiosSecure.interceptors.response.use(
     // console.log("Error in the interceptor", error.response.status);
     if (error.response.status === 401 || error.response.status === 403) {
       await clearCookie();
-      toast.error("Your Session has expired! Please log in again to continue");
+      toast.warning(
+        "Your Session has expired! Please log in again to continue"
+      );
       await userLogout();
       history.push("/login");
     }

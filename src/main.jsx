@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 
 import Root from "./Shared/Root";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
 import { RouterProvider } from "react-router-dom";
 import AuthProviders from "./Shared/AuthProviders";
 import { HelmetProvider } from "react-helmet-async";
@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </AuthProviders>
       </QueryClientProvider>
     </HelmetProvider>
-    <Toaster position="bottom-center" reverseOrder={false} />
+    <Toaster richColors position="bottom-center" />
   </React.StrictMode>
 );
 

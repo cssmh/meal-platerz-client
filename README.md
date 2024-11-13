@@ -79,7 +79,7 @@ MealPlaterz is a community-driven platform dedicated to reducing food waste by f
 - [npm i @headlessui/react](https://www.npmjs.com/package/@headlessui/react)
 - [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)
 - [react-helmet-async](https://www.npmjs.com/package/react-helmet-async)
-- [react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
+- [sonner](https://www.npmjs.com/package/sonner)
 - [swiper](https://www.npmjs.com/package/swiper)
 
 ### Dev Dependencies

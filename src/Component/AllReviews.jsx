@@ -9,7 +9,7 @@ import {
 import ReviewModal from "./ReviewModal";
 import useAuth from "../hooks/useAuth";
 import { FaTrash, FaPlus } from "react-icons/fa";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import PlaterHelmet from "./PlaterHelmet";
 
 const AllReviews = () => {
@@ -28,7 +28,7 @@ const AllReviews = () => {
     const getReview = e.target.review.value;
 
     if (getReview.length < 1) {
-      return toast.error("Review cannot be empty.");
+      return toast.info("Review cannot be empty.");
     }
 
     const reviewData = {

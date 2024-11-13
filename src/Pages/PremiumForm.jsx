@@ -1,5 +1,4 @@
-import swal from "sweetalert";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
@@ -56,7 +55,7 @@ const PremiumForm = () => {
     e.preventDefault();
 
     if (isPremium) {
-      toast.error("You are already a Premium member!");
+      toast.info("You are already a Premium member!");
       return;
     }
 
@@ -109,12 +108,9 @@ const PremiumForm = () => {
 
         if (res?.modifiedCount > 0) {
           refetch();
-          swal({
-            title: "Congratulations",
-            text: "Enjoy your premium membership benefits!",
-            icon: "success",
-            timer: 2000,
-          });
+          toast.success(
+            "Congratulations! Enjoy your premium membership benefits!"
+          );
         }
       }
     } catch (error) {
@@ -142,11 +138,11 @@ const PremiumForm = () => {
   return (
     <div className="2xl:min-h-[87vh] flex items-center justify-center md:py-5 md:px-4 flex-col relative">
       <PlaterHelmet title={"Be Premium"} />
-      <div className="hidden lg:block 2xl:hidden absolute top-1/2 left-14 transform -translate-y-1/2 px-4 py-2 bg-rose-50 border-l-4 border-rose-300 text-rose-600 rounded-r-lg shadow-md">
+      <div className="hidden lg:block 2xl:hidden absolute top-1/2 left-14 transform -translate-y-1/2 px-4 py-2 bg-teal-50 border-l-4 border-teal-300 text-teal-600 rounded-r-lg shadow-md">
         🍽️ Enjoy free <br /> food delivery <br /> with your Premium membership!
       </div>
-      <div className="max-w-[540px] 2xl:max-w-xl w-full bg-white shadow-2xl md:rounded-xl px-2 md:px-8 py-5 space-y-2 border border-rose-200">
-        <h2 className="text-lg md:text-xl font-medium text-center text-rose-600">
+      <div className="max-w-[540px] 2xl:max-w-xl w-full bg-white shadow-2xl md:rounded-xl px-2 md:px-8 py-5 space-y-2 border border-teal-200">
+        <h2 className="text-lg md:text-xl font-medium text-center text-teal-600">
           Become a Premium Member
         </h2>
         <p className="text-center text-gray-600 text-sm">
@@ -155,7 +151,7 @@ const PremiumForm = () => {
         <form onSubmit={handleSubmit} className="space-y-3 md:space-y-5">
           <div className="space-y-2">
             <input
-              className="w-full px-4 py-3 rounded-lg bg-rose-50 text-gray-800 border border-rose-300 focus:outline-none focus:border-rose-500 transition-all shadow-md placeholder-gray-400"
+              className="w-full px-4 py-3 rounded-lg bg-teal-50 text-gray-800 border border-teal-300 focus:outline-none focus:border-teal-500 transition-all shadow-md placeholder-gray-400"
               name="name"
               id="name"
               type="text"
@@ -166,7 +162,7 @@ const PremiumForm = () => {
           </div>
           <div className="space-y-2">
             <select
-              className="w-full px-4 py-3 rounded-lg bg-rose-50 text-gray-800 border border-rose-300 focus:outline-none focus:border-rose-500 transition-all shadow-md"
+              className="w-full px-4 py-3 rounded-lg bg-teal-50 text-gray-800 border border-teal-300 focus:outline-none focus:border-teal-500 transition-all shadow-md"
               onChange={(e) => handlePeriod(e.target.value)}
               required
             >
@@ -194,7 +190,7 @@ const PremiumForm = () => {
                   },
                 },
               }}
-              className="w-full p-4 rounded-lg bg-rose-50 text-gray-800 border border-rose-300 focus:outline-none focus:border-rose-500 transition-all shadow-md"
+              className="w-full p-4 rounded-lg bg-teal-50 text-gray-800 border border-teal-300 focus:outline-none focus:border-teal-500 transition-all shadow-md"
               onChange={handleCardChange}
               onFocus={handleCardFocus}
             />
@@ -227,7 +223,7 @@ const PremiumForm = () => {
                   ? "bg-gray-400 cursor-not-allowed"
                   : isPremium
                   ? "bg-green-500 cursor-not-allowed"
-                  : "bg-rose-600 hover:bg-rose-500"
+                  : "bg-teal-600 hover:bg-teal-500"
               }`}
             >
               {loading ? (
@@ -263,7 +259,7 @@ const PremiumForm = () => {
             : "Be our Premium member today!"}
         </p>
       </div>
-      <div className="lg:hidden 2xl:block mt-6 text-center bg-rose-50 border border-rose-300 text-rose-600 rounded-lg py-3 md:px-4 shadow-sm">
+      <div className="lg:hidden 2xl:block mt-6 text-center bg-teal-50 border border-teal-300 text-teal-600 rounded-lg py-3 md:px-4 shadow-sm">
         🍽️ Enjoy free food delivery with your Premium membership!
       </div>
     </div>

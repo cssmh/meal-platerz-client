@@ -1,10 +1,10 @@
+import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
 import useIsPremium from "../hooks/useIsPremium";
-import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -29,7 +29,7 @@ const Navbar = () => {
 
   const handleProtectedRoute = (path) => {
     if (!user?.email) {
-      toast.error("Please log in first to access this feature.");
+      toast.info("Please log in first to access this feature.");
       navigate("/login");
     } else {
       navigate(path);

@@ -1,5 +1,5 @@
 import moment from "moment";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { addReviews, getFood } from "../api/Foods";
@@ -70,33 +70,34 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
     }
   };
 
-  if (isLoading || loading) return (
-    <div className="border rounded-md mx-1 lg:mx-0 py-4 border-gray-300 bg-gray-100 animate-pulse">
-      <div className="flex flex-col md:flex-row px-2 md:px-8 items-center gap-3">
-        <div className="w-24 md:w-32 h-24 md:h-32 bg-gray-300 rounded-md" />
-        <div className="flex flex-col items-start">
-          <div className="h-6 w-1/2 bg-gray-300 rounded-md mb-2" />
-          <div className="text-lg text-blue-900 h-4 w-3/4 bg-gray-300 rounded-md mb-1" />
-          <h1 className="text-cyan-600 h-6 w-1/3 bg-gray-300 rounded-md mb-2" />
-          <div className="flex flex-col md:flex-row gap-1">
-            <div className="h-4 w-1/2 bg-gray-300 rounded-md" />
-            <div className="h-4 w-1/4 bg-gray-300 rounded-md" />
+  if (isLoading || loading)
+    return (
+      <div className="border rounded-md mx-1 lg:mx-0 py-4 border-gray-300 bg-gray-100 animate-pulse">
+        <div className="flex flex-col md:flex-row px-2 md:px-8 items-center gap-3">
+          <div className="w-24 md:w-32 h-24 md:h-32 bg-gray-300 rounded-md" />
+          <div className="flex flex-col items-start">
+            <div className="h-6 w-1/2 bg-gray-300 rounded-md mb-2" />
+            <div className="text-lg text-blue-900 h-4 w-3/4 bg-gray-300 rounded-md mb-1" />
+            <h1 className="text-cyan-600 h-6 w-1/3 bg-gray-300 rounded-md mb-2" />
+            <div className="flex flex-col md:flex-row gap-1">
+              <div className="h-4 w-1/2 bg-gray-300 rounded-md" />
+              <div className="h-4 w-1/4 bg-gray-300 rounded-md" />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="space-y-1 px-3 md:px-8 mt-1">
-        <div className="h-4 w-full bg-gray-300 rounded-md" />
-        <div className="h-4 w-full bg-gray-300 rounded-md" />
-        <div className="h-4 w-1/2 bg-gray-300 rounded-md" />
-        <div className="h-4 w-3/4 bg-gray-300 rounded-md" />
-        <div className="flex gap-2">
+        <div className="space-y-1 px-3 md:px-8 mt-1">
+          <div className="h-4 w-full bg-gray-300 rounded-md" />
+          <div className="h-4 w-full bg-gray-300 rounded-md" />
           <div className="h-4 w-1/2 bg-gray-300 rounded-md" />
+          <div className="h-4 w-3/4 bg-gray-300 rounded-md" />
+          <div className="flex gap-2">
+            <div className="h-4 w-1/2 bg-gray-300 rounded-md" />
+          </div>
+          <div className="h-4 w-full bg-gray-300 rounded-md mt-2" />
+          <div className="h-8 w-1/4 bg-gray-300 rounded-md mt-2" />
         </div>
-        <div className="h-4 w-full bg-gray-300 rounded-md mt-2" />
-        <div className="h-8 w-1/4 bg-gray-300 rounded-md mt-2" />
       </div>
-    </div>
-  );
+    );
 
   return (
     <div

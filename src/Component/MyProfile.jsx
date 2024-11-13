@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import React, { useState } from "react";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";

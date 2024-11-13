@@ -9,7 +9,7 @@ import {
 import moment from "moment";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { addReq } from "../api/Foods";
 import useIsPremium from "../hooks/useIsPremium";
 import useMyRequest from "../hooks/useMyRequest";
@@ -72,11 +72,11 @@ const AddRequest = ({ getFood }) => {
     const status = "Pending";
 
     if (!/^[1-9]\d*$/.test(donation)) {
-      toast.error("The donation amount is invalid");
+      toast.info("The donation amount is invalid");
       return;
     }
     if (!/^(\+?8801|01)\d{9}$/.test(user_phone)) {
-      toast.error("Enter a valid phone number!");
+      toast.info("Enter a valid phone number!");
       return;
     }
 
