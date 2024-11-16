@@ -5,6 +5,7 @@ import { updateMyFoods } from "../api/Foods";
 import moment from "moment";
 
 const UpdateMyFood = ({ foodData, food_status, refetch }) => {
+  const [loading, setLoading] = useState(false);
   const {
     _id,
     food_name,
@@ -28,12 +29,10 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     setTodayDate(today);
-    // Initialize expirationDate and expirationTime based on props
     setExpirationDate(
       moment(expiration_date, "YYYY-MM-DD").format("YYYY-MM-DD")
     );
     setExpirationTime(moment(expiration_time, "hh:mm A").format("HH:mm"));
-    // Also set expiredDate and expiredTime initially
     setExpiredDate(moment(expiration_date, "YYYY-MM-DD").format("YYYY-MM-DD"));
     setExpiredTime(moment(expiration_time, "hh:mm A").format("HH:mm"));
   }, [expiration_date, expiration_time]);
@@ -56,6 +55,7 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
 
   const handleUpdateFood = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
     const food_name = form.food_name.value;
     const food_image = form.food_image_url.value;
@@ -85,6 +85,7 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
       console.error(error);
     } finally {
       setOpen(false);
+      setLoading(false);
     }
   };
 
@@ -225,8 +226,17 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
               ></textarea>
             </div>
             <div className="form-control mt-5">
-              <button className="btn btn-outline border-none bg-red-400 hover:bg-red-400 text-white">
-                Update Food
+              <button
+                disabled={loading}
+                className="btn btn-outline border-none bg-red-400 hover:bg-red-400 text-white"
+              >
+                {loading ? (
+                  <div className="flex justify-center">
+                    <p>Updating...</p>
+                  </div>
+                ) : (
+                  "Update Food"
+                )}
               </button>
             </div>
           </form>

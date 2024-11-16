@@ -148,7 +148,16 @@ const PremiumForm = () => {
         <p className="text-center text-gray-600 text-sm">
           Unlock exclusive benefits by upgrading your account!
         </p>
-        <form onSubmit={handleSubmit} className="space-y-3 md:space-y-5">
+        <p className="text-sm text-center text-gray-800">
+          Use test card{" "}
+          <span className="text-teal-600 font-semibold">
+            4242 4242 4242 4242{" "}
+          </span>
+          expiry <span className="text-teal-600 font-semibold">12/25</span> cvc{" "}
+          <span className="text-teal-600 font-semibold">222</span> zip{" "}
+          <span className="text-teal-600 font-semibold">32321</span>
+        </p>
+        <form onSubmit={handleSubmit} className="mx-2 md:mx-0 space-y-3 md:space-y-4">
           <div className="space-y-2">
             <input
               className="w-full px-4 py-3 rounded-lg bg-teal-50 text-gray-800 border border-teal-300 focus:outline-none focus:border-teal-500 transition-all shadow-md placeholder-gray-400"
@@ -195,7 +204,7 @@ const PremiumForm = () => {
               onFocus={handleCardFocus}
             />
           </div>
-          <div className="min-h-[16px]">
+          <div className="min-h-[14px]">
             <p
               className={`text-rose-600 text-sm ${
                 error && hasInteracted ? "opacity-100" : "opacity-0"
@@ -238,17 +247,18 @@ const PremiumForm = () => {
                     className="h-5 w-5 text-white"
                     viewBox="0 0 20 20"
                     fill="currentColor"
+                    aria-hidden="true"
                   >
                     <path
                       fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 112 0v4a1 1 0 11-2 0V7zm-2 2a1 1 0 110 2 1 1 0 010-2z"
                       clipRule="evenodd"
                     />
                   </svg>
                   Paid
                 </div>
               ) : (
-                "Pay for Premium Membership"
+                "Pay Now"
               )}
             </button>
           </div>
@@ -259,7 +269,7 @@ const PremiumForm = () => {
             : "Be our Premium member today!"}
         </p>
       </div>
-      <div className="lg:hidden 2xl:block mt-6 text-center bg-teal-50 border border-teal-300 text-teal-600 rounded-lg py-3 md:px-4 shadow-sm">
+      <div className="mx-2 lg:hidden 2xl:block my-5 text-center bg-teal-50 border border-teal-300 text-teal-600 rounded-lg py-3">
         🍽️ Enjoy free food delivery with your Premium membership!
       </div>
     </div>

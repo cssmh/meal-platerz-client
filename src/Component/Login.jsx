@@ -3,8 +3,8 @@ import { toast } from "sonner";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { TbFidgetSpinner } from "react-icons/tb";
 import { addUser } from "../api/users";
+import { PiSpinnerGapLight } from "react-icons/pi";
 import PlaterHelmet from "./PlaterHelmet";
 
 const Login = () => {
@@ -37,6 +37,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
+    setLoading(true);
     try {
       const res = await googleLogin();
       toast.success("User logged in successfully");
@@ -48,6 +49,8 @@ const Login = () => {
       await addUser(userData);
     } catch (err) {
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -96,7 +99,7 @@ const Login = () => {
         <button className="block w-full p-3 text-center rounded-xl dark:text-gray-50 dark:bg-redFood">
           {loading ? (
             <div className="flex justify-center">
-              <TbFidgetSpinner className="animate-spin text-xl my-[2px]" />
+              <PiSpinnerGapLight className="animate-spin text-xl my-[2px]" />
             </div>
           ) : (
             "Login"
