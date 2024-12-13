@@ -37,7 +37,6 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
-    setLoading(true);
     try {
       const res = await googleLogin();
       toast.success("User logged in successfully");
@@ -49,8 +48,6 @@ const Login = () => {
       await addUser(userData);
     } catch (err) {
       toast.error(err.message);
-    } finally {
-      setLoading(false);
     }
   };
 

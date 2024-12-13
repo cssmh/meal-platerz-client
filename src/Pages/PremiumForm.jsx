@@ -136,34 +136,19 @@ const PremiumForm = () => {
   if (isLoading) return <SmallLoader />;
 
   return (
-    <div className="2xl:min-h-[87vh] flex items-center justify-center md:py-5 md:px-4 flex-col relative">
-      <PlaterHelmet title={"Be Premium"} />
-      <div className="hidden lg:block 2xl:hidden absolute top-1/2 left-14 transform -translate-y-1/2 px-4 py-2 bg-red-50 border-l-4 border-red-300 text-red-600 rounded-r-lg shadow-md">
-        🍽️ Enjoy free <br /> food delivery <br /> with your Premium membership!
-      </div>
-      <div className="max-w-[540px] 2xl:max-w-xl w-full bg-white shadow-2xl md:rounded-xl px-2 md:px-8 py-5 space-y-2 border border-red-200">
-        <h2 className="text-lg md:text-xl font-medium text-center text-red-600">
+    <div className="flex items-center justify-center p-4 bg-gray-50">
+      <PlaterHelmet title={"Become Premium Member"} />
+      <div className="max-w-xl w-full bg-white shadow-lg rounded-xl p-8 space-y-5">
+        <h2 className="text-2xl font-semibold text-center text-red-600">
           Become a Premium Member
         </h2>
         <p className="text-center text-gray-600 text-sm">
           Unlock exclusive benefits by upgrading your account!
         </p>
-        <p className="text-sm text-center text-gray-800">
-          Use test card{" "}
-          <span className="text-red-600 font-semibold">
-            4242 4242 4242 4242{" "}
-          </span>
-          expiry <span className="text-red-600 font-semibold">12/25</span> cvc{" "}
-          <span className="text-red-600 font-semibold">222</span> zip{" "}
-          <span className="text-red-600 font-semibold">32321</span>
-        </p>
-        <form
-          onSubmit={handleSubmit}
-          className="mx-2 md:mx-0 space-y-3 md:space-y-4"
-        >
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <input
-              className="w-full px-4 py-3 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-all shadow-md placeholder-gray-400"
+              className="w-full px-4 py-3 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-shadow shadow-md placeholder-gray-400"
               name="name"
               id="name"
               type="text"
@@ -174,7 +159,7 @@ const PremiumForm = () => {
           </div>
           <div className="space-y-2">
             <select
-              className="w-full px-4 py-3 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-all shadow-md"
+              className="w-full px-4 py-3 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-shadow shadow-md"
               onChange={(e) => handlePeriod(e.target.value)}
               required
             >
@@ -202,7 +187,7 @@ const PremiumForm = () => {
                   },
                 },
               }}
-              className="w-full p-4 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-all shadow-md"
+              className="w-full p-4 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-shadow shadow-md"
               onChange={handleCardChange}
               onFocus={handleCardFocus}
             />
