@@ -15,21 +15,11 @@ const PlateReview = () => {
 
   const photos = data?.result?.map((food) => food.food_image) || [];
 
-  const renderSkeleton = () => (
-    <div className="flex space-x-4">
-      {Array(12)
-        .fill("")
-        .map((_, idx) => (
-          <div key={idx} className="w-28 h-24 bg-gray-200 animate-pulse"></div>
-        ))}
-    </div>
-  );
-
   return (
     <div className="mt-10">
       {isLoading ? (
-        <div className="flex justify-center items-center">
-          {renderSkeleton()}
+        <div className="flex justify-center items-center mb-9">
+          <span className="loading loading-bars loading-md"></span>
         </div>
       ) : (
         <Swiper

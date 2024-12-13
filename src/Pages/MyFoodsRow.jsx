@@ -65,17 +65,17 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
       </td>
       <td
         className={
-          isExpired
+          food_status === "Unavailable"
+            ? "text-cyan-500"
+            : isExpired
             ? "text-redFood"
-            : food_status === "Unavailable"
-            ? "text-green-500"
-            : "text-emerald-600"
+            : "text-green-500"
         }
       >
-        {isExpired
-          ? "Food Expired"
-          : food_status === "Unavailable"
+        {food_status === "Unavailable"
           ? "Delivered"
+          : isExpired
+          ? "Food Expired"
           : food_status}
       </td>
       <th>

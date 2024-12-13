@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
 import moment from "moment";
+import React, { useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
 
-const Countdown = () => {
+const Countdown = ({ profile = false }) => {
   const { userData, isLoading } = useUser();
   const [countdown, setCountdown] = useState({
     days: 0,
@@ -60,11 +60,54 @@ const Countdown = () => {
   }
 
   return (
-    <p>
-      {isExpired
-        ? "Your premium membership has expired."
-        : `${countdown.days} days ${countdown.hours} hours ${countdown.minutes} minutes ${countdown.seconds} seconds`}
-    </p>
+    <div>
+      {isExpired ? (
+        <p>Your premium membership has expired.</p>
+      ) : (
+        <div className="flex gap-3">
+          <div>
+            <span
+              className={`countdown font-medium ${
+                profile ? "text-4xl" : "text-xl"
+              }`}
+            >
+              <span style={{ "--value": countdown.days }}></span>
+            </span>
+            days
+          </div>
+          <div>
+            <span
+              className={`countdown font-medium ${
+                profile ? "text-4xl" : "text-xl"
+              }`}
+            >
+              <span style={{ "--value": countdown.hours }}></span>
+            </span>
+            hours
+          </div>
+          <div>
+            <span
+              className={`countdown font-medium ${
+                profile ? "text-4xl" : "text-xl"
+              }`}
+            >
+              <span style={{ "--value": countdown.minutes }}></span>
+            </span>
+            min
+          </div>
+          <div>
+            <span
+              className={`countdown font-medium ${
+                profile ? "text-4xl" : "text-xl"
+              }`}
+            >
+              <span style={{ "--value": countdown.seconds }}></span>
+            </span>
+            sec
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-# MealPlaterz (Empowering Community Through Food Sharing to Reduce Waste)
+# MealPlaterz (Food Donation Platform to Reduce Waste)
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
@@ -17,7 +17,7 @@
 
 ## Description
 
-MealPlaterz is a community-driven platform dedicated to reducing food waste by facilitating the sharing of surplus food among community members. It provides a user-friendly interface where users can post available food items, connect with neighbors, and contribute to a more sustainable environment.
+MealPlaterz streamlines food donation by providing a platform to schedule, track, and request food donations. Only users who complete food donations can leave reviews. Stripe is integrated for premium membership, which includes free food delivery.
 
 ## Features
 

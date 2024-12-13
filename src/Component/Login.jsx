@@ -117,7 +117,7 @@ const Login = () => {
         <button
           onClick={handleGoogleLogin}
           aria-label="Log in with Google"
-          className="p-3 rounded-sm"
+          className="px-6 py-2 rounded-xl bg-redFood text-white"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

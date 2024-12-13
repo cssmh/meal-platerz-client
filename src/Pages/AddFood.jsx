@@ -145,7 +145,7 @@ const AddFood = () => {
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
-              className="input input-bordered w-full p-2"
+              className="input input-bordered p-2"
             />
           </div>
         </div>

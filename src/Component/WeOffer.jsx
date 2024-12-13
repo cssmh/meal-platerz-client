@@ -4,8 +4,7 @@ const WeOffer = () => {
       <h2 className="mb-8 text-2xl font-semibold leading-none text-center px-3 md:px-0">
         What do we have to offer<span className="text-redFood">?</span>
       </h2>
-
-      <div className="max-w-6xl 2xl:max-w-[90%] mx-auto flex flex-wrap justify-between gap-6 px-5 md:px-0">
+      <div className="max-w-6xl 2xl:max-w-[90%] mx-auto flex  flex-col md:flex-row justify-between gap-6 px-5 md:px-0">
         <div className="flex flex-col items-center space-y-4">
           <div
             data-aos="fade-down-right"

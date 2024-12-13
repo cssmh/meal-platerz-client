@@ -92,14 +92,12 @@ const MyProfile = () => {
               </p>
               <p className="text-sm">Time Remaining:</p>
               <div className="mt-2 inline-block px-4 py-2 bg-green-100 rounded-lg shadow">
-                <Countdown />
+                <Countdown profile={true} />
               </div>
             </div>
           )}
         </div>
       </div>
-
-      {/* Edit Profile Modal */}
       <EditProfileModal
         isOpen={isOpen}
         closeModal={closeModal}
