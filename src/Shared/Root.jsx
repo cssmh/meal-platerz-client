@@ -39,6 +39,14 @@ const Root = createBrowserRouter([
         element: <AvailableFoods />,
       },
       {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/all-reviews",
+        element: <AllReviews />,
+      },
+      {
         path: "/my-profile",
         element: (
           <PrivateRoute>
@@ -92,22 +100,6 @@ const Root = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyPending />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/blogs",
-        element: (
-          <PrivateRoute>
-            <Blogs />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/all-reviews",
-        element: (
-          <PrivateRoute>
-            <AllReviews />,
           </PrivateRoute>
         ),
       },

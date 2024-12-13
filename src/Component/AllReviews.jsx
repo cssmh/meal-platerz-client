@@ -134,7 +134,6 @@ const AllReviews = () => {
         isOpen={isOpen}
         closeModal={closeModal}
         handleAddReview={handleAddReview}
-        width={"xl"}
       />
     </div>
   );

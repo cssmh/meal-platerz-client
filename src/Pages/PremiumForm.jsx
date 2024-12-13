@@ -136,42 +136,44 @@ const PremiumForm = () => {
   if (isLoading) return <SmallLoader />;
 
   return (
-    <div className="flex items-center justify-center p-4 bg-gray-50">
+    <div className="flex items-center justify-center p-2 md:p-4 bg-gray-100">
       <PlaterHelmet title={"Become Premium Member"} />
-      <div className="max-w-xl w-full bg-white shadow-lg rounded-xl p-8 space-y-5">
-        <h2 className="text-2xl font-semibold text-center text-red-600">
-          Become a Premium Member
-        </h2>
-        <p className="text-center text-gray-600 text-sm">
-          Unlock exclusive benefits by upgrading your account!
+      <div className="max-w-3xl w-full bg-white p-4 md:p-8 rounded-xl shadow-xl space-y-5">
+        <h1 className="text-2xl font-semibold text-center text-gray-800">
+          Upgrade to Premium
+        </h1>
+        <p className="text-center text-gray-600 md:w-[85%] mx-auto">
+          Enjoy exclusive benefits with our Premium Membership. Select a plan
+          and make your payment securely.
         </p>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <input
-              className="w-full px-4 py-3 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-shadow shadow-md placeholder-gray-400"
-              name="name"
-              id="name"
-              type="text"
-              required
-              defaultValue={user?.displayName}
-              placeholder="Full Name"
-            />
+        <div className="space-y-3 md:space-y-5">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <input
+                className="w-full px-4 py-3 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-shadow shadow-md placeholder-gray-400"
+                name="name"
+                id="name"
+                type="text"
+                required
+                defaultValue={user?.displayName}
+                placeholder="Full Name"
+              />
+            </div>
+            <div className="flex-1">
+              <select
+                className="w-full px-4 py-3 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-shadow shadow-md"
+                onChange={(e) => handlePeriod(e.target.value)}
+                required
+              >
+                <option value="1">1 Minute</option>
+                <option value="3">3 Days</option>
+                <option value="7">7 Days</option>
+                <option value="15">15 Days</option>
+                <option value="30">30 Days</option>
+              </select>
+            </div>
           </div>
-          <div className="space-y-2">
-            <select
-              className="w-full px-4 py-3 rounded-lg bg-red-50 text-gray-800 border border-red-300 focus:outline-none focus:border-red-500 transition-shadow shadow-md"
-              onChange={(e) => handlePeriod(e.target.value)}
-              required
-            >
-              <option value="1">1 Minute</option>
-              <option value="3">3 Days</option>
-              <option value="7">7 Days</option>
-              <option value="15">15 Days</option>
-              <option value="30">30 Days</option>
-            </select>
-          </div>
-          <p className="text-lg font-semibold text-gray-800">Price: ${price}</p>
-          <div className="space-y-2">
+          <div>
             <CardElement
               options={{
                 style: {
@@ -192,75 +194,76 @@ const PremiumForm = () => {
               onFocus={handleCardFocus}
             />
           </div>
-          <div className="min-h-[14px]">
-            <p
-              className={`text-rose-600 text-sm ${
-                error && hasInteracted ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              {error || " "}
+        </div>
+        <p className="text-lg font-semibold text-gray-800">
+          Price: ${price}
+        </p>
+        <div className="min-h-[14px]">
+          <p
+            className={`text-rose-600 text-sm ${
+              error && hasInteracted ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {error || " "}
+          </p>
+          {isPremium && (
+            <div className="flex justify-center mb-2">
+              <span className="mt-2 inline-block px-4 py-2 bg-green-100 rounded-lg shadow">
+                <Countdown />
+              </span>
+            </div>
+          )}
+          {isPremium && userData?.paymentIntent_Id && (
+            <p className="text-green-500 text-sm flex text-center justify-center">
+              Your transaction id is: {userData.paymentIntent_Id}
             </p>
-            {isPremium && (
-              <div className="flex justify-center mb-2">
-                <span className="mt-2 inline-block px-4 py-2 bg-green-100 rounded-lg shadow">
-                  <Countdown />
-                </span>
+          )}
+        </div>
+        <div className="flex justify-center">
+          <button
+            disabled={!stripe || !clientSecret || isPremium}
+            type="submit"
+            className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : isPremium
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-redFood"
+            }`}
+            onClick={handleSubmit}
+          >
+            {loading ? (
+              <div className="flex justify-center items-center gap-2">
+                <span className="loading loading-spinner loading-xs"></span>
+                Processing...
               </div>
+            ) : isPremium ? (
+              <div className="flex items-center gap-2 justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-white"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 112 0v4a1 1 0 11-2 0V7zm-2 2a1 1 0 110 2 1 1 0 010-2z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Paid
+              </div>
+            ) : (
+              "Pay Now"
             )}
-            {isPremium && userData?.paymentIntent_Id && (
-              <p className="text-green-500 text-sm flex justify-center">
-                Your transaction id is: {userData.paymentIntent_Id}
-              </p>
-            )}
-          </div>
-          <div className="flex justify-center">
-            <button
-              disabled={!stripe || !clientSecret || isPremium}
-              type="submit"
-              className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
-                loading
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : isPremium
-                  ? "bg-red-500 cursor-not-allowed"
-                  : "bg-red-600 hover:bg-red-500"
-              }`}
-            >
-              {loading ? (
-                <div className="flex justify-center items-center gap-2">
-                  <span className="loading loading-spinner loading-xs"></span>
-                  Processing...
-                </div>
-              ) : isPremium ? (
-                <div className="flex items-center gap-2 justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-white"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 112 0v4a1 1 0 11-2 0V7zm-2 2a1 1 0 110 2 1 1 0 010-2z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Paid
-                </div>
-              ) : (
-                "Pay Now"
-              )}
-            </button>
-          </div>
-        </form>
+          </button>
+        </div>
         <p className="text-center text-sm text-gray-600">
           {isPremium
             ? "Congratulations on being a Premium member!"
             : "Be our Premium member today!"}
         </p>
-      </div>
-      <div className="mx-2 lg:hidden 2xl:block my-5 text-center bg-red-50 border border-red-300 text-red-600 rounded-lg py-3">
-        🍽️ Enjoy free food delivery with your Premium membership!
       </div>
     </div>
   );

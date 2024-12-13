@@ -122,6 +122,14 @@ const Navbar = () => {
                 >
                   Be Premium
                 </button>
+                <button
+                  onClick={() => handleProtectedRoute("/all-reviews")}
+                  className={`flex items-center p-[2px] ${getLinkClasses(
+                    "/all-reviews"
+                  )}`}
+                >
+                  All Reviews
+                </button>
                 {user?.email && (
                   <Link
                     to="/manage-my-foods"
@@ -129,7 +137,7 @@ const Navbar = () => {
                       "/manage-my-foods"
                     )}`}
                   >
-                    Manage My Foods
+                    My Foods
                   </Link>
                 )}
                 {user?.email && (
@@ -139,7 +147,7 @@ const Navbar = () => {
                       "/my-food-request"
                     )}`}
                   >
-                    My Food Request
+                    My Request
                   </Link>
                 )}
               </ul>
@@ -180,6 +188,14 @@ const Navbar = () => {
                 )}`}
               >
                 Be Premium
+              </button>
+              <button
+                onClick={() => handleProtectedRoute("/all-reviews")}
+                className={`flex items-center p-2 ${getLinkClasses(
+                  "/all-reviews"
+                )}`}
+              >
+                All Reviews
               </button>
               {user?.email && (
                 <li tabIndex={0}>
