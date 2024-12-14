@@ -138,8 +138,8 @@ const PremiumForm = () => {
   return (
     <div className="flex items-center justify-center p-2 md:p-4 bg-gray-100">
       <PlaterHelmet title={"Become Premium Member"} />
-      <div className="max-w-2xl w-full bg-white p-4 md:p-8 rounded-xl shadow-xl space-y-5">
-        <h1 className="text-2xl font-semibold text-center text-gray-800">
+      <div className="max-w-2xl w-full bg-white p-4 md:px-8 md:py-5 rounded-xl shadow-xl space-y-5">
+        <h1 className="text-2xl font-semibold text-center text-red-500">
           Upgrade to Premium
         </h1>
         <p className="text-center text-gray-600 md:w-[85%] mx-auto">
@@ -223,9 +223,9 @@ const PremiumForm = () => {
             type="submit"
             className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
               loading
-                ? "bg-gray-400 cursor-not-allowed"
+                ? "bg-green-300 cursor-not-allowed"
                 : isPremium
-                ? "bg-gray-400 cursor-not-allowed"
+                ? "bg-green-300 cursor-not-allowed"
                 : "bg-redFood"
             }`}
             onClick={handleSubmit}

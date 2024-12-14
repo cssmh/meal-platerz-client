@@ -36,6 +36,8 @@ const PlateReview = () => {
           slidesPerView={1}
           spaceBetween={0}
           breakpoints={{
+            250: { slidesPerView: 3, spaceBetween: 0 },
+            375: { slidesPerView: 4, spaceBetween: 0 },
             480: { slidesPerView: 5, spaceBetween: 0 },
             768: { slidesPerView: 8, spaceBetween: 0 },
             1000: { slidesPerView: 12, spaceBetween: 0 },

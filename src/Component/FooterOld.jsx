@@ -1,6 +1,6 @@
 const FooterOld = () => {
   return (
-    <div className="flex flex-col bg-gray-100 md:flex-row items-center justify-between p-9 md:p-14">
+    <div className="flex flex-col bg-gray-200 md:flex-row items-center justify-between p-9 md:p-14">
       <div className="mb-5 md:mb-0">
         <ul className="flex flex-col md:flex-row gap-5">
           <div className="flex items-center justify-center gap-5">

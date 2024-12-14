@@ -8,7 +8,7 @@ const Blogs = () => {
     <div className="bg-gray-100 py-6">
       <PlaterHelmet title={"Blogs"} />
       <div className="max-w-7xl 2xl:max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-xl md:text-3xl font-bold text-center mb-8">
+        <h1 className="text-2xl md:text-3xl font-medium text-center mb-8">
           Community Food Sharing Blogs
         </h1>
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -21,7 +21,7 @@ const Blogs = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-4">
                 <h2 className="text-lg md:text-xl font-bold text-white">
-                  Blog Platerz 1
+                  Blog Platerz
                 </h2>
               </div>
             </div>
@@ -53,7 +53,7 @@ const Blogs = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-4">
                 <h2 className="text-lg md:text-xl font-bold text-white">
-                  Blog Platerz 2
+                  Meal Platerz
                 </h2>
               </div>
             </div>
@@ -84,7 +84,7 @@ const Blogs = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-4">
                 <h2 className="text-lg md:text-xl font-bold text-white">
-                  Blog Platerz 3
+                  Food Platerz
                 </h2>
               </div>
             </div>

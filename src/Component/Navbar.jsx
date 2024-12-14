@@ -16,7 +16,11 @@ const Navbar = () => {
   const isHome = location.pathname === "/";
   const navigate = useNavigate();
 
-  const handleProfileClick = () => setShowProfileOptions((prev) => !prev);
+  const handleProfileClick = (e) => {
+    e.stopPropagation();
+    setShowProfileOptions((prev) => !prev);
+  };
+
   const handleLogOut = () => logOut().catch(() => {});
 
   const getLinkClasses = (path) =>
@@ -138,9 +142,9 @@ const Navbar = () => {
                 )}
               </ul>
             </div>
-            <img src={logo} className="w-10 md:mr-1" alt="Logo" />
-            <Link to="/" className="font-semibold lg:text-[21px] px-0">
-              MealPlaterz
+            <Link to="/" className="flex items-center gap-1">
+              <img src={logo} className="w-10 md:mr-1" alt="Logo" />
+              <h1 className="font-semibold lg:text-[21px] px-0">MealPlaterz</h1>
             </Link>
           </div>
 
@@ -237,13 +241,10 @@ const Navbar = () => {
               {user?.email && showProfileOptions && (
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] shadow-lg bg-white rounded-lg w-48 border border-gray-200"
+                  className="menu menu-sm dropdown-content mt-3 z-[1] shadow-lg bg-white rounded-lg w-48 border border-gray-200 space-y-1"
                 >
                   <li>
-                    <Link
-                      to="/my-profile"
-                      className="rounded-lg text-gray-700"
-                    >
+                    <Link to="/my-profile" className="rounded-lg text-gray-700">
                       <span className="font-medium">View Profile</span>
                     </Link>
                   </li>

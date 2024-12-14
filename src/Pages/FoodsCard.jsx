@@ -14,7 +14,6 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
     pickup_location,
     expiration_date,
     expiration_time,
-    donator_phone,
     food_status,
   } = getFoods;
 
@@ -26,13 +25,13 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
       data-aos="fade-up"
       data-aos-duration={aosDuration}
       data-aos-anchor-placement="center-bottom"
-      className="group flex flex-col bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:bg-gray-50 transform hover:scale-105"
+      className="md:group flex flex-col bg-white shadow-lg md:rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:bg-gray-50 transform hover:scale-105"
     >
       <div className="relative">
         <img
           alt={food_name}
           src={food_image}
-          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+          className="w-full h-56 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div
           className={`absolute top-2 right-2 text-xs font-semibold py-1 px-2 rounded-md ${
@@ -50,7 +49,7 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
             : null}
         </div>
       </div>
-      <div className="p-3 flex flex-col justify-between flex-grow">
+      <div className="py-2 px-3 flex flex-col justify-between flex-grow">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 leading-tight">
             {food_name}
@@ -71,7 +70,6 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
               ? "This food item has been successfully delivered on time."
               : `Expires on: ${expireIn} at ${expiration_time}`}
           </p>
-          <p className="text-sm text-gray-600 mt-2">Phone: {donator_phone}</p>
         </div>
         <div className="flex items-center mt-4">
           <img
@@ -87,7 +85,7 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
           </div>
         </div>
       </div>
-      <div className="p-3 bg-gray-100 border-t border-gray-200">
+      <div className="p-2">
         <Link
           to={`/food/${_id}`}
           className="block text-center bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"

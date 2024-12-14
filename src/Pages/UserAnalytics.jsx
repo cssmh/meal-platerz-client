@@ -17,12 +17,11 @@ import {
 } from "recharts";
 import { getUserData } from "../api/users";
 import useAuth from "../hooks/useAuth";
+import SmallLoader from "../Component/SmallLoader";
 
-// Pie chart data
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 const RADIAN = Math.PI / 180;
 
-// Custom label for Pie chart
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -43,6 +42,7 @@ const renderCustomizedLabel = ({
       fill="white"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
+      style={{ fontSize: "13px", fontWeight: "normal" }}
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
@@ -59,46 +59,48 @@ const UserAnalytics = () => {
     enabled: !loading && !!user,
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return <SmallLoader />;
 
   const { foodCount, requestCount, reviewCount, user: userData } = data;
 
-  // Pie chart data
   const pieData = [
     { name: "Foods Added", value: foodCount },
     { name: "Requests Made", value: requestCount },
     { name: "Reviews Written", value: reviewCount },
   ];
 
-  // Bar chart data (for demonstration purposes)
   const barData = [
     { name: "Food Count", value: foodCount },
     { name: "Request Count", value: requestCount },
     { name: "Review Count", value: reviewCount },
   ];
 
-  // Line chart data (can be used for trends)
   const lineData = [
     { name: "Month 1", foodCount: 2, requestCount: 3, reviewCount: 1 },
     { name: "Month 2", foodCount: 5, requestCount: 3, reviewCount: 2 },
     { name: "Month 3", foodCount: 8, requestCount: 5, reviewCount: 3 },
   ];
 
+  const pieLabels = pieData
+    .map(
+      (entry) =>
+        `${entry.name}: ${(
+          (entry.value / (foodCount + requestCount + reviewCount)) *
+          100
+        ).toFixed(0)}%`
+    )
+    .join("  ");
+
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <div className="text-center mb-8">
+    <div className="p-3 md:p-7 bg-gray-100 min-h-screen">
+      <div className="text-center mb-5 md:mb-8">
         <h2 className="text-2xl font-semibold text-gray-800">
           Welcome, {userData?.name}
         </h2>
       </div>
-
-      {/* Grid Layout for Charts */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Pie Chart */}
         <div className="bg-white p-4 shadow-lg rounded-lg border-t-4 border-red-300">
-          <h3 className="text-xl font-semibold text-center mb-4 text-gray-600">
+          <h3 className="text-xl font-semibold text-center md:mb-4 text-gray-600">
             Activity Distribution
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -109,7 +111,7 @@ const UserAnalytics = () => {
                 cy="50%"
                 labelLine={false}
                 label={renderCustomizedLabel}
-                outerRadius={80}
+                outerRadius={100}
                 fill="#FF6B6B"
                 dataKey="value"
               >
@@ -122,9 +124,8 @@ const UserAnalytics = () => {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
+          <div className="text-center text-black">{pieLabels}</div>
         </div>
-
-        {/* Bar Chart */}
         <div className="bg-white p-4 shadow-lg rounded-lg border-t-4 border-red-300">
           <h3 className="text-xl font-semibold text-center mb-4 text-gray-600">
             User Activity Counts
@@ -140,8 +141,6 @@ const UserAnalytics = () => {
             </BarChart>
           </ResponsiveContainer>
         </div>
-
-        {/* Line Chart */}
         <div className="bg-white p-4 shadow-lg rounded-lg border-t-4 border-red-300">
           <h3 className="text-xl font-semibold text-center mb-4 text-gray-600">
             Activity Over Time

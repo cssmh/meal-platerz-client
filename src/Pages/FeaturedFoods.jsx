@@ -24,6 +24,8 @@ const FeaturedFoods = () => {
       return await getFeaturedFoods();
     },
   });
+  
+  const displayedFoods = isMobile ? data.slice(0, 4) : data;
 
   return (
     <div className="relative -top-12 lg:-top-[30px]">
@@ -43,7 +45,7 @@ const FeaturedFoods = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1280px] 2xl:max-w-[90%] mx-auto">
-            {data?.map((foods, idx) => (
+            {displayedFoods.map((foods, idx) => (
               <FoodsCard
                 key={foods._id}
                 getFoods={foods}

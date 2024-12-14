@@ -7,7 +7,7 @@ const Banner = () => {
       // data-aos="fade-up"
       // data-aos-duration="900"
       // data-aos-anchor-placement="top-bottom"
-      className="hero min-h-[70vh] md:min-h-[75vh] lg:min-h-[90vh] 2xl:min-h-[93vh] bg-cover relative -top-20 lg:-top-[59px]"
+      className="hero min-h-[55vh] md:min-h-[75vh] lg:min-h-[90vh] 2xl:min-h-[93vh] bg-cover relative -top-20 lg:-top-[59px]"
       style={{
         backgroundImage: `url(${BannerImg})`,
         backgroundSize: "cover",
@@ -20,11 +20,15 @@ const Banner = () => {
           <h1 className="text-2xl nav lg:text-4xl 2xl:text-6xl font-medium mt-12 md:mt-5">
             Building Communities <br /> by Sharing Excess Food <br /> Resources
           </h1>
-          <p className="text-sm md:text-base w-[80%]">
+          <p className="hidden md:block text-sm text-gray-700 md:text-base w-[80%] pb-3">
             Our mission is simple yet profound: to build resilient communities
             by fostering the sharing of excess food resources. We believe that
             in a world where millions go hungry while tons of food are wasted,
             there is an urgent need for collective action.
+          </p>
+          <p className="md:hidden text-sm text-gray-700 md:text-base w-[80%] pb-3">
+            We believe that in a world where millions go hungry while tons of
+            food are wasted, there is an urgent need for collective action.
           </p>
           <p className="space-x-2">
             <Link className="bg-redFood rounded-md px-4 py-2 text-white">
