@@ -16,7 +16,7 @@ import { getFood } from "../api/Foods";
 import MyPending from "../Pages/MyPending";
 import Blogs from "../Component/Blogs";
 import AllReviews from "../Component/AllReviews";
-import Dashboard from "../Pages/Dashboard";
+import UserAnalytics from "../Pages/UserAnalytics";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -48,8 +48,8 @@ const Root = createBrowserRouter([
         element: <AllReviews />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
+        path: "/user-analytics",
+        element: <UserAnalytics />,
       },
       {
         path: "/my-profile",

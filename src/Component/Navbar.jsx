@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
+import { FaChartLine } from "react-icons/fa";
 import useIsPremium from "../hooks/useIsPremium";
 
 const Navbar = () => {
@@ -236,33 +237,22 @@ const Navbar = () => {
               {user?.email && showProfileOptions && (
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-lg w-56 border border-gray-200"
+                  className="menu menu-sm dropdown-content mt-3 z-[1] shadow-lg bg-white rounded-lg w-48 border border-gray-200"
                 >
-                  <li className="text-sm text-gray-600">
-                    <p className="font-medium">Hi, {user?.displayName}</p>
-                  </li>
                   <li>
                     <Link
                       to="/my-profile"
-                      className="flex items-center p-2 hover:bg-gray-100 rounded-md text-gray-700 hover:text-blue-500 transition-colors duration-200"
+                      className="rounded-lg text-gray-700"
                     >
-                      <span className="mr-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 14c4.418 0 8 2 8 4v2H4v-2c0-2 3.582-4 8-4z"
-                          />
-                        </svg>
-                      </span>
-                      View Profile
+                      <span className="font-medium">View Profile</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/user-analytics"
+                      className="rounded-lg text-gray-700"
+                    >
+                      <span className="font-medium">User Analytics</span>
                     </Link>
                   </li>
                 </ul>
