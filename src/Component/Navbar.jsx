@@ -63,11 +63,6 @@ const Navbar = () => {
           Contact: +880176761606* Offer!! Be our premium member!!
         </p>
       </div> */}
-      {/* <footer className="bg-gray-800 text-white py-4">
-        <p className="text-center text-xs">
-          Have a story to share? Contact us at +8801767616067.
-        </p>
-      </footer> */}
       <div className="border-b border-base-300">
         <div className="navbar min-h-[58px] md:px-10 py-0">
           <div className="navbar-start">
