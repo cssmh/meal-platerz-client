@@ -9,7 +9,7 @@ const Blogs = () => {
     <div className="bg-gray-100 py-6">
       <PlaterHelmet title={"Blogs"} />
       <div className="max-w-7xl 2xl:max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-2xl md:text-3xl font-semibold text-center mb-6">
+        <h1 className="text-xl md:text-2xl font-semibold text-center mb-6">
           Community Food Sharing Blogs
         </h1>
         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

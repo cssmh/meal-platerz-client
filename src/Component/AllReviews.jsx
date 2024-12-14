@@ -25,6 +25,10 @@ const AllReviews = () => {
   const closeModal = () => setIsOpen(false);
   const handleAddReview = async (e) => {
     e.preventDefault();
+    if (!user) {
+      setIsOpen(false);
+      return toast.info("Please login first");
+    }
     const getReview = e.target.review.value;
 
     if (getReview.length < 1) {
@@ -35,7 +39,7 @@ const AllReviews = () => {
       name: user?.displayName,
       email: user?.email,
       quote: getReview,
-      role: "client",
+      role: "member",
       image: user?.photoURL,
     };
 

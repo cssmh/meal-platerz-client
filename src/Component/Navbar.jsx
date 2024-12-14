@@ -122,14 +122,14 @@ const Navbar = () => {
                 >
                   Be Premium
                 </button>
-                <button
-                  onClick={() => handleProtectedRoute("/all-reviews")}
+                <Link
+                  to="/all-reviews"
                   className={`flex items-center p-[2px] ${getLinkClasses(
                     "/all-reviews"
                   )}`}
                 >
                   All Reviews
-                </button>
+                </Link>
                 {user?.email && (
                   <Link
                     to="/manage-my-foods"
@@ -189,14 +189,14 @@ const Navbar = () => {
               >
                 Be Premium
               </button>
-              <button
-                onClick={() => handleProtectedRoute("/all-reviews")}
+              <Link
+                to="/all-reviews"
                 className={`flex items-center p-2 ${getLinkClasses(
                   "/all-reviews"
                 )}`}
               >
                 All Reviews
-              </button>
+              </Link>
               {user?.email && (
                 <li tabIndex={0}>
                   <details>
