@@ -1,6 +1,7 @@
 import moment from "moment";
 import { Link } from "react-router-dom";
 import useIsExpire from "../hooks/useIsExpire";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 const FoodsCard = ({ getFoods, aosDuration }) => {
   const {
@@ -74,13 +75,15 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
         </div>
         <div className="flex items-center mt-4">
           <img
-            className="w-10 h-10 rounded-full object-cover mr-2"
+            className="w-10 h-10 rounded-full object-cover mr-2  border-2 border-red-500"
             src={donator_image}
             alt={donator_name}
           />
           <div className="text-sm">
             <p className="text-gray-800 font-semibold">{donator_name}</p>
-            <p className="text-gray-500">Location: {pickup_location}</p>
+            <div className="flex items-center text-sm text-gray-500">
+              <FaMapMarkerAlt className="mr-1 text-red-500" /> {pickup_location}
+            </div>
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@ import { getFood } from "../api/Foods";
 import MyPending from "../Pages/MyPending";
 import Blogs from "../Component/Blogs";
 import AllReviews from "../Component/AllReviews";
+import Dashboard from "../Pages/Dashboard";
 const Root = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +48,10 @@ const Root = createBrowserRouter([
         element: <AllReviews />,
       },
       {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
         path: "/my-profile",
         element: (
           <PrivateRoute>
@@ -56,11 +61,7 @@ const Root = createBrowserRouter([
       },
       {
         path: "/be-premium",
-        element: (
-          <PrivateRoute>
-            <Payment />
-          </PrivateRoute>
-        ),
+        element: <Payment />,
       },
       {
         path: "/add-food",
@@ -88,11 +89,7 @@ const Root = createBrowserRouter([
       },
       {
         path: "/food/:id",
-        element: (
-          <PrivateRoute>
-            <FoodDetails />
-          </PrivateRoute>
-        ),
+        element: <FoodDetails />,
         loader: async ({ params }) => await getFood(params.id),
       },
       {

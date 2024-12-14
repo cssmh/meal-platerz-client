@@ -38,6 +38,8 @@ const AddRequest = ({ getFood }) => {
   }, []);
 
   const handlePopUp = () => {
+    if (!user)
+      return toast.info("Login credential is necessary to add request!");
     const user_email = user?.email;
     const hasRequest = myFoodRequest.some(
       (request) =>

@@ -8,24 +8,18 @@ import useIsPremium from "../hooks/useIsPremium";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const [isDown, setIsDown] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [showProfileOptions, setShowProfileOptions] = useState(false);
   const isPremium = useIsPremium();
   const location = useLocation();
   const isHome = location.pathname === "/";
   const navigate = useNavigate();
 
-  const handleProfileClick = () => {
-    setShowProfileOptions(!showProfileOptions);
-  };
+  const handleProfileClick = () => setShowProfileOptions((prev) => !prev);
+  const handleLogOut = () => logOut().catch(() => {});
 
-  const handleLogOut = () => {
-    logOut().then().catch();
-  };
-
-  const getLinkClasses = (path) => {
-    return location.pathname === path ? "text-blue-500" : "hover:text-blue-500";
-  };
+  const getLinkClasses = (path) =>
+    location.pathname === path ? "text-blue-500" : "hover:text-blue-500";
 
   const handleProtectedRoute = (path) => {
     if (!user?.email) {
@@ -38,11 +32,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 530) {
-        setIsDown(true);
-      } else {
-        setIsDown(false);
-      }
+      setIsScrolled(window.scrollY > 530);
     };
     window.addEventListener("scroll", toggleVisibility);
     return () => window.removeEventListener("scroll", toggleVisibility);
@@ -52,7 +42,7 @@ const Navbar = () => {
     <header
       className={`sticky top-0 left-0 right-0 z-50 bg-white shadow-sm ${
         isHome
-          ? isDown
+          ? isScrolled
             ? "bg-opacity-100"
             : "bg-opacity-40"
           : "bg-opacity-100"
@@ -126,24 +116,24 @@ const Navbar = () => {
                   All Reviews
                 </Link>
                 {user?.email && (
-                  <Link
-                    to="/manage-my-foods"
-                    className={`flex items-center p-[2px] ${getLinkClasses(
-                      "/manage-my-foods"
-                    )}`}
-                  >
-                    My Foods
-                  </Link>
-                )}
-                {user?.email && (
-                  <Link
-                    to="/my-food-request"
-                    className={`flex items-center p-[2px] ${getLinkClasses(
-                      "/my-food-request"
-                    )}`}
-                  >
-                    My Request
-                  </Link>
+                  <>
+                    <Link
+                      to="/manage-my-foods"
+                      className={`flex items-center p-[2px] ${getLinkClasses(
+                        "/manage-my-foods"
+                      )}`}
+                    >
+                      My Foods
+                    </Link>
+                    <Link
+                      to="/my-food-request"
+                      className={`flex items-center p-[2px] ${getLinkClasses(
+                        "/my-food-request"
+                      )}`}
+                    >
+                      My Request
+                    </Link>
+                  </>
                 )}
               </ul>
             </div>
@@ -152,6 +142,7 @@ const Navbar = () => {
               MealPlaterz
             </Link>
           </div>
+
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <Link
@@ -219,6 +210,7 @@ const Navbar = () => {
               )}
             </ul>
           </div>
+
           <div className="navbar-end">
             {user?.email && (
               <p className="hidden md:block text-sm bg-base-300 px-2 py-1 rounded mr-2">
@@ -244,20 +236,32 @@ const Navbar = () => {
               {user?.email && showProfileOptions && (
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-lg bg-white rounded-lg w-56 border border-gray-200"
                 >
-                  <li>
-                    <p className="pointer-events-none">
-                      Hi, {user?.displayName}
-                    </p>
+                  <li className="text-sm text-gray-600">
+                    <p className="font-medium">Hi, {user?.displayName}</p>
                   </li>
                   <li>
                     <Link
                       to="/my-profile"
-                      className={({ isActive }) =>
-                        isActive ? "text-blue-500" : ""
-                      }
+                      className="flex items-center p-2 hover:bg-gray-100 rounded-md text-gray-700 hover:text-blue-500 transition-colors duration-200"
                     >
+                      <span className="mr-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 14c4.418 0 8 2 8 4v2H4v-2c0-2 3.582-4 8-4z"
+                          />
+                        </svg>
+                      </span>
                       View Profile
                     </Link>
                   </li>

@@ -28,7 +28,7 @@ const BePremium = () => {
 
   return (
     <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-5 md:p-8 rounded-md shadow-lg flex flex-col md:flex-row items-center justify-between mb-12">
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 mb-4 md:mb-0">
         <FaStar className="text-yellow-400 text-4xl animate-pulse" />
         <div>
           <h2 className="text-2xl md:text-3xl font-bold">Go Premium!</h2>
@@ -37,32 +37,37 @@ const BePremium = () => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row items-center">
-        <div className="flex items-center gap-5 text-center mb-6">
-          <div className="flex flex-col">
-            <span className="countdown font-mono text-3xl">
-              <span style={{ "--value": days }}></span>
-            </span>
-            days
+      <div className="flex flex-col items-center md:flex-row md:items-center gap-6">
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex items-center gap-5 text-center">
+            <div className="flex flex-col">
+              <span className="countdown font-mono text-3xl">
+                <span style={{ "--value": days }}></span>
+              </span>
+              days
+            </div>
+            <div className="flex flex-col">
+              <span className="countdown font-mono text-3xl">
+                <span style={{ "--value": hours }}></span>
+              </span>
+              hours
+            </div>
+            <div className="flex flex-col">
+              <span className="countdown font-mono text-3xl">
+                <span style={{ "--value": minutes }}></span>
+              </span>
+              min
+            </div>
+            <div className="flex flex-col">
+              <span className="countdown font-mono text-3xl">
+                <span style={{ "--value": seconds }}></span>
+              </span>
+              sec
+            </div>
           </div>
-          <div className="flex flex-col">
-            <span className="countdown font-mono text-3xl">
-              <span style={{ "--value": hours }}></span>
-            </span>
-            hours
-          </div>
-          <div className="flex flex-col">
-            <span className="countdown font-mono text-3xl">
-              <span style={{ "--value": minutes }}></span>
-            </span>
-            min
-          </div>
-          <div className="flex flex-col">
-            <span className="countdown font-mono text-3xl">
-              <span style={{ "--value": seconds }}></span>
-            </span>
-            sec
-          </div>
+          <p className="text-sm md:text-base text-yellow-200">
+            Catch free food delivery offer in time!
+          </p>
         </div>
         <Link
           to="/be-premium"

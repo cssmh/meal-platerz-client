@@ -9,3 +9,7 @@ export const getSingleUser = async (email) => {
   const { data } = await axiosSecure(`/user/${email}`);
   return data;
 };
+export const getUserData = async (email) => {
+  const { data } = await axiosSecure(`/user-data?email=${email}`);
+  return data;
+};

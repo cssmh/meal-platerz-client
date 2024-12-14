@@ -53,7 +53,7 @@ const PremiumForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!user) return toast.error("Please login first");
     if (isPremium) {
       toast.info("You are already a Premium member!");
       return;
@@ -138,7 +138,7 @@ const PremiumForm = () => {
   return (
     <div className="flex items-center justify-center p-2 md:p-4 bg-gray-100">
       <PlaterHelmet title={"Become Premium Member"} />
-      <div className="max-w-3xl w-full bg-white p-4 md:p-8 rounded-xl shadow-xl space-y-5">
+      <div className="max-w-2xl w-full bg-white p-4 md:p-8 rounded-xl shadow-xl space-y-5">
         <h1 className="text-2xl font-semibold text-center text-gray-800">
           Upgrade to Premium
         </h1>
@@ -195,9 +195,7 @@ const PremiumForm = () => {
             />
           </div>
         </div>
-        <p className="text-lg font-semibold text-gray-800">
-          Price: ${price}
-        </p>
+        <p className="text-lg font-semibold text-gray-800">Price: ${price}</p>
         <div className="min-h-[14px]">
           <p
             className={`text-rose-600 text-sm ${
