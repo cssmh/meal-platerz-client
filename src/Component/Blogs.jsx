@@ -5,7 +5,7 @@ import { AiOutlineFileText } from "react-icons/ai";
 
 const Blogs = () => {
   return (
-    <div className="bg-gray-100 py-6">
+    <div className="bg-gray-100 py-4">
       <PlaterHelmet title={"Blogs"} />
       <div className="max-w-7xl 2xl:max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl md:text-3xl font-medium text-center mb-8">

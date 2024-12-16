@@ -18,8 +18,9 @@ const AddRequest = ({ getFood }) => {
   const [open, setOpen] = useState(false);
   const [todayDateTime, setTodayDateTime] = useState("");
   const { myFoodRequest, user, refetch } = useMyRequest();
-  const isPremium = useIsPremium();
   const [freeDelivery, setFreeDelivery] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isPremium = useIsPremium();
 
   const {
     _id,
@@ -61,6 +62,9 @@ const AddRequest = ({ getFood }) => {
 
   const handleAddRequest = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
+
     const form = e.target;
     const food_id = _id;
     const user_name = user?.displayName;
@@ -69,19 +73,14 @@ const AddRequest = ({ getFood }) => {
     const user_phone = form.user_phone.value;
     const request_date = todayDateTime;
     const message_to_donator = form.message_to_donator.value;
-    const donation = form.donation_money.value;
-    const donation_money = Number(donation) > 0 ? donation : 0;
     const status = "Pending";
 
-    if (!/^[1-9]\d*$/.test(donation)) {
-      toast.info("The donation amount is invalid");
-      return;
-    }
     if (!/^(\+?8801|01)\d{9}$/.test(user_phone)) {
       toast.info("Enter a valid phone number!");
       return;
     }
 
+    setIsSubmitting(true);
     const requestFoodData = {
       food_id,
       food_name,
@@ -98,7 +97,6 @@ const AddRequest = ({ getFood }) => {
       expiration_date,
       expiration_time,
       status,
-      donation_money,
       message_to_donator,
       free_delivery: isPremium && freeDelivery,
     };
@@ -111,8 +109,10 @@ const AddRequest = ({ getFood }) => {
         setOpen(false);
       }
     } catch (err) {
-      console.error(err);
+      console.log(err);
       toast.error("An error occurred while adding the request.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -128,29 +128,32 @@ const AddRequest = ({ getFood }) => {
           </Button>
         </DialogActions>
         <DialogContent>
-          <form onSubmit={handleAddRequest} className="md:w-[70%] mx-auto">
+          <form
+            onSubmit={handleAddRequest}
+            className="w-full md:w-[70%] mx-auto mb-3"
+          >
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3">
                 <label className="label">
                   <span className="label-text">Food Name</span>
                 </label>
                 <input
                   type="text"
-                  defaultValue={food_name}
+                  placeholder={food_name}
                   name="food_name"
                   readOnly
                   className="input input-bordered"
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3">
                 <label className="label">
                   <span className="label-text">Donator Email</span>
                 </label>
                 <input
                   type="text"
                   name="donator_email"
-                  defaultValue={donator_email}
+                  placeholder={donator_email}
                   readOnly
                   className="input input-bordered"
                   style={{ outline: "none" }}
@@ -158,7 +161,7 @@ const AddRequest = ({ getFood }) => {
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3">
                 <label className="label">
                   <span className="label-text">Your Email</span>
                 </label>
@@ -170,7 +173,7 @@ const AddRequest = ({ getFood }) => {
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+              <div className="form-control md:w-2/3">
                 <label className="label">
                   <span className="label-text">Your Phone</span>
                 </label>
@@ -185,17 +188,6 @@ const AddRequest = ({ getFood }) => {
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
-                <label className="label">
-                  <span className="label-text">Donate Some Money</span>
-                </label>
-                <input
-                  type="text"
-                  name="donation_money"
-                  className="input input-bordered"
-                  style={{ outline: "none" }}
-                />
-              </div>
               <div className="form-control md:w-2/3 mx-auto lg:mx-0 flex justify-center">
                 <FormControlLabel
                   control={
@@ -218,19 +210,22 @@ const AddRequest = ({ getFood }) => {
                 />
               </div>
             </div>
-            <div className="form-control mx-3 lg:mx-0 mt-4">
+            <div className="form-control mt-4">
               <textarea
                 name="message_to_donator"
-                cols="5"
                 placeholder="Any Message for Donator?"
                 rows="5"
-                className="border p-1 rounded-xl"
+                className="border p-3 rounded-md"
                 style={{ outline: "none" }}
               ></textarea>
             </div>
             <div className="form-control mt-5">
-              <button className="btn btn-outline border-none bg-red-400 hover:bg-red-400 text-white">
-                Request for This Food
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn hover:bg-redFood btn-outline border-none bg-redFood text-white"
+              >
+                {isSubmitting ? "Requesting..." : "Request for This Food"}
               </button>
             </div>
           </form>

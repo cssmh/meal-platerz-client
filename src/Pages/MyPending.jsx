@@ -34,7 +34,7 @@ const MyPending = () => {
     },
   });
 
-  if ((loading || isLoading, idLoading)) return <SmallLoader />;
+  if (loading || isLoading || idLoading) return <SmallLoader />;
 
   return (
     <div>

@@ -34,7 +34,7 @@ const MyRequest = () => {
 
   return (
     <div>
-      <PlaterHelmet title={"My Food Request"} />
+      <PlaterHelmet title={"My Requests"} />
       <div>
         {myFoodRequest?.length === 0 ? (
           <p className="text-center my-3 text-redFood text-xl italic">

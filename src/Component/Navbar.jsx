@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
-import { FaChartLine } from "react-icons/fa";
 import useIsPremium from "../hooks/useIsPremium";
 
 const Navbar = () => {
@@ -96,14 +95,16 @@ const Navbar = () => {
                 >
                   Available Foods
                 </Link>
-                <button
-                  onClick={() => handleProtectedRoute("/add-food")}
-                  className={`flex items-center p-[2px] ${getLinkClasses(
-                    "/add-food"
-                  )}`}
-                >
-                  Add Food
-                </button>
+                {user && (
+                  <Link
+                    to="/add-food"
+                    className={`flex items-center p-[2px] ${getLinkClasses(
+                      "/add-food"
+                    )}`}
+                  >
+                    Add Food
+                  </Link>
+                )}
                 <button
                   onClick={() => handleProtectedRoute("/be-premium")}
                   className={`flex items-center p-[2px] ${getLinkClasses(
@@ -147,7 +148,6 @@ const Navbar = () => {
               <h1 className="font-semibold lg:text-[21px] px-0">MealPlaterz</h1>
             </Link>
           </div>
-
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <Link
@@ -164,14 +164,16 @@ const Navbar = () => {
               >
                 Available Foods
               </Link>
-              <button
-                onClick={() => handleProtectedRoute("/add-food")}
-                className={`flex items-center p-2 ${getLinkClasses(
-                  "/add-food"
-                )}`}
-              >
-                Add Food
-              </button>
+              {user && (
+                <Link
+                  to="/add-food"
+                  className={`flex items-center p-2 ${getLinkClasses(
+                    "/add-food"
+                  )}`}
+                >
+                  Add Food
+                </Link>
+              )}
               <button
                 onClick={() => handleProtectedRoute("/be-premium")}
                 className={`flex items-center p-2 ${getLinkClasses(
@@ -215,7 +217,6 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-
           <div className="navbar-end">
             {user?.email && (
               <p className="hidden md:block text-sm bg-base-300 px-2 py-1 rounded mr-2">

@@ -24,7 +24,6 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
     expiration_date,
     expiration_time,
     user_email,
-    donation_money,
     status,
     delivered_date,
     free_delivery,
@@ -130,9 +129,6 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
           </p>
         )}
         <p>Your Request: {reqDate}</p>
-        {donation_money > 0 && (
-          <p>Thanks for your {donation_money} BDT donation</p>
-        )}
         {free_delivery && isPremium ? (
           <p className="text-green-600 font-semibold">Free Delivery Included</p>
         ) : (

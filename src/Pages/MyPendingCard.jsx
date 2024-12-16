@@ -1,9 +1,9 @@
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import moment from "moment";
+import PlaterHelmet from "../Component/PlaterHelmet";
 import { addTime, updateFoodStatus, updateRequestedStatus } from "../api/Foods";
 import useMyFoods from "../hooks/useMyFoods";
-import moment from "moment";
 import useFood from "../hooks/useFood";
 import useIsExpire from "../hooks/useIsExpire";
 
@@ -19,7 +19,6 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
     expiration_date,
     expiration_time,
     message_to_donator,
-    donation_money,
     status,
     delivered_date,
   } = getReq;
@@ -58,7 +57,6 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
     }
   };
 
-  // format
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
   const reqDate = moment(request_date, "YYYY-MM-DD hh:mm A").format(
     "DD MMM YYYY [at] hh:mm A"
@@ -69,7 +67,7 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
       "DD MMM YYYY [at] hh:mm A"
     );
 
-  if (isLoading || loading)
+  if (isLoading || loading) {
     return (
       <div className="border border-gray-300 rounded-md mx-1 md:mx-0 h-auto flex flex-col p-4 animate-pulse">
         <div className="flex items-center space-x-4">
@@ -91,55 +89,54 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
         </div>
       </div>
     );
+  }
 
   return (
     <div>
-      <Helmet>
-        <title>MealPlaterz | Food Request</title>
-      </Helmet>
-      <div className="border border-red-500 rounded-md mx-1 md:mx-0 h-auto flex flex-col p-4">
-        <div className="flex items-center space-x-4">
+      <PlaterHelmet title="Food Request" />
+      <div className="border border-gray-300 rounded-lg p-4 shadow-md mx-2 md:mx-0 space-y-4 hover:shadow-lg transition-shadow duration-300">
+        <div className="flex items-center gap-4">
           <img
             src={user_image}
-            className="w-16 h-16 rounded-full"
             alt="User Avatar"
+            className="w-16 h-16 rounded-full border border-gray-200 shadow-sm"
           />
           <div>
-            <h1 className="text-blue-800 text-lg">Requester Information</h1>
-            <p className="text-gray-700">{user_name}</p>
+            <h2 className="text-xl font-semibold text-gray-800">{user_name}</h2>
+            <p className="text-sm text-gray-500">{user_email}</p>
+            <p className="text-sm text-gray-500">{user_phone}</p>
           </div>
         </div>
-        <div className="mt-2 space-y-1">
-          <p className="text-cyan-600">{user_email}</p>
-          <p className="text-red-600">{user_phone}</p>
+        <div className="space-y-2">
           {message_to_donator && (
-            <p className="text-gray-600">Message: {message_to_donator}</p>
+            <p className="text-sm text-gray-600 italic">{message_to_donator}</p>
           )}
-          <p className="text-gray-600">
-            Requested: <span>{reqDate}</span>
-          </p>
+          <p className="text-sm text-gray-700">Requested: {reqDate}</p>
           {status === "Delivered" ? (
-            <p className="text-gray-600">
-              ✔️ Delivered: <span className="text-cyan-500">{deliverDate}</span>
+            <p className="text-sm text-green-600">
+              ✔️ Delivered: {deliverDate}
             </p>
           ) : (
-            <p className="text-gray-600">
-              Expires in:{" "}
-              <span className="text-blue-600">
-                {expireIn} at {expiration_time}{" "}
-                <span className="text-redFood">
-                  {isExpired && "(Expired!)"}
-                </span>
-              </span>
+            <p className="text-sm text-gray-700">
+              Expires in: {expireIn} at {expiration_time}{" "}
+              {isExpired && <span className="text-red-500">(Expired!)</span>}
             </p>
           )}
-          <p className="text-gray-600">Donation: {donation_money} BDT</p>
         </div>
-        <div className="text-center mt-2">
+        <div className="flex justify-between items-center">
+          <span
+            className={`text-sm font-medium py-1 px-2 rounded-full ${
+              status === "Pending"
+                ? "bg-yellow-100 text-yellow-700"
+                : "bg-green-100 text-green-700"
+            }`}
+          >
+            Status: {status}
+          </span>
           <select
             defaultValue={status}
             onChange={(e) => handleUpdateStatus(e, _id, food_id)}
-            className="input input-bordered py-1 px-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none"
+            className="text-sm bg-white border border-gray-300 rounded-lg shadow-sm py-1 px-3 focus:outline-none hover:bg-gray-50 transition-colors"
             disabled={
               isExpired ||
               status === "Delivered" ||

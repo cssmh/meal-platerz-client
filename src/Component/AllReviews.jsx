@@ -71,16 +71,19 @@ const AllReviews = () => {
   };
 
   return (
-    <div className="bg-gray-100 py-6">
-      <PlaterHelmet title={"All Reviews"} />
-      <div className="max-w-7xl 2xl:max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-gray-100 py-4 mb-3">
+      <PlaterHelmet title={"User Reviews"} />
+      <div className="max-w-7xl 2xl:max-w-[90%] mx-auto px-3">
         <h1 className="text-2xl md:text-3xl font-medium text-center">
           What Our Clients Say
         </h1>
         <div className="text-center my-2">
+          <p className="text-sm text-gray-600 mb-2">
+            Your review will be featured on the home page slider!
+          </p>
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center justify-center text-white bg-green-500 rounded-3xl p-2 mb-4"
+            className="flex items-center justify-center text-white bg-green-500 rounded-xl py-2 px-3 mb-4"
           >
             <FaPlus className="mr-2" /> Add Your Review
           </button>

@@ -32,7 +32,7 @@ const MyFoods = () => {
 
   return (
     <div>
-      <PlaterHelmet title={"My Foods"} />
+      <PlaterHelmet title={"Manage Foods"} />
       {isLoading ? (
         <SmallLoader />
       ) : myFoods.length === 0 ? (

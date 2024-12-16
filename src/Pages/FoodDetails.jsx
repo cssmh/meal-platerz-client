@@ -8,6 +8,7 @@ import useAuth from "../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import SmallLoader from "../Component/SmallLoader";
 import useIsExpire from "../hooks/useIsExpire";
+import PlaterHelmet from "../Component/PlaterHelmet";
 
 const FoodDetails = () => {
   const { user } = useAuth();
@@ -50,9 +51,7 @@ const FoodDetails = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>MealPlaterz | {food_name}</title>
-      </Helmet>
+      <PlaterHelmet title={food_name} />
       <MenuDetails />
       <div className="text-center mx-auto max-w-md border-2 py-2 my-5 lg:mx-auto">
         <h1 className="font-semibold text-xl md:text-[22px] text-blue-800 mb-1">
