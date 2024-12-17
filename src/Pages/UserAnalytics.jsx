@@ -19,7 +19,7 @@ import { getUserData } from "../api/users";
 import useAuth from "../hooks/useAuth";
 import SmallLoader from "../Component/SmallLoader";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
+const COLORS = ["#f01543", "#00C49F", "#FFBB28"];
 const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = ({

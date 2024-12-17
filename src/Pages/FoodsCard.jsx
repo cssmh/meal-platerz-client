@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useIsExpire from "../hooks/useIsExpire";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-const FoodsCard = ({ getFoods, aosDuration }) => {
+const FoodsCard = ({ getFoods }) => {
   const {
     _id,
     food_image,
@@ -23,7 +23,7 @@ const FoodsCard = ({ getFoods, aosDuration }) => {
   return (
     <div
       data-aos="fade-up"
-      data-aos-duration={aosDuration}
+      data-aos-duration="400"
       data-aos-anchor-placement="center-bottom"
       className="md:group flex flex-col bg-white shadow-lg md:rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:bg-gray-50 transform hover:scale-105"
     >

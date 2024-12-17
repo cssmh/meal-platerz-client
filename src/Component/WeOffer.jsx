@@ -7,8 +7,8 @@ const WeOffer = () => {
       <div className="max-w-6xl 2xl:max-w-[90%] mx-auto flex  flex-col md:flex-row justify-between gap-6 px-5 md:px-0">
         <div className="flex flex-col items-center space-y-4">
           <div
-            data-aos="fade-down-right"
-            data-aos-duration="300"
+            // data-aos="fade-down-right"
+            // data-aos-duration="300"
             className="flex justify-center items-center space-x-2"
           >
             <svg
@@ -22,8 +22,8 @@ const WeOffer = () => {
             <span>Easy Sharing</span>
           </div>
           <div
-            data-aos="fade-down-right"
-            data-aos-duration="400"
+            // data-aos="fade-down-right"
+            // data-aos-duration="400"
             className="flex justify-center items-center space-x-2"
           >
             <svg
@@ -39,8 +39,8 @@ const WeOffer = () => {
         </div>
         <div className="flex flex-col items-center space-y-4">
           <div
-            data-aos="fade-down-right"
-            data-aos-duration="500"
+            // data-aos="fade-down-right"
+            // data-aos-duration="500"
             className="flex justify-center items-center space-x-2"
           >
             <svg
@@ -54,8 +54,8 @@ const WeOffer = () => {
             <span>Reducing Food Waste</span>
           </div>
           <div
-            data-aos="fade-down-right"
-            data-aos-duration="600"
+            // data-aos="fade-down-right"
+            // data-aos-duration="600"
             className="flex justify-center items-center space-x-2"
           >
             <svg
@@ -69,11 +69,10 @@ const WeOffer = () => {
             <span>Home-cooked Meals Delivery</span>
           </div>
         </div>
-
         <div className="flex flex-col items-center space-y-4">
           <div
-            data-aos="fade-down-right"
-            data-aos-duration="700"
+            // data-aos="fade-down-right"
+            // data-aos-duration="700"
             className="flex justify-center items-center space-x-2"
           >
             <svg
@@ -87,8 +86,8 @@ const WeOffer = () => {
             <span>Meal Prep Flexibility</span>
           </div>
           <div
-            data-aos="fade-down-right"
-            data-aos-duration="800"
+            // data-aos="fade-down-right"
+            // data-aos-duration="800"
             className="flex justify-center items-center space-x-2"
           >
             <svg

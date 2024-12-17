@@ -101,34 +101,38 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
   return (
     <div
       className={`border rounded-md mx-1 lg:mx-0 py-4 ${
-        isExpired ? "border-gray-500 bg-gray-200" : "border-redFood"
+        isExpired ? "bg-gray-100 text-gray-500" : "bg-white text-black"
       }`}
     >
       <div className="flex flex-col md:flex-row px-2 md:px-8 items-center gap-3">
-        <img src={food_image} className="w-24 md:w-32 rounded-md" alt="food" />
+        <img
+          src={food_image}
+          className="w-24 md:w-32 rounded-md object-cover"
+          alt="food"
+        />
         <div className="flex flex-col items-start">
-          <Link to={`/food/${food_id}`}>
-            <p className="text-xl">{food_name}</p>
+          <Link
+            to={`/food/${food_id}`}
+            className="text-xl font-semibold text-blue-800"
+          >
+            {food_name}
           </Link>
-          <p className="text-lg text-blue-900">Donator Information</p>
-          <h1 className="text-cyan-600">{donator_name}</h1>
-          <div className="flex flex-col md:flex-row gap-1">
-            <p>{donator_email}</p>
-            <p>({donator_phone})</p>
-          </div>
+          <p className="text-lg text-gray-600">Donator Information</p>
+          <h1 className="text-blue-700 font-medium">{donator_name}</h1>
+          <p className="text-sm text-gray-500">({donator_phone})</p>
         </div>
       </div>
-      <div className="space-y-1 px-3 md:px-8 mt-1">
-        <p className="text-gray-600">
+      <div className="space-y-2 px-3 md:px-8 mt-2">
+        <p className="text-gray-700">
           Pickup Location:{" "}
-          <span className="text-cyan-600">{pickup_location}</span>
+          <span className="text-blue-600">{pickup_location}</span>
         </p>
         {!delivered_date && (
-          <p>
-            Expire in: {expireIn} at {expiration_time}
+          <p className="text-gray-700">
+            Expire on: {expireIn} at {expiration_time}
           </p>
         )}
-        <p>Your Request: {reqDate}</p>
+        <p className="text-gray-700">Your Request: {reqDate}</p>
         {free_delivery && isPremium ? (
           <p className="text-green-600 font-semibold">Free Delivery Included</p>
         ) : (
@@ -136,11 +140,11 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
             Membership expired! Upgrade to premium for free delivery.
           </p>
         )}
-        <div className="flex gap-2 ">
+        <div className="flex gap-2">
           {data === "available" ? (
             <p>
               Status:{" "}
-              <span className={status === "Pending" ? "text-redFood" : ""}>
+              <span className={status === "Pending" ? "text-red-600" : ""}>
                 {status}
               </span>
             </p>
@@ -149,24 +153,24 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
               Delivered: <span>{deliverDate}</span>
             </p>
           ) : (
-            <p className="text-redFood">
-              Sorry, This food is already delivered to someone else!
+            <p className="text-red-600">
+              Sorry, this food has already been delivered!
             </p>
           )}
         </div>
         {isExpired ? (
           <>
-            <p className="text-red-500 mt-1">This food has expired.</p>
+            <p className="text-red-500 mt-2">This food has expired.</p>
             <button
               onClick={() => handleRequestedDelete(_id, food_name)}
-              className="mt-1 btn btn-sm border-black bg-gray-200"
+              className="mt-2 btn btn-sm bg-gray-300 text-black border-black"
             >
               Cancel Request
             </button>
           </>
         ) : status === "Delivered" ? (
           food?.user_review ? (
-            <p className="bg-blue-50 p-2 rounded-md border">
+            <p className="bg-blue-50 p-2 rounded-md border border-gray-300">
               <span className="text-green-600 font-semibold">Your Review:</span>{" "}
               <span className="text-gray-700">{food?.user_review}</span>
               <button
@@ -179,7 +183,7 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
           ) : (
             <button
               onClick={() => setIsOpen(true)}
-              className="btn btn-sm border bg-redFood hover:bg-redFood text-white mt-1"
+              className="btn btn-sm bg-red-600 hover:bg-red-700 text-white mt-2"
             >
               Add Review
             </button>
@@ -187,8 +191,7 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
         ) : (
           <button
             onClick={() => handleRequestedDelete(_id, food_name)}
-            className="mt-1 btn btn-sm border-black bg-base-100 hover:bg-black text-black hover:text-white"
-          >
+            className="mt-1 btn btn-sm border-black bg-base-100 hover:bg-black text-black hover:text-white">
             Cancel Request
           </button>
         )}
