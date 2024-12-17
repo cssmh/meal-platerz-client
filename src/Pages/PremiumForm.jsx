@@ -108,9 +108,7 @@ const PremiumForm = () => {
 
         if (res?.modifiedCount > 0) {
           refetch();
-          toast.success(
-            "Congratulations! Enjoy your premium membership benefits!"
-          );
+          toast.success("Congratulations! Enjoy your membership benefits!");
         }
       }
     } catch (error) {
@@ -146,7 +144,7 @@ const PremiumForm = () => {
           Enjoy exclusive benefits with our Premium Membership. Select a plan
           and make your payment securely.
         </p>
-        <div className="space-y-3 md:space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-3 md:space-y-5">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <input
@@ -194,69 +192,68 @@ const PremiumForm = () => {
               onFocus={handleCardFocus}
             />
           </div>
-        </div>
-        <p className="text-lg font-semibold text-gray-800">Price: ${price}</p>
-        <div className="min-h-[14px]">
-          <p
-            className={`text-rose-600 text-sm ${
-              error && hasInteracted ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {error || " "}
-          </p>
-          {isPremium && (
-            <div className="flex justify-center mb-2">
-              <span className="mt-2 inline-block px-4 py-2 bg-green-100 rounded-lg shadow">
-                <Countdown />
-              </span>
-            </div>
-          )}
-          {isPremium && userData?.paymentIntent_Id && (
-            <p className="text-green-500 text-sm flex text-center justify-center">
-              Your transaction id is: {userData.paymentIntent_Id}
+          <p className="text-lg font-semibold text-gray-800">Price: ${price}</p>
+          <div className="min-h-[14px]">
+            <p
+              className={`text-rose-600 text-sm ${
+                error && hasInteracted ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {error || " "}
             </p>
-          )}
-        </div>
-        <div className="flex justify-center">
-          <button
-            disabled={!stripe || !clientSecret || isPremium}
-            type="submit"
-            className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
-              loading
-                ? "bg-green-300 cursor-not-allowed"
-                : isPremium
-                ? "bg-green-300 cursor-not-allowed"
-                : "bg-redFood"
-            }`}
-            onClick={handleSubmit}
-          >
-            {loading ? (
-              <div className="flex justify-center items-center gap-2">
-                <span className="loading loading-spinner loading-xs"></span>
-                Processing...
+            {isPremium && (
+              <div className="flex justify-center mb-2">
+                <span className="mt-2 inline-block px-4 py-2 bg-green-100 rounded-lg shadow">
+                  <Countdown />
+                </span>
               </div>
-            ) : isPremium ? (
-              <div className="flex items-center gap-2 justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-white"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 112 0v4a1 1 0 11-2 0V7zm-2 2a1 1 0 110 2 1 1 0 010-2z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Paid
-              </div>
-            ) : (
-              "Pay Now"
             )}
-          </button>
-        </div>
+            {isPremium && userData?.paymentIntent_Id && (
+              <p className="text-green-500 text-sm flex text-center justify-center">
+                Your transaction id is: {userData.paymentIntent_Id}
+              </p>
+            )}
+          </div>
+          <div className="flex justify-center">
+            <button
+              disabled={!stripe || !clientSecret || isPremium}
+              type="submit"
+              className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
+                loading
+                  ? "bg-green-300 cursor-not-allowed"
+                  : isPremium
+                  ? "bg-green-300 cursor-not-allowed"
+                  : "bg-[#f01543] hover:bg-red-600"
+              }`}
+            >
+              {loading ? (
+                <div className="flex justify-center items-center gap-2">
+                  <span className="loading loading-spinner loading-xs"></span>
+                  Processing...
+                </div>
+              ) : isPremium ? (
+                <div className="flex items-center gap-2 justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-white"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 112 0v4a1 1 0 11-2 0V7zm-2 2a1 1 0 110 2 1 1 0 010-2z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Paid
+                </div>
+              ) : (
+                "Pay Now"
+              )}
+            </button>
+          </div>
+        </form>
         <p className="text-center text-sm text-gray-600">
           {isPremium
             ? "Congratulations on being a Premium member!"

@@ -18,12 +18,12 @@ const MainLayout = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  if (loading) return <BigLoader />;
+  // if (loading) return <BigLoader />;
 
   return (
     <div>
       <Navbar />
-      <div className="min-h-[70vh]">
+      <div className="min-h-[80vh]">
         <Outlet />
       </div>
       {home ? <Footer /> : <FooterOld />}

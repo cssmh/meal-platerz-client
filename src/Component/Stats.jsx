@@ -6,7 +6,7 @@ const Stats = () => {
           <div
             data-aos="fade-right"
             data-aos-duration="400"
-            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood"
+            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-[#f01543]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@ const Stats = () => {
           <div
             data-aos="fade-right"
             data-aos-duration="1000"
-            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood"
+            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-[#f01543]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ const Stats = () => {
           <div
             data-aos="fade-right"
             data-aos-duration="1600"
-            className="flex p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood"
+            className="flex p-2 align-middle rounded-lg sm:p-4 dark:bg-[#f01543]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ const Stats = () => {
           <div
             data-aos="fade-right"
             data-aos-duration="2200"
-            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-redFood"
+            className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-[#f01543]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -234,7 +234,7 @@ const AddFood = () => {
         <div className="form-control mt-6">
           <button
             disabled={loading}
-            className="btn bg-redFood hover:bg-redFood text-white"
+            className="btn bg-[#f01543] hover:bg-[#f01543] text-white"
           >
             {loading ? (
               <div className="flex justify-center">

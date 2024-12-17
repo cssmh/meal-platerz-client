@@ -62,7 +62,7 @@ const MyProfile = () => {
           <p className="text-sm text-gray-500">{user?.email}</p>
           <button
             onClick={() => setIsOpen(true)}
-            className="mt-4 bg-redFood text-white px-6 py-2 rounded-full shadow-md transition"
+            className="mt-4 bg-[#f01543] text-white px-6 py-2 rounded-full shadow-md transition"
           >
             Edit Profile
           </button>

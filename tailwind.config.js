@@ -2,11 +2,7 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {
-      colors: {
-        redFood: "#f01543",
-      },
-    },
+    extend: {},
   },
   plugins: [require("daisyui")],
 };

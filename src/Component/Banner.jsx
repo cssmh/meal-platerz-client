@@ -31,7 +31,7 @@ const Banner = () => {
             food are wasted, there is an urgent need for collective action.
           </p>
           <p className="space-x-2">
-            <Link className="bg-redFood rounded-md px-4 py-2 text-white">
+            <Link className="bg-[#f01543] rounded-md px-4 py-2 text-white">
               Foods
             </Link>
             <Link

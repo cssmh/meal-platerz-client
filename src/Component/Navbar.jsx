@@ -263,13 +263,13 @@ const Navbar = () => {
             {user?.email ? (
               <button
                 onClick={handleLogOut}
-                className="bg-redFood rounded-md text-white py-1 px-2"
+                className="bg-[#f01543] rounded-md text-white py-1 px-2"
               >
                 Logout
               </button>
             ) : (
               <Link to="/login">
-                <p className="bg-redFood rounded-md text-white py-1 px-2">
+                <p className="bg-[#f01543] rounded-md text-white py-1 px-2">
                   Login
                 </p>
               </Link>

@@ -118,7 +118,7 @@ const Register = () => {
         </div>
         <button
           type="submit"
-          className="block w-full p-3 text-center dark:text-gray-50 dark:bg-redFood rounded-xl"
+          className="block w-full p-3 text-center dark:text-gray-50 dark:bg-[#f01543] rounded-xl"
           disabled={imageUploading}
         >
           {imageUploading ? "Uploading Image..." : "Register"}

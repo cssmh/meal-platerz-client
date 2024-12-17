@@ -223,7 +223,7 @@ const AddRequest = ({ getFood }) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn hover:bg-redFood btn-outline border-none bg-redFood text-white"
+                className="btn hover:bg-[#f01543] btn-outline border-none bg-[#f01543] text-white"
               >
                 {isSubmitting ? "Requesting..." : "Request for This Food"}
               </button>

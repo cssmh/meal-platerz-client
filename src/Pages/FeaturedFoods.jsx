@@ -24,7 +24,7 @@ const FeaturedFoods = () => {
       return await getFeaturedFoods();
     },
   });
-  
+
   const displayedFoods = isMobile ? data.slice(0, 4) : data;
 
   return (
@@ -46,15 +46,12 @@ const FeaturedFoods = () => {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1280px] 2xl:max-w-[90%] mx-auto">
             {displayedFoods.map((foods) => (
-              <FoodsCard
-                key={foods._id}
-                getFoods={foods}
-              />
+              <FoodsCard key={foods._id} getFoods={foods} />
             ))}
           </div>
           <div className="flex justify-center mt-8">
             <Link to="/available-foods">
-              <button className="text-white bg-redFood font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+              <button className="text-white bg-[#f01543] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                 Show all available Foods
               </button>
             </Link>

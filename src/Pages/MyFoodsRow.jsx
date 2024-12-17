@@ -89,7 +89,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
         <Link to={`/req-for/${_id}/${donator_email}`}>
           <button
             className={`${
-              food_status === "Unavailable" ? "bg-cyan-600" : "bg-redFood"
+              food_status === "Unavailable" ? "bg-cyan-600" : "bg-[#f01543]"
             } px-[10px] py-[7px] text-white rounded-lg`}
           >
             {food_status === "Unavailable"

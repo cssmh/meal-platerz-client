@@ -93,7 +93,7 @@ const Login = () => {
             </a>
           </div>
         </div>
-        <button className="block w-full p-3 text-center rounded-xl dark:text-gray-50 dark:bg-redFood">
+        <button className="block w-full p-3 text-center rounded-xl dark:text-gray-50 dark:bg-[#f01543]">
           {loading ? (
             <div className="flex justify-center">
               <PiSpinnerGapLight className="animate-spin text-xl my-[2px]" />
@@ -114,7 +114,7 @@ const Login = () => {
         <button
           onClick={handleGoogleLogin}
           aria-label="Log in with Google"
-          className="flex items-center gap-1 px-6 py-2 rounded-xl bg-redFood text-white"
+          className="flex items-center gap-1 px-6 py-2 rounded-xl bg-[#f01543] text-white"
         >
           <FaGoogle className="text-xl" /> <span>Google login</span>
         </button>

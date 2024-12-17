@@ -98,7 +98,7 @@ const FoodDetails = () => {
         <div className="flex gap-1">
           <button
             onClick={() => setShow(true)}
-            className="bg-redFood px-3 py-2 text-white rounded-md mb-2"
+            className="bg-[#f01543] px-3 py-2 text-white rounded-md mb-2"
           >
             Description
           </button>
