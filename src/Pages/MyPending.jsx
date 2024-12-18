@@ -40,7 +40,7 @@ const MyPending = () => {
     <div>
       <PlaterHelmet title={"User Request"} />
       {requestedData?.length === 0 ? (
-        <p className="text-center my-[10px] text-redFood text-xl italic">
+        <p className="text-center my-[10px] text-[#f01543] text-xl italic">
           No one Requested for This Food
         </p>
       ) : (

@@ -129,7 +129,7 @@ const Register = () => {
         <Link
           to={"/login"}
           rel="noopener noreferrer"
-          className="underline dark:text-redFood"
+          className="underline dark:text-[#f01543]"
         >
           Login
         </Link>

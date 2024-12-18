@@ -125,7 +125,7 @@ const Login = () => {
           state={location.state}
           to={"/register"}
           rel="noopener noreferrer"
-          className="underline dark:text-redFood"
+          className="underline dark:text-[#f01543]"
         >
           Register
         </Link>

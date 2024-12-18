@@ -37,7 +37,7 @@ const MyRequest = () => {
       <PlaterHelmet title={"My Requests"} />
       <div>
         {myFoodRequest?.length === 0 ? (
-          <p className="text-center my-3 text-redFood text-xl italic">
+          <p className="text-center my-3 text-[#f01543] text-xl italic">
             You have&apos;nt requested for any food
           </p>
         ) : (

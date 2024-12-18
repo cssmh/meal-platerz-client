@@ -65,7 +65,7 @@ const BePremium = () => {
               sec
             </div>
           </div>
-          <p className="text-sm md:text-base text-yellow-200">
+          <p className="text-sm md:text-base">
             Catch free food delivery offer in time!
           </p>
         </div>

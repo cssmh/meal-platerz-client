@@ -13,8 +13,8 @@ axiosSecure.interceptors.response.use(
     // console.log("Error in the interceptor", error.response.status);
     if (error.response.status === 401 || error.response.status === 403) {
       await clearCookie();
-      toast.warning(
-        "Your Session has expired! Please log in again to continue"
+      toast.error(
+        "Your Session has expired! Please log in again."
       );
       await userLogout();
       history.push("/login");

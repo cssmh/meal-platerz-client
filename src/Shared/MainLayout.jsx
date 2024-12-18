@@ -18,7 +18,7 @@ const MainLayout = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // if (loading) return <BigLoader />;
+  if (loading) return <BigLoader />;
 
   return (
     <div>

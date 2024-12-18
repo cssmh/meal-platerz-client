@@ -68,7 +68,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
           food_status === "Unavailable"
             ? "text-cyan-500"
             : isExpired
-            ? "text-redFood"
+            ? "text-[#f01543]"
             : "text-green-500"
         }
       >

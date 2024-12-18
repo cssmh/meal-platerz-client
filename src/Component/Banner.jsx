@@ -31,18 +31,21 @@ const Banner = () => {
             food are wasted, there is an urgent need for collective action.
           </p>
           <p className="space-x-2">
-            <Link className="bg-[#f01543] rounded-md px-4 py-2 text-white">
+            <Link
+              to={"/available-foods"}
+              className="bg-[#f01543] rounded-md px-4 py-2 text-white"
+            >
               Foods
             </Link>
             <Link
               to={"/blogs"}
-              className="rounded-md px-4 py-[7px] border border-redFood ml-1"
+              className="rounded-md px-4 py-[7px] border border-[#f01543] ml-1"
             >
               Blogs
             </Link>
             <Link
               to={"/all-reviews"}
-              className="rounded-md px-4 py-[7px] border border-redFood ml-1"
+              className="rounded-md px-4 py-[7px] border border-[#f01543] ml-1"
             >
               Reviews
             </Link>

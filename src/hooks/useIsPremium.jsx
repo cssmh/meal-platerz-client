@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
 import moment from "moment";
+import { useState, useEffect } from "react";
 import useUser from "./useUser";
 
 const useIsPremium = () => {
-  const { userData, isLoading } = useUser();
+  const { userData, isLoading, refetch } = useUser();
   const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
@@ -13,12 +13,13 @@ const useIsPremium = () => {
         if (userData?.premium_date) {
           const premiumDate = moment(parseInt(userData.premium_date, 10));
           const now = moment();
-          // If the premium date is after now, the user is still premium
           setIsPremium(premiumDate.isAfter(now, "second"));
         } else {
-          // If there's no premium_date, consider the user as not premium
           setIsPremium(false);
+          refetch();
         }
+      } else {
+        setIsPremium(false);
       }
     };
 
@@ -32,7 +33,7 @@ const useIsPremium = () => {
         clearInterval(interval);
       }
     };
-  }, [userData, isLoading]);
+  }, [userData, isLoading, refetch]);
 
   return isPremium;
 };

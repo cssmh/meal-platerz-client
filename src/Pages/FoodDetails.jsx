@@ -76,9 +76,9 @@ const FoodDetails = () => {
             </p>
             {food_status === "Unavailable" ? (
               isUserDonator ? (
-                <p className="text-redFood">You shared this food item.</p>
+                <p className="text-[#f01543]">You shared this food item.</p>
               ) : (
-                <p className="text-redFood">
+                <p className="text-[#f01543]">
                   This food item has been delivered!
                 </p>
               )

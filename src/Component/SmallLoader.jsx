@@ -22,7 +22,7 @@ const SmallLoader = () => {
   };
 
   return (
-    <div className="w-full min-h-[95vh] flex justify-center items-center">
+    <div className="w-full min-h-[94vh] flex justify-center items-center">
       <div style={loadingSpinnerContainer}>
         <div className="animate-spin" style={loadingSpinner}></div>
       </div>

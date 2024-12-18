@@ -46,7 +46,7 @@ const AvailableFoods = () => {
           name="name"
           onChange={handleSearch}
           placeholder="Search for Food Name and Location"
-          className="text-sm border py-[9px] px-[11px] rounded-xl focus:border-redFood min-w-[75%] md:min-w-[340px] border-red-500"
+          className="text-sm border py-[9px] px-[11px] rounded-xl focus:border-[#f01543] min-w-[75%] md:min-w-[340px] border-red-500"
           style={{ outline: "none" }}
         />
       </div>
@@ -121,7 +121,7 @@ const AvailableFoods = () => {
                       setPage(1);
                     }}
                     defaultValue={limit}
-                    className="input input-bordered border-red-400 text-red-500 outline-none focus:border-redFood"
+                    className="input input-bordered border-red-400 text-red-500 outline-none focus:border-[#f01543]"
                     style={{ outline: "none" }}
                   >
                     <option value="4">4</option>

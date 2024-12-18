@@ -12,7 +12,10 @@ const useUser = () => {
     enabled: !loading && !!user?.email,
     queryKey: ["user"],
     queryFn: async () => {
-      return await getSingleUser(user?.email);
+      if (user?.email) {
+        return await getSingleUser(user?.email);
+      }
+      return {};
     },
   });
 
