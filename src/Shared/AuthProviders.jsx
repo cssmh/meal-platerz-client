@@ -52,7 +52,8 @@ const AuthProviders = ({ children }) => {
     return sendEmailVerification(auth.currentUser);
   };
 
-  const logOut = () => {
+  const logOut = async () => {
+    await clearCookie();
     return signOut(auth);
   };
 
@@ -62,11 +63,9 @@ const AuthProviders = ({ children }) => {
       const getEmail = currentUser?.email || user?.email;
       const emailToSend = { email: getEmail };
       if (getEmail) {
-        const res = await setToken(emailToSend);
-        // console.log("login token res", res);
+        await setToken(emailToSend);
       } else {
-        const res = await clearCookie(emailToSend);
-        // console.log("logout token res", res);
+        await clearCookie(emailToSend);
       }
       setLoading(false);
     });

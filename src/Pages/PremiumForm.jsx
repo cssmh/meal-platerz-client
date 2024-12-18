@@ -30,6 +30,14 @@ const PremiumForm = () => {
   }, [isPremium]);
 
   useEffect(() => {
+    if (!user) {
+      setIsPaid(false);
+      setClientSecret("");
+      setError("");
+    }
+  }, [user]);
+
+  useEffect(() => {
     if (typeof price !== "number" || price < 1) {
       return;
     }
@@ -209,14 +217,14 @@ const PremiumForm = () => {
             >
               {error || " "}
             </p>
-            {isPremium && (
+            {user && isPremium && (
               <div className="flex justify-center mb-2">
                 <span className="mt-2 inline-block px-4 py-2 bg-green-100 rounded-lg shadow">
                   <Countdown />
                 </span>
               </div>
             )}
-            {isPremium && userData?.paymentIntent_Id && (
+            {user && isPremium && userData?.paymentIntent_Id && (
               <p className="text-green-500 text-sm flex text-center justify-center">
                 Your transaction id is: {userData.paymentIntent_Id}
               </p>
@@ -224,10 +232,14 @@ const PremiumForm = () => {
           </div>
           <div className="flex justify-center">
             <button
-              disabled={!stripe || !clientSecret || isPremium || isPaid}
+              disabled={
+                !stripe || !clientSecret || isPremium || isPaid || !user
+              }
               type="submit"
               className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
-                loading
+                !user
+                  ? "bg-[#f01543] hover:bg-red-600"
+                  : loading
                   ? "bg-green-300 cursor-not-allowed"
                   : isPremium || isPaid
                   ? "bg-green-300 cursor-not-allowed"
@@ -239,6 +251,8 @@ const PremiumForm = () => {
                   <span className="loading loading-spinner loading-xs"></span>
                   Processing...
                 </div>
+              ) : !user ? (
+                "Login to Pay"
               ) : isPremium || isPaid ? (
                 <div className="flex items-center gap-2 justify-center">
                   <svg
@@ -263,7 +277,9 @@ const PremiumForm = () => {
           </div>
         </form>
         <p className="text-center text-sm text-gray-600">
-          {isPremium
+          {!user
+            ? "Be our Premium member today!"
+            : isPremium
             ? "Congratulations on joining our Premium membership!"
             : "Be our Premium member today!"}
         </p>

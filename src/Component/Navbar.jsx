@@ -27,11 +27,9 @@ const Navbar = () => {
 
   const handleProtectedRoute = (path) => {
     if (!user?.email) {
-      toast.info("Please log in first to access this feature.");
-      navigate("/login");
-    } else {
-      navigate(path);
+      toast.info("Please log in to purchase Premium membership.");
     }
+    navigate(path);
   };
 
   useEffect(() => {

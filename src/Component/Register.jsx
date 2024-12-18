@@ -43,7 +43,7 @@ const Register = () => {
 
       const userData = {
         email: email.toLowerCase(),
-        name: name,
+        name: name || "anonymous",
         photo: photoURL,
       };
       await addUser(userData);
@@ -51,7 +51,7 @@ const Register = () => {
       toast.success("Registration successful");
       navigateTo(location?.state || "/");
     } catch (err) {
-      toast.error(err.response?.data?.message || err.message);
+      console.log("Add user error", err.response.data.message);
     } finally {
       setImageUploading(false);
     }

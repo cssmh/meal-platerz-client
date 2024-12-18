@@ -25,12 +25,8 @@ const AllReviews = () => {
   const closeModal = () => setIsOpen(false);
   const handleAddReview = async (e) => {
     e.preventDefault();
-    if (!user) {
-      setIsOpen(false);
-      return toast.info("Please login first");
-    }
-    const getReview = e.target.review.value;
 
+    const getReview = e.target.review.value;
     if (getReview.length < 1) {
       return toast.info("Review cannot be empty.");
     }
@@ -82,7 +78,13 @@ const AllReviews = () => {
             Your review will be featured on the home page slider!
           </p>
           <button
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              if (!user?.email) {
+                toast.info("Please log in to access this feature.");
+              } else {
+                setIsOpen(true);
+              }
+            }}
             className="flex items-center justify-center text-white bg-green-500 rounded-xl py-2 px-3 mb-4"
           >
             <FaPlus className="mr-2" /> Add Your Review

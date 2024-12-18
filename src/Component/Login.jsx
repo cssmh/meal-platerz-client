@@ -22,15 +22,15 @@ const Login = () => {
 
     try {
       const res = await login(email, password);
-      toast.success("Logged in successfully");
+      toast.success("Log in successfully");
       navigateTo(location?.state || "/");
       const userData = {
-        email: email.toLowerCase(),
-        name: res?.user?.displayName,
+        email: res.user?.email.toLowerCase(),
+        name: res.user?.displayName || "anonymous",
       };
       await addUser(userData);
     } catch (err) {
-      toast.error(err.message);
+      console.log("Add user error", err.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -42,12 +42,12 @@ const Login = () => {
       toast.success("User logged in successfully");
       navigateTo(location?.state || "/");
       const userData = {
-        email: res?.user?.email.toLowerCase(),
-        name: res?.user?.displayName,
+        email: res.user?.email.toLowerCase(),
+        name: res.user?.displayName || "anonymous",
       };
       await addUser(userData);
     } catch (err) {
-      toast.error(err.message);
+      console.log("Add user error", err.response.data.message);
     }
   };
 
