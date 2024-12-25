@@ -21,17 +21,16 @@ const FoodsCard = ({ getFoods }) => {
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
 
   return (
-    <div
-      data-aos="fade-up"
-      data-aos-duration="400"
-      data-aos-anchor-placement="center-bottom"
-      className="md:group flex flex-col bg-white shadow-lg md:rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:bg-gray-50 transform hover:scale-105"
-    >
-      <div className="relative">
+    <div className="flex flex-col bg-white shadow-lg md:rounded-lg overflow-hidden">
+      <div
+        data-aos="zoom-out-down"
+        data-aos-duration="500"
+        className="relative"
+      >
         <img
           alt={food_name}
           src={food_image}
-          className="w-full h-56 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+          className="w-full h-60 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div
           className={`absolute top-2 right-2 text-xs font-semibold py-1 px-2 rounded-md ${

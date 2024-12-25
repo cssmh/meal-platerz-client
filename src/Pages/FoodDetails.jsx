@@ -35,7 +35,6 @@ donator_phone,
     food_status,
     user_review,
   } = data;
-  console.log(data);
 
   const [show, setShow] = useState(true);
   useEffect(() => {

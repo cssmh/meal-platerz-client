@@ -77,7 +77,7 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-52"
               >
                 <Link
                   to="/"
@@ -141,8 +141,8 @@ const Navbar = () => {
                 )}
               </ul>
             </div>
-            <Link to="/" className="flex items-center gap-1">
-              <img src={logo} className="w-10 md:mr-1" alt="Logo" />
+            <Link to="/" className="flex items-center md:gap-1">
+              <img src={logo} className="w-0 md:w-10 md:mr-1" alt="Logo" />
               <h1 className="font-semibold lg:text-[21px] px-0">MealPlaterz</h1>
             </Link>
           </div>

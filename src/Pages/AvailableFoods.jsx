@@ -39,7 +39,7 @@ const AvailableFoods = () => {
 
   return (
     <div>
-      <PlaterHelmet title={"Available Foods"} />
+      <PlaterHelmet title={"All Foods"} />
       <div className="text-center mt-3 mb-3">
         <input
           type="text"
