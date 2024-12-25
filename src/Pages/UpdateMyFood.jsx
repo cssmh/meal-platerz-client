@@ -162,8 +162,6 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                 />
               </div>
             </div>
-
-            {/* Food Quantity and Phone */}
             <div className="flex flex-col md:flex-row gap-3">
               <div className="form-control md:w-2/3 mx-3 lg:mx-0">
                 <label className="label">
@@ -190,8 +188,6 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                 />
               </div>
             </div>
-
-            {/* Expiration Date and Time */}
             <div className="flex flex-col md:flex-row gap-3">
               <div className="form-control md:w-2/3 mx-3 lg:mx-0">
                 <label className="label">
@@ -219,8 +215,6 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                 />
               </div>
             </div>
-
-            {/* Pickup Location */}
             <div className="flex flex-col md:flex-row gap-3">
               <div className="form-control md:w-full mx-3 lg:mx-0">
                 <label className="label">

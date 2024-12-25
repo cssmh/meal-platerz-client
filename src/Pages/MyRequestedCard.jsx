@@ -70,7 +70,7 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
 
   if (isLoading || loading)
     return (
-      <div className="border rounded-md mx-1 lg:mx-0 py-4 border-gray-300 bg-gray-100 animate-pulse">
+      <div className="border rounded-md mx-1 lg:mx-0 py-2 border-gray-300 bg-gray-100 animate-pulse">
         <div className="flex flex-col md:flex-row px-2 md:px-8 items-center gap-3">
           <div className="w-24 md:w-32 h-24 md:h-32 bg-gray-300 rounded-md" />
           <div className="flex flex-col items-start">
@@ -99,11 +99,11 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
 
   return (
     <div
-      className={`border rounded-md mx-1 lg:mx-0 py-4 ${
+      className={`border rounded-md mx-1 lg:mx-0 py-2 ${
         isExpired ? "bg-gray-100 text-gray-500" : "bg-white text-black"
-      } shadow-lg hover:shadow-xl transition-shadow duration-200 ease-in-out`}
+      } shadow-lg hover:shadow-xl transition-shadow duration-200 ease-in-out flex flex-col`}
     >
-      <div className="flex flex-col md:flex-row items-center gap-3 p-4">
+      <div className="flex flex-col md:flex-row items-center gap-3 p-4 flex-grow">
         <img
           src={food_image}
           className="w-28 h-20 rounded-lg object-cover shadow-md"
@@ -124,7 +124,7 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
           </div>
         </div>
       </div>
-      <div className="px-4">
+      <div className="px-4 flex-grow">
         <p className="text-gray-600">
           Pickup Location:{" "}
           <span className="text-blue-600">{pickup_location}</span>
@@ -160,6 +160,8 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
             </p>
           )}
         </div>
+      </div>
+      <div className="p-4 mt-auto">
         {isExpired ? (
           <div>
             <p className="text-red-500 mt-2">This food has expired.</p>

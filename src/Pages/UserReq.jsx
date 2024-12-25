@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
-import MyPendingCard from "./MyPendingCard";
+import UserReqCard from "./UserReqCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../hooks/useAuth";
-import { getMyPending, unavailableId } from "../api/Foods";
+import { getUserReq, unavailableId } from "../api/Foods";
 import SmallLoader from "../Component/SmallLoader";
 import PlaterHelmet from "../Component/PlaterHelmet";
 
-const MyPending = () => {
+const UserReq = () => {
   const { loading, user } = useAuth();
   const { id, email } = useParams();
 
@@ -15,9 +15,9 @@ const MyPending = () => {
     data: requestedData,
     refetch: refetchReq,
   } = useQuery({
-    queryKey: ["myPending", id, email],
+    queryKey: ["userRequest", id, email],
     queryFn: async () => {
-      return await getMyPending(id, email);
+      return await getUserReq(id, email);
     },
   });
 
@@ -48,15 +48,15 @@ const MyPending = () => {
           <p className="text-center my-[10px] text-blue-900 text-xl italic">
             User Requested for This Food
           </p>
-          <div className="max-w-6xl 2xl:max-w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="max-w-7xl 2xl:max-w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {requestedData?.map((req) => (
-              <MyPendingCard
+              <UserReqCard
                 key={req._id}
                 getReq={req}
                 unavailableIds={unavailableIds}
                 refetchReq={refetchReq}
                 idFetch={idFetch}
-              ></MyPendingCard>
+              ></UserReqCard>
             ))}
           </div>
         </div>
@@ -65,4 +65,4 @@ const MyPending = () => {
   );
 };
 
-export default MyPending;
+export default UserReq;

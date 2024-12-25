@@ -7,7 +7,7 @@ import useMyFoods from "../hooks/useMyFoods";
 import useFood from "../hooks/useFood";
 import useIsExpire from "../hooks/useIsExpire";
 
-const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
+const UserReqCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
   const {
     _id,
     food_id,
@@ -69,23 +69,21 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
 
   if (isLoading || loading) {
     return (
-      <div className="border border-gray-300 rounded-md mx-1 md:mx-0 h-auto flex flex-col p-4 animate-pulse">
+      <div className="border border-gray-300 rounded-md mx-1 md:mx-0 h-auto flex flex-col p-4">
         <div className="flex items-center space-x-4">
-          <div className="w-20 h-20 rounded-full bg-gray-300"></div>
+          <div className="w-20 h-20 rounded-full bg-gray-300 skeleton"></div>
           <div>
-            <div className="h-4 bg-gray-300 rounded w-24 mb-2"></div>
-            <div className="h-3 bg-gray-300 rounded w-36"></div>
+            <div className="h-4 bg-gray-300 rounded w-24 mb-2 skeleton"></div>
+            <div className="h-3 bg-gray-300 rounded w-36 skeleton"></div>
           </div>
         </div>
         <div className="mt-2 space-y-2">
-          <div className="h-3 bg-gray-300 rounded w-40"></div>
-          <div className="h-3 bg-gray-300 rounded w-32"></div>
-          <div className="h-3 bg-gray-300 rounded w-56"></div>
-          <div className="h-3 bg-gray-300 rounded w-28"></div>
-          <div className="h-3 bg-gray-300 rounded w-44"></div>
+          <div className="h-3 bg-gray-300 rounded w-40 skeleton"></div>
+          <div className="h-3 bg-gray-300 rounded w-32 skeleton"></div>
+          <div className="h-3 bg-gray-300 rounded w-44 skeleton"></div>
         </div>
-        <div className="text-center mt-2">
-          <div className="h-8 bg-gray-300 rounded w-24 mx-auto"></div>
+        <div className="mt-2">
+          <div className="h-8 bg-gray-300 rounded w-24 ml-auto skeleton"></div>
         </div>
       </div>
     );
@@ -103,21 +101,20 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
           />
           <div>
             <h2 className="text-xl font-semibold text-gray-800">{user_name}</h2>
-            <p className="text-sm text-gray-500">{user_email}</p>
             <p className="text-sm text-gray-500">{user_phone}</p>
           </div>
         </div>
-        <div className="space-y-2">
+        <div>
+          <p className="text-sm text-yellow-600">Requested: {reqDate}</p>
           {message_to_donator && (
             <p className="text-sm text-gray-600 italic">{message_to_donator}</p>
           )}
-          <p className="text-sm text-gray-700">Requested: {reqDate}</p>
           {status === "Delivered" ? (
             <p className="text-sm text-green-600">
               ✔️ Delivered: {deliverDate}
             </p>
           ) : (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-500">
               Expires in: {expireIn} at {expiration_time}{" "}
               {isExpired && <span className="text-red-500">(Expired!)</span>}
             </p>
@@ -152,4 +149,4 @@ const MyPendingCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
   );
 };
 
-export default MyPendingCard;
+export default UserReqCard;

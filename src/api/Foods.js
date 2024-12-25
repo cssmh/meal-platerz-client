@@ -64,7 +64,7 @@ export const getFood = async (idx) => {
 };
 
 // get my pending
-export const getMyPending = async (idx, email) => {
+export const getUserReq = async (idx, email) => {
   const { data } = await axiosSecure(`/pending-request/${idx}/${email}`);
   return data;
 };

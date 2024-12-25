@@ -13,7 +13,7 @@ import MyFoods from "../Pages/MyFoods";
 import MyRequest from "../Pages/MyRequest";
 import FoodDetails from "../Pages/FoodDetails";
 import { getFood } from "../api/Foods";
-import MyPending from "../Pages/MyPending";
+import UserReq from "../Pages/UserReq";
 import Blogs from "../Component/Blogs";
 import AllReviews from "../Component/AllReviews";
 import UserAnalytics from "../Pages/UserAnalytics";
@@ -96,7 +96,7 @@ const Root = createBrowserRouter([
         path: "/req-for/:id/:email",
         element: (
           <PrivateRoute>
-            <MyPending />
+            <UserReq />
           </PrivateRoute>
         ),
       },
