@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
-import defaultAvatar from "../assets/default.jpg";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
@@ -12,7 +11,7 @@ import { PiSpinnerGapLight } from "react-icons/pi";
 const Register = () => {
   const [view, setView] = useState(true);
   const [imageUploading, setImageUploading] = useState(false);
-  const [isRegistering, setIsRegistering] = useState(false); // Separate state for register button loading
+  const [isRegistering, setIsRegistering] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const apiKey = import.meta.env.VITE_imgBbKey;
   const { createNewUser, updateProfileInfo, emailVerification } = useAuth();
@@ -27,12 +26,10 @@ const Register = () => {
     const password = form.password.value;
     const photoFile = form.photo.files[0];
 
-    try { // Start loading for registration
-      let photoURL = defaultAvatar; // Default photo in case no image is uploaded
+    try {
+      let photoURL = "";
 
       if (photoFile) {
-        // If image is selected, set image uploading to true and upload the image
-        setImageUploading(true);
         const formData = new FormData();
         formData.append("image", photoFile);
 
@@ -45,21 +42,19 @@ const Register = () => {
           throw new Error("Image upload failed. Please try again.");
         }
 
-        photoURL = imgRes.data.data.display_url || defaultAvatar; // Get uploaded image URL
-        setImageUploading(false); // Set image uploading to false after upload completes
+        photoURL = imgRes.data.data.display_url;
       }
-
       setIsRegistering(true);
-      await createNewUser(email, password); // Register user
-      await updateProfileInfo(name, photoURL); // Update profile with name and photo
-      await emailVerification(); // Send email verification
+      await createNewUser(email, password);
+      await updateProfileInfo(name, photoURL);
+      await emailVerification();
 
       const userData = {
         email: email.toLowerCase(),
         name: name || "anonymous",
         photo: photoURL,
       };
-      await addUser(userData); // Add user to database
+      await addUser(userData);
 
       toast.success("Registration successful");
       navigateTo(location?.state || "/");
@@ -68,14 +63,36 @@ const Register = () => {
       toast.error("Registration failed. Please try again.");
     } finally {
       setIsRegistering(false);
-        setImageUploading(false);
     }
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
+      setImageUploading(true);
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const imgRes = await axios.post(
+          `https://api.imgbb.com/1/upload?key=${apiKey}`,
+          formData
+        );
+
+        if (!imgRes.data.success) {
+          throw new Error("Image upload failed. Please try again.");
+        }
+
+        setSelectedImage(imgRes.data.data.display_url); // Update preview with uploaded image URL
+        setImageUploading(false); // Set uploading to false when done
+      } catch (error) {
+        console.log("Image upload error", error.message);
+        toast.error("Image upload failed. Please try again.");
+      } finally {
+        setImageUploading(false);
+      }
     } else {
       setSelectedImage(null);
     }
@@ -122,7 +139,7 @@ const Register = () => {
               name="photo"
               accept="image/*"
               className="absolute inset-0 opacity-0 cursor-pointer"
-              onChange={handleImageChange}
+              onChange={handleImageChange} // Trigger image upload on change
             />
             <div className="text-center">
               {imageUploading ? (
@@ -178,7 +195,7 @@ const Register = () => {
         <button
           type="submit"
           className="block w-full p-3 text-center text-gray-50 bg-[#f01543] rounded-xl"
-          disabled={isRegistering} // Disable button while registering
+          disabled={isRegistering || isRegistering}
         >
           {isRegistering ? (
             <div className="flex justify-center">
