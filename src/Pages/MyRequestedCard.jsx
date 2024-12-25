@@ -16,7 +16,6 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
     food_id,
     food_name,
     food_image,
-    donator_email,
     donator_name,
     donator_phone,
     request_date,

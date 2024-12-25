@@ -57,7 +57,7 @@ const Login = () => {
       <h1 className="text-2xl font-bold text-center">Login</h1>
       <form onSubmit={handleLogin} className="space-y-5">
         <div className="space-y-1 text-sm">
-          <label htmlFor="email" className="block dark:text-gray-600">
+          <label htmlFor="email" className="block text-gray-600">
             Your Email
           </label>
           <input
@@ -70,7 +70,7 @@ const Login = () => {
           />
         </div>
         <div className="space-y-1 text-sm relative">
-          <label htmlFor="password" className="block dark:text-gray-600">
+          <label htmlFor="password" className="block text-gray-600">
             Password
           </label>
           <input
@@ -87,13 +87,13 @@ const Login = () => {
           >
             {view ? <FaRegEyeSlash /> : <FaRegEye />}
           </span>
-          <div className="flex justify-end text-xs dark:text-gray-600">
+          <div className="flex justify-end text-xs text-gray-600">
             <a rel="noopener noreferrer" href="#">
               Forgot Password?
             </a>
           </div>
         </div>
-        <button className="block w-full p-3 text-center rounded-xl dark:text-gray-50 dark:bg-[#f01543]">
+        <button className="block w-full p-3 text-center rounded-xl text-white bg-[#f01543]">
           {loading ? (
             <div className="flex justify-center">
               <PiSpinnerGapLight className="animate-spin text-xl my-[2px]" />
@@ -104,17 +104,17 @@ const Login = () => {
         </button>
       </form>
       <div className="flex items-center py-2 space-x-1">
-        <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-        <p className="px-3 text-sm dark:text-gray-600">
+        <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
+        <p className="px-3 text-sm text-gray-600">
           Login with social accounts
         </p>
-        <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
+        <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
       </div>
       <div className="flex justify-center space-x-4">
         <button
           onClick={handleGoogleLogin}
           aria-label="Log in with Google"
-          className="flex items-center gap-1 px-6 py-2 rounded-xl bg-[#f01543] text-white"
+          className="flex items-center gap-2 px-6 py-2 rounded-xl bg-[#f01543] text-white"
         >
           <FaGoogle className="text-xl" /> <span>Google login</span>
         </button>
@@ -125,7 +125,7 @@ const Login = () => {
           state={location.state}
           to={"/register"}
           rel="noopener noreferrer"
-          className="underline dark:text-[#f01543]"
+          className="underline text-[#f01543]"
         >
           Register
         </Link>

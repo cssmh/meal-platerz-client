@@ -92,7 +92,7 @@ const AllReviews = () => {
         </div>
         <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {isLoading
-            ? [...Array(3)].map((_, idx) => (
+            ? [...Array(6)].map((_, idx) => (
                 <div
                   key={idx}
                   className="bg-white rounded-lg shadow-lg p-6 animate-pulse"

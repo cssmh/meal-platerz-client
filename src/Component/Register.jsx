@@ -7,10 +7,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { addUser } from "../api/users";
 import PlaterHelmet from "./PlaterHelmet";
+import { PiSpinnerGapLight } from "react-icons/pi";
 
 const Register = () => {
   const [view, setView] = useState(true);
   const [imageUploading, setImageUploading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const apiKey = import.meta.env.VITE_imgBbKey;
   const { createNewUser, updateProfileInfo, emailVerification } = useAuth();
   const navigateTo = useNavigate();
@@ -52,61 +54,106 @@ const Register = () => {
       navigateTo(location?.state || "/");
     } catch (err) {
       console.log("Add user error", err.response.data.message);
+      toast.error("Registration failed. Please try again.");
     } finally {
       setImageUploading(false);
     }
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file));
+    } else {
+      setSelectedImage(null);
+    }
+  };
+
   return (
-    <div className="my-6 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
+    <div className="my-5 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
       <PlaterHelmet title={"Register"} />
-      <h1 className="text-2xl font-semibold text-center">Register</h1>
-      <form onSubmit={handleRegister} className="space-y-5">
+      <h1 className="text-2xl font-semibold text-center">Register Now</h1>
+      <form onSubmit={handleRegister} className="space-y-4">
         <div className="space-y-1 text-sm">
-          <label htmlFor="name" className="block dark:text-gray-600">
+          <label htmlFor="name" className="block text-gray-600">
             Name
           </label>
           <input
             type="text"
             name="name"
+            required
             placeholder="Your Name"
-            className="w-full px-4 py-3 rounded-xl border"
+            className="w-full px-4 py-3 rounded-lg border"
             style={{ outline: "none" }}
           />
         </div>
         <div className="space-y-1 text-sm">
-          <label htmlFor="email" className="block dark:text-gray-600">
+          <label htmlFor="email" className="block text-gray-600">
             Email
           </label>
           <input
             type="email"
             name="email"
+            required
             placeholder="Your Email"
-            className="w-full px-4 py-3 rounded-xl border"
+            className="w-full px-4 py-3 rounded-lg border"
             style={{ outline: "none" }}
           />
         </div>
-        <div className="space-y-1 text-sm">
-          <label htmlFor="photo" className="block dark:text-gray-600">
+        <div className="space-y-2 text-sm">
+          <label htmlFor="photo" className="block text-gray-600">
             Upload Profile Image
           </label>
-          <input
-            type="file"
-            name="photo"
-            accept="image/*"
-            className="w-full px-4 py-3 rounded-xl border"
-            style={{ outline: "none" }}
-          />
+          <div className="relative flex items-center justify-center w-full h-24 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50">
+            <input
+              type="file"
+              name="photo"
+              accept="image/*"
+              className="absolute inset-0 opacity-0 cursor-pointer"
+              onChange={handleImageChange}
+            />
+            <div className="text-center">
+              {imageUploading ? (
+                <p className="text-gray-400">Uploading Image...</p>
+              ) : selectedImage ? (
+                <img
+                  src={selectedImage}
+                  alt="Selected"
+                  className="w-20 h-20 object-cover rounded-lg"
+                />
+              ) : (
+                <>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-8 h-8 text-gray-400 mx-auto mb-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  <p className="text-gray-400">Click or drag to upload</p>
+                </>
+              )}
+            </div>
+          </div>
         </div>
         <div className="space-y-1 text-sm relative">
-          <label htmlFor="password" className="block dark:text-gray-600">
+          <label htmlFor="password" className="block text-gray-600">
             Password
           </label>
           <input
             type={view ? "password" : "text"}
             name="password"
+            required
             placeholder="Password"
-            className="w-full px-4 py-3 rounded-xl border"
+            className="w-full px-4 py-3 rounded-lg border"
             style={{ outline: "none" }}
           />
           <span
@@ -118,10 +165,16 @@ const Register = () => {
         </div>
         <button
           type="submit"
-          className="block w-full p-3 text-center dark:text-gray-50 dark:bg-[#f01543] rounded-xl"
+          className="block w-full p-3 text-center text-gray-50 bg-[#f01543] rounded-xl"
           disabled={imageUploading}
         >
-          {imageUploading ? "Uploading Image..." : "Register"}
+          {imageUploading ? (
+            <div className="flex justify-center">
+              <PiSpinnerGapLight className="animate-spin text-xl my-[2px]" />
+            </div>
+          ) : (
+            "Register"
+          )}
         </button>
       </form>
       <p className="text-sm text-center text-gray-600 pt-1">
@@ -129,7 +182,7 @@ const Register = () => {
         <Link
           to={"/login"}
           rel="noopener noreferrer"
-          className="underline dark:text-[#f01543]"
+          className="underline text-[#f01543]"
         >
           Login
         </Link>
