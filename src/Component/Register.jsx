@@ -12,6 +12,7 @@ import { PiSpinnerGapLight } from "react-icons/pi";
 const Register = () => {
   const [view, setView] = useState(true);
   const [imageUploading, setImageUploading] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false); // Separate state for register button loading
   const [selectedImage, setSelectedImage] = useState(null);
   const apiKey = import.meta.env.VITE_imgBbKey;
   const { createNewUser, updateProfileInfo, emailVerification } = useAuth();
@@ -26,37 +27,48 @@ const Register = () => {
     const password = form.password.value;
     const photoFile = form.photo.files[0];
 
-    try {
-      setImageUploading(true);
-      const formData = new FormData();
-      formData.append("image", photoFile);
-      const imgRes = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${apiKey}`,
-        formData
-      );
-      if (!imgRes.data.success) {
-        throw new Error("Image upload failed. Please try again.");
-      }
-      const photoURL = imgRes.data.data.display_url || defaultAvatar;
+    try { // Start loading for registration
+      let photoURL = defaultAvatar; // Default photo in case no image is uploaded
 
-      await createNewUser(email, password);
-      await updateProfileInfo(name, photoURL);
-      await emailVerification();
+      if (photoFile) {
+        // If image is selected, set image uploading to true and upload the image
+        setImageUploading(true);
+        const formData = new FormData();
+        formData.append("image", photoFile);
+
+        const imgRes = await axios.post(
+          `https://api.imgbb.com/1/upload?key=${apiKey}`,
+          formData
+        );
+
+        if (!imgRes.data.success) {
+          throw new Error("Image upload failed. Please try again.");
+        }
+
+        photoURL = imgRes.data.data.display_url || defaultAvatar; // Get uploaded image URL
+        setImageUploading(false); // Set image uploading to false after upload completes
+      }
+
+      setIsRegistering(true);
+      await createNewUser(email, password); // Register user
+      await updateProfileInfo(name, photoURL); // Update profile with name and photo
+      await emailVerification(); // Send email verification
 
       const userData = {
         email: email.toLowerCase(),
         name: name || "anonymous",
         photo: photoURL,
       };
-      await addUser(userData);
+      await addUser(userData); // Add user to database
 
       toast.success("Registration successful");
       navigateTo(location?.state || "/");
     } catch (err) {
-      console.log("Add user error", err.response.data.message);
+      console.log("Add user error", err.response?.data?.message || err.message);
       toast.error("Registration failed. Please try again.");
     } finally {
-      setImageUploading(false);
+      setIsRegistering(false);
+        setImageUploading(false);
     }
   };
 
@@ -70,7 +82,7 @@ const Register = () => {
   };
 
   return (
-    <div className="my-5 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
+    <div className="my-5 space-y-3 rounded-xl lg:max-w-2xl mx-2 md:mx-auto">
       <PlaterHelmet title={"Register"} />
       <h1 className="text-2xl font-semibold text-center">Register Now</h1>
       <form onSubmit={handleRegister} className="space-y-4">
@@ -102,7 +114,7 @@ const Register = () => {
         </div>
         <div className="space-y-2 text-sm">
           <label htmlFor="photo" className="block text-gray-600">
-            Upload Profile Image
+            Upload Profile Image (optional)
           </label>
           <div className="relative flex items-center justify-center w-full h-24 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50">
             <input
@@ -166,9 +178,9 @@ const Register = () => {
         <button
           type="submit"
           className="block w-full p-3 text-center text-gray-50 bg-[#f01543] rounded-xl"
-          disabled={imageUploading}
+          disabled={isRegistering} // Disable button while registering
         >
-          {imageUploading ? (
+          {isRegistering ? (
             <div className="flex justify-center">
               <PiSpinnerGapLight className="animate-spin text-xl my-[2px]" />
             </div>
