@@ -1,9 +1,14 @@
 import { toast } from "sonner";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
+import {
+  IoIosCloseCircleOutline,
+  IoMdCloseCircle,
+  IoMdCloseCircleOutline,
+} from "react-icons/io";
 import useIsPremium from "../hooks/useIsPremium";
 
 const Navbar = () => {
@@ -14,6 +19,21 @@ const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const navigate = useNavigate();
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleProfileClick = (e) => {
     e.stopPropagation();
@@ -58,90 +78,26 @@ const Navbar = () => {
       <div className="border-b border-base-300">
         <div className="navbar min-h-[58px] md:px-10 py-0">
           <div className="navbar-start">
-            <div className="dropdown lg:hidden">
-              <label tabIndex={0} className="btn btn-sm btn-ghost">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-52"
+            <button
+              onClick={() => setMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <Link
-                  to="/"
-                  className={`flex items-center p-[2px] ${getLinkClasses("/")}`}
-                >
-                  Home
-                </Link>
-                <Link
-                  to="/available-foods"
-                  className={`flex items-center p-[2px] ${getLinkClasses(
-                    "/available-foods"
-                  )}`}
-                >
-                  Available Foods
-                </Link>
-                {user && (
-                  <Link
-                    to="/add-food"
-                    className={`flex items-center p-[2px] ${getLinkClasses(
-                      "/add-food"
-                    )}`}
-                  >
-                    Add Food
-                  </Link>
-                )}
-                <button
-                  onClick={() => handleProtectedRoute("/be-premium")}
-                  className={`flex items-center p-[2px] ${getLinkClasses(
-                    "/be-premium"
-                  )}`}
-                >
-                  Be Premium
-                </button>
-                <Link
-                  to="/all-reviews"
-                  className={`flex items-center p-[2px] ${getLinkClasses(
-                    "/all-reviews"
-                  )}`}
-                >
-                  All Reviews
-                </Link>
-                {user?.email && (
-                  <>
-                    <Link
-                      to="/manage-my-foods"
-                      className={`flex items-center p-[2px] ${getLinkClasses(
-                        "/manage-my-foods"
-                      )}`}
-                    >
-                      My Foods
-                    </Link>
-                    <Link
-                      to="/my-food-request"
-                      className={`flex items-center p-[2px] ${getLinkClasses(
-                        "/my-food-request"
-                      )}`}
-                    >
-                      My Request
-                    </Link>
-                  </>
-                )}
-              </ul>
-            </div>
-            <Link to="/" className="flex items-center md:gap-1">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </button>
+            <Link to="/" className="flex items-center gap-1">
               <img src={logo} className="w-0 md:w-10 md:mr-1" alt="Logo" />
               <h1 className="font-semibold lg:text-[21px] px-0">MealPlaterz</h1>
             </Link>
@@ -274,6 +230,74 @@ const Navbar = () => {
             )}
           </div>
         </div>
+      </div>
+      <div
+        ref={menuRef}
+        className={`fixed top-0 z-50 right-0 h-full w-[48%] bg-white p-3 transition-transform transform ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        } md:hidden`}
+      >
+        <div className="flex justify-end">
+          <button onClick={() => setMenuOpen(false)}>
+            <IoIosCloseCircleOutline className="h-7 w-7" />
+          </button>
+        </div>
+        <ul>
+          <Link
+            to="/"
+            className={`block p-2 ${getLinkClasses("/")}`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
+            to="/available-foods"
+            className={`block p-2 ${getLinkClasses("/available-foods")}`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Available Foods
+          </Link>
+          {user && (
+            <Link
+              to="/add-food"
+              className={`block p-2 ${getLinkClasses("/add-food")}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              Add Food
+            </Link>
+          )}
+          <button
+            onClick={() => handleProtectedRoute("/be-premium")}
+            className={`block p-2 ${getLinkClasses("/be-premium")}`}
+          >
+            Be Premium
+          </button>
+          <Link
+            to="/all-reviews"
+            className={`block p-2 ${getLinkClasses("/all-reviews")}`}
+            onClick={() => setMenuOpen(false)}
+          >
+            All Reviews
+          </Link>
+          {user?.email && (
+            <>
+              <Link
+                to="/manage-my-foods"
+                className={`block p-2 ${getLinkClasses("/manage-my-foods")}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                My Foods
+              </Link>
+              <Link
+                to="/my-food-request"
+                className={`block p-2 ${getLinkClasses("/my-food-request")}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                My Request
+              </Link>
+            </>
+          )}
+        </ul>
       </div>
     </header>
   );
