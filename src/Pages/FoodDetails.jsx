@@ -26,6 +26,7 @@ const FoodDetails = () => {
     food_name,
     donator_name,
     donator_email,
+donator_phone,
     food_quantity,
     pickup_location,
     expiration_date,
@@ -34,6 +35,7 @@ const FoodDetails = () => {
     food_status,
     user_review,
   } = data;
+  console.log(data);
 
   const [show, setShow] = useState(true);
   useEffect(() => {
@@ -58,8 +60,8 @@ const FoodDetails = () => {
           Donator Information
         </h1>
         <p className="text-cyan-600">Name: {donator_name}</p>
-        <p>Email: {donator_email}</p>
-        <p className="pb-1 text-blue-600">Pickup Location: {pickup_location}</p>
+        <p>{donator_phone}</p>
+        <p className="text-blue-600">Pickup Location: {pickup_location}</p>
       </div>
       <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row lg:items-center justify-center my-6 lg:my-8 gap-4 lg:gap-7">
         <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-7">
@@ -68,10 +70,12 @@ const FoodDetails = () => {
             className="w-full h-48 md:w-[380px] md:h-[240px] rounded-md object-cover transition-transform duration-300 group-hover:scale-110"
             alt="food"
           />
-          <div className="space-y-1 lg:space-y-[6px] mx-6 lg:mx-0 text-center lg:text-left">
+          <div className="space-y-1 mx-6 lg:mx-0 text-center lg:text-left">
             <h1 className="text-xl lg:text-2xl font-semibold">{food_name}</h1>
-            <p>Quantity: {food_quantity} (no. of persons to be served)</p>
-            <p>
+            <p className="text-gray-700">
+              Quantity: {food_quantity} (no. of persons to be served)
+            </p>
+            <p className="text-gray-500">
               Expire In: {expireIn} at {expiration_time}
             </p>
             {food_status === "Unavailable" ? (
@@ -86,7 +90,9 @@ const FoodDetails = () => {
               <p className="text-pink-700">This food item has expired!</p>
             ) : isAvailable ? (
               isUserDonator ? (
-                <p className="text-blue-700">You have listed this food item.</p>
+                <p className="text-blue-600 font-semibold">
+                  You have listed this food item.
+                </p>
               ) : (
                 <AddRequest getFood={data} />
               )
@@ -111,8 +117,8 @@ const FoodDetails = () => {
             </button>
           )}
         </div>
-        {show && <p>{additional_notes}</p>}
-        {!show && <p>{user_review}</p>}
+        {show && <p className="text-gray-600">{additional_notes}</p>}
+        {!show && <p className="text-gray-600">{user_review}</p>}
       </div>
     </div>
   );

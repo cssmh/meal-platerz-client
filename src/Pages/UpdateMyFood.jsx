@@ -126,18 +126,18 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
           </Button>
         </DialogActions>
         <DialogContent>
-          <form onSubmit={handleUpdateFood} className="md:w-[70%] mx-auto">
+          <form onSubmit={handleUpdateFood} className="md:w-[90%] mx-auto">
             {imagePreview && (
-              <div className="w-full max-w-xs mx-auto">
+              <div className="w-full max-w-xs mx-auto mb-4">
                 <img
                   src={imagePreview}
                   alt="Food Preview"
-                  className="object-cover w-full h-32 rounded-md"
+                  className="object-cover w-52 mx-auto h-32 rounded-md"
                 />
               </div>
             )}
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text">Food Name</span>
                 </label>
@@ -145,25 +145,11 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                   type="text"
                   defaultValue={food_name}
                   name="food_name"
-                  className="input input-bordered"
+                  className="input input-bordered w-full"
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
-                <label className="label">
-                  <span className="label-text">Food Image</span>
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="input input-bordered p-2"
-                  style={{ outline: "none" }}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text">Food Quantity</span>
                 </label>
@@ -171,11 +157,28 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                   type="text"
                   defaultValue={food_quantity}
                   name="food_quantity"
-                  className="input input-bordered"
+                  className="input input-bordered w-full"
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Food Image</span>
+                </label>
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="input input-bordered p-2 w-full"
+                    style={{ outline: "none" }}
+                  />
+                  <span className="text-sm text-gray-500">Upload Image</span>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text">Phone</span>
                 </label>
@@ -183,13 +186,11 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                   type="text"
                   defaultValue={donator_phone}
                   name="donator_phone"
-                  className="input input-bordered"
+                  className="input input-bordered w-full"
                   style={{ outline: "none" }}
                 />
               </div>
-            </div>
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text">Expired Date</span>
                 </label>
@@ -202,7 +203,7 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-2/3 mx-3 lg:mx-0">
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text">Expired Time</span>
                 </label>
@@ -215,36 +216,31 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-full mx-3 lg:mx-0">
-                <label className="label">
-                  <span className="label-text">Pickup Location</span>
-                </label>
-                <input
-                  type="text"
-                  name="pickup_location"
-                  defaultValue={pickup_location}
-                  className="input input-bordered"
-                  style={{ outline: "none" }}
-                />
-              </div>
+            <div className="form-control mb-4">
+              <label className="label">
+                <span className="label-text">Pickup Location</span>
+              </label>
+              <input
+                type="text"
+                name="pickup_location"
+                defaultValue={pickup_location}
+                className="input input-bordered w-full"
+                style={{ outline: "none" }}
+              />
             </div>
-
-            {/* Additional Notes */}
-            <div className="form-control w-full mx-3 lg:mx-0 mt-4">
+            <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text">Additional Notes</span>
               </label>
               <textarea
                 className="textarea textarea-bordered w-full"
                 placeholder="Additional Notes"
+                rows="5"
                 defaultValue={additional_notes}
                 name="additional_notes"
                 style={{ outline: "none" }}
               />
             </div>
-
-            {/* Submit Button */}
             <div className="text-center mt-4">
               <Button
                 type="submit"
@@ -252,7 +248,7 @@ const UpdateMyFood = ({ foodData, food_status, refetch }) => {
                 disabled={loading}
                 color="success"
               >
-                {loading ? "Updating..." : "Update Food"}
+                {loading ? "Updating..." : "Update Food Data"}
               </Button>
             </div>
           </form>

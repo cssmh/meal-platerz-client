@@ -6,6 +6,7 @@ import useMyFoods from "../hooks/useMyFoods";
 import { toast } from "sonner";
 import PlaterHelmet from "../Component/PlaterHelmet";
 import axios from "axios";
+import { PiSpinnerGapLight } from "react-icons/pi";
 
 const AddFood = () => {
   const { user } = useAuth();
@@ -14,7 +15,8 @@ const AddFood = () => {
   const [expiredDate, setExpiredDate] = useState("");
   const [expiredTime, setExpiredTime] = useState("");
   const [todayDate, setTodayDate] = useState("");
-  const [imageUrl, setImageUrl] = useState(""); // Store image URL
+  const [imageUrl, setImageUrl] = useState("");
+  const [imagePreview, setImagePreview] = useState("");
   const { myFoods, refetch } = useMyFoods();
 
   useEffect(() => {
@@ -43,7 +45,8 @@ const AddFood = () => {
         `https://api.imgbb.com/1/upload?key=${apiKey}`,
         formData
       );
-      setImageUrl(response.data.data.url); // Set image URL after successful upload
+      setImageUrl(response.data.data.url);
+      setImagePreview(URL.createObjectURL(file));
       toast.success("Image uploaded successfully!");
     } catch (error) {
       toast.error("Image upload failed. Please try again.");
@@ -69,14 +72,10 @@ const AddFood = () => {
       setLoading(false);
       return toast.warning("You already added this Food!");
     }
-    if (!/^[0-9]+$/.test(food_quantity)) {
-      setLoading(false);
-      return toast.warning("Use only numbers for food quantity");
-    }
 
     const foodInfo = {
       food_name,
-      food_image: imageUrl, // Use the uploaded image URL
+      food_image: imageUrl,
       food_quantity,
       donator_name,
       donator_image,
@@ -122,10 +121,10 @@ const AddFood = () => {
       <PlaterHelmet title={"Add Food"} />
       <form
         onSubmit={handleAddFood}
-        className="max-w-6xl 2xl:max-w-[82%] mx-auto"
+        className="max-w-[950px] 2xl:max-w-[75%] mx-auto space-y-2"
       >
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="form-control mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Food Name</span>
             </label>
@@ -136,35 +135,22 @@ const AddFood = () => {
               className="input input-bordered"
               style={{ outline: "none" }}
             />
-          </div>
-          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
-            <label className="label">
-              <span className="label-text">Food Image</span>
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="input input-bordered p-2"
-            />
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+          </div>{" "}
+          <div className="form-control mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">
                 Food Quantity (Person to be served)
               </span>
             </label>
             <input
-              type="text"
+              type="number"
               name="food_quantity"
               required
               className="input input-bordered"
               style={{ outline: "none" }}
             />
           </div>
-          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+          <div className="form-control mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Pickup Location</span>
             </label>
@@ -177,35 +163,36 @@ const AddFood = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="flex-1 flex flex-col md:flex-row gap-3">
-            <div className="w-full">
-              <label className="label">
-                <span className="label-text">Expired Date</span>
-              </label>
+        <div>
+          <div className="form-control mx-3 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Food Image</span>
+            </label>
+            <div
+              className="flex flex-col items-center p-4 border-2 border-dashed rounded-lg cursor-pointer"
+              onClick={() => document.getElementById("image-upload").click()}
+            >
+              {imagePreview ? (
+                <img
+                  src={imagePreview}
+                  alt="Food"
+                  className="h-36 w-40 object-cover rounded-md"
+                />
+              ) : (
+                <span className="text-gray-500">Click to upload an image</span>
+              )}
               <input
-                type="date"
-                required
-                min={todayDate}
-                onChange={handleDateChange}
-                className="input input-bordered w-full"
-                style={{ outline: "none" }}
-              />
-            </div>
-            <div className="w-full">
-              <label className="label">
-                <span className="label-text">Expired Time</span>
-              </label>
-              <input
-                type="time"
-                required
-                onChange={handleTimeChange}
-                className="input input-bordered w-full"
-                style={{ outline: "none" }}
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="file-input file-input-bordered hidden"
               />
             </div>
           </div>
-          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="form-control mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Phone Number</span>
             </label>
@@ -213,6 +200,31 @@ const AddFood = () => {
               type="text"
               defaultValue={"+880"}
               name="phone"
+              className="input input-bordered w-full"
+              style={{ outline: "none" }}
+            />
+          </div>
+          <div className="form-control mx-3 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Expired Date</span>
+            </label>
+            <input
+              type="date"
+              required
+              min={todayDate}
+              onChange={handleDateChange}
+              className="input input-bordered w-full"
+              style={{ outline: "none" }}
+            />
+          </div>
+          <div className="form-control mx-3 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Expired Time</span>
+            </label>
+            <input
+              type="time"
+              required
+              onChange={handleTimeChange}
               className="input input-bordered w-full"
               style={{ outline: "none" }}
             />
@@ -225,20 +237,19 @@ const AddFood = () => {
           <textarea
             name="additional_notes"
             placeholder="Write something about your Food..."
-            cols="10"
             rows="5"
             className="border px-2 py-1 rounded-xl w-full"
             style={{ outline: "none" }}
           ></textarea>
         </div>
-        <div className="form-control mt-6">
+        <div className="form-control pt-3">
           <button
-            disabled={loading}
+            type="submit"
             className="btn bg-[#f01543] hover:bg-[#f01543] text-white"
           >
             {loading ? (
               <div className="flex justify-center">
-                <p>Submitting...</p>
+                <PiSpinnerGapLight className="animate-spin text-xl my-[2px]" />
               </div>
             ) : (
               "Add Food"
