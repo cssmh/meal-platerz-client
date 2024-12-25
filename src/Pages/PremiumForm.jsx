@@ -13,6 +13,7 @@ const PremiumForm = () => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
+  const [isCard, setIsCard] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
   const [error, setError] = useState("");
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -73,7 +74,11 @@ const PremiumForm = () => {
       toast.info("You are already a Premium member!");
       return;
     }
-
+    if (!isCard) {
+      toast.info("Please enter card details before proceeding.");
+      return;
+    }
+    
     if (!stripe || !elements) return;
 
     const card = elements.getElement(CardElement);
@@ -136,6 +141,7 @@ const PremiumForm = () => {
   };
 
   const handleCardChange = (event) => {
+    setIsCard(!event.empty);
     if (event.error) {
       setError(event.error.message);
     } else {
@@ -278,10 +284,10 @@ const PremiumForm = () => {
         </form>
         <p className="text-center text-sm text-gray-600">
           {!user
-            ? "Be our Premium member today!"
-            : isPremium
+            ? "Please log in to make a payment."
+            : isPremium || isPaid
             ? "Congratulations on joining our Premium membership!"
-            : "Be our Premium member today!"}
+            : "Upgrade to Premium membership now!"}
         </p>
       </div>
     </div>

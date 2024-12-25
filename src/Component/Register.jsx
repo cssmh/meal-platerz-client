@@ -27,6 +27,7 @@ const Register = () => {
     const photoFile = form.photo.files[0];
 
     try {
+      setIsRegistering(true);
       let photoURL = "";
 
       if (photoFile) {
@@ -44,7 +45,7 @@ const Register = () => {
 
         photoURL = imgRes.data.data.display_url;
       }
-      setIsRegistering(true);
+
       await createNewUser(email, password);
       await updateProfileInfo(name, photoURL);
       await emailVerification();
@@ -52,7 +53,7 @@ const Register = () => {
       const userData = {
         email: email.toLowerCase(),
         name: name || "anonymous",
-        photo: photoURL,
+        photo: photoURL || "",
       };
       await addUser(userData);
 
@@ -85,8 +86,7 @@ const Register = () => {
           throw new Error("Image upload failed. Please try again.");
         }
 
-        setSelectedImage(imgRes.data.data.display_url); // Update preview with uploaded image URL
-        setImageUploading(false); // Set uploading to false when done
+        setSelectedImage(imgRes.data.data.display_url);
       } catch (error) {
         console.log("Image upload error", error.message);
         toast.error("Image upload failed. Please try again.");
@@ -139,7 +139,7 @@ const Register = () => {
               name="photo"
               accept="image/*"
               className="absolute inset-0 opacity-0 cursor-pointer"
-              onChange={handleImageChange} // Trigger image upload on change
+              onChange={handleImageChange}
             />
             <div className="text-center">
               {imageUploading ? (
@@ -195,7 +195,7 @@ const Register = () => {
         <button
           type="submit"
           className="block w-full p-3 text-center text-gray-50 bg-[#f01543] rounded-xl"
-          disabled={isRegistering || isRegistering}
+          disabled={imageUploading || isRegistering}
         >
           {isRegistering ? (
             <div className="flex justify-center">

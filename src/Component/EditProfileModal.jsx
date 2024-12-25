@@ -42,10 +42,7 @@ const EditProfileModal = ({
                 </Dialog.Title>
                 <form onSubmit={handleUpdateProfile} className="space-y-5">
                   <div className="space-y-1 text-sm">
-                    <label
-                      htmlFor="Your Name"
-                      className="block dark:text-gray-600"
-                    >
+                    <label htmlFor="Your Name" className="block text-gray-600">
                       Your Name
                     </label>
                     <input
@@ -58,10 +55,7 @@ const EditProfileModal = ({
                     />
                   </div>
                   <div className="space-y-1 text-sm relative">
-                    <label
-                      htmlFor="Photo URL"
-                      className="block dark:text-gray-600"
-                    >
+                    <label htmlFor="Photo URL" className="block text-gray-600">
                       Photo URL
                     </label>
                     <input

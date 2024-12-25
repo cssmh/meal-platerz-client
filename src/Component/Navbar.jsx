@@ -233,7 +233,7 @@ const Navbar = () => {
                     user?.email && isPremium
                       ? "border-[3px] border-yellow-500"
                       : ""
-                  } w-9 rounded-full mr-2`}
+                  } w-9 h-9 rounded-full mr-2`}
                   alt="avatar"
                 />
               </label>

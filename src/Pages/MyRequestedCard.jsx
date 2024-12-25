@@ -27,6 +27,7 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
     delivered_date,
     free_delivery,
   } = getFoods;
+  console.log(free_delivery);
 
   const { isLoading: loading, food, refetch } = useFood(food_id);
   const [isOpen, setIsOpen] = useState(false);
@@ -132,12 +133,8 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
           </p>
         )}
         <p className="text-gray-700">Your Request: {reqDate}</p>
-        {free_delivery && isPremium ? (
+        {free_delivery && isPremium && (
           <p className="text-green-600 font-semibold">Free Delivery Included</p>
-        ) : (
-          <p className="text-red-600">
-            Membership expired! Upgrade to premium for free delivery.
-          </p>
         )}
         <div className="flex gap-2">
           {data === "available" ? (
