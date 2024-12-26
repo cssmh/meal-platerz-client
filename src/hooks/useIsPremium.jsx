@@ -1,4 +1,3 @@
-import moment from "moment";
 import { useState, useEffect } from "react";
 import useUser from "./useUser";
 
@@ -8,22 +7,19 @@ const useIsPremium = () => {
 
   useEffect(() => {
     let interval;
+
     const checkExpiration = () => {
-      if (!isLoading) {
-        if (userData?.premium_date) {
-          const premiumDate = moment(parseInt(userData.premium_date, 10));
-          const now = moment();
-          setIsPremium(premiumDate.isAfter(now, "second"));
-        } else {
-          setIsPremium(false);
-          refetch();
-        }
+      if (!isLoading && userData?.premium_date) {
+        const premiumDate = new Date(parseInt(userData.premium_date, 10));
+        const now = new Date();
+        setIsPremium(premiumDate > now);
       } else {
         setIsPremium(false);
+        refetch();
       }
     };
 
-    if (!isLoading) {
+    if (userData) {
       checkExpiration();
       interval = setInterval(checkExpiration, 1000);
     }

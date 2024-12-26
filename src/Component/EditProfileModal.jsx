@@ -10,7 +10,7 @@ const EditProfileModal = ({
 }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-50" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -62,7 +62,7 @@ const EditProfileModal = ({
                       type="text"
                       name="photo"
                       defaultValue={
-                        photo === "/assets/default-wCr_jk0I.jpg" ? "" : photo
+                        photo === "/src/assets/default.jpg" ? "" : photo
                       }
                       className="w-full px-3 py-3 rounded-xl border"
                       style={{ outline: "none" }}

@@ -36,13 +36,13 @@ const Footer = () => {
         <div className="space-y-3">
           <h2 className="text-lg font-semibold text-white">Contact Info</h2>
           <p>123 Food Street, Food City, FC 12345</p>
-          <p>Phone: +880176761606</p>
-          <p>Email: contact@ymealplaterz.com</p>
+          <p>Phone: +880176761606*</p>
+          <p>Email: contact@mealplaterz.com</p>
         </div>
         <div className="space-y-3">
           <h2 className="text-lg font-semibold text-white">Our Office</h2>
           <p>Kharabor House 23, Ghatail</p>
-          <p>Phone: +88015258543</p>
+          <p>Phone: +880151655257*</p>
         </div>
       </div>
       <div className="flex justify-center items-center">

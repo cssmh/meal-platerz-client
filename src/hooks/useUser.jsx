@@ -7,7 +7,7 @@ const useUser = () => {
   const {
     refetch,
     data: userData = {},
-    isLoading,
+    isLoading: load,
   } = useQuery({
     enabled: !loading && !!user?.email,
     queryKey: ["singleUser"],
@@ -18,7 +18,7 @@ const useUser = () => {
       return {};
     },
   });
-
+  const isLoading = loading || load;
   return { userData, refetch, isLoading };
 };
 

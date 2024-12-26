@@ -121,9 +121,9 @@ const AddFood = () => {
       <PlaterHelmet title={"Add Food"} />
       <form
         onSubmit={handleAddFood}
-        className="max-w-[950px] 2xl:max-w-[75%] mx-auto space-y-2"
+        className="max-w-[950px] 2xl:max-w-[75%] mx-auto space-y-1 md:space-y-2"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-3">
           <div className="form-control mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Food Name</span>
@@ -169,7 +169,7 @@ const AddFood = () => {
               <span className="label-text">Food Image</span>
             </label>
             <div
-              className="flex flex-col items-center p-4 border-2 border-dashed rounded-lg cursor-pointer"
+              className="flex flex-col items-center p-6 border-2 border-dashed rounded-lg cursor-pointer"
               onClick={() => document.getElementById("image-upload").click()}
             >
               {imagePreview ? (
@@ -191,7 +191,7 @@ const AddFood = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-3">
           <div className="form-control mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Phone Number</span>
@@ -238,11 +238,11 @@ const AddFood = () => {
             name="additional_notes"
             placeholder="Write something about your Food..."
             rows="5"
-            className="border px-2 py-1 rounded-xl w-full"
+            className="border px-3 py-2 rounded-lg w-full"
             style={{ outline: "none" }}
           ></textarea>
         </div>
-        <div className="form-control pt-3">
+        <div className="form-control pt-3 mx-3 md:mx-0">
           <button
             type="submit"
             className="btn bg-[#f01543] hover:bg-[#f01543] text-white"

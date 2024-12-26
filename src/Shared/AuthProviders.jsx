@@ -62,12 +62,17 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       const getEmail = currentUser?.email || user?.email;
       const emailToSend = { email: getEmail };
-      if (getEmail) {
-        await setToken(emailToSend);
-      } else {
-        await clearCookie(emailToSend);
+      try {
+        if (getEmail) {
+          await setToken(emailToSend);
+        } else {
+          await clearCookie(emailToSend);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
     return () => {
       unSubscribe();

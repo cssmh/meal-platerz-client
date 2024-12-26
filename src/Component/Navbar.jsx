@@ -21,10 +21,16 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const menuToggleRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        menuToggleRef.current &&
+        !menuToggleRef.current.contains(event.target)
+      ) {
         setMenuOpen(false);
       }
     };
@@ -79,7 +85,8 @@ const Navbar = () => {
         <div className="navbar min-h-[58px] md:px-10 py-0">
           <div className="navbar-start">
             <button
-              onClick={() => setMenuOpen(!isMenuOpen)}
+              ref={menuToggleRef}
+              onClick={() => setMenuOpen((prev) => !prev)}
               className="md:hidden p-2 focus:outline-none"
             >
               <svg
@@ -233,7 +240,7 @@ const Navbar = () => {
       </div>
       <div
         ref={menuRef}
-        className={`fixed top-0 z-50 right-0 h-full w-[48%] bg-white p-3 transition-transform transform ${
+        className={`fixed top-0 z-50 right-0 h-full w-[46%] bg-white p-3 transition-transform transform ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         } md:hidden`}
       >
@@ -245,14 +252,14 @@ const Navbar = () => {
         <ul>
           <Link
             to="/"
-            className={`block p-2 ${getLinkClasses("/")}`}
+            className={`block px-3 py-2 ${getLinkClasses("/")}`}
             onClick={() => setMenuOpen(false)}
           >
             Home
           </Link>
           <Link
             to="/available-foods"
-            className={`block p-2 ${getLinkClasses("/available-foods")}`}
+            className={`block px-3 py-2 ${getLinkClasses("/available-foods")}`}
             onClick={() => setMenuOpen(false)}
           >
             Available Foods
@@ -260,7 +267,7 @@ const Navbar = () => {
           {user && (
             <Link
               to="/add-food"
-              className={`block p-2 ${getLinkClasses("/add-food")}`}
+              className={`block px-3 py-2 ${getLinkClasses("/add-food")}`}
               onClick={() => setMenuOpen(false)}
             >
               Add Food
@@ -268,13 +275,13 @@ const Navbar = () => {
           )}
           <button
             onClick={() => handleProtectedRoute("/be-premium")}
-            className={`block p-2 ${getLinkClasses("/be-premium")}`}
+            className={`block px-3 py-2 ${getLinkClasses("/be-premium")}`}
           >
             Be Premium
           </button>
           <Link
             to="/all-reviews"
-            className={`block p-2 ${getLinkClasses("/all-reviews")}`}
+            className={`block px-3 py-2 ${getLinkClasses("/all-reviews")}`}
             onClick={() => setMenuOpen(false)}
           >
             All Reviews
@@ -283,14 +290,14 @@ const Navbar = () => {
             <>
               <Link
                 to="/manage-my-foods"
-                className={`block p-2 ${getLinkClasses("/manage-my-foods")}`}
+                className={`block px-3 py-2 ${getLinkClasses("/manage-my-foods")}`}
                 onClick={() => setMenuOpen(false)}
               >
                 My Foods
               </Link>
               <Link
                 to="/my-food-request"
-                className={`block p-2 ${getLinkClasses("/my-food-request")}`}
+                className={`block px-3 py-2 ${getLinkClasses("/my-food-request")}`}
                 onClick={() => setMenuOpen(false)}
               >
                 My Request

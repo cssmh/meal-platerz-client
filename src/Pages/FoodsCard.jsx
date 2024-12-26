@@ -20,6 +20,55 @@ const FoodsCard = ({ getFoods }) => {
   const isExpired = useIsExpire(expiration_date, expiration_time);
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
 
+  // Calculate remaining time
+  // const expirationDateTime = moment(
+  //   `${expiration_date} ${expiration_time}`,
+  //   "YYYY-MM-DD hh:mm A"
+  // );
+  // const now = moment();
+  // const timeLeft = expirationDateTime.diff(now);
+
+  // let remainingTime = "Expired";
+  // if (timeLeft > 0) {
+  //   const duration = moment.duration(timeLeft);
+  //   const totalDays = Math.floor(duration.asDays());
+  //   const hours = duration.hours();
+  //   const minutes = duration.minutes();
+
+  //   remainingTime = `${totalDays > 0 ? `${totalDays} day(s)` : ""} ${
+  //     hours > 0 ? `${hours} hour(s)` : ""
+  //   } ${minutes > 0 ? `${minutes} minute(s)` : ""}`.trim();
+  // }
+
+  // Calculate remaining time
+
+  const expirationDateTime = moment(
+    `${expiration_date} ${expiration_time}`,
+    "YYYY-MM-DD hh:mm A"
+  );
+  const now = moment();
+  const timeLeft = expirationDateTime.diff(now);
+
+  let remainingTime = "Expired";
+  if (timeLeft > 0) {
+    const duration = moment.duration(timeLeft);
+    const totalDays = Math.floor(duration.asDays());
+    const totalHours = Math.floor(duration.asHours());
+    const totalMinutes = duration.minutes();
+    const totalRemainingMinutes = duration.asMinutes();
+
+    if (totalDays > 1) {
+      remainingTime = `${totalDays} day(s)`;
+    } else if (totalDays === 1 || totalHours >= 1) {
+      const minutesAfterHours = Math.floor(totalRemainingMinutes % 60);
+      remainingTime = `${totalHours} hour(s) ${minutesAfterHours} min(s)`;
+    } else if (totalHours === 0 && totalMinutes > 0) {
+      remainingTime = `${totalMinutes} minute(s)`;
+    } else {
+      remainingTime = "Less than a minute";
+    }
+  }
+
   return (
     <div className="flex flex-col bg-white shadow-lg md:rounded-lg overflow-hidden">
       <div
@@ -69,6 +118,11 @@ const FoodsCard = ({ getFoods }) => {
               ? "This food item has been successfully delivered on time."
               : `Expires on: ${expireIn} at ${expiration_time}`}
           </p>
+          {!isExpired && food_status !== "Unavailable" && (
+            <p className="text-sm text-blue-600 mt-1">
+              Time Remaining: {remainingTime}
+            </p>
+          )}
         </div>
         <div className="flex items-center mt-4">
           <img
