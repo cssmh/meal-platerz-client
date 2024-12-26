@@ -13,22 +13,49 @@ const MyProfile = () => {
   const { user, updateProfileInfo } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(user?.displayName);
-  const [photo, setPhoto] = useState(user?.photoURL);
+  const [photo, setPhoto] = useState(user?.photoURL || defaultAvatar);
+  const apiKey = import.meta.env.VITE_imgBbKey;
   const isPremium = useIsPremium();
   const { myFoods } = useMyFoods();
 
   const closeModal = () => setIsOpen(false);
+
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photo = form.photo.value || defaultAvatar;
-    const updateMyAllFoodInfo = {
-      name,
-      photo,
-    };
+    const file = form.photo.files[0];
+
+    let uploadedPhoto = photo;
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const response = await fetch(
+          `https://api.imgbb.com/1/upload?key=${apiKey}`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        const data = await response.json();
+        if (data.success) {
+          uploadedPhoto = data.data.url;
+        } else {
+          throw new Error("Image upload failed");
+        }
+      } catch (error) {
+        toast.error("Failed to upload image. Please try again.");
+        return;
+      }
+    }
+
+    const updateMyAllFoodInfo = { name, photo: uploadedPhoto };
+
     try {
-      updateProfileInfo(name, photo);
+      updateProfileInfo(name, uploadedPhoto);
       setName(name);
       if (myFoods?.length > 0) {
         const res = await updateMyImgName(user?.email, updateMyAllFoodInfo);
@@ -36,8 +63,8 @@ const MyProfile = () => {
           toast.success("Food information updated");
         }
       }
-      toast.success("Updated Successfully");
-      setPhoto(photo);
+      toast.success("Profile updated successfully!");
+      setPhoto(uploadedPhoto);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -52,7 +79,7 @@ const MyProfile = () => {
         {/* Profile Image and Basic Info */}
         <div className="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
           <img
-            src={photo || defaultAvatar}
+            src={photo}
             alt="Profile"
             className={`${
               isPremium ? "border-yellow-300" : "border-gray-300"

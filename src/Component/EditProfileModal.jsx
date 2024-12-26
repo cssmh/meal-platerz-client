@@ -2,12 +2,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 const EditProfileModal = ({
-  handleUpdateProfile,
-  closeModal,
   isOpen,
+  closeModal,
+  handleUpdateProfile,
   name,
-  photo,
 }) => {
+  const apiKey = import.meta.env.VITE_imgBbKey;
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={closeModal}>
@@ -54,18 +54,19 @@ const EditProfileModal = ({
                       style={{ outline: "none" }}
                     />
                   </div>
-                  <div className="space-y-1 text-sm relative">
-                    <label htmlFor="Photo URL" className="block text-gray-600">
-                      Photo URL
+                  <div>
+                    <label
+                      htmlFor="photo"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Upload Photo
                     </label>
                     <input
-                      type="text"
+                      type="file"
+                      id="photo"
                       name="photo"
-                      defaultValue={
-                        photo === "/src/assets/default.jpg" ? "" : photo
-                      }
-                      className="w-full px-3 py-3 rounded-xl border"
-                      style={{ outline: "none" }}
+                      accept="image/*"
+                      className="mt-1 block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-indigo-50 file:text-green-700 hover:file:bg-indigo-100"
                     />
                   </div>
                   <div className="flex mt-2 justify-around">
