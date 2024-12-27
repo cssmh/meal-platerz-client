@@ -102,7 +102,7 @@ const Register = () => {
     <div className="my-5 space-y-3 rounded-xl lg:max-w-2xl mx-2 md:mx-auto">
       <PlaterHelmet title={"Register"} />
       <h1 className="text-2xl font-semibold text-center">Register Now</h1>
-      <form onSubmit={handleRegister} className="space-y-4">
+      <form onSubmit={handleRegister} className="space-y-4 mx-2 md:mx-0">
         <div className="space-y-1 text-sm">
           <label htmlFor="name" className="block text-gray-600">
             Name
@@ -206,7 +206,7 @@ const Register = () => {
           )}
         </button>
       </form>
-      <p className="text-sm text-center text-gray-600 pt-1">
+      <p className="text-sm text-center text-gray-600 pt-1 pb-2">
         Already have an account?{" "}
         <Link
           to={"/login"}

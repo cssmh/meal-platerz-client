@@ -9,7 +9,7 @@ const axiosSecure = axios.create({
 axiosSecure.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log("Error in the interceptor", error);
+    // console.log("Error in the interceptor", error);
     if (error.response.status === 401 || error.response.status === 403) {
       await clearCookie();
       toast.error(

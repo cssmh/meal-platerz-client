@@ -4,9 +4,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
-import {
-  IoIosCloseCircleOutline,
-} from "react-icons/io";
+import { MdFoodBank } from "react-icons/md";
+import { AiOutlineHome, AiOutlineLogout } from "react-icons/ai";
+import { RiFeedbackLine, RiAddBoxLine } from "react-icons/ri";
+import { FaRegStar, FaUtensils } from "react-icons/fa";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import useIsPremium from "../hooks/useIsPremium";
 
 const Navbar = () => {
@@ -44,7 +46,10 @@ const Navbar = () => {
     setShowProfileOptions((prev) => !prev);
   };
 
-  const handleLogOut = () => logOut().catch(() => {});
+  const handleLogOut = () => {
+    logOut().catch(() => {});
+    setMenuOpen(false);
+  };
 
   const getLinkClasses = (path) =>
     location.pathname === path ? "text-blue-500" : "hover:text-blue-500";
@@ -188,15 +193,33 @@ const Navbar = () => {
                 className="cursor-pointer"
                 onClick={handleProfileClick}
               >
-                <img
-                  src={user?.photoURL || defaultAvatar}
-                  className={`${
-                    user?.email && isPremium
-                      ? "border-[3px] border-yellow-500"
-                      : ""
-                  } w-9 h-9 rounded-full mr-2`}
-                  alt="avatar"
-                />
+                <div className="flex items-center gap-2">
+                  {user && (
+                    <h1 className="md:hidden bg-base-300 px-2 py-1 rounded">
+                      Hi,{" "}
+                      {(() => {
+                        if (!user?.displayName) return "";
+                        // Split the name into parts
+                        const nameParts = user.displayName.split(" ");
+                        // Remove "Md.", "Md", "Mohammad", or any similar prefix
+                        const filteredParts = nameParts.filter(
+                          (part) => !["Md", "Md.", "Mohammad"].includes(part)
+                        );
+                        // Display the shorter part (e.g., the first name or last part)
+                        return filteredParts[filteredParts.length - 1]; // Show the last name
+                      })()}
+                    </h1>
+                  )}
+                  <img
+                    src={user?.photoURL || defaultAvatar}
+                    className={`${
+                      user?.email && isPremium
+                        ? "border-[3px] border-yellow-500"
+                        : ""
+                    } w-10 lg:w-9 h-10 lg:h-9 rounded-full mr-2`}
+                    alt="avatar"
+                  />
+                </div>
               </label>
               {user?.email && showProfileOptions && (
                 <ul
@@ -222,7 +245,7 @@ const Navbar = () => {
             {user?.email ? (
               <button
                 onClick={handleLogOut}
-                className="bg-[#f01543] rounded-md text-white py-1 px-2"
+                className="hidden lg:block bg-[#f01543] rounded-md text-white py-1 px-2"
               >
                 Logout
               </button>
@@ -237,70 +260,99 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        ref={menuRef}
-        className={`fixed top-0 z-50 right-0 h-full w-[50%] bg-white p-3 transition-transform transform ${
+        className={`fixed top-0 z-50 right-0 h-full w-[55%] bg-white p-3 transition-transform transform ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         } md:hidden`}
       >
         <div className="flex justify-end">
           <button onClick={() => setMenuOpen(false)}>
-            <IoIosCloseCircleOutline className="h-7 w-7" />
+            <IoIosCloseCircleOutline className="h-7 w-7 text-gray-600" />
           </button>
         </div>
-        <ul>
+        <ul className="space-y-2">
           <Link
             to="/"
-            className={`block px-3 py-2 ${getLinkClasses("/")}`}
+            className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
+              "/"
+            )}`}
             onClick={() => setMenuOpen(false)}
           >
+            <AiOutlineHome className="text-xl text-red-500" />
             Home
           </Link>
           <Link
             to="/available-foods"
-            className={`block px-3 py-2 ${getLinkClasses("/available-foods")}`}
+            className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
+              "/available-foods"
+            )}`}
             onClick={() => setMenuOpen(false)}
           >
+            <MdFoodBank className="text-xl text-red-500" />
             Available Foods
           </Link>
           {user && (
             <Link
               to="/add-food"
-              className={`block px-3 py-2 ${getLinkClasses("/add-food")}`}
+              className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
+                "/add-food"
+              )}`}
               onClick={() => setMenuOpen(false)}
             >
+              <RiAddBoxLine className="text-xl text-red-500" />
               Add Food
             </Link>
           )}
           <button
             onClick={() => handleProtectedRoute("/be-premium")}
-            className={`block px-3 py-2 ${getLinkClasses("/be-premium")}`}
+            className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
+              "/be-premium"
+            )}`}
           >
+            <FaRegStar className="text-xl text-red-500" />
             Be Premium
           </button>
           <Link
             to="/all-reviews"
-            className={`block px-3 py-2 ${getLinkClasses("/all-reviews")}`}
+            className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
+              "/all-reviews"
+            )}`}
             onClick={() => setMenuOpen(false)}
           >
+            <RiFeedbackLine className="text-xl text-red-500" />
             All Reviews
           </Link>
           {user?.email && (
             <>
               <Link
                 to="/manage-my-foods"
-                className={`block px-3 py-2 ${getLinkClasses("/manage-my-foods")}`}
+                className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
+                  "/manage-my-foods"
+                )}`}
                 onClick={() => setMenuOpen(false)}
               >
+                <FaUtensils className="text-xl text-red-500" />
                 My Foods
               </Link>
               <Link
                 to="/my-food-request"
-                className={`block px-3 py-2 ${getLinkClasses("/my-food-request")}`}
+                className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
+                  "/my-food-request"
+                )}`}
                 onClick={() => setMenuOpen(false)}
               >
+                <FaUtensils className="text-xl text-red-500" />
                 My Request
               </Link>
             </>
+          )}
+          {user && (
+            <button
+              onClick={handleLogOut}
+              className="flex items-center gap-2 px-3 py-1 text-red-600"
+            >
+              <AiOutlineLogout className="text-xl text-red-500" />
+              Logout
+            </button>
           )}
         </ul>
       </div>

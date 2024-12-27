@@ -52,10 +52,10 @@ const Login = () => {
   };
 
   return (
-    <div className="my-8 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
+    <div className="my-5 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
       <PlaterHelmet title={"Login"} />
       <h1 className="text-2xl font-bold text-center">Login</h1>
-      <form onSubmit={handleLogin} className="space-y-5">
+      <form onSubmit={handleLogin} className="space-y-5 mx-2 md:mx-0">
         <div className="space-y-1 text-sm">
           <label htmlFor="email" className="block text-gray-600">
             Your Email
@@ -93,7 +93,7 @@ const Login = () => {
             </a>
           </div>
         </div>
-        <button className="block w-full p-3 text-center rounded-xl text-white bg-[#f01543]">
+        <button className="block w-full p-3 text-center rounded-lg text-white bg-[#f01543]">
           {loading ? (
             <div className="flex justify-center">
               <PiSpinnerGapLight className="animate-spin text-xl my-[2px]" />
@@ -114,7 +114,7 @@ const Login = () => {
         <button
           onClick={handleGoogleLogin}
           aria-label="Log in with Google"
-          className="flex items-center gap-2 px-6 py-2 rounded-xl bg-[#f01543] text-white"
+          className="flex items-center gap-2 px-6 py-2 rounded-lg bg-[#f01543] text-white"
         >
           <FaGoogle className="text-xl" /> <span>Google login</span>
         </button>

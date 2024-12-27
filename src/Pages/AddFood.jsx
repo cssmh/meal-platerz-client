@@ -124,7 +124,7 @@ const AddFood = () => {
         className="max-w-[950px] 2xl:max-w-[75%] mx-auto space-y-1 md:space-y-2"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-3">
-          <div className="form-control mx-3 lg:mx-0">
+          <div className="form-control mx-4 lg:mx-0">
             <label className="label">
               <span className="label-text">Food Name</span>
             </label>
@@ -132,11 +132,11 @@ const AddFood = () => {
               type="text"
               name="food_name"
               required
-              className="input input-bordered"
+              className="h-[42px] input input-bordered"
               style={{ outline: "none" }}
             />
           </div>{" "}
-          <div className="form-control mx-3 lg:mx-0">
+          <div className="form-control mx-4 lg:mx-0">
             <label className="label">
               <span className="label-text">
                 Food Quantity (Person to be served)
@@ -146,11 +146,11 @@ const AddFood = () => {
               type="number"
               name="food_quantity"
               required
-              className="input input-bordered"
+              className="h-[42px] input input-bordered"
               style={{ outline: "none" }}
             />
           </div>
-          <div className="form-control mx-3 lg:mx-0">
+          <div className="form-control mx-4 lg:mx-0">
             <label className="label">
               <span className="label-text">Pickup Location</span>
             </label>
@@ -158,13 +158,13 @@ const AddFood = () => {
               type="text"
               required
               name="pickup_location"
-              className="input input-bordered"
+              className="h-[42px] input input-bordered"
               style={{ outline: "none" }}
             />
           </div>
         </div>
         <div>
-          <div className="form-control mx-3 lg:mx-0">
+          <div className="form-control mx-4 lg:mx-0">
             <label className="label">
               <span className="label-text">Food Image</span>
             </label>
@@ -192,7 +192,7 @@ const AddFood = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-3">
-          <div className="form-control mx-3 lg:mx-0">
+          <div className="form-control mx-4 lg:mx-0">
             <label className="label">
               <span className="label-text">Phone Number</span>
             </label>
@@ -200,11 +200,11 @@ const AddFood = () => {
               type="text"
               defaultValue={"+880"}
               name="phone"
-              className="input input-bordered w-full"
+              className="h-[42px] input input-bordered w-full"
               style={{ outline: "none" }}
             />
           </div>
-          <div className="form-control mx-3 lg:mx-0">
+          <div className="form-control mx-4 lg:mx-0">
             <label className="label">
               <span className="label-text">Expired Date</span>
             </label>
@@ -213,11 +213,11 @@ const AddFood = () => {
               required
               min={todayDate}
               onChange={handleDateChange}
-              className="input input-bordered w-full"
+              className="h-[42px] input input-bordered w-full"
               style={{ outline: "none" }}
             />
           </div>
-          <div className="form-control mx-3 lg:mx-0">
+          <div className="form-control mx-4 lg:mx-0">
             <label className="label">
               <span className="label-text">Expired Time</span>
             </label>
@@ -225,19 +225,19 @@ const AddFood = () => {
               type="time"
               required
               onChange={handleTimeChange}
-              className="input input-bordered w-full"
+              className="h-[42px] input input-bordered w-full"
               style={{ outline: "none" }}
             />
           </div>
         </div>
-        <div className="form-control mx-3 lg:mx-0">
+        <div className="form-control mx-4 lg:mx-0">
           <label className="label">
             <span className="label-text">Additional Notes</span>
           </label>
           <textarea
             name="additional_notes"
             placeholder="Write something about your Food..."
-            rows="5"
+            rows="4"
             className="border px-3 py-2 rounded-lg w-full"
             style={{ outline: "none" }}
           ></textarea>
