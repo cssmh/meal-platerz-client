@@ -6,8 +6,6 @@ import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
 import {
   IoIosCloseCircleOutline,
-  IoMdCloseCircle,
-  IoMdCloseCircleOutline,
 } from "react-icons/io";
 import useIsPremium from "../hooks/useIsPremium";
 
@@ -240,7 +238,7 @@ const Navbar = () => {
       </div>
       <div
         ref={menuRef}
-        className={`fixed top-0 z-50 right-0 h-full w-[46%] bg-white p-3 transition-transform transform ${
+        className={`fixed top-0 z-50 right-0 h-full w-[50%] bg-white p-3 transition-transform transform ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         } md:hidden`}
       >

@@ -10,11 +10,10 @@ const useMyFoods = () => {
     refetch,
   } = useQuery({
     queryKey: ["myFoods", user?.email],
-    queryFn: async () => {
-      return await getMyFoods(user?.email);
-    },
+    queryFn: async () => await getMyFoods(user?.email),
     enabled: !loading && !!user?.email,
   });
+  
   return { isLoading, myFoods, refetch, user };
 };
 

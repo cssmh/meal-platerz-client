@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// Countdown Hook
 const useCountDown = (expiryDate) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -30,7 +29,7 @@ const useCountDown = (expiryDate) => {
       setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    calculateTimeLeft(); // Initial call
+    calculateTimeLeft();
     const intervalId = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(intervalId);

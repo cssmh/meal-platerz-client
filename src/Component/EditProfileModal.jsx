@@ -1,13 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const EditProfileModal = ({
   isOpen,
   closeModal,
   handleUpdateProfile,
   name,
+  isUploading,
 }) => {
-  const apiKey = import.meta.env.VITE_imgBbKey;
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={closeModal}>
@@ -68,9 +69,20 @@ const EditProfileModal = ({
                       accept="image/*"
                       className="mt-1 block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-indigo-50 file:text-green-700 hover:file:bg-indigo-100"
                     />
+                    {isUploading && (
+                      <div className="mt-2 flex items-center justify-center">
+                        <AiOutlineLoading3Quarters className="animate-spin text-green-500 text-2xl" />
+                        <span className="ml-2 text-sm text-gray-600">
+                          Uploading...
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="flex mt-2 justify-around">
-                    <button className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2">
+                    <button
+                      disabled={isUploading}
+                      className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                    >
                       Update
                     </button>
                     <button

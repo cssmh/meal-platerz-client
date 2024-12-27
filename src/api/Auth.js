@@ -14,7 +14,7 @@ export const clearCookie = async () => {
 };
 
 export const setToken = async (email) => {
-  const { data } = await axiosSecure.post("/jwt", email);
+  const { data } = await axiosSecure.post("/jwt", { email });
   // console.log("login user", data);
   return data;
 };

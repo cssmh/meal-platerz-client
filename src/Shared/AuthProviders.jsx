@@ -60,16 +60,15 @@ const AuthProviders = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      const getEmail = currentUser?.email || user?.email;
-      const emailToSend = { email: getEmail };
+      const userEmail = currentUser?.email || user?.email;
       try {
-        if (getEmail) {
-          await setToken(emailToSend);
+        if (userEmail) {
+          await setToken(userEmail);
         } else {
-          await clearCookie(emailToSend);
+          await clearCookie();
         }
       } catch (error) {
-        console.log(error);
+        console.log("Error during on auth token", error);
       } finally {
         setLoading(false);
       }

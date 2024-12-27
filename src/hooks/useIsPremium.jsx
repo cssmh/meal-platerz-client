@@ -2,34 +2,25 @@ import { useState, useEffect } from "react";
 import useUser from "./useUser";
 
 const useIsPremium = () => {
-  const { userData, isLoading, refetch } = useUser();
+  const { userData, isLoading } = useUser();
   const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
-    let interval;
+    if (isLoading || !userData) return; // Wait until user data is available
 
+    // Check if the premium date is valid and not expired
     const checkExpiration = () => {
-      if (!isLoading && userData?.premium_date) {
-        const premiumDate = new Date(parseInt(userData.premium_date, 10));
-        const now = new Date();
-        setIsPremium(premiumDate > now);
+      if (userData?.premium_date) {
+        const premiumDate = new Date(parseInt(userData.premium_date, 10)); // Convert premium_date to Date
+        const now = new Date(); // Current date
+        setIsPremium(premiumDate > now); // true if premiumDate is in the future
       } else {
-        setIsPremium(false);
-        refetch();
+        setIsPremium(false); // Default to false if no premium_date is provided
       }
     };
 
-    if (userData) {
-      checkExpiration();
-      interval = setInterval(checkExpiration, 1000);
-    }
-
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  }, [userData, isLoading, refetch]);
+    checkExpiration(); // Run the expiration check on load
+  }, [userData, isLoading]);
 
   return isPremium;
 };

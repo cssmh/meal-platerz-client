@@ -11,6 +11,7 @@ import PlaterHelmet from "./PlaterHelmet";
 
 const MyProfile = () => {
   const { user, updateProfileInfo } = useAuth();
+  const [isUploading, setIsUploading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(user?.displayName);
   const [photo, setPhoto] = useState(user?.photoURL || defaultAvatar);
@@ -29,6 +30,7 @@ const MyProfile = () => {
     let uploadedPhoto = photo;
 
     if (file) {
+      setIsUploading(true);
       const formData = new FormData();
       formData.append("image", file);
 
@@ -49,6 +51,8 @@ const MyProfile = () => {
       } catch (error) {
         toast.error("Failed to upload image. Please try again.");
         return;
+      } finally {
+        setIsUploading(false);
       }
     }
 
@@ -73,10 +77,9 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 md:p-12">
+    <div className="md:min-h-screen bg-gray-100 p-4 md:p-12">
       <PlaterHelmet title={"My Profile"} />
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 md:flex md:items-start">
-        {/* Profile Image and Basic Info */}
         <div className="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
           <img
             src={photo}
@@ -97,19 +100,32 @@ const MyProfile = () => {
         <div className="w-full md:w-2/3 mt-6 md:mt-0 md:pl-8 space-y-6">
           <div className="text-gray-600">
             <p className="text-lg font-semibold">Account Details</p>
-            <p className="text-sm">
-              <span className="font-semibold">Account Created:</span>{" "}
-              {new Date(
-                parseInt(user?.metadata?.createdAt, 10)
-              ).toLocaleDateString()}{" "}
-              at{" "}
-              {new Date(
-                parseInt(user?.metadata?.createdAt, 10)
-              ).toLocaleTimeString()}
+            <p className="text-sm mb-2">
+              <p className="font-semibold">Account Created:</p>{" "}
+              <p className="text-sm">
+                <span className="font-semibold">Last Sign-In:</span>{" "}
+                {user?.metadata?.lastSignInTime
+                  ? `${new Date(
+                      user.metadata.lastSignInTime
+                    ).toLocaleDateString("en-BD")} at ${new Date(
+                      user.metadata.lastSignInTime
+                    ).toLocaleTimeString("en-BD", {
+                      timeZone: "Asia/Dhaka",
+                      hour12: true,
+                    })}`
+                  : "N/A"}
+              </p>
             </p>
             <p className="text-sm">
-              <span className="font-semibold">Last Sign-In:</span>{" "}
-              {user?.metadata?.lastSignInTime}
+              <p className="font-semibold">Last Sign-In:</p>{" "}
+              {user?.metadata?.lastSignInTime
+                ? new Intl.DateTimeFormat("en-BD", {
+                    dateStyle: "long",
+                    timeStyle: "short",
+                    hour12: true,
+                    timeZone: "Asia/Dhaka",
+                  }).format(new Date(user.metadata.lastSignInTime))
+                : "N/A"}
             </p>
           </div>
           {isPremium && (
@@ -130,7 +146,7 @@ const MyProfile = () => {
         closeModal={closeModal}
         handleUpdateProfile={handleUpdateProfile}
         name={name}
-        photo={photo}
+        isUploading={isUploading}
       />
     </div>
   );

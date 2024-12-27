@@ -5,20 +5,17 @@ import { getSingleUser } from "../api/users";
 const useUser = () => {
   const { user, loading } = useAuth();
   const {
-    refetch,
     data: userData = {},
     isLoading: load,
+    refetch,
   } = useQuery({
     enabled: !loading && !!user?.email,
-    queryKey: ["singleUser"],
-    queryFn: async () => {
-      if (user?.email) {
-        return await getSingleUser(user?.email);
-      }
-      return {};
-    },
+    queryKey: ["singleUser", user?.email],
+    queryFn: async () => await getSingleUser(user?.email),
   });
+
   const isLoading = loading || load;
+
   return { userData, refetch, isLoading };
 };
 
