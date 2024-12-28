@@ -92,9 +92,9 @@ const UserAnalytics = () => {
     .join("  ");
 
   return (
-    <div className="p-3 md:p-7 bg-gray-100 min-h-screen">
-      <div className="text-center mb-5 md:mb-8">
-        <h2 className="text-2xl font-semibold text-gray-800">
+    <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+      <div className="text-center mb-5">
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
           Welcome, {userData?.name}
         </h2>
       </div>

@@ -4,10 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
-import { MdFoodBank } from "react-icons/md";
-import { AiOutlineHome, AiOutlineLogout } from "react-icons/ai";
+import { PiBowlFoodDuotone } from "react-icons/pi";
+import { IoFastFood } from "react-icons/io5";
+import { TbPremiumRights } from "react-icons/tb";
+import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
 import { RiFeedbackLine, RiAddBoxLine } from "react-icons/ri";
-import { FaRegStar, FaUtensils } from "react-icons/fa";
+import { FaUtensils } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import useIsPremium from "../hooks/useIsPremium";
 
@@ -55,6 +58,7 @@ const Navbar = () => {
     location.pathname === path ? "text-blue-500" : "hover:text-blue-500";
 
   const handleProtectedRoute = (path) => {
+    setMenuOpen(false);
     if (!user?.email) {
       toast.info("Please log in to purchase Premium membership.");
     }
@@ -80,17 +84,17 @@ const Navbar = () => {
       }`}
     >
       {/* <div className="bg-primary/40 py-[1px]">
-        <p className="text-[13px] text-white px-3 md:px-12">
+        <p className="text-[13px] text-white px-3 lg:px-12">
           Contact: +880176761606* Offer!! Be our premium member!!
         </p>
       </div> */}
       <div className="border-b border-base-300">
-        <div className="navbar min-h-[58px] md:px-10 py-0">
+        <div className="navbar min-h-[58px] lg:px-10 py-0">
           <div className="navbar-start">
             <button
               ref={menuToggleRef}
               onClick={() => setMenuOpen((prev) => !prev)}
-              className="md:hidden p-2 focus:outline-none"
+              className="lg:hidden p-2 focus:outline-none"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +112,7 @@ const Navbar = () => {
               </svg>
             </button>
             <Link to="/" className="flex items-center gap-1">
-              <img src={logo} className="w-0 md:w-10 md:mr-1" alt="Logo" />
+              <img src={logo} className="w-0 lg:w-10 lg:mr-1" alt="Logo" />
               <h1 className="font-semibold lg:text-[21px] px-0">MealPlaterz</h1>
             </Link>
           </div>
@@ -183,7 +187,7 @@ const Navbar = () => {
           </div>
           <div className="navbar-end">
             {user?.email && (
-              <p className="hidden md:block text-sm bg-base-300 px-2 py-1 rounded mr-2">
+              <p className="hidden lg:block text-sm bg-base-300 px-2 py-1 rounded mr-2">
                 {user?.displayName}
               </p>
             )}
@@ -195,18 +199,25 @@ const Navbar = () => {
               >
                 <div className="flex items-center gap-2">
                   {user && (
-                    <h1 className="md:hidden bg-base-300 px-2 py-1 rounded">
+                    <h1 className="lg:hidden bg-base-300 px-2 py-1 rounded">
                       Hi,{" "}
                       {(() => {
                         if (!user?.displayName) return "";
                         // Split the name into parts
                         const nameParts = user.displayName.split(" ");
-                        // Remove "Md.", "Md", "Mohammad", or any similar prefix
+                        // Remove prefixes like "Md", "Md.", "Mohammad", etc.
                         const filteredParts = nameParts.filter(
-                          (part) => !["Md", "Md.", "Mohammad"].includes(part)
+                          (part) =>
+                            !["Md", "Md.", "MD", "MD.", "Mohammad"].includes(
+                              part
+                            )
                         );
-                        // Display the shorter part (e.g., the first name or last part)
-                        return filteredParts[filteredParts.length - 1]; // Show the last name
+                        // Select the shorter meaningful part of the name
+                        const sortedParts = filteredParts.sort(
+                          (a, b) => a.length - b.length
+                        );
+                        // Return the shortest part
+                        return sortedParts[0] || "";
                       })()}
                     </h1>
                   )}
@@ -260,9 +271,10 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`fixed top-0 z-50 right-0 h-full w-[55%] bg-white p-3 transition-transform transform ${
+        ref={menuRef}
+        className={`fixed top-0 right-0 z-50 h-full md:w-[25%] lg:w-[55%] bg-white p-3 transition-transform transform ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
-        } md:hidden`}
+        } lg:hidden`}
       >
         <div className="flex justify-end">
           <button onClick={() => setMenuOpen(false)}>
@@ -287,7 +299,7 @@ const Navbar = () => {
             )}`}
             onClick={() => setMenuOpen(false)}
           >
-            <MdFoodBank className="text-xl text-red-500" />
+            <IoFastFood className="text-xl text-red-500" />
             Available Foods
           </Link>
           {user && (
@@ -308,7 +320,7 @@ const Navbar = () => {
               "/be-premium"
             )}`}
           >
-            <FaRegStar className="text-xl text-red-500" />
+            <TbPremiumRights className="text-xl text-red-500" />
             Be Premium
           </button>
           <Link
@@ -340,7 +352,7 @@ const Navbar = () => {
                 )}`}
                 onClick={() => setMenuOpen(false)}
               >
-                <FaUtensils className="text-xl text-red-500" />
+                <PiBowlFoodDuotone className="text-xl text-red-500" />
                 My Request
               </Link>
             </>
