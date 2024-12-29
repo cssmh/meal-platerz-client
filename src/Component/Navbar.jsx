@@ -91,26 +91,104 @@ const Navbar = () => {
       <div className="border-b border-base-300">
         <div className="navbar min-h-[58px] lg:px-10 py-0">
           <div className="navbar-start">
-            <button
-              ref={menuToggleRef}
-              onClick={() => setMenuOpen((prev) => !prev)}
-              className="lg:hidden p-2 focus:outline-none"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <div className="dropdown lg:hidden">
+              <label
+                ref={menuToggleRef}
+                tabIndex={0}
+                className="btn btn-sm btn-ghost"
+                onClick={() => setMenuOpen((prev) => !prev)}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </label>
+              {isMenuOpen && (
+                <ul
+                  ref={menuRef}
+                  className="menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-base-100 rounded-lg max-h-[70vh] overflow-y-auto w-44"
+                >
+                  <Link
+                    to="/"
+                    className={`flex items-center p-[2px] ${getLinkClasses(
+                      "/"
+                    )}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    to="/available-foods"
+                    className={`flex items-center p-[2px] ${getLinkClasses(
+                      "/available-foods"
+                    )}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Available Foods
+                  </Link>
+                  {user && (
+                    <Link
+                      to="/add-food"
+                      className={`flex items-center p-[2px] ${getLinkClasses(
+                        "/add-food"
+                      )}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Add Food
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => handleProtectedRoute("/be-premium")}
+                    className={`flex items-center p-[2px] ${getLinkClasses(
+                      "/be-premium"
+                    )}`}
+                  >
+                    Be Premium
+                  </button>
+                  <Link
+                    to="/all-reviews"
+                    className={`flex items-center p-[2px] ${getLinkClasses(
+                      "/all-reviews"
+                    )}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    All Reviews
+                  </Link>
+                  {user?.email && (
+                    <>
+                      <Link
+                        to="/manage-my-foods"
+                        className={`flex items-center p-[2px] ${getLinkClasses(
+                          "/manage-my-foods"
+                        )}`}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        My Foods
+                      </Link>
+                      <Link
+                        to="/my-food-request"
+                        className={`flex items-center p-[2px] ${getLinkClasses(
+                          "/my-food-request"
+                        )}`}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        My Request
+                      </Link>
+                    </>
+                  )}
+                </ul>
+              )}
+            </div>
             <Link to="/" className="flex items-center gap-1">
               <img src={logo} className="w-0 lg:w-10 lg:mr-1" alt="Logo" />
               <h1 className="font-semibold lg:text-[21px] px-0">MealPlaterz</h1>
@@ -203,20 +281,16 @@ const Navbar = () => {
                       Hi,{" "}
                       {(() => {
                         if (!user?.displayName) return "";
-                        // Split the name into parts
                         const nameParts = user.displayName.split(" ");
-                        // Remove prefixes like "Md", "Md.", "Mohammad", etc.
                         const filteredParts = nameParts.filter(
                           (part) =>
                             !["Md", "Md.", "MD", "MD.", "Mohammad"].includes(
                               part
                             )
                         );
-                        // Select the shorter meaningful part of the name
                         const sortedParts = filteredParts.sort(
                           (a, b) => a.length - b.length
                         );
-                        // Return the shortest part
                         return sortedParts[0] || "";
                       })()}
                     </h1>
@@ -269,104 +343,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-      </div>
-      <div
-        ref={menuRef}
-        className={`fixed top-0 right-0 z-50 h-full md:w-[25%] lg:w-[55%] bg-white p-3 transition-transform transform ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        } lg:hidden`}
-      >
-        <div className="flex justify-end">
-          <button onClick={() => setMenuOpen(false)}>
-            <IoIosCloseCircleOutline className="h-7 w-7 text-gray-600" />
-          </button>
-        </div>
-        <ul className="space-y-2">
-          <Link
-            to="/"
-            className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
-              "/"
-            )}`}
-            onClick={() => setMenuOpen(false)}
-          >
-            <AiOutlineHome className="text-xl text-red-500" />
-            Home
-          </Link>
-          <Link
-            to="/available-foods"
-            className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
-              "/available-foods"
-            )}`}
-            onClick={() => setMenuOpen(false)}
-          >
-            <IoFastFood className="text-xl text-red-500" />
-            Available Foods
-          </Link>
-          {user && (
-            <Link
-              to="/add-food"
-              className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
-                "/add-food"
-              )}`}
-              onClick={() => setMenuOpen(false)}
-            >
-              <RiAddBoxLine className="text-xl text-red-500" />
-              Add Food
-            </Link>
-          )}
-          <button
-            onClick={() => handleProtectedRoute("/be-premium")}
-            className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
-              "/be-premium"
-            )}`}
-          >
-            <TbPremiumRights className="text-xl text-red-500" />
-            Be Premium
-          </button>
-          <Link
-            to="/all-reviews"
-            className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
-              "/all-reviews"
-            )}`}
-            onClick={() => setMenuOpen(false)}
-          >
-            <RiFeedbackLine className="text-xl text-red-500" />
-            All Reviews
-          </Link>
-          {user?.email && (
-            <>
-              <Link
-                to="/manage-my-foods"
-                className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
-                  "/manage-my-foods"
-                )}`}
-                onClick={() => setMenuOpen(false)}
-              >
-                <FaUtensils className="text-xl text-red-500" />
-                My Foods
-              </Link>
-              <Link
-                to="/my-food-request"
-                className={`flex items-center gap-2 px-3 py-2 ${getLinkClasses(
-                  "/my-food-request"
-                )}`}
-                onClick={() => setMenuOpen(false)}
-              >
-                <PiBowlFoodDuotone className="text-xl text-red-500" />
-                My Request
-              </Link>
-            </>
-          )}
-          {user && (
-            <button
-              onClick={handleLogOut}
-              className="flex items-center gap-2 px-3 py-1 text-red-600"
-            >
-              <AiOutlineLogout className="text-xl text-red-500" />
-              Logout
-            </button>
-          )}
-        </ul>
       </div>
     </header>
   );
