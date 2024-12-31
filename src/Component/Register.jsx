@@ -54,7 +54,6 @@ const Register = () => {
         email: email.toLowerCase(),
         name: name || "anonymous",
         photo: photoURL || "",
-        role: "user",
       };
       await addUser(userData);
 

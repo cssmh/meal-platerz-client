@@ -28,7 +28,6 @@ const Login = () => {
         email: res.user?.email.toLowerCase(),
         name: res.user?.displayName || "anonymous",
         photo: res.user?.photoURL || "",
-        role: "user",
       };
       await addUser(userData);
     } catch (err) {
@@ -47,7 +46,6 @@ const Login = () => {
         email: res.user?.email.toLowerCase(),
         name: res.user?.displayName || "anonymous",
         photo: res.user?.photoURL || "",
-        role: "user",
       };
       await addUser(userData);
     } catch (err) {

@@ -60,7 +60,7 @@ const AdminSetTimer = () => {
             type="number"
             value={timeValue}
             onChange={(e) => setTimeValue(e.target.value)}
-            className="mt-2 p-2 border rounded-md w-28"
+            className="mt-2 p-2 border rounded-md w-36"
             min="0"
             placeholder={`Enter ${timeUnit}`}
           />
@@ -68,10 +68,11 @@ const AdminSetTimer = () => {
             value={timeUnit}
             onChange={(e) => setTimeUnit(e.target.value)}
             className="mt-2 p-2 border rounded-md"
+            style={{ outline: "none" }}
           >
             <option value="days">Days</option>
             <option value="hours">Hours</option>
-            <option value="minutes">Minutes</option>
+            <option value="minutes">Min</option>
           </select>
         </div>
         <button
