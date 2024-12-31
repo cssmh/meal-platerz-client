@@ -2,19 +2,29 @@ import { useState } from "react";
 import { updatePremiumTime } from "../api/users";
 
 const AdminSetTimer = () => {
-  const [days, setDays] = useState("");
+  const [timeValue, setTimeValue] = useState("");
+  const [timeUnit, setTimeUnit] = useState("days");
   const [message, setMessage] = useState("");
 
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    if (!days || isNaN(days) || days < 0) {
-      setMessage("Please enter a valid number of days (or 0 to stop).");
+    if (!timeValue || isNaN(timeValue) || timeValue < 0) {
+      setMessage("Please enter a valid number for the selected time unit.");
       return;
     }
 
+    let totalSeconds = 0;
+    if (timeUnit === "days") {
+      totalSeconds = parseInt(timeValue, 10) * 24 * 3600;
+    } else if (timeUnit === "hours") {
+      totalSeconds = parseInt(timeValue, 10) * 3600;
+    } else if (timeUnit === "minutes") {
+      totalSeconds = parseInt(timeValue, 10) * 60;
+    }
+
     try {
-      const res = await updatePremiumTime(parseInt(days, 10));
+      const res = await updatePremiumTime(totalSeconds / (24 * 3600));
       if (res.endTime === 0) {
         setMessage("Premium timer stopped successfully.");
       } else {
@@ -31,7 +41,7 @@ const AdminSetTimer = () => {
 
   const handleStopTimer = async () => {
     try {
-      const res = await updatePremiumTime(0); // Send 0 days to stop the timer
+      const res = await updatePremiumTime(0);
       if (res.endTime === 0) {
         setMessage("Premium timer stopped successfully.");
       }
@@ -44,16 +54,25 @@ const AdminSetTimer = () => {
     <div className="text-center mt-6">
       <h2 className="text-2xl font-semibold">Set Premium Time</h2>
       <form onSubmit={handleUpdate} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium">Number of Days:</label>
+        <div className="flex items-center justify-center space-x-2">
+          <label className="block text-sm font-medium">Set Time:</label>
           <input
             type="number"
-            value={days}
-            onChange={(e) => setDays(e.target.value)}
-            className="mt-2 p-2 border focus:border-none rounded-md"
+            value={timeValue}
+            onChange={(e) => setTimeValue(e.target.value)}
+            className="mt-2 p-2 border rounded-md w-28"
             min="0"
-            placeholder="Enter number of days"
+            placeholder={`Enter ${timeUnit}`}
           />
+          <select
+            value={timeUnit}
+            onChange={(e) => setTimeUnit(e.target.value)}
+            className="mt-2 p-2 border rounded-md"
+          >
+            <option value="days">Days</option>
+            <option value="hours">Hours</option>
+            <option value="minutes">Minutes</option>
+          </select>
         </div>
         <button
           type="submit"
