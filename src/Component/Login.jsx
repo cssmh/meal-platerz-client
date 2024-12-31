@@ -27,6 +27,8 @@ const Login = () => {
       const userData = {
         email: res.user?.email.toLowerCase(),
         name: res.user?.displayName || "anonymous",
+        photo: res.user?.photoURL || "",
+        role: "user",
       };
       await addUser(userData);
     } catch (err) {
@@ -44,6 +46,8 @@ const Login = () => {
       const userData = {
         email: res.user?.email.toLowerCase(),
         name: res.user?.displayName || "anonymous",
+        photo: res.user?.photoURL || "",
+        role: "user",
       };
       await addUser(userData);
     } catch (err) {
@@ -105,9 +109,7 @@ const Login = () => {
       </form>
       <div className="flex items-center py-2 space-x-1">
         <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
-        <p className="px-3 text-sm text-gray-600">
-          Login with social accounts
-        </p>
+        <p className="px-3 text-sm text-gray-600">Login with social accounts</p>
         <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
       </div>
       <div className="flex justify-center space-x-4">

@@ -61,12 +61,12 @@ const OurClient = () => {
         ) : (
           data?.map((client) => (
             <SwiperSlide key={client?._id}>
-              <div className="overflow-hidden w-full m-4 flex justify-center rounded-lg">
+              <div className="overflow-hidden w-full p-3 md:p-4 flex justify-center rounded-lg">
                 <div className="flex flex-col items-center justify-center text-center">
                   <img
                     src={client?.image}
                     alt="no photo"
-                    className="w-20 rounded-full"
+                    className="w-20 h-20 object-cover mx-auto rounded-full"
                   />
                   <div className="text-stone-500 m-2">{client?.quote}</div>
                   <div className="font-bold text-[#f01543]">{client?.name}</div>

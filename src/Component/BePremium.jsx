@@ -1,26 +1,41 @@
 import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getPremiumTimer } from "../api/users";
 
 const BePremium = () => {
-  const initialTime = 15 * 24 * 3600; // 15 days in seconds
-  const [timeLeft, setTimeLeft] = useState(initialTime);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const { data = {} } = useQuery({
+    queryKey: ["timers"],
+    queryFn: async () => await getPremiumTimer(),
+  });
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prevTime) => {
-        if (prevTime > 0) {
-          return prevTime - 1;
+    if (data?.endTime) {
+      const serverEndTime = parseInt(data.endTime, 10);
+      const currentTime = Math.floor(Date.now() / 1000);
+
+      if (currentTime < serverEndTime) {
+        setTimeLeft(serverEndTime - currentTime);
+      } else {
+        setTimeLeft(0);
+      }
+
+      const timer = setInterval(() => {
+        const updatedTimeLeft = serverEndTime - Math.floor(Date.now() / 1000);
+        if (updatedTimeLeft > 0) {
+          setTimeLeft(updatedTimeLeft);
         } else {
-          return initialTime; // Reset to 15 days when the countdown ends
+          clearInterval(timer);
+          setTimeLeft(0);
         }
-      });
-    }, 1000);
+      }, 1000);
 
-    return () => clearInterval(timer); // Cleanup on unmount
-  }, [initialTime]);
+      return () => clearInterval(timer);
+    }
+  }, [data?.endTime]);
 
-  // Calculate days, hours, minutes, seconds
   const days = Math.floor(timeLeft / (24 * 3600));
   const hours = Math.floor((timeLeft % (24 * 3600)) / 3600);
   const minutes = Math.floor((timeLeft % 3600) / 60);
@@ -31,7 +46,7 @@ const BePremium = () => {
       <div className="flex items-center space-x-4 mb-4 md:mb-0">
         <FaStar className="text-yellow-400 text-4xl" />
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold">Go Premium!</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold">Go Premium!</h2>
           <p className="text-sm md:text-lg">
             Unlock exclusive features and content.
           </p>
@@ -39,29 +54,21 @@ const BePremium = () => {
       </div>
       <div className="flex flex-col items-center md:flex-row md:items-center gap-6">
         <div className="flex flex-col items-center gap-2">
-          <div className="flex items-center gap-5 text-center">
-            <div className="flex flex-col">
-              <span className="countdown font-mono text-3xl">
-                <span style={{ "--value": days }}></span>
-              </span>
-              days
+          <div className="flex items-center gap-6 text-center">
+            <div className="flex flex-col items-center">
+              <span className="countdown font-mono text-3xl">{days}</span>
+              days 
             </div>
-            <div className="flex flex-col">
-              <span className="countdown font-mono text-3xl">
-                <span style={{ "--value": hours }}></span>
-              </span>
+            <div className="flex flex-col items-center">
+              <span className="countdown font-mono text-3xl">{hours}</span>
               hours
             </div>
-            <div className="flex flex-col">
-              <span className="countdown font-mono text-3xl">
-                <span style={{ "--value": minutes }}></span>
-              </span>
+            <div className="flex flex-col items-center">
+              <span className="countdown font-mono text-3xl">{minutes}</span>
               min
             </div>
-            <div className="flex flex-col">
-              <span className="countdown font-mono text-3xl">
-                <span style={{ "--value": seconds }}></span>
-              </span>
+            <div className="flex flex-col items-center">
+              <span className="countdown font-mono text-3xl">{seconds}</span>
               sec
             </div>
           </div>
@@ -71,7 +78,7 @@ const BePremium = () => {
         </div>
         <Link
           to="/be-premium"
-          className="bg-yellow-400 animate-pulse text-indigo-600 px-6 py-2 md:py-3 rounded-full text-lg font-semibold hover:bg-yellow-300 transition duration-300 ease-in-out"
+          className="bg-yellow-400 animate-pulse text-indigo-600 px-5 py-2 rounded-full text-lg font-semibold hover:bg-yellow-300 transition duration-300 ease-in-out"
         >
           Upgrade Now
         </Link>

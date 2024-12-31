@@ -9,6 +9,8 @@ import { updateMyImgName } from "../api/Foods";
 import Countdown from "./Countdown";
 import useIsPremium from "../hooks/useIsPremium";
 import PlaterHelmet from "./PlaterHelmet";
+import AdminSetTimer from "./AdminSetTimer";
+import useIsAdmin from "../hooks/useIsAdmin";
 
 const MyProfile = () => {
   const { user, updateProfileInfo } = useAuth();
@@ -18,6 +20,7 @@ const MyProfile = () => {
   const [photo, setPhoto] = useState(user?.photoURL || defaultAvatar);
   const apiKey = import.meta.env.VITE_imgBbKey;
   const isPremium = useIsPremium();
+  const { isAdmin } = useIsAdmin();
   const { myFoods } = useMyFoods();
 
   const closeModal = () => setIsOpen(false);
@@ -74,7 +77,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="md:min-h-screen bg-gray-100 p-4 md:p-12">
+    <div className="md:min-h-screen bg-gray-100 p-4 md:p-10">
       <PlaterHelmet title={"My Profile"} />
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-5 md:p-8 md:flex md:items-start">
         <div className="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
@@ -145,6 +148,7 @@ const MyProfile = () => {
         name={name}
         isUploading={isUploading}
       />
+      {isAdmin && <AdminSetTimer />}
     </div>
   );
 };

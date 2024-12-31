@@ -322,7 +322,7 @@ const Navbar = () => {
                       <li>
                         <Link
                           to="/be-premium"
-                          className="rounded-lg text-gray-700"
+                          className="lg:hidden rounded-lg text-gray-700"
                         >
                           <span className="font-medium">Be Premium</span>
                         </Link>

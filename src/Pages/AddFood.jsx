@@ -117,7 +117,7 @@ const AddFood = () => {
   };
 
   return (
-    <div className="my-5">
+    <div className="mt-5 pb-6">
       <PlaterHelmet title={"Add Food"} />
       <form
         onSubmit={handleAddFood}

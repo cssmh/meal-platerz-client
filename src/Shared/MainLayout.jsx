@@ -6,8 +6,8 @@ import BigLoader from "../Component/BigLoader";
 import FooterOld from "../Component/FooterOld";
 
 const MainLayout = () => {
-  const loc = useLocation();
   const [loading, setLoading] = useState(true);
+  const loc = useLocation();
   const home = loc.pathname === "/";
 
   useEffect(() => {
