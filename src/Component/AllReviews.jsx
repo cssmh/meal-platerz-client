@@ -27,8 +27,8 @@ const AllReviews = () => {
     e.preventDefault();
 
     const getReview = e.target.review.value;
-    if (getReview.length < 1) {
-      return toast.info("Review cannot be empty.");
+    if (getReview.length < 4) {
+      return toast.info("Write your thought");
     }
 
     const reviewData = {
@@ -77,20 +77,22 @@ const AllReviews = () => {
           <p className="text-sm text-gray-600 mb-2">
             Your review will be featured on the home page slider!
           </p>
-          <button
-            onClick={() => {
-              if (!user?.email) {
-                toast.info("Please log in to access this feature.");
-              } else {
-                setIsOpen(true);
-              }
-            }}
-            className="flex items-center justify-center text-white bg-green-500 rounded-xl py-2 px-3 mb-4"
-          >
-            <FaPlus className="mr-2" /> Add Your Review
-          </button>
+          <div className="flex justify-center md:justify-start">
+            <button
+              onClick={() => {
+                if (!user?.email) {
+                  toast.info("Please log in to access this feature.");
+                } else {
+                  setIsOpen(true);
+                }
+              }}
+              className="flex items-center justify-center text-white bg-green-500 rounded-lg py-2 px-4 my-1"
+            >
+              <FaPlus className="mr-2" /> Add Your Review
+            </button>
+          </div>
         </div>
-        <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {isLoading
             ? [...Array(6)].map((_, idx) => (
                 <div
@@ -111,7 +113,7 @@ const AllReviews = () => {
             : data?.map((client) => (
                 <div
                   key={client?._id}
-                  className="bg-white rounded-lg shadow-lg p-6"
+                  className="bg-white rounded-lg shadow-md hover:shadow-lg p-6"
                 >
                   <div className="flex items-center mb-4">
                     <img

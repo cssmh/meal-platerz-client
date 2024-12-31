@@ -4,14 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/meal.jpg";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../hooks/useAuth";
-import { PiBowlFoodDuotone } from "react-icons/pi";
-import { IoFastFood } from "react-icons/io5";
-import { TbPremiumRights } from "react-icons/tb";
-import { AiOutlineHome } from "react-icons/ai";
-import { AiOutlineLogout } from "react-icons/ai";
-import { RiFeedbackLine, RiAddBoxLine } from "react-icons/ri";
-import { FaUtensils } from "react-icons/fa";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoIosLogOut } from "react-icons/io";
 import useIsPremium from "../hooks/useIsPremium";
 
 const Navbar = () => {
@@ -89,7 +82,7 @@ const Navbar = () => {
         </p>
       </div> */}
       <div className="border-b border-base-300">
-        <div className="navbar min-h-[58px] lg:px-10 py-0">
+        <div className="navbar min-h-[58px] lg:px-8 py-0">
           <div className="navbar-start">
             <div className="dropdown lg:hidden">
               <label
@@ -147,14 +140,14 @@ const Navbar = () => {
                       Add Food
                     </Link>
                   )}
-                  <button
+                  {/* <button
                     onClick={() => handleProtectedRoute("/be-premium")}
                     className={`flex items-center p-[2px] ${getLinkClasses(
                       "/be-premium"
                     )}`}
                   >
                     Be Premium
-                  </button>
+                  </button> */}
                   <Link
                     to="/all-reviews"
                     className={`flex items-center p-[2px] ${getLinkClasses(
@@ -309,7 +302,7 @@ const Navbar = () => {
               {user?.email && showProfileOptions && (
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] shadow-lg bg-white rounded-lg w-48 border border-gray-200 space-y-1"
+                  className="menu menu-sm dropdown-content mt-2 z-[1] shadow-lg bg-white rounded-lg w-40 border border-gray-200"
                 >
                   <li>
                     <Link to="/my-profile" className="rounded-lg text-gray-700">
@@ -324,6 +317,27 @@ const Navbar = () => {
                       <span className="font-medium">User Analytics</span>
                     </Link>
                   </li>
+                  {user && (
+                    <>
+                      <li>
+                        <Link
+                          to="/be-premium"
+                          className="rounded-lg text-gray-700"
+                        >
+                          <span className="font-medium">Be Premium</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          onClick={handleLogOut}
+                          className="lg:hidden flex items-center gap-2 text-red-500"
+                        >
+                          <IoIosLogOut className="text-xl" />
+                          Log Out
+                        </button>
+                      </li>
+                    </>
+                  )}
                 </ul>
               )}
             </div>

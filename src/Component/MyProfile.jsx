@@ -1,3 +1,4 @@
+import axios from "axios";
 import { toast } from "sonner";
 import React, { useState } from "react";
 import defaultAvatar from "../assets/default.jpg";
@@ -35,14 +36,10 @@ const MyProfile = () => {
       formData.append("image", file);
 
       try {
-        const response = await fetch(
+        const { data } = await axios.post(
           `https://api.imgbb.com/1/upload?key=${apiKey}`,
-          {
-            method: "POST",
-            body: formData,
-          }
+          formData
         );
-        const data = await response.json();
         if (data.success) {
           uploadedPhoto = data.data.url;
         } else {
@@ -70,7 +67,7 @@ const MyProfile = () => {
       toast.success("Profile updated successfully!");
       setPhoto(uploadedPhoto);
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Failed to update profile. Please try again.");
     } finally {
       closeModal();
     }
@@ -79,7 +76,7 @@ const MyProfile = () => {
   return (
     <div className="md:min-h-screen bg-gray-100 p-4 md:p-12">
       <PlaterHelmet title={"My Profile"} />
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 md:flex md:items-start">
+      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-5 md:p-8 md:flex md:items-start">
         <div className="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
           <img
             src={photo}
