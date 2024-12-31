@@ -12,7 +12,7 @@ const BePremium = () => {
   });
 
   useEffect(() => {
-    if (data?.endTime) {
+    if (data?.endTime && data.endTime > 0) {
       const serverEndTime = parseInt(data.endTime, 10);
       const currentTime = Math.floor(Date.now() / 1000);
 
@@ -33,6 +33,8 @@ const BePremium = () => {
       }, 1000);
 
       return () => clearInterval(timer);
+    } else {
+      setTimeLeft(0);
     }
   }, [data?.endTime]);
 
