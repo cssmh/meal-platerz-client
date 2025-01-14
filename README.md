@@ -1,4 +1,4 @@
-# MealPlaterz (Food Donation Platform to Reduce Waste)
+# MealPlaterz (Share Food Reduce Waste Project)
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)

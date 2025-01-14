@@ -119,6 +119,7 @@ const AllReviews = () => {
                     <img
                       src={client?.image}
                       alt={client?.name}
+                      onContextMenu={(e) => e.preventDefault()}
                       className="w-16 h-16 rounded-full object-cover border-2 border-green-500"
                     />
                     <div className="ml-4 flex-1">
