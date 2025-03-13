@@ -27,29 +27,29 @@ const FeaturedFoods = () => {
 
   return (
     <div className="my-8">
-      <h1 className="text-center font-semibold text-lg md:text-xl mb-7">
+      <h1 className="text-center font-semibold text-lg md:text-xl 2xl:text-2xl mb-7">
         Featured Foods Sorted by Quantity (Highest to Lowest)
       </h1>
       {error ? (
-        <div className="text-center text-lg md:text-xl my-2 md:my-4 font-semibold text-red-600">
+        <div className="text-center text-lg md:text-xl 2xl:text-2xl my-2 md:my-4 font-semibold text-red-600">
           An error occurred while fetching Featured Foods!
         </div>
       ) : isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1280px] mx-auto md:mx-2 lg:mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1250px] 2xl:max-w-[85%] mx-auto md:mx-2 lg:mx-auto">
           {[...Array(skeletonSize)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1250px] 2xl:max-w-[90%] mx-auto">
-            {displayedFoods.map((foods) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1250px] 2xl:max-w-[85%] lg:mx-auto mx-3">
+            {displayedFoods?.map((foods) => (
               <FoodsCard key={foods._id} getFoods={foods} />
             ))}
           </div>
           <div className="flex justify-center mt-8">
             <Link to="/available-foods">
-              <button className="text-white bg-[#f01543] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+              <button className="text-white bg-[#f01543] 2xl:text-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                 Show all available Foods
               </button>
             </Link>

@@ -10,7 +10,7 @@ const WeOffer = () => {
       >
         What do we have to offer<span className="text-[#f01543]">?</span>
       </h2>
-      <div className="max-w-6xl 2xl:max-w-[90%] mx-auto flex  flex-col md:flex-row justify-between gap-6 px-5 md:px-0">
+      <div className="max-w-6xl 2xl:max-w-[80%] mx-auto flex  flex-col md:flex-row justify-between gap-6 px-5 md:px-0">
         <div className="flex flex-col items-center space-y-4">
           <div className="flex justify-center items-center space-x-2">
             <FaRegCircleCheck className="text-2xl text-red-500" />

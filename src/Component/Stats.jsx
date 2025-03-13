@@ -1,7 +1,7 @@
 const Stats = () => {
   return (
     <section className="px-5 mt-10">
-      <div className="container grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto">
+      <div className="max-w-[1250px] 2xl:max-w-[85%] grid grid-cols-1 md:grid-cols-4 gap-6 mx-auto">
         <div className="flex justify-center p-4 space-x-4 rounded-lg md:space-x-6 bg-gray-50">
           <div
             data-aos="fade-right"

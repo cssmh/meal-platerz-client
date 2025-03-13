@@ -12,7 +12,7 @@ const OurClient = () => {
   });
 
   return (
-    <div className="max-w-[1220px] 2xl:max-w-[91%] mx-auto mt-10">
+    <div className="max-w-[1250px] 2xl:max-w-[85%] mx-auto mt-10">
       <div className="text-[#f01543] text-3xl md:text-5xl text-center font-medium">
         What Our Clients Say
       </div>
