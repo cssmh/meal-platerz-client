@@ -67,12 +67,12 @@ const AllReviews = () => {
   return (
     <div className="bg-gray-100 py-4 mb-3">
       <PlaterHelmet title={"User Reviews"} />
-      <div className="max-w-7xl 2xl:max-w-[90%] mx-auto px-3">
-        <h1 className="text-2xl md:text-3xl font-medium text-center">
+      <div className="max-w-[1250px] 2xl:max-w-[85%] mx-auto px-3">
+        <h1 className="text-2xl md:text-3xl 2xl:text-4xl font-medium text-center">
           What Our Clients Say
         </h1>
         <div className="text-center my-2">
-          <p className="text-sm text-gray-600 mb-2">
+          <p className="text-sm 2xl:text-base text-gray-600 mb-2">
             Your review will be featured on the home page slider!
           </p>
           <div className="flex justify-center md:justify-start">
@@ -84,7 +84,7 @@ const AllReviews = () => {
                   setIsOpen(true);
                 }
               }}
-              className="flex items-center justify-center text-white bg-green-500 rounded-lg py-2 px-4 my-1"
+              className="flex items-center justify-center text-white bg-green-500 rounded-lg py-2 2xl:py-[10px] px-4 my-1 2xl:my-2"
             >
               <FaPlus className="mr-2" /> Add Your Review
             </button>
@@ -121,21 +121,23 @@ const AllReviews = () => {
                       className="w-16 h-16 rounded-full object-cover border-2 border-green-500"
                     />
                     <div className="ml-4 flex-1">
-                      <h2 className="text-xl font-semibold text-gray-800">
+                      <h2 className="text-xl 2xl:text-2xl font-semibold text-gray-800">
                         {client?.name}
                       </h2>
-                      <p className="text-gray-500 text-sm">{client?.role}</p>
+                      <p className="text-gray-500 text-sm 2xl:text-base">
+                        {client?.role}
+                      </p>
                     </div>
                     {client?.email === user?.email && (
                       <button
                         onClick={() => handleDelete(client?._id, client?.email)}
-                        className="text-red-500 hover:text-red-600"
+                        className="text-red-500 hover:text-red-600 2xl:text-lg"
                       >
                         <FaTrash />
                       </button>
                     )}
                   </div>
-                  <p className="text-gray-600 italic">{`"${client?.quote}"`}</p>
+                  <p className="text-gray-600 italic 2xl:text-lg">{`"${client?.quote}"`}</p>
                 </div>
               ))}
         </div>

@@ -7,13 +7,3 @@
 body {
   font-family: "Poppins", sans-serif;
 }
-
-body::-webkit-scrollbar {
-  width: 14px;
-  background-color: #ffffff;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: #e6454d;
-  border-radius: 6px;
-}

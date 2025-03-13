@@ -44,7 +44,7 @@ const AvailableFoods = () => {
           name="name"
           onChange={handleSearch}
           placeholder="Search for Food Name and Location"
-          className="text-sm border py-[9px] px-[11px] rounded-xl focus:border-[#f01543] min-w-[75%] md:min-w-[340px] border-red-500"
+          className="text-sm border py-[9px] 2xl:py-3 px-[11px] rounded-xl focus:border-[#f01543] min-w-[75%] md:min-w-[340px] 2xl:min-w-[460px]  border-red-500"
           style={{ outline: "none" }}
         />
       </div>
