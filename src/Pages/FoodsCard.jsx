@@ -20,8 +20,7 @@ const FoodsCard = ({ getFoods }) => {
   const isExpired = useIsExpire(expiration_date, expiration_time);
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
 
-  // Calculate remaining time
-  // const expirationDateTime = moment(
+  // Calculate remaining time// const expirationDateTime = moment(
   //   `${expiration_date} ${expiration_time}`,
   //   "YYYY-MM-DD hh:mm A"
   // );
@@ -70,16 +69,16 @@ const FoodsCard = ({ getFoods }) => {
   }
 
   return (
-    <div className="flex flex-col bg-white shadow-lg md:rounded-lg overflow-hidden">
-      <div
-        data-aos="zoom-out-down"
-        data-aos-duration="500"
-        className="relative"
-      >
+    <div
+      data-aos="fade-up"
+      data-aos-duration="700"
+      className="flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-xl"
+    >
+      <div className="relative">
         <img
           alt={food_name}
           src={food_image}
-          className="w-full h-60 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+          className="w-full h-60 md:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div
           className={`absolute top-2 right-2 text-xs font-semibold py-1 px-2 rounded-md ${
@@ -97,36 +96,35 @@ const FoodsCard = ({ getFoods }) => {
             : null}
         </div>
       </div>
-      <div className="py-2 px-3 flex flex-col justify-between flex-grow">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 leading-tight">
-            {food_name}
-          </h3>
-          <p className="text-sm text-gray-600 mt-1">
-            Quantity: {food_quantity} person{food_quantity > 1 ? "s" : ""}
+      <div className="py-3 px-4 flex flex-col justify-between flex-grow">
+        <h3 className="text-lg font-semibold text-gray-900 leading-tight">
+          {food_name}
+        </h3>
+        <p className="text-sm text-gray-600 mt-1">
+          Quantity: {food_quantity} person{food_quantity > 1 ? "s" : ""}
+        </p>
+        <p
+          className={`text-sm mt-1 ${
+            food_status === "Unavailable"
+              ? "text-emerald-500"
+              : isExpired
+              ? "text-red-500"
+              : "text-gray-500"
+          }`}
+        >
+          {food_status === "Unavailable"
+            ? "This food item has been successfully delivered on time."
+            : `Expires on: ${expireIn} at ${expiration_time}`}
+        </p>
+        {!isExpired && food_status !== "Unavailable" && (
+          <p className="text-sm text-blue-600 mt-1">
+            Time Remaining: {remainingTime}
           </p>
-          <p
-            className={`text-sm mt-1 ${
-              food_status === "Unavailable"
-                ? "text-emerald-500"
-                : isExpired
-                ? "text-red-500"
-                : "text-gray-500"
-            }`}
-          >
-            {food_status === "Unavailable"
-              ? "This food item has been successfully delivered on time."
-              : `Expires on: ${expireIn} at ${expiration_time}`}
-          </p>
-          {!isExpired && food_status !== "Unavailable" && (
-            <p className="text-sm text-blue-600 mt-1">
-              Time Remaining: {remainingTime}
-            </p>
-          )}
-        </div>
+        )}
+
         <div className="flex items-center mt-4">
           <img
-            className="w-10 h-10 rounded-full object-cover mr-2 border-2 border-red-500"
+            className="w-10 h-10 rounded-full object-cover mr-3 border-2 border-red-500"
             src={donator_image}
             alt={donator_name}
           />
@@ -138,10 +136,10 @@ const FoodsCard = ({ getFoods }) => {
           </div>
         </div>
       </div>
-      <div className="p-2">
+      <div className="p-3">
         <Link
           to={`/food/${_id}`}
-          className="block text-center bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
+          className="block text-center bg-gradient-to-r from-red-500 to-red-600 text-white py-2 rounded-lg hover:scale-105 transition-all duration-300 shadow-md"
         >
           View Details
         </Link>
