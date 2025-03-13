@@ -159,7 +159,7 @@ const PremiumForm = () => {
     <div className="flex items-center justify-center p-2 md:p-4 bg-gray-100">
       <PlaterHelmet title={"Premium Membership"} />
       <div className="max-w-2xl w-full bg-white p-4 md:px-8 md:py-5 rounded-xl shadow-xl space-y-5">
-        <h1 className="text-2xl font-semibold text-center text-red-500">
+        <h1 className="text-2xl 2xl:text-3xl font-semibold text-center text-red-500">
           Upgrade to Premium
         </h1>
         <p className="text-center text-gray-600 md:w-[85%] mx-auto">
@@ -242,7 +242,7 @@ const PremiumForm = () => {
                 !stripe || !clientSecret || isPremium || isPaid || !user
               }
               type="submit"
-              className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 shadow-md ${
+              className={`w-full py-3 2xl:text-lg rounded-lg font-semibold text-white transition duration-300 shadow-md ${
                 !user
                   ? "bg-[#f01543] hover:bg-red-600"
                   : loading
@@ -260,7 +260,7 @@ const PremiumForm = () => {
               ) : !user ? (
                 "Login to Pay"
               ) : isPremium || isPaid ? (
-                <div className="flex items-center gap-2 justify-center">
+                <div className="flex 2xl:text-lg items-center gap-2 justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 text-white"

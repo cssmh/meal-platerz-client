@@ -5,7 +5,9 @@ const Footer = () => {
       <footer className="max-w-[1220px] 2xl:max-w-[82%] mx-auto px-6 lg:px-0">
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-white">Shop</h2>
+            <h2 className="text-lg 2xl:text-xl font-semibold text-white">
+              Shop
+            </h2>
             <ul>
               <li>Shop</li>
               <li>About</li>
@@ -15,19 +17,27 @@ const Footer = () => {
             </ul>
           </div>
           <div className="space-y-3">
-            <p className="text-lg font-semibold text-white">Contact Info</p>
+            <p className="text-lg 2xl:text-xl font-semibold text-white">
+              Contact Info
+            </p>
             <p>123 Food Street, Food City, FC 12345</p>
             <p>Phone: +880176761606*</p>
             <p>Email: contact@mealplaterz.com</p>
           </div>
           <div className="space-y-3">
-            <p className="text-lg font-semibold text-white">Our Office</p>
+            <p className="text-lg 2xl:text-xl font-semibold text-white">
+              Our Office
+            </p>
             <p>Kharabor House 23, Ghatail</p>
             <p>Phone: +880151655257*</p>
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <img src={bgImage} alt="Our Office" className="rounded-md w-12 md:w-20" />
+          <img
+            src={bgImage}
+            alt="Our Office"
+            className="rounded-md w-12 md:w-20"
+          />
         </div>
         <div className="flex flex-col justify-center pt-6 lg:pt-0 mt-6">
           <div className="flex justify-center space-x-4">

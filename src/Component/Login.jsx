@@ -54,12 +54,12 @@ const Login = () => {
   };
 
   return (
-    <div className="my-5 space-y-3 rounded-xl lg:w-1/2 mx-2 md:mx-auto">
+    <div className="my-5 space-y-3 rounded-xl max-w-2xl mx-2 md:mx-auto">
       <PlaterHelmet title={"Login"} />
-      <h1 className="text-2xl font-bold text-center">Login</h1>
+      <h1 className="text-2xl font-semibold text-center">Login</h1>
       <form onSubmit={handleLogin} className="space-y-5 mx-2 md:mx-0">
         <div className="space-y-1 text-sm">
-          <label htmlFor="email" className="block text-gray-600">
+          <label htmlFor="email" className="block text-gray-600 2xl:text-base">
             Your Email
           </label>
           <input
@@ -72,7 +72,10 @@ const Login = () => {
           />
         </div>
         <div className="space-y-1 text-sm relative">
-          <label htmlFor="password" className="block text-gray-600">
+          <label
+            htmlFor="password"
+            className="block text-gray-600 2xl:text-base"
+          >
             Password
           </label>
           <input
@@ -107,19 +110,21 @@ const Login = () => {
       </form>
       <div className="flex items-center py-2 space-x-1">
         <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
-        <p className="px-3 text-sm text-gray-600">Login with social accounts</p>
+        <p className="px-3 text-sm 2xl:text-base text-gray-600">
+          Login with social accounts
+        </p>
         <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
       </div>
       <div className="flex justify-center space-x-4">
         <button
           onClick={handleGoogleLogin}
           aria-label="Log in with Google"
-          className="flex items-center gap-2 px-6 py-2 rounded-lg bg-[#f01543] text-white"
+          className="flex items-center gap-2 px-6 py-2 2xl:py-[10px] rounded-lg bg-[#f01543] text-white"
         >
           <FaGoogle className="text-xl" /> <span>Google login</span>
         </button>
       </div>
-      <p className="text-sm text-center text-gray-600 pt-1">
+      <p className="text-sm 2xl:text-base text-center text-gray-600 pt-1">
         Do not have an account?{" "}
         <Link
           state={location.state}

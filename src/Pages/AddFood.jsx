@@ -126,19 +126,19 @@ const AddFood = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-3">
           <div className="form-control mx-4 lg:mx-0">
             <label className="label">
-              <span className="label-text">Food Name</span>
+              <span className="label-text 2xl:text-lg">Food Name</span>
             </label>
             <input
               type="text"
               name="food_name"
               required
-              className="h-[42px] input input-bordered"
+              className="h-[42px] 2xl:h-14 input input-bordered"
               style={{ outline: "none" }}
             />
           </div>{" "}
           <div className="form-control mx-4 lg:mx-0">
             <label className="label">
-              <span className="label-text">
+              <span className="label-text 2xl:text-lg">
                 Food Quantity (Person to be served)
               </span>
             </label>
@@ -146,93 +146,91 @@ const AddFood = () => {
               type="number"
               name="food_quantity"
               required
-              className="h-[42px] input input-bordered"
+              className="h-[42px] 2xl:h-14 input input-bordered"
               style={{ outline: "none" }}
             />
           </div>
           <div className="form-control mx-4 lg:mx-0">
             <label className="label">
-              <span className="label-text">Pickup Location</span>
+              <span className="label-text 2xl:text-lg">Pickup Location</span>
             </label>
             <input
               type="text"
               required
               name="pickup_location"
-              className="h-[42px] input input-bordered"
-              style={{ outline: "none" }}
-            />
-          </div>
-        </div>
-        <div>
-          <div className="form-control mx-4 lg:mx-0">
-            <label className="label">
-              <span className="label-text">Food Image</span>
-            </label>
-            <div
-              className="flex flex-col items-center p-6 border-2 border-dashed rounded-lg cursor-pointer"
-              onClick={() => document.getElementById("image-upload").click()}
-            >
-              {imagePreview ? (
-                <img
-                  src={imagePreview}
-                  alt="Food"
-                  className="h-36 w-40 object-cover rounded-md"
-                />
-              ) : (
-                <span className="text-gray-500">Click to upload an image</span>
-              )}
-              <input
-                id="image-upload"
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="file-input file-input-bordered hidden"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-3">
-          <div className="form-control mx-4 lg:mx-0">
-            <label className="label">
-              <span className="label-text">Phone Number</span>
-            </label>
-            <input
-              type="text"
-              defaultValue={"+880"}
-              name="phone"
-              className="h-[42px] input input-bordered w-full"
-              style={{ outline: "none" }}
-            />
-          </div>
-          <div className="form-control mx-4 lg:mx-0">
-            <label className="label">
-              <span className="label-text">Expired Date</span>
-            </label>
-            <input
-              type="date"
-              required
-              min={todayDate}
-              onChange={handleDateChange}
-              className="h-[42px] input input-bordered w-full"
-              style={{ outline: "none" }}
-            />
-          </div>
-          <div className="form-control mx-4 lg:mx-0">
-            <label className="label">
-              <span className="label-text">Expired Time</span>
-            </label>
-            <input
-              type="time"
-              required
-              onChange={handleTimeChange}
-              className="h-[42px] input input-bordered w-full"
+              className="h-[42px] 2xl:h-14 input input-bordered"
               style={{ outline: "none" }}
             />
           </div>
         </div>
         <div className="form-control mx-4 lg:mx-0">
           <label className="label">
-            <span className="label-text">Additional Notes</span>
+            <span className="label-text 2xl:text-lg">Food Image</span>
+          </label>
+          <div
+            className="flex flex-col items-center p-6 border-2 border-dashed rounded-lg cursor-pointer"
+            onClick={() => document.getElementById("image-upload").click()}
+          >
+            {imagePreview ? (
+              <img
+                src={imagePreview}
+                alt="Food"
+                className="h-36 w-40 object-cover rounded-md"
+              />
+            ) : (
+              <span className="text-gray-500">Click to upload an image</span>
+            )}
+            <input
+              id="image-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="file-input file-input-bordered hidden"
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-3">
+          <div className="form-control mx-4 lg:mx-0">
+            <label className="label">
+              <span className="label-text 2xl:text-lg">Phone Number</span>
+            </label>
+            <input
+              type="text"
+              defaultValue={"+880"}
+              name="phone"
+              className="h-[42px] 2xl:h-14 input input-bordered w-full"
+              style={{ outline: "none" }}
+            />
+          </div>
+          <div className="form-control mx-4 lg:mx-0">
+            <label className="label">
+              <span className="label-text 2xl:text-lg">Expired Date</span>
+            </label>
+            <input
+              type="date"
+              required
+              min={todayDate}
+              onChange={handleDateChange}
+              className="h-[42px] 2xl:h-14 input input-bordered w-full"
+              style={{ outline: "none" }}
+            />
+          </div>
+          <div className="form-control mx-4 lg:mx-0">
+            <label className="label">
+              <span className="label-text 2xl:text-lg">Expired Time</span>
+            </label>
+            <input
+              type="time"
+              required
+              onChange={handleTimeChange}
+              className="h-[42px] 2xl:h-14 input input-bordered w-full"
+              style={{ outline: "none" }}
+            />
+          </div>
+        </div>
+        <div className="form-control mx-4 lg:mx-0">
+          <label className="label">
+            <span className="label-text 2xl:text-lg">Additional Notes</span>
           </label>
           <textarea
             name="additional_notes"
@@ -242,10 +240,10 @@ const AddFood = () => {
             style={{ outline: "none" }}
           ></textarea>
         </div>
-        <div className="form-control pt-3 mx-3 md:mx-0">
+        <div className="form-control pt-3 2xl:pt-4 mx-3 md:mx-0">
           <button
             type="submit"
-            className="btn bg-[#f01543] hover:bg-[#f01543] text-white"
+            className="btn bg-[#f01543] 2xl:text-lg hover:bg-[#f01543] text-white"
           >
             {loading ? (
               <div className="flex justify-center">

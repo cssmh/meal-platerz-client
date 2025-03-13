@@ -52,10 +52,12 @@ const AdminSetTimer = () => {
 
   return (
     <div className="text-center mt-6">
-      <h2 className="text-2xl font-semibold">Set Premium Time</h2>
+      <h2 className="text-2xl 2xl:text-3xl font-semibold">Set Premium Time</h2>
       <form onSubmit={handleUpdate} className="space-y-4">
         <div className="flex items-center justify-center space-x-2">
-          <label className="block text-sm font-medium">Set Time:</label>
+          <label className="block text-sm 2xl:text-base font-medium">
+            Set Time:
+          </label>
           <input
             type="number"
             value={timeValue}
@@ -77,14 +79,14 @@ const AdminSetTimer = () => {
         </div>
         <button
           type="submit"
-          className="mt-4 bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 transition"
+          className="mt-4 bg-red-600 text-white 2xl:text-lg px-6 py-2 rounded-md hover:bg-red-700 transition"
         >
           Update Premium Time
         </button>
       </form>
       <button
         onClick={handleStopTimer}
-        className="mt-4 bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
+        className="mt-4 bg-gray-500 text-white 2xl:text-lg px-6 py-2 rounded-md hover:bg-gray-600 transition"
       >
         Stop Timer
       </button>

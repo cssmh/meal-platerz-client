@@ -68,7 +68,7 @@ const Countdown = ({ profile = false }) => {
           <div>
             <span
               className={`countdown font-medium ${
-                profile ? "text-4xl" : "text-xl"
+                profile ? "text-4xl 2xl:text-5xl" : "text-xl 2xl:text-2xl"
               }`}
             >
               <span style={{ "--value": countdown.days }}></span>
@@ -78,7 +78,7 @@ const Countdown = ({ profile = false }) => {
           <div>
             <span
               className={`countdown font-medium ${
-                profile ? "text-4xl" : "text-xl"
+                profile ? "text-4xl 2xl:text-5xl" : "text-xl 2xl:text-2xl"
               }`}
             >
               <span style={{ "--value": countdown.hours }}></span>
@@ -88,7 +88,7 @@ const Countdown = ({ profile = false }) => {
           <div>
             <span
               className={`countdown font-medium ${
-                profile ? "text-4xl" : "text-xl"
+                profile ? "text-4xl 2xl:text-5xl" : "text-xl 2xl:text-2xl"
               }`}
             >
               <span style={{ "--value": countdown.minutes }}></span>
@@ -98,7 +98,7 @@ const Countdown = ({ profile = false }) => {
           <div>
             <span
               className={`countdown font-medium ${
-                profile ? "text-4xl" : "text-xl"
+                profile ? "text-4xl 2xl:text-5xl" : "text-xl 2xl:text-2xl"
               }`}
             >
               <span style={{ "--value": countdown.seconds }}></span>

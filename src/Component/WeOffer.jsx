@@ -6,7 +6,7 @@ const WeOffer = () => {
       <h2
         data-aos="zoom-in-down"
         data-aos-duration="500"
-        className="mb-8 text-2xl font-semibold leading-none text-center px-3 md:px-0"
+        className="mb-8 text-2xl 2xl:text-3xl font-semibold leading-none text-center px-3 md:px-0"
       >
         What do we have to offer<span className="text-[#f01543]">?</span>
       </h2>
@@ -14,31 +14,31 @@ const WeOffer = () => {
         <div className="flex flex-col items-center space-y-4">
           <div className="flex justify-center items-center space-x-2">
             <FaRegCircleCheck className="text-2xl text-red-500" />
-            <span>Easy Sharing</span>
+            <span className="2xl:text-lg">Easy Sharing</span>
           </div>
           <div className="flex justify-center items-center space-x-2">
             <FaRegCircleCheck className="text-2xl text-red-500" />
-            <span>Support Local Chefs</span>
-          </div>
-        </div>
-        <div className="flex flex-col items-center space-y-4">
-          <div className="flex justify-center items-center space-x-2">
-            <FaRegCircleCheck className="text-2xl text-red-500" />
-            <span>Reducing Food Waste</span>
-          </div>
-          <div className="flex justify-center items-center space-x-2">
-            <FaRegCircleCheck className="text-2xl text-red-500" />
-            <span>Home-cooked Meals Delivery</span>
+            <span className="2xl:text-lg">Support Local Chefs</span>
           </div>
         </div>
         <div className="flex flex-col items-center space-y-4">
           <div className="flex justify-center items-center space-x-2">
             <FaRegCircleCheck className="text-2xl text-red-500" />
-            <span>Meal Prep Flexibility</span>
+            <span className="2xl:text-lg">Reducing Food Waste</span>
           </div>
           <div className="flex justify-center items-center space-x-2">
             <FaRegCircleCheck className="text-2xl text-red-500" />
-            <span>Community Food Sharing</span>
+            <span className="2xl:text-lg">Home-cooked Meals Delivery</span>
+          </div>
+        </div>
+        <div className="flex flex-col items-center space-y-4">
+          <div className="flex justify-center items-center space-x-2">
+            <FaRegCircleCheck className="text-2xl text-red-500" />
+            <span className="2xl:text-lg">Meal Prep Flexibility</span>
+          </div>
+          <div className="flex justify-center items-center space-x-2">
+            <FaRegCircleCheck className="text-2xl text-red-500" />
+            <span className="2xl:text-lg">Community Food Sharing</span>
           </div>
         </div>
       </div>

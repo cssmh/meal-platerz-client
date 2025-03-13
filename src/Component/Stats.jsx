@@ -23,14 +23,14 @@ const Stats = () => {
             <p
               data-aos="fade-right"
               data-aos-duration="600"
-              className="text-3xl font-semibold leading-none"
+              className="text-3xl 2xl:text-4xl font-semibold leading-none"
             >
               200
             </p>
             <p
               data-aos="fade-right"
               data-aos-duration="800"
-              className="capitalize"
+              className="capitalize 2xl:text-lg"
             >
               Orders
             </p>
@@ -58,14 +58,14 @@ const Stats = () => {
             <p
               data-aos="fade-right"
               data-aos-duration="1200"
-              className="text-3xl font-semibold leading-none"
+              className="text-3xl 2xl:text-4xl font-semibold leading-none"
             >
               120
             </p>
             <p
               data-aos="fade-right"
               data-aos-duration="1400"
-              className="capitalize"
+              className="capitalize 2xl:text-lg"
             >
               New customers
             </p>
@@ -95,14 +95,14 @@ const Stats = () => {
             <p
               data-aos="fade-right"
               data-aos-duration="1800"
-              className="text-3xl font-semibold leading-none"
+              className="text-3xl 2xl:text-4xl font-semibold leading-none"
             >
               72%
             </p>
             <p
               data-aos="fade-right"
               data-aos-duration="2000"
-              className="capitalize"
+              className="capitalize 2xl:text-lg"
             >
               Growth
             </p>
@@ -127,14 +127,14 @@ const Stats = () => {
             <p
               data-aos="fade-right"
               data-aos-duration="2400"
-              className="text-3xl font-semibold leading-none"
+              className="text-3xl 2xl:text-4xl font-semibold leading-none"
             >
               13%
             </p>
             <p
               data-aos="fade-right"
               data-aos-duration="2600"
-              className="capitalize"
+              className="capitalize 2xl:text-lg"
             >
               Bounce rate
             </p>

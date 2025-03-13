@@ -104,7 +104,7 @@ const Register = () => {
       <h1 className="text-2xl font-semibold text-center">Register Now</h1>
       <form onSubmit={handleRegister} className="space-y-4 mx-2 md:mx-0">
         <div className="space-y-1 text-sm">
-          <label htmlFor="name" className="block text-gray-600">
+          <label htmlFor="name" className="block text-gray-600 2xl:text-base">
             Name
           </label>
           <input
@@ -117,7 +117,7 @@ const Register = () => {
           />
         </div>
         <div className="space-y-1 text-sm">
-          <label htmlFor="email" className="block text-gray-600">
+          <label htmlFor="email" className="block text-gray-600 2xl:text-base">
             Email
           </label>
           <input
@@ -130,7 +130,7 @@ const Register = () => {
           />
         </div>
         <div className="space-y-2 text-sm">
-          <label htmlFor="photo" className="block text-gray-600">
+          <label htmlFor="photo" className="block text-gray-600 2xl:text-base">
             Upload Profile Image (optional)
           </label>
           <div className="relative flex items-center justify-center w-full h-24 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50">
@@ -174,7 +174,10 @@ const Register = () => {
           </div>
         </div>
         <div className="space-y-1 text-sm relative">
-          <label htmlFor="password" className="block text-gray-600">
+          <label
+            htmlFor="password"
+            className="block text-gray-600 2xl:text-base"
+          >
             Password
           </label>
           <input
@@ -206,7 +209,7 @@ const Register = () => {
           )}
         </button>
       </form>
-      <p className="text-sm text-center text-gray-600 pt-1 pb-2">
+      <p className="text-sm 2xl:text-base text-center text-gray-600 pt-1 pb-2">
         Already have an account?{" "}
         <Link
           to={"/login"}

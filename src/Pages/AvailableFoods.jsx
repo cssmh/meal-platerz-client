@@ -49,7 +49,7 @@ const AvailableFoods = () => {
         />
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1300px] 2xl:max-w-[92%] mx-auto md:mx-2 lg:mx-auto mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1250px] 2xl:max-w-[85%] mx-auto md:mx-2 lg:mx-auto mt-4">
           {[...Array(4)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
@@ -62,10 +62,10 @@ const AvailableFoods = () => {
             </p>
           ) : (
             <>
-              <h1 className="text-center font-semibold text-lg md:text-xl">
+              <h1 className="text-center font-semibold text-lg md:text-xl 2xl:text-2xl">
                 Available Foods Sorted by Expiration Date
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1300px] 2xl:max-w-[92%] mx-auto mt-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1250px] 2xl:max-w-[85%] mx-auto mt-3">
                 {data?.result?.map((food) => (
                   <FoodsCard key={food._id} getFoods={food} />
                 ))}
@@ -78,7 +78,7 @@ const AvailableFoods = () => {
                 <div className="join">
                   <button
                     onClick={handlePrevious}
-                    className="join-item btn btn-active hover:border-red-400 hover:bg-yellow-50 border-red-400 bg-yellow-50 hover:text-red-40 text-red-400"
+                    className="join-item 2xl:text-lg btn btn-active hover:border-red-400 hover:bg-yellow-50 border-red-400 bg-yellow-50 hover:text-red-40 text-red-400"
                   >
                     Previous
                   </button>
@@ -104,7 +104,7 @@ const AvailableFoods = () => {
                   </div>
                   <button
                     onClick={handleNext}
-                    className="join-item btn btn-active hover:border-red-400 hover:bg-yellow-50 border-red-400 bg-yellow-50 hover:text-red-40 text-red-400"
+                    className="join-item 2xl:text-lg btn btn-active hover:border-red-400 hover:bg-yellow-50 border-red-400 bg-yellow-50 hover:text-red-40 text-red-400"
                   >
                     Next
                   </button>
