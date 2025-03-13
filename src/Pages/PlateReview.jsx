@@ -8,9 +8,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 const PlateReview = () => {
   const { data = [], isLoading } = useQuery({
     queryKey: ["allFoodPhotos"],
-    queryFn: async () => {
-      return await getAllFoodPhotos();
-    },
+    queryFn: getAllFoodPhotos,
   });
 
   const photos = data?.result?.map((food) => food.food_image) || [];

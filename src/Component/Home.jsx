@@ -10,7 +10,7 @@ import PlateReview from "../Pages/PlateReview";
 
 const Home = () => {
   return (
-    <div>
+    <div className="relative -top-[59px]">
       <Helmet>
         <title>Share Food Build Community</title>
       </Helmet>

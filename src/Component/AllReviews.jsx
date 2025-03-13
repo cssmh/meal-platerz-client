@@ -17,9 +17,7 @@ const AllReviews = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["allReviews"],
-    queryFn: async () => {
-      return await getClientSays(true);
-    },
+    queryFn: () => getClientSays(true),
   });
 
   const closeModal = () => setIsOpen(false);

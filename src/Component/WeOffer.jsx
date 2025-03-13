@@ -2,7 +2,7 @@ import { FaRegCircleCheck } from "react-icons/fa6";
 
 const WeOffer = () => {
   return (
-    <div className="relative -top-[16px]">
+    <div>
       <h2
         data-aos="zoom-in-down"
         data-aos-duration="500"

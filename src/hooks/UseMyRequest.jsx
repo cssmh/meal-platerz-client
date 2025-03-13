@@ -10,7 +10,7 @@ const useMyRequest = () => {
     refetch,
   } = useQuery({
     queryKey: ["myFoodRequest", user?.email],
-    queryFn: async () => await getMyRequests(user?.email),
+    queryFn: () => getMyRequests(user?.email),
     enabled: !loading && !!user?.email,
   });
   return { isLoading, myFoodRequest, refetch, user };

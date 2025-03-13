@@ -8,9 +8,9 @@ const useFood = (id) => {
     refetch,
   } = useQuery({
     queryKey: ["food", id],
-    queryFn: async () => await getFood(id),
+    queryFn: () => getFood(id),
   });
-  
+
   return { isLoading, food, refetch };
 };
 export default useFood;

@@ -34,8 +34,8 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
 
   const { data = "", isLoading } = useQuery({
     queryKey: ["getFoodData", food_id],
-    queryFn: async () => {
-      const res = await getFood(food_id);
+    queryFn: () => {
+      const res = getFood(food_id);
       return res?.food_status;
     },
   });

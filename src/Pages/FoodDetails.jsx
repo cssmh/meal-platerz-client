@@ -20,13 +20,14 @@ const FoodDetails = () => {
       return await food;
     },
   });
+  console.log(data);
 
   const {
     food_image,
     food_name,
     donator_name,
     donator_email,
-donator_phone,
+    donator_phone,
     food_quantity,
     pickup_location,
     expiration_date,

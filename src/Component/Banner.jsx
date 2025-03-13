@@ -4,10 +4,10 @@ import BannerImg from "../assets/food-banner.jpg";
 const Banner = () => {
   return (
     <div
-      // data-aos="fade-up"
-      // data-aos-duration="900"
-      // data-aos-anchor-placement="top-bottom"
-      className="hero min-h-[55vh] md:min-h-[75vh] lg:min-h-[90vh] 2xl:min-h-[93vh] bg-cover relative -top-20 lg:-top-[59px]"
+      data-aos="fade-up"
+      data-aos-duration="900"
+      data-aos-anchor-placement="top-bottom"
+      className="hero min-h-[55vh] md:min-h-[75vh] lg:min-h-[90vh] 2xl:min-h-[93vh] bg-cover"
       style={{
         backgroundImage: `url(${BannerImg})`,
         backgroundSize: "cover",

@@ -8,9 +8,7 @@ import { getClientSays } from "../api/Foods";
 const OurClient = () => {
   const { data = [], isLoading } = useQuery({
     queryKey: ["reviews"],
-    queryFn: async () => {
-      return await getClientSays();
-    },
+    queryFn: getClientSays,
   });
 
   return (

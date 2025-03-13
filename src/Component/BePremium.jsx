@@ -8,7 +8,7 @@ const BePremium = () => {
   const [timeLeft, setTimeLeft] = useState(0);
   const { data = {} } = useQuery({
     queryKey: ["timers"],
-    queryFn: async () => await getPremiumTimer(),
+    queryFn: getPremiumTimer,
   });
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const BePremium = () => {
           <div className="flex items-center gap-6 text-center">
             <div className="flex flex-col items-center">
               <span className="countdown font-mono text-3xl">{days}</span>
-              days 
+              days
             </div>
             <div className="flex flex-col items-center">
               <span className="countdown font-mono text-3xl">{hours}</span>

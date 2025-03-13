@@ -16,9 +16,7 @@ const UserReq = () => {
     refetch: refetchReq,
   } = useQuery({
     queryKey: ["userRequest", id, email],
-    queryFn: async () => {
-      return await getUserReq(id, email);
-    },
+    queryFn: () => getUserReq(id, email),
   });
 
   const {
@@ -28,8 +26,8 @@ const UserReq = () => {
   } = useQuery({
     enabled: !loading && !!user?.email,
     queryKey: ["unavailableIds", user?.email],
-    queryFn: async () => {
-      const data = await unavailableId(user?.email);
+    queryFn: () => {
+      const data = unavailableId(user?.email);
       return data?.map((food) => food?._id);
     },
   });

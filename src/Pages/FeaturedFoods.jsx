@@ -20,15 +20,13 @@ const FeaturedFoods = () => {
     error,
   } = useQuery({
     queryKey: ["FeaturedFoods"],
-    queryFn: async () => {
-      return await getFeaturedFoods();
-    },
+    queryFn: getFeaturedFoods,
   });
 
   const displayedFoods = isMobile ? data.slice(0, 4) : data;
 
   return (
-    <div className="relative -top-12 lg:-top-[30px]">
+    <div>
       <h1 className="text-center font-semibold text-lg md:text-xl mb-7">
         Featured Foods Sorted by Quantity (Highest to Lowest)
       </h1>

@@ -11,7 +11,7 @@ const useUser = () => {
   } = useQuery({
     enabled: !loading && !!user?.email,
     queryKey: ["singleUser", user?.email],
-    queryFn: async () => await getSingleUser(user?.email),
+    queryFn: () => getSingleUser(user?.email),
   });
 
   const isLoading = loading || load;

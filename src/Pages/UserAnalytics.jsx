@@ -53,9 +53,7 @@ const UserAnalytics = () => {
   const { loading, user } = useAuth();
   const { data = [], isLoading } = useQuery({
     queryKey: ["userData", user?.email],
-    queryFn: async () => {
-      return await getUserData(user?.email);
-    },
+    queryFn: () => getUserData(user?.email),
     enabled: !loading && !!user,
   });
 

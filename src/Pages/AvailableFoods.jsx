@@ -19,9 +19,7 @@ const AvailableFoods = () => {
 
   const { data = [], isLoading } = useQuery({
     queryKey: ["allFoods", page, limit, searchTerm],
-    queryFn: async () => {
-      return await getAllFoods(page, limit, searchTerm);
-    },
+    queryFn: () => getAllFoods(page, limit, searchTerm),
   });
 
   const handleSearch = (e) => {
@@ -69,10 +67,7 @@ const AvailableFoods = () => {
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-w-[1300px] 2xl:max-w-[92%] mx-auto mt-3">
                 {data?.result?.map((food) => (
-                  <FoodsCard
-                    key={food._id}
-                    getFoods={food}
-                  />
+                  <FoodsCard key={food._id} getFoods={food} />
                 ))}
               </div>
             </>
