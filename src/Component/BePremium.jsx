@@ -44,7 +44,7 @@ const BePremium = () => {
   const seconds = timeLeft % 60;
 
   return (
-    <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-5 md:p-8 md:rounded-md shadow-lg flex flex-col md:flex-row items-center justify-between mb-12">
+    <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-5 md:p-8 md:rounded-md shadow-lg flex flex-col md:flex-row items-center justify-between">
       <div className="flex items-center space-x-4 mb-4 md:mb-0">
         <FaStar className="text-yellow-400 text-4xl" />
         <div>

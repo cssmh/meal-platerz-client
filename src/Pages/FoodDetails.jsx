@@ -3,6 +3,12 @@ import { useParams } from "react-router-dom";
 import MenuDetails from "./MenuDetails";
 import { useEffect, useState } from "react";
 import AddRequest from "./AddRequest";
+import {
+  FaInfoCircle,
+  FaStar,
+  FaClock,
+  FaUser,
+} from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import SmallLoader from "../Component/SmallLoader";
@@ -49,45 +55,62 @@ const FoodDetails = () => {
   if (isLoading) return <SmallLoader />;
 
   return (
-    <div>
+    <div className="bg-gray-50">
       <PlaterHelmet title={food_name} />
       <MenuDetails />
-      <div className="text-center mx-auto max-w-md border-2 py-2 my-5 lg:mx-auto">
-        <h1 className="font-semibold text-xl md:text-[22px] text-blue-800 mb-1">
-          Donator Information
+      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md mb-8">
+        <h1 className="font-semibold text-xl md:text-2xl text-blue-800 mb-3 flex items-center gap-2">
+          <FaUser /> Donator Information
         </h1>
-        <p className="text-cyan-600">Name: {donator_name}</p>
-        <p>{donator_phone}</p>
-        <p className="text-blue-600">Pickup Location: {pickup_location}</p>
+        <div className="space-y-1 text-gray-700">
+          <p>
+            <span className="font-medium">Name:</span> {donator_name}
+          </p>
+          <p>
+            <span className="font-medium">Phone:</span> {donator_phone}
+          </p>
+          <p>
+            <span className="font-medium">Pickup Location:</span>{" "}
+            {pickup_location}
+          </p>
+        </div>
       </div>
-      <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row lg:items-center justify-center my-6 lg:my-8 gap-4 lg:gap-7">
-        <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-7">
+      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md mb-8">
+        <div className="flex flex-col lg:flex-row items-center gap-6">
           <img
             src={food_image}
-            className="w-full h-48 md:w-[380px] md:h-[240px] rounded-md object-cover transition-transform duration-300 group-hover:scale-110"
-            alt="food"
+            className="w-full lg:w-1/2 h-48 md:h-64 rounded-md object-cover shadow-lg"
+            alt={food_name}
           />
-          <div className="space-y-1 mx-6 lg:mx-0 text-center lg:text-left">
-            <h1 className="text-xl lg:text-2xl font-semibold">{food_name}</h1>
-            <p className="text-gray-700">
-              Quantity: {food_quantity} (no. of persons to be served)
+          <div className="space-y-3">
+            <h1 className="text-2xl lg:text-3xl font-semibold text-gray-800">
+              {food_name}
+            </h1>
+            <p className="text-gray-600">
+              <span className="font-medium">Quantity:</span> {food_quantity}{" "}
+              (no. of persons to be served)
             </p>
-            <p className="text-gray-500">
-              Expire In: {expireIn} at {expiration_time}
+            <p className="text-gray-600 flex items-center gap-2">
+              <FaClock /> <span className="font-medium">Expires:</span>{" "}
+              {expireIn} at {expiration_time}
             </p>
             {food_status === "Unavailable" ? (
               isUserDonator ? (
-                <p className="text-[#f01543]">You shared this food item.</p>
+                <p className="text-[#f01543]">
+                  You shared this food item.
+                </p>
               ) : (
                 <p className="text-[#f01543]">
                   This food item has been delivered!
                 </p>
               )
             ) : isExpired ? (
-              <p className="text-pink-700">This food item has expired!</p>
+              <p className="text-pink-700">
+                This food item has expired!
+              </p>
             ) : isAvailable ? (
               isUserDonator ? (
-                <p className="text-blue-600 font-semibold">
+                <p className="text-blue-600">
                   You have listed this food item.
                 </p>
               ) : (
@@ -97,25 +120,32 @@ const FoodDetails = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-[1200px] 2xl:max-w-[92%] mx-4 lg:mx-auto mb-7">
-        <div className="flex gap-1">
+      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div className="flex gap-2 mb-4">
           <button
             onClick={() => setShow(true)}
-            className="bg-[#f01543] px-3 py-2 text-white rounded-md mb-2"
+            className={`flex items-center gap-2 px-4 py-2 rounded-md ${
+              show ? "bg-[#f01543] text-white" : "bg-gray-200 text-gray-700"
+            }`}
           >
-            Description
+            <FaInfoCircle /> Description
           </button>
           {user_review && (
             <button
               onClick={() => setShow(false)}
-              className="bg-blue-500 px-3 py-2 text-white rounded-md mb-2"
+              className={`flex items-center gap-2 px-4 py-2 rounded-md ${
+                !show ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
+              }`}
             >
-              Review
+              <FaStar /> Review
             </button>
           )}
         </div>
-        {show && <p className="text-gray-600">{additional_notes}</p>}
-        {!show && <p className="text-gray-600">{user_review}</p>}
+        {show ? (
+          <p className="text-gray-700">{additional_notes}</p>
+        ) : (
+          <p className="text-gray-700">{user_review}</p>
+        )}
       </div>
     </div>
   );

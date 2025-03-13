@@ -14,7 +14,7 @@ const PlateReview = () => {
   const photos = data?.result?.map((food) => food.food_image) || [];
 
   return (
-    <div className="mt-10">
+    <div className="relative top-[59px]">
       {isLoading ? (
         <div className="flex justify-center items-center mb-9">
           <span className="loading loading-bars loading-md"></span>

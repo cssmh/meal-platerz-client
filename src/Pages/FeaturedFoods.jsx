@@ -26,12 +26,12 @@ const FeaturedFoods = () => {
   const displayedFoods = isMobile ? data.slice(0, 4) : data;
 
   return (
-    <div>
+    <div className="my-8">
       <h1 className="text-center font-semibold text-lg md:text-xl mb-7">
         Featured Foods Sorted by Quantity (Highest to Lowest)
       </h1>
       {error ? (
-        <div className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600">
+        <div className="text-center text-lg md:text-xl my-2 md:my-4 font-semibold text-red-600">
           An error occurred while fetching Featured Foods!
         </div>
       ) : isLoading ? (
