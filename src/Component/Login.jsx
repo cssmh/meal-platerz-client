@@ -30,8 +30,8 @@ const Login = () => {
         photo: res.user?.photoURL || "",
       };
       await addUser(userData);
-    } catch (err) {
-      console.log("Add user error", err.response.data.message);
+    } catch (error) {
+      toast.error("Error (auth/invalid-credential)");
     } finally {
       setLoading(false);
     }
@@ -49,7 +49,7 @@ const Login = () => {
       };
       await addUser(userData);
     } catch (err) {
-      console.log("Add user error", err.response.data.message);
+      toast.error("Error (auth/invalid-credential)");
     }
   };
 
