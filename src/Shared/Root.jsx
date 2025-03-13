@@ -12,7 +12,6 @@ import AddFood from "../Pages/AddFood";
 import MyFoods from "../Pages/MyFoods";
 import MyRequest from "../Pages/MyRequest";
 import FoodDetails from "../Pages/FoodDetails";
-import { getFood } from "../api/Foods";
 import UserReq from "../Pages/UserReq";
 import Blogs from "../Component/Blogs";
 import AllReviews from "../Component/AllReviews";
@@ -23,34 +22,13 @@ const Root = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        path: "/available-foods",
-        element: <AvailableFoods />,
-      },
-      {
-        path: "/blogs",
-        element: <Blogs />,
-      },
-      {
-        path: "/all-reviews",
-        element: <AllReviews />,
-      },
-      {
-        path: "/user-analytics",
-        element: <UserAnalytics />,
-      },
+      { path: "/", element: <Home /> },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
+      { path: "/available-foods", element: <AvailableFoods /> },
+      { path: "/blogs", element: <Blogs /> },
+      { path: "/all-reviews", element: <AllReviews /> },
+      { path: "/user-analytics", element: <UserAnalytics /> },
       {
         path: "/my-profile",
         element: (
@@ -59,10 +37,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/be-premium",
-        element: <Payment />,
-      },
+      { path: "/be-premium", element: <Payment /> },
       {
         path: "/add-food",
         element: (
@@ -87,11 +62,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/food/:id",
-        element: <FoodDetails />,
-        loader: async ({ params }) => await getFood(params.id),
-      },
+      { path: "/food/:id", element: <FoodDetails /> },
       {
         path: "/req-for/:id/:email",
         element: (

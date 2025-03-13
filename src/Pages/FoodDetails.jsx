@@ -1,26 +1,23 @@
 import moment from "moment";
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import MenuDetails from "./MenuDetails";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import AddRequest from "./AddRequest";
 import useAuth from "../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import SmallLoader from "../Component/SmallLoader";
 import useIsExpire from "../hooks/useIsExpire";
 import PlaterHelmet from "../Component/PlaterHelmet";
+import { getFood } from "../api/Foods";
 
 const FoodDetails = () => {
   const { user } = useAuth();
-  const food = useLoaderData();
+  const { id } = useParams();
 
   const { data = [], isLoading } = useQuery({
-    queryKey: ["foodData", food],
-    queryFn: async () => {
-      return await food;
-    },
+    queryKey: ["foodData", id],
+    queryFn: () => getFood(id),
   });
-  console.log(data);
 
   const {
     food_image,
