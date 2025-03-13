@@ -112,19 +112,20 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
         <div className="flex flex-col items-start">
           <Link
             to={`/food/${food_id}`}
-            className="text-xl font-semibold text-blue-800 hover:underline"
+            className="text-xl 2xl:text-2xl font-semibold text-blue-800 hover:underline"
           >
             {food_name}
           </Link>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm 2xl:text-base text-gray-500">
             <p>
-              Donated by <span className="text-blue-700">{donator_name}</span>
+              Donated by{" "}
+              <span className="text-blue-700 2xl:text-lg">{donator_name}</span>
             </p>
-            <p className="text-gray-400">Phone: {donator_phone}</p>
+            <p className="text-gray-400 2xl:text-lg">Phone: {donator_phone}</p>
           </div>
         </div>
       </div>
-      <div className="px-4 flex-grow">
+      <div className="px-4 flex-grow 2xl:text-lg">
         <p className="text-gray-600">
           Pickup Location:{" "}
           <span className="text-blue-600">{pickup_location}</span>
@@ -164,7 +165,9 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
       <div className="p-4 mt-auto">
         {isExpired ? (
           <div>
-            <p className="text-red-500 mt-2">This food has expired.</p>
+            <p className="text-red-500 mt-2 2xl:text-lg">
+              This food has expired.
+            </p>
             <button
               onClick={() => handleRequestedDelete(_id, food_name)}
               className="btn bg-gray-300 text-black border-black hover:bg-gray-400 mt-2"

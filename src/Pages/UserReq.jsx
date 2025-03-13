@@ -19,11 +19,7 @@ const UserReq = () => {
     queryFn: () => getUserReq(id, email),
   });
 
-  const {
-    isLoading: idLoading,
-    data: unavailableIds = [],
-    refetch: idFetch,
-  } = useQuery({
+  const { data: unavailableIds = [], refetch: idFetch } = useQuery({
     enabled: !loading && !!user?.email,
     queryKey: ["unavailableIds", user?.email],
     queryFn: () => {
@@ -32,21 +28,21 @@ const UserReq = () => {
     },
   });
 
-  if (loading || isLoading || idLoading) return <SmallLoader />;
+  if (loading || isLoading) return <SmallLoader />;
 
   return (
     <div>
       <PlaterHelmet title={"User Request"} />
       {requestedData?.length === 0 ? (
-        <p className="text-center my-[10px] text-[#f01543] text-xl italic">
+        <p className="text-center my-[10px] 2xl:text-2xl text-[#f01543] text-xl italic">
           No one Requested for This Food
         </p>
       ) : (
         <div className="mb-8">
-          <p className="text-center my-[10px] text-blue-900 text-xl italic">
+          <p className="text-center my-[10px] text-blue-900 text-xl 2xl:text-2xl italic">
             User Requested for This Food
           </p>
-          <div className="max-w-7xl 2xl:max-w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="max-w-[1250px] 2xl:max-w-[85%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {requestedData?.map((req) => (
               <UserReqCard
                 key={req._id}

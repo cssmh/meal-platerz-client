@@ -45,23 +45,27 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
             </svg>
           </button>
           <div className="avatar">
-            <div className="mask w-16 rounded-tr-2xl rounded-bl-2xl">
+            <div className="mask w-16 2xl:w-20 rounded-tr-2xl rounded-bl-2xl">
               <img src={food_image} alt="no image" />
             </div>
           </div>
         </div>
       </th>
       <td>
-        <Link to={`/food/${_id}`}>{food_name}</Link>
+        <Link className="2xl:text-base" to={`/food/${_id}`}>
+          {food_name}
+        </Link>
       </td>
       <td>
-        <span className="pl-4 text-emerald-600">{food_quantity}</span>
+        <span className="pl-4 2xl:text-base text-emerald-600">
+          {food_quantity}
+        </span>
       </td>
       <td>
-        <span>{expireIn}</span>
+        <span className="2xl:text-base">{expireIn}</span>
       </td>
       <td>
-        <span>{expiration_time}</span>
+        <span className="2xl:text-base">{expiration_time}</span>
       </td>
       <td
         className={
@@ -88,7 +92,7 @@ const MyFoodsRow = ({ getFood, handleDelete, refetch }) => {
       <td>
         <Link to={`/req-for/${_id}/${donator_email}`}>
           <button
-            className={`${
+            className={`2xl:text-base ${
               food_status === "Unavailable" ? "bg-cyan-600" : "bg-[#f01543]"
             } px-[10px] py-[7px] text-white rounded-lg`}
           >

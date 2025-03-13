@@ -100,21 +100,27 @@ const UserReqCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
             className="w-16 h-16 rounded-full border border-gray-200 shadow-sm"
           />
           <div>
-            <h2 className="text-xl font-semibold text-gray-800">{user_name}</h2>
-            <p className="text-sm text-gray-500">{user_phone}</p>
+            <h2 className="text-xl 2xl:text-2xl font-semibold text-gray-800">
+              {user_name}
+            </h2>
+            <p className="text-sm 2xl:text-base text-gray-500">{user_phone}</p>
           </div>
         </div>
         <div>
-          <p className="text-sm text-yellow-600">Requested: {reqDate}</p>
+          <p className="text-sm 2xl:text-base text-yellow-600">
+            Requested: {reqDate}
+          </p>
           {message_to_donator && (
-            <p className="text-sm text-gray-600 italic">{message_to_donator}</p>
+            <p className="text-sm 2xl:text-base text-gray-600 italic">
+              {message_to_donator}
+            </p>
           )}
           {status === "Delivered" ? (
-            <p className="text-sm text-green-600">
+            <p className="text-sm 2xl:text-base text-green-600">
               ✔️ Delivered: {deliverDate}
             </p>
           ) : (
-            <p className="text-sm text-gray-500">
+            <p className="text-sm 2xl:text-base text-gray-500">
               Expires in: {expireIn} at {expiration_time}{" "}
               {isExpired && <span className="text-red-500">(Expired!)</span>}
             </p>
@@ -122,7 +128,7 @@ const UserReqCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
         </div>
         <div className="flex justify-between items-center">
           <span
-            className={`text-sm font-medium py-1 px-2 rounded-full ${
+            className={`text-sm 2xl:text-base font-medium py-1 px-2 rounded-full ${
               status === "Pending"
                 ? "bg-yellow-100 text-yellow-700"
                 : "bg-green-100 text-green-700"
@@ -133,7 +139,7 @@ const UserReqCard = ({ getReq, unavailableIds, refetchReq, idFetch }) => {
           <select
             defaultValue={status}
             onChange={(e) => handleUpdateStatus(e, _id, food_id)}
-            className="text-sm bg-white border border-gray-300 rounded-lg shadow-sm py-1 px-3 focus:outline-none hover:bg-gray-50 transition-colors"
+            className="text-sm 2xl:text-base bg-white border border-gray-300 rounded-lg shadow-sm py-1 px-3 focus:outline-none hover:bg-gray-50 transition-colors"
             disabled={
               isExpired ||
               status === "Delivered" ||

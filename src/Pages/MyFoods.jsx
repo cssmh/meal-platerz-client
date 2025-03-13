@@ -41,9 +41,9 @@ const MyFoods = () => {
         </p>
       ) : (
         <div className="overflow-x-auto my-3">
-          <table className="table max-w-7xl 2xl:max-w-[92%] mx-auto">
+          <table className="table max-w-[1250px] 2xl:max-w-[85%] mx-auto">
             <thead>
-              <tr>
+              <tr className="2xl:text-base">
                 <th>Food Image</th>
                 <th>Food Name</th>
                 <th>Quantity</th>
@@ -61,7 +61,7 @@ const MyFoods = () => {
                   handleDelete={handleDelete}
                   getFood={food}
                   refetch={refetch}
-                ></MyFoodsRow>
+                />
               ))}
             </tbody>
           </table>

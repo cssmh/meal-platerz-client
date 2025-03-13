@@ -37,15 +37,15 @@ const MyRequest = () => {
       <PlaterHelmet title={"My Requests"} />
       <div>
         {myFoodRequest?.length === 0 ? (
-          <p className="text-center my-3 text-[#f01543] text-xl italic">
+          <p className="text-center my-3 text-[#f01543] text-xl 2xl:text-2xl italic">
             You have&apos;nt requested for any food
           </p>
         ) : (
           <div className="mb-8">
-            <p className="text-center my-3 text-blue-900 text-xl italic">
+            <p className="text-center my-3 text-blue-900 text-xl 2xl:text-2xl italic">
               Your requested all foods Here
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-7xl 2xl:max-w-[90%] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-[1250px] 2xl:max-w-[85%] mx-auto">
               {myFoodRequest?.map((food) => (
                 <MyRequestedCard
                   key={food._id}
