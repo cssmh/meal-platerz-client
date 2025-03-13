@@ -82,7 +82,7 @@ const Navbar = () => {
         </p>
       </div> */}
       <div className="border-b border-base-300">
-        <div className="navbar min-h-[58px] lg:px-8 py-0">
+        <div className="navbar min-h-[58px] 2xl:min-h-[72px] lg:px-8 2xl:px-12 py-0">
           <div className="navbar-start">
             <div className="dropdown lg:hidden">
               <label
@@ -183,21 +183,29 @@ const Navbar = () => {
               )}
             </div>
             <Link to="/" className="flex items-center gap-1">
-              <img src={logo} className="w-0 lg:w-10 lg:mr-1" alt="Logo" />
-              <h1 className="font-semibold lg:text-[21px] px-0">MealPlaterz</h1>
+              <img
+                src={logo}
+                className="w-0 lg:w-10 2xl:w-12 lg:mr-1"
+                alt="Logo"
+              />
+              <h1 className="font-semibold lg:text-[21px] 2xl:text-2xl px-0">
+                MealPlaterz
+              </h1>
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <Link
                 to="/"
-                className={`flex items-center p-2 ${getLinkClasses("/")}`}
+                className={`flex items-center 2xl:text-lg p-2 ${getLinkClasses(
+                  "/"
+                )}`}
               >
                 Home
               </Link>
               <Link
                 to="/available-foods"
-                className={`flex items-center p-2 ${getLinkClasses(
+                className={`flex items-center 2xl:text-lg p-2 ${getLinkClasses(
                   "/available-foods"
                 )}`}
               >
@@ -206,7 +214,7 @@ const Navbar = () => {
               {user && (
                 <Link
                   to="/add-food"
-                  className={`flex items-center p-2 ${getLinkClasses(
+                  className={`flex items-center 2xl:text-lg p-2 ${getLinkClasses(
                     "/add-food"
                   )}`}
                 >
@@ -215,7 +223,7 @@ const Navbar = () => {
               )}
               <button
                 onClick={() => handleProtectedRoute("/be-premium")}
-                className={`flex items-center p-2 ${getLinkClasses(
+                className={`flex items-center 2xl:text-lg p-2 ${getLinkClasses(
                   "/be-premium"
                 )}`}
               >
@@ -223,7 +231,7 @@ const Navbar = () => {
               </button>
               <Link
                 to="/all-reviews"
-                className={`flex items-center p-2 ${getLinkClasses(
+                className={`flex items-center 2xl:text-lg p-2 ${getLinkClasses(
                   "/all-reviews"
                 )}`}
               >
@@ -232,11 +240,11 @@ const Navbar = () => {
               {user?.email && (
                 <li tabIndex={0}>
                   <details>
-                    <summary className="px-2">Dashboard</summary>
-                    <ul className="menu menu-sm dropdown-content z-[1] w-[170px]">
+                    <summary className="px-2 2xl:text-lg">Dashboard</summary>
+                    <ul className="menu menu-sm dropdown-content z-[1] w-[170px] 2xl:w-[190px]">
                       <Link
                         to="/manage-my-foods"
-                        className={`flex items-center p-[3px] ${getLinkClasses(
+                        className={`flex items-center 2xl:text-lg p-[3px] ${getLinkClasses(
                           "/manage-my-foods"
                         )}`}
                       >
@@ -244,7 +252,7 @@ const Navbar = () => {
                       </Link>
                       <Link
                         to="/my-food-request"
-                        className={`flex items-center p-[3px] ${getLinkClasses(
+                        className={`flex items-center 2xl:text-lg p-[3px] ${getLinkClasses(
                           "/my-food-request"
                         )}`}
                       >
@@ -258,7 +266,7 @@ const Navbar = () => {
           </div>
           <div className="navbar-end">
             {user?.email && (
-              <p className="hidden lg:block text-sm bg-base-300 px-2 py-1 rounded mr-2">
+              <p className="hidden lg:block text-sm 2xl:text-base bg-base-300 px-2 py-1 rounded mr-2">
                 {user?.displayName}
               </p>
             )}
@@ -294,7 +302,7 @@ const Navbar = () => {
                       user?.email && isPremium
                         ? "border-[3px] border-yellow-500"
                         : ""
-                    } w-10 lg:w-9 h-10 lg:h-9 rounded-full mr-2`}
+                    } w-10 lg:w-9 2xl:w-12 h-10 lg:h-9 2xl:h-12 rounded-full mr-2`}
                     alt="avatar"
                   />
                 </div>
@@ -306,7 +314,9 @@ const Navbar = () => {
                 >
                   <li>
                     <Link to="/my-profile" className="rounded-lg text-gray-700">
-                      <span className="font-medium">View Profile</span>
+                      <span className="font-medium 2xl:text-base">
+                        View Profile
+                      </span>
                     </Link>
                   </li>
                   <li>
@@ -314,7 +324,9 @@ const Navbar = () => {
                       to="/user-analytics"
                       className="rounded-lg text-gray-700"
                     >
-                      <span className="font-medium">User Analytics</span>
+                      <span className="font-medium 2xl:text-base">
+                        User Analytics
+                      </span>
                     </Link>
                   </li>
                   {user && (
@@ -344,13 +356,13 @@ const Navbar = () => {
             {user?.email ? (
               <button
                 onClick={handleLogOut}
-                className="hidden lg:block bg-[#f01543] rounded-md text-white py-1 px-2"
+                className="hidden lg:block 2xl:text-lg bg-[#f01543] rounded-md text-white py-1 px-2"
               >
                 Logout
               </button>
             ) : (
               <Link to="/login">
-                <p className="bg-[#f01543] rounded-md text-white py-1 px-2">
+                <p className="bg-[#f01543] 2xl:text-lg rounded-md text-white py-1 px-2">
                   Login
                 </p>
               </Link>

@@ -92,13 +92,13 @@ const UserAnalytics = () => {
   return (
     <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
       <div className="text-center mb-5">
-        <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
+        <h2 className="text-xl md:text-2xl 2xl:text-3xl font-semibold text-gray-800">
           Welcome, {userData?.name}
         </h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="bg-white p-4 shadow-lg rounded-lg border-t-4 border-red-300">
-          <h3 className="text-xl font-semibold text-center md:mb-4 text-gray-600">
+          <h3 className="text-xl 2xl:text-2xl font-semibold text-center md:mb-4 text-gray-600">
             Activity Distribution
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -125,7 +125,7 @@ const UserAnalytics = () => {
           <div className="text-center text-black">{pieLabels}</div>
         </div>
         <div className="bg-white p-4 shadow-lg rounded-lg border-t-4 border-red-300">
-          <h3 className="text-xl font-semibold text-center mb-4 text-gray-600">
+          <h3 className="text-xl 2xl:text-2xl font-semibold text-center mb-4 text-gray-600">
             User Activity Counts
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -140,7 +140,7 @@ const UserAnalytics = () => {
           </ResponsiveContainer>
         </div>
         <div className="bg-white p-4 shadow-lg rounded-lg border-t-4 border-red-300">
-          <h3 className="text-xl font-semibold text-center mb-4 text-gray-600">
+          <h3 className="text-xl 2xl:text-2xl font-semibold text-center mb-4 text-gray-600">
             Activity Over Time
           </h3>
           <ResponsiveContainer width="100%" height={300}>
