@@ -27,19 +27,19 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
     delivered_date,
     free_delivery,
   } = getFoods;
-
+  
   const { isLoading: loading, food, refetch } = useFood(food_id);
   const [isOpen, setIsOpen] = useState(false);
   const isExpired = useIsExpire(food?.expiration_date, food?.expiration_time);
 
   const { data = "", isLoading } = useQuery({
     queryKey: ["getFoodData", food_id],
-    queryFn: () => {
-      const res = getFood(food_id);
+    queryFn: async () => {
+      const res = await getFood(food_id);
       return res?.food_status;
     },
   });
-
+  
   const expireIn = moment(expiration_date, "YYYY-MM-DD").format("DD MMM YYYY");
   const reqDate = moment(request_date, "YYYY-MM-DD hh:mm A").format(
     "DD MMM YYYY [at] hh:mm A"
@@ -96,7 +96,7 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
         </div>
       </div>
     );
-
+    
   return (
     <div
       className={`border rounded-md mx-1 lg:mx-0 py-2 ${
@@ -140,7 +140,7 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
           <p className="text-green-600 font-semibold">Free Delivery Included</p>
         )}
         <div className="flex gap-2 items-center">
-          {data === "available" ? (
+          {data !== "available" ? (
             <p>
               Status:{" "}
               <span
@@ -156,9 +156,11 @@ const MyRequestedCard = ({ getFoods, handleRequestedDelete }) => {
               Delivered on: <span>{deliverDate}</span>
             </p>
           ) : (
-            <p className="text-red-600">
-              This food has already been delivered!
-            </p>
+            data === "Unavailable" && (
+              <p className="text-red-600">
+                This food has already been delivered!
+              </p>
+            )
           )}
         </div>
       </div>
